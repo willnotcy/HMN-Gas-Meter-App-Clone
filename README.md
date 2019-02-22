@@ -1,2 +1,2 @@
-# effective-octo-broccoli
+# HMN Gas App
 Repository for the Second Year Project
