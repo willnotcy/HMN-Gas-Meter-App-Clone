@@ -17,6 +17,7 @@ using Xamarin.Forms.Platform.Android;
 [assembly: ExportRenderer(typeof(RoundedEntry), typeof(RoundedEntryRenderer))]
 namespace HMNGasApp.Droid
 {
+#pragma warning disable CS0618 // Type or member is obsolete
     public class RoundedEntryRenderer : EntryRenderer
     {
 
@@ -25,8 +26,10 @@ namespace HMNGasApp.Droid
             base.OnElementChanged(e);
             if (Control != null)
             {
-                Control.Background = Xamarin.Forms.Forms.Context.GetDrawable(Resource.Drawable.RoundedEntryText);
+                Control.Background = Forms.Context.GetDrawable(Resource.Drawable.RoundedEntryText);
+                Control.SetPadding(30, 10, 10, 10);
             }
         }
     }
+#pragma warning restore CS0618 // Type or member is obsolete
 }
