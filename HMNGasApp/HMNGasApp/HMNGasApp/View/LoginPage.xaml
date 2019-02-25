@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.LoginPage"
-             xmlns:converters="clr-namespace:HMNGasApp.Converters">
+             xmlns:converters="clr-namespace:HMNGasApp.Converters"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
@@ -10,22 +11,27 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" >
-            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" VerticalOptions="Center" HeightRequest="250">
-                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White"/>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="250">
+                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White" Margin="125"/>
             </StackLayout>
-            <StackLayout  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Padding="50">
-                <Label Text="Kundenummer"/>
-                <Entry x:Name="customerId" Text="{Binding CustomerId}" Placeholder="Indtast kundenummer"/>
-                <Label Text="Kodeord"/>
-                <Entry x:Name="password" Text="{Binding Password}" Placeholder="Indtast kodeord" IsPassword="True"/>
+            <StackLayout  VerticalOptions="CenterAndExpand" 
+                          HorizontalOptions="CenterAndExpand" 
+                          Padding="20">
+                <Label Text="Kundenummer" FontSize="20" Margin="10"/>
+                <components:RoundedEntry x:Name="customerId" Text="{Binding CustomerId}" Placeholder="Indtast kundenummer" WidthRequest="400" FontSize="20"/>
+                <Label Text="Kodeord" FontSize="20" Margin="10"/>
+                <components:RoundedEntry x:Name="password" Text="{Binding Password}" Placeholder="Indtast kodeord" FontSize="20" IsPassword="True"/>
             </StackLayout>
             <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
                 <Button Text="Log in" 
                         IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
-                        BackgroundColor="{StaticResource PrimaryGreen}" 
+                        BackgroundColor="{StaticResource SecondaryMint}" 
                         VerticalOptions="FillAndExpand" 
-                        TextColor="White">
+                        TextColor="White"
+                        FontSize="30">
                     <Button.Triggers>
                         <MultiTrigger TargetType="Button">
                             <MultiTrigger.Conditions>
