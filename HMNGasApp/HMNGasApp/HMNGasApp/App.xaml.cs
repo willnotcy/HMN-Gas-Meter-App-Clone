@@ -1,6 +1,8 @@
-﻿using System;
+﻿using HMNGasApp.View;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
@@ -11,7 +13,7 @@ namespace HMNGasApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new InfoPage();
         }
 
         protected override void OnStart()
