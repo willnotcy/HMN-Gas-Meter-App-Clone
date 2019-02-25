@@ -19,7 +19,7 @@
                 <Label Text="Kodeord"/>
                 <Entry x:Name="password" Text="{Binding Password}" Placeholder="Indtast kodeord" IsPassword="True"/>
             </StackLayout>
-            <StackLayout VerticalOptions="EndAndExpand" HeightRequest="150">
+            <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
                 <Button Text="Log in" 
                         IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
