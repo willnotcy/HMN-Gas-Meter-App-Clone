@@ -1,12 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HMNGasApp.View.LoginPage">
+             x:Class="HMNGasApp.View.LoginPage"
+             xmlns:converters="clr-namespace:HMNGasApp.Converters">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" >
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" VerticalOptions="Center" HeightRequest="250">
+                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White"/>
+            </StackLayout>
+            <StackLayout  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Padding="50">
+                <Label Text="Kundenummer"/>
+                <Entry x:Name="customerId" Text="{Binding CustomerId}" Placeholder="Indtast kundenummer"/>
+                <Label Text="Kodeord"/>
+                <Entry x:Name="password" Text="{Binding Password}" Placeholder="Indtast kodeord" IsPassword="True"/>
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand" HeightRequest="150">
+                <Button Text="Log in" 
+                        IsEnabled="false" 
+                        Command="{Binding SignInCommand}" 
+                        BackgroundColor="{StaticResource PrimaryGreen}" 
+                        VerticalOptions="FillAndExpand" 
+                        TextColor="White">
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference customerId}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference password}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
