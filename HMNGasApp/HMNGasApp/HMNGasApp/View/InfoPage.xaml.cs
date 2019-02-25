@@ -20,9 +20,7 @@ namespace HMNGasApp.View
             InitializeComponent();
 
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
-
-            //TODO: _viewModel.Navigation = Navigation;
-            //_viewModel.AccountNum = customer.AccountNum;
+            _viewModel.Navigation = Navigation;
         }
 
         protected override void OnAppearing()
@@ -30,12 +28,6 @@ namespace HMNGasApp.View
             base.OnAppearing();
 
             _viewModel.LoadCommand.Execute(null);
-        }
-
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            //_viewModel.Reset();
         }
     }
 }

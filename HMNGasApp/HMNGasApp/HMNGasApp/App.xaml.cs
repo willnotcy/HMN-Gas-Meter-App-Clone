@@ -1,4 +1,6 @@
-﻿using HMNGasApp.View;
+﻿using HMNGasApp.Model;
+using HMNGasApp.Services;
+using HMNGasApp.View;
 using HMNGasApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,7 +22,7 @@ namespace HMNGasApp
         {
             InitializeComponent();
 
-            MainPage = new InfoPage();
+            MainPage = new LoginPage();
 
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
         }
@@ -46,6 +48,8 @@ namespace HMNGasApp
 
             services.AddScoped<LoginViewModel>();
             services.AddScoped<InfoViewModel>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<DummyContext>();
 
             return services.BuildServiceProvider();
         }

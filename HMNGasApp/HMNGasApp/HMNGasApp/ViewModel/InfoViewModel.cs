@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace HMNGasApp.ViewModel
 {
-    public class InfoViewModel
+    public class InfoViewModel : BaseViewModel
     {
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -18,35 +18,35 @@ namespace HMNGasApp.ViewModel
         public string AccountNum
         {
             get => _accountNum;
-            set { _accountNum = value; }
+            set => SetProperty(ref _accountNum, value);
         }
 
         private string _email;
         public string Email
         {
             get => _email;
-            set { _email = value; }
+            set => SetProperty(ref _email, value);
         }
 
         private string _phone;
         public string Phone
         {
             get => _phone;
-            set { _phone = value; }
+            set => SetProperty(ref _phone, value);
         }
 
         private string _address;
         public string Address
         {
             get => _address;
-            set { _address = value; }
+            set => SetProperty(ref _address, value);
         }
 
         private string _name;
         public string Name
         {
             get => _name;
-            set { _name = value; }
+            set => SetProperty(ref _name, value);
         }
 
         public InfoViewModel(ICustomerRepository customerRepository)
@@ -54,7 +54,7 @@ namespace HMNGasApp.ViewModel
             //TODO: Title = "MINE OPLYSNINGER";
 
             LoadCommand = new Command(() => ExecuteLoadCommand());
-            EditCommand = new Command(() => ExecuteEditCommand());
+            //EditCommand = new Command(() => ExecuteEditCommand());
             _customerRepository = customerRepository;
         }
 
@@ -66,9 +66,10 @@ namespace HMNGasApp.ViewModel
         {
             //Hack
             var customer = _customerRepository.Find(1);
+            Init(customer);
         }
 
-        public void init(Customer c)
+        public void Init(Customer c)
         {
             AccountNum = c.AccountNum;
             Name = c.Name;
