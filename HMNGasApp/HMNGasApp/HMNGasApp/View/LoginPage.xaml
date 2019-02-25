@@ -10,10 +10,14 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" >
-            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" VerticalOptions="Center" HeightRequest="250">
-                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White"/>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="250">
+                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White" Margin="125"/>
             </StackLayout>
-            <StackLayout  VerticalOptions="Center" HorizontalOptions="CenterAndExpand" Padding="50">
+            <StackLayout  VerticalOptions="Center" 
+                          HorizontalOptions="CenterAndExpand" 
+                          Padding="50">
                 <Label Text="Kundenummer"/>
                 <Entry x:Name="customerId" Text="{Binding CustomerId}" Placeholder="Indtast kundenummer"/>
                 <Label Text="Kodeord"/>
@@ -23,7 +27,7 @@
                 <Button Text="Log in" 
                         IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
-                        BackgroundColor="{StaticResource PrimaryGreen}" 
+                        BackgroundColor="{StaticResource SecondaryMint}" 
                         VerticalOptions="FillAndExpand" 
                         TextColor="White">
                     <Button.Triggers>
