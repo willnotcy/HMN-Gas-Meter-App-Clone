@@ -21,10 +21,10 @@ namespace HMNGasApp
         public App()
         {
             InitializeComponent();
-
-            MainPage = new LoginPage();
-
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
+            MainPage = new InfoPage();
+
+            
         }
 
         protected override void OnStart()
