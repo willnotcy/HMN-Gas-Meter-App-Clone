@@ -45,6 +45,7 @@ namespace HMNGasApp
             var services = new ServiceCollection();
 
             services.AddScoped<LoginViewModel>();
+            services.AddScoped<InfoViewModel>();
 
             return services.BuildServiceProvider();
         }
