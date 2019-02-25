@@ -1,6 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using HMNGasApp.View;
+using System.ComponentModel;
+using Xamarin.Forms.Internals;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
@@ -11,7 +14,9 @@ namespace HMNGasApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            //DependencyResolver.ResolveUsing(Container.GetService);
+
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
