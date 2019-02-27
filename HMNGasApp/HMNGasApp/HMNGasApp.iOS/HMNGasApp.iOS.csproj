@@ -110,6 +110,18 @@
     <BundleResource Include="Resources\Scandia-Regular.otf" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\round_call_black.imageset\baseline_call_black.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_call_black.imageset\baseline_call_black_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_call_black.imageset\baseline_call_black_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_call_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_account_circle_white.imageset\Contents.json">
       <Visible>false</Visible>
     </ImageAsset>
