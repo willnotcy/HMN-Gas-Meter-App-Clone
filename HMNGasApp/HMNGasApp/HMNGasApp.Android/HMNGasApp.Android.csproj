@@ -88,9 +88,6 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\round_account_circle_black.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\HMNGasApp\HMNGasApp.csproj">
       <Project>{A0427963-5762-4291-837C-06B98C620432}</Project>
       <Name>HMNGasApp</Name>
@@ -118,10 +115,10 @@
     <AndroidResource Include="Resources\drawable-hdpi\round_location_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\round_settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\round_account_circle_black.png" />
+    <AndroidResource Include="Resources\drawable\round_account_circle_black.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\round_account_circle_black.png" />
@@ -145,7 +142,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\round_location_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\round_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\round_call_black.png" />
@@ -166,7 +163,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\round_location_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\round_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\round_account_circle_black.png" />
@@ -190,7 +187,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\round_location_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\round_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\round_account_circle_black.png" />
@@ -217,7 +214,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\round_location_on_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\round_settings.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\round_call_black.png" />
@@ -235,7 +232,31 @@
     <AndroidResource Include="Resources\drawable\round_info_black.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\round_settings_black.png" />
+    <AndroidResource Include="Resources\drawable\round_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\round_account_circle_black.png">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\round_arrow_back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\round_arrow_back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-mdpi\round_arrow_back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xhdpi\round_arrow_back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxhdpi\round_arrow_back_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable-xxxhdpi\round_arrow_back_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
