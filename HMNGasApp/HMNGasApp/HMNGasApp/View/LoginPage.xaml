@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.LoginPage"
@@ -14,7 +14,7 @@
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                          VerticalOptions="Center" 
                          HeightRequest="200">
-                <Label Text="HMN Scanner" Style="{StaticResource Heading}" HorizontalOptions="Center" TextColor="White" Margin="125"/>
+                <Label Text="HMN Scanner" Style="{StaticResource Heading}" HorizontalOptions="CenterAndExpand" TextColor="White" Margin="50, 125, 50, 50"/>
             </StackLayout>
             <StackLayout  VerticalOptions="CenterAndExpand" 
                           HorizontalOptions="CenterAndExpand" 
