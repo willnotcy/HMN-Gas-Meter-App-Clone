@@ -24,7 +24,7 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteManualCommand()
         {
-            await Navigation.PushAsync(new MainPage());
+            await Navigation.PushModalAsync(new MainPage());
         }
 
     }
