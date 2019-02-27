@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "scale": "1x",
+      "idiom": "universal",
+      "filename": "round_date_range_black.png"
+    },
+    {
+      "scale": "2x",
+      "idiom": "universal",
+      "filename": "round_date_range_black_2x.png"
+    },
+    {
+      "scale": "3x",
+      "idiom": "universal",
+      "filename": "round_date_range_black_3x.png"
+    }
+  ],
+  "properties": {},
+  "info": {
+    "version": 1,
+    "author": ""
+  }
+}

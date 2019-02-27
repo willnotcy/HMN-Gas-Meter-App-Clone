@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="HMNGasApp.View.ManualPage"
+             Title="Tast Selv"
+             BackgroundColor="White">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="80">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold" 
+                           Text="Manuel indtastning" 
+                           FontSize="Large" 
+                           TextColor="White" 
+                           HorizontalOptions="CenterAndExpand" 
+                           Margin="0,0,50,0"  />
+                </StackLayout>
+            </StackLayout>    
+            
+            <Label Text="Indtast dit forbrug:"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
+                   Font="Bold, 30"
+                   HorizontalTextAlignment="Center"
+                   Margin="10, 100, 20, 10"/>
+            <Entry x:Name="forbrug"
+                   Margin="50,10,50,10"
+                   FontSize="10"
+                   Placeholder="Forbrug..."
+                   />
+            <Button Text="Send"
+                    TextColor="White"
+                    Margin="90,50,90,10"
+                    BackgroundColor="{StaticResource SecondaryMint}"
+                    Command="{Binding ManualCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
