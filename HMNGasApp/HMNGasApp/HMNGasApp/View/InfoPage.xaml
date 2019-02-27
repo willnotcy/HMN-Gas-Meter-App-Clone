@@ -11,19 +11,52 @@
                 <Label Font="Bold" Text="MINE OPLYSNINGER" FontSize="Large" HorizontalOptions="Center" TextColor="White" Margin="50"/>
             </StackLayout>
             <StackLayout Spacing="20" Padding="15">
-                <Label Text="{Binding Name}" Font="Bold" FontSize="Medium"/>
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="round_location_on.png"/>
+                    <Image Source="round_account_circle_black.png"/>
+                    <Label Text="{Binding Name}" Font="Bold" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_location_on_black.png"/>
                     <StackLayout>
-                        <Label Text="{Binding Address}" FontSize="Medium"/>
+                        <Label Text="{Binding Address}"/>
                         <Label Text="Addresse" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                <Label Text="{Binding Email}"/>
-                <Label Text="{Binding Phone}"/>
-                <Label Text="{Binding MeterNum}"/>
-                <Label Text="1.072,722 m3"/>
-                <Label Text="01-02-19"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_email_black.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding Email}"/>
+                        <Label Text="E-mail" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_call_black.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding Phone}"/>
+                        <Label Text="Mobil" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_info_black.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding MeterNum}" />
+                        <Label Text="Måler nr." FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_equalizer_black.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding LatestMeasure}" />
+                        <Label Text="Seneste måling" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_date_range_black.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding MeasureDate}" />
+                        <Label Text="Dato for seneste måling" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
 
             </StackLayout>
         </StackLayout>

@@ -47,6 +47,27 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _name, value);
         }
 
+        private string _meterNum;
+        public string MeterNum
+        {
+            get => _meterNum;
+            set => SetProperty(ref _meterNum, value);
+        }
+
+        private string _latestMeasure;
+        public string LatestMeasure
+        {
+            get => _latestMeasure;
+            set => SetProperty(ref _latestMeasure, value);
+        }
+
+        private string _measureDate;
+        public string MeasureDate
+        {
+            get => _measureDate;
+            set => SetProperty(ref _measureDate, value);
+        }
+
         public InfoViewModel()
         {
             //TODO: Title = "MINE OPLYSNINGER";
@@ -73,6 +94,10 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
+            MeterNum = c.MeterNum;
+            LatestMeasure = "4025,34 m3";
+            MeasureDate = "01-02-19";
+
         }
     }
 }
