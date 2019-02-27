@@ -30,7 +30,7 @@
             <!-- Font styles -->
             <Style x:Key="Heading" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"/>
-                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontSize" Value="40"/>
                 <Setter Property="FontFamily" Value="{StaticResource ScandiaBold}"/>
             </Style>
 
