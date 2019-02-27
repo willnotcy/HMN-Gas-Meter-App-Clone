@@ -15,6 +15,7 @@ namespace HMNGasApp.View
     public partial class InfoPage : ContentPage
     {
         private readonly InfoViewModel _viewModel;
+
         public InfoPage()
         {
             InitializeComponent();

@@ -3,13 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.InfoPage"
              Title="{Binding Title}">
-
     <ScrollView>
-        <StackLayout Spacing="20" Padding="15">
-            <Label
-                Text="{Binding Address}"
-                />
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="125">
+                <Label Font="Bold" Text="MINE OPLYSNINGER" FontSize="Large" HorizontalOptions="Center" TextColor="White" Margin="50"/>
+            </StackLayout>
+            <StackLayout Spacing="20" Padding="15">
+                <Label Text="{Binding Name}" Font="Bold" FontSize="Medium"/>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_location_on.png"/>
+                    <StackLayout>
+                        <Label Text="{Binding Address}" FontSize="Medium"/>
+                        <Label Text="Addresse" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <Label Text="{Binding Email}"/>
+                <Label Text="{Binding Phone}"/>
+                <Label Text="{Binding MeterNum}"/>
+                <Label Text="1.072,722 m3"/>
+                <Label Text="01-02-19"/>
 
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

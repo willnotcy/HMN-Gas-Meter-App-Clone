@@ -48,8 +48,6 @@ namespace HMNGasApp
 
             services.AddScoped<LoginViewModel>();
             services.AddScoped<InfoViewModel>();
-            services.AddScoped<ICustomerRepository, CustomerRepository>();
-            services.AddScoped<DummyContext>();
 
             return services.BuildServiceProvider();
         }

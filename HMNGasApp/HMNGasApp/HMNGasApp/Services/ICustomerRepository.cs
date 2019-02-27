@@ -9,8 +9,7 @@ namespace HMNGasApp.Services
 {
     public interface ICustomerRepository
     {
-        Customer Find(int id);
-        IEnumerable<Customer> Read();
-        bool Update(Customer userAccount);
+        IEnumerable<Customer> ReadAsync();
+        Task<bool> UpdateAsync(Customer customer);
     }
 }

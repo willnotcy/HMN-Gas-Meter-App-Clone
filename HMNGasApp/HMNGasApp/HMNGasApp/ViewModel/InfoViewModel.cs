@@ -12,8 +12,6 @@ namespace HMNGasApp.ViewModel
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
 
-        private readonly ICustomerRepository _customerRepository;
-
         private string _accountNum;
         public string AccountNum
         {
@@ -49,13 +47,12 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _name, value);
         }
 
-        public InfoViewModel(ICustomerRepository customerRepository)
+        public InfoViewModel()
         {
             //TODO: Title = "MINE OPLYSNINGER";
 
             LoadCommand = new Command(() => ExecuteLoadCommand());
             //EditCommand = new Command(() => ExecuteEditCommand());
-            _customerRepository = customerRepository;
         }
 
         private void ExecuteEditCommand()
@@ -65,7 +62,7 @@ namespace HMNGasApp.ViewModel
         private void ExecuteLoadCommand()
         {
             //Hack
-            var customer = _customerRepository.Find(1);
+            var customer = new Customer { AccountNum = "1343545", Address = "Kongehaven 24", Email = "apal@itu.dk", Name = "Alexander Pálsson", Phone = "27501015", MeterNum = "HMN 16.20.649" };
             Init(customer);
         }
 
