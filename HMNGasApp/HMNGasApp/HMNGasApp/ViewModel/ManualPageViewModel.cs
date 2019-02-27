@@ -24,6 +24,7 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteManualCommand()
         {
+            await App.Current.MainPage.DisplayAlert("Data indsendt", "Din manuelle indtastning er blevet godkendt", "Tilbage til menu");
             await Navigation.PushModalAsync(new MainPage());
         }
 
