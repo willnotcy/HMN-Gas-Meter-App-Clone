@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HMNGasApp"
              x:Class="HMNGasApp.View.MainPage"
-             xmlns:viewModel="clr-namespace:HMNGasApp.ViewModel"
              Title="HMN Scanner" 
              BackgroundColor="White">
 
@@ -13,7 +11,13 @@
                          VerticalOptions="Center" 
                          HeightRequest="80">
             <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
-                <Label Font="Bold" Text="HMN Scanner" FontSize="Large" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0"/>
+                <Label Font="Bold" 
+                       Text="HMN Scanner" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Margin="50,0,0,0"/>
+                
                 <Image Source="round_account_circle_white.png" Margin="0,0,10,0" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding InfoPageNavCommand}" />
@@ -28,7 +32,8 @@
                 BorderRadius="7"
                 Margin="10,70,10,10"
                 Font="Bold, 15"
-                BackgroundColor="#4a8472"/>
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
         <Button Text="Tast selv"
                 TextColor="White"
                 Command="{Binding ManualPageNavCommand}"
@@ -36,18 +41,20 @@
                 Padding="15"
                 BorderRadius="7"
                 Font="Bold, 15"
-                BackgroundColor="#4a8472"/>
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
         <Button Text="Mit forbrug"
                 TextColor="White"
                 Margin="10,10,10,50"
                 Padding="15"
                 BorderRadius="7"
                 Font="Bold, 15"
-                BackgroundColor="#4a8472"/>
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
         <Button Text="Log out"
                 TextColor="White"
                 VerticalOptions="EndAndExpand"
-                BackgroundColor="#73c4aa"
+                BackgroundColor="{StaticResource SecondaryMint}"
                 HeightRequest="60"/>
     </StackLayout>
 

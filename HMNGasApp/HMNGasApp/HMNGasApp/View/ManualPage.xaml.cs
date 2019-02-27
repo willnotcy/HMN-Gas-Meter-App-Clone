@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using HMNGasApp.ViewModel;
+﻿using HMNGasApp.ViewModel;
 
 using Xamarin.Forms;
 

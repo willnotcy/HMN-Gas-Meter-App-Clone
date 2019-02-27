@@ -1,6 +1,4 @@
-﻿using HMNGasApp.Model;
-using HMNGasApp.Services;
-using HMNGasApp.View;
+﻿using HMNGasApp.View;
 using HMNGasApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;

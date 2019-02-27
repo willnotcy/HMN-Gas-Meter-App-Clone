@@ -14,25 +14,33 @@
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                          VerticalOptions="Center" 
                          HeightRequest="200">
-                <Label Text="HMN Scanner" Style="{StaticResource Heading}" HorizontalOptions="CenterAndExpand" TextColor="White" Margin="50, 125, 50, 50"/>
+                <Label Text="HMN Scanner" 
+                       Style="{StaticResource Heading}" 
+                       HorizontalOptions="CenterAndExpand" 
+                       TextColor="White" 
+                       Margin="50, 125, 50, 50"/>
             </StackLayout>
-            <StackLayout  VerticalOptions="CenterAndExpand" 
-                          HorizontalOptions="CenterAndExpand" 
-                          Padding="20">
-                <Label Text="Kundenummer" Style="{StaticResource BodyText}" Margin="10"/>
+            <StackLayout VerticalOptions="CenterAndExpand" 
+                         HorizontalOptions="CenterAndExpand" 
+                         Padding="20">
+                <Label Text="Kundenummer" 
+                       Style="{StaticResource BodyText}" 
+                       Margin="10"/>
                 <components:RoundedEntry x:Name="customerId" 
                                          Text="{Binding CustomerId}" 
                                          Placeholder="Indtast kundenummer" 
                                          WidthRequest="400" 
-                                         FontSize="20"
-                                         />
-                <Label Text="Kodeord" Style="{StaticResource BodyText}" Margin="10"/>
+                                         FontSize="20"/>
+                
+                <Label Text="Kodeord" 
+                       Style="{StaticResource BodyText}" 
+                       Margin="10"/>
+                
                 <components:RoundedEntry x:Name="password" 
                                          Text="{Binding Password}" 
                                          Placeholder="Indtast kodeord" 
                                          FontSize="20" 
-                                         IsPassword="True"
-                                         />
+                                         IsPassword="True"/>
             </StackLayout>
             <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
                 <Button Text="Log in" 
@@ -45,10 +53,17 @@
                     <Button.Triggers>
                         <MultiTrigger TargetType="Button">
                             <MultiTrigger.Conditions>
-                                <BindingCondition Binding="{Binding Source={x:Reference customerId}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
-                                <BindingCondition Binding="{Binding Source={x:Reference password}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference customerId}, 
+                                                                    Path=Text.Length, 
+                                                                    Converter={StaticResource dataHasBeenEntered}}" 
+                                                  Value="true"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference password}, 
+                                                                    Path=Text.Length, 
+                                                                    Converter={StaticResource dataHasBeenEntered}}" 
+                                                  Value="true"/>
                             </MultiTrigger.Conditions>
-                            <Setter Property="IsEnabled" Value="True"/>
+                            <Setter Property="IsEnabled" 
+                                    Value="True"/>
                         </MultiTrigger>
                     </Button.Triggers>
                 </Button>

@@ -1,10 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace HMNGasApp.Model
+﻿namespace HMNGasApp.Model
 {
     public class Customer
     {
-        [Key]
         public string AccountNum { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }

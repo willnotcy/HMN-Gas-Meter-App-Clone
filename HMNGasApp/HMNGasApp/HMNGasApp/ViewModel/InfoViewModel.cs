@@ -1,9 +1,6 @@
 ﻿using System.Windows.Input;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using HMNGasApp.Services;
 using HMNGasApp.Model;
-using System.Collections.Generic;
 
 namespace HMNGasApp.ViewModel
 {
