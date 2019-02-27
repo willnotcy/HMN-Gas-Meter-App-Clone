@@ -1,14 +1,63 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:HMNGasApp"
-             x:Class="HMNGasApp.MainPage">
+             x:Class="HMNGasApp.View.MainPage"
+             Title="HMN Scanner" 
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="80">
+            <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                <Label Font="Bold" 
+                       Text="HMN Scanner" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Margin="50,0,0,0"/>
+                
+                <Image Source="round_account_circle_white.png" Margin="0,0,10,0" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InfoPageNavCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+
+        <Button Text="Scan"
+                TextColor="White"
+                Padding="15"
+                BorderRadius="7"
+                Margin="10,70,10,10"
+                Font="Bold, 15"
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
+        <Button Text="Tast selv"
+                TextColor="White"
+                Command="{Binding ManualPageNavCommand}"
+                Margin="10,10,10,10"
+                Padding="15"
+                BorderRadius="7"
+                Font="Bold, 15"
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
+        <Button Text="Mit forbrug"
+                TextColor="White"
+                Margin="10,10,10,50"
+                Padding="15"
+                BorderRadius="7"
+                Font="Bold, 15"
+                BackgroundColor="{StaticResource PrimaryGreen}"/>
+        
+        <Button Text="Log out"
+                TextColor="White"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="{StaticResource SecondaryMint}"
+                HeightRequest="60"
+                Command="{Binding LogOutCommand}"/>
     </StackLayout>
 
 </ContentPage>
