@@ -4,6 +4,20 @@
              x:Class="HMNGasApp.App">
     <Application.Resources>
         <ResourceDictionary>
+             <!-- Fonts -->
+            <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
+                <On Platform="iOS" Value="Scandia Bold" />
+                <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
+                <On Platform="UWP" Value="Assets/Fonts/Scandia-Bold.otf#Scandia" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="OpenSans">
+                <On Platform="iOS" Value="OpenSans-Regular" />
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
+                <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
+            </OnPlatform>
+
+            <!-- Colors -->
             <Color x:Key="PrimaryOrange">#E37222</Color>
             <Color x:Key="PrimaryGreen">#338671</Color>
             <Color x:Key="PrimaryBlue">#26578A</Color>
@@ -12,6 +26,18 @@
             <Color x:Key="SecondaryCurry">#FEAC2C</Color>
             <Color x:Key="SecondaryMint">#54C7A9</Color>
             <Color x:Key="SecondaryAzur">#26A2D6</Color>
+            
+            <!-- Font styles -->
+            <Style x:Key="Heading" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontFamily" Value="{StaticResource ScandiaBold}"/>
+            </Style>
+
+            <Style x:Key="BodyText" TargetType="Label">
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

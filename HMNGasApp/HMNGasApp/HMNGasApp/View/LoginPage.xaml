@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.LoginPage"
@@ -14,19 +14,19 @@
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                          VerticalOptions="Center" 
                          HeightRequest="200">
-                <Label Text="HMN Scanner" FontSize="30" HorizontalOptions="Center" TextColor="White" Margin="100"/>
+                <Label Text="HMN Scanner" Style="{StaticResource Heading}" HorizontalOptions="CenterAndExpand" TextColor="White" Margin="50, 125, 50, 50"/>
             </StackLayout>
             <StackLayout  VerticalOptions="CenterAndExpand" 
                           HorizontalOptions="CenterAndExpand" 
                           Padding="20">
-                <Label Text="Kundenummer" FontSize="20" Margin="10"/>
+                <Label Text="Kundenummer" Style="{StaticResource BodyText}" Margin="10"/>
                 <components:RoundedEntry x:Name="customerId" 
                                          Text="{Binding CustomerId}" 
                                          Placeholder="Indtast kundenummer" 
                                          WidthRequest="400" 
                                          FontSize="20"
                                          />
-                <Label Text="Kodeord" FontSize="20" Margin="10"/>
+                <Label Text="Kodeord" Style="{StaticResource BodyText}" Margin="10"/>
                 <components:RoundedEntry x:Name="password" 
                                          Text="{Binding Password}" 
                                          Placeholder="Indtast kodeord" 
