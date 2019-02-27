@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="HMNGasApp.View.ManualPage"
+             Title="Tast Selv"
+             xmlns:view="clr-namespace:HMNGasApp.View"
+             xmlns:viewModel="clr-namespace:HMNGasApp.ViewModel"
+             BackgroundColor="White">
+    <ContentPage.Content>
+    </ContentPage.Content>
+    
+    <StackLayout>
+    <Button Text="Back"
+            Command="{Binding BackToHomePageCommand}"
+            Margin="10,50,300,10"/>
+            
+    <Label Text="Indtast dit forbrug:"
+           TextColor="#5b5d60"
+           Font="Bold, 30"
+           HorizontalTextAlignment="Center"
+           Margin="10, 100, 20, 10"/>
+        <Entry x:Name="forbrug"
+               Margin="50,10,50,10"
+               FontSize="10"
+               Placeholder="Forbrug..."
+               />
+        <Button Text="Send"
+                TextColor="White"
+                Margin="90,50,90,10"
+                BackgroundColor="#73c4aa"/>
+    </StackLayout>
+</ContentPage>

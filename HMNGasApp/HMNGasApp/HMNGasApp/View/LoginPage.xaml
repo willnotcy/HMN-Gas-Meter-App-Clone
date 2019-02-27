@@ -13,16 +13,26 @@
         <StackLayout Orientation="Vertical" >
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                          VerticalOptions="Center" 
-                         HeightRequest="250">
-                <Label Text="HMN Scanner" FontSize="Large" HorizontalOptions="Center" TextColor="White" Margin="125"/>
+                         HeightRequest="200">
+                <Label Text="HMN Scanner" FontSize="30" HorizontalOptions="Center" TextColor="White" Margin="100"/>
             </StackLayout>
             <StackLayout  VerticalOptions="CenterAndExpand" 
                           HorizontalOptions="CenterAndExpand" 
                           Padding="20">
                 <Label Text="Kundenummer" FontSize="20" Margin="10"/>
-                <components:RoundedEntry x:Name="customerId" Text="{Binding CustomerId}" Placeholder="Indtast kundenummer" WidthRequest="400" FontSize="20"/>
+                <components:RoundedEntry x:Name="customerId" 
+                                         Text="{Binding CustomerId}" 
+                                         Placeholder="Indtast kundenummer" 
+                                         WidthRequest="400" 
+                                         FontSize="20"
+                                         />
                 <Label Text="Kodeord" FontSize="20" Margin="10"/>
-                <components:RoundedEntry x:Name="password" Text="{Binding Password}" Placeholder="Indtast kodeord" FontSize="20" IsPassword="True"/>
+                <components:RoundedEntry x:Name="password" 
+                                         Text="{Binding Password}" 
+                                         Placeholder="Indtast kodeord" 
+                                         FontSize="20" 
+                                         IsPassword="True"
+                                         />
             </StackLayout>
             <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
                 <Button Text="Log in" 
