@@ -37,7 +37,7 @@ namespace HMNGasApp.ViewModel
         {
             //TODO Implement with api
             SignedIn = true;
-            await Navigation.PushModalAsync(new MainPage());
+            await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
         }
 
     }

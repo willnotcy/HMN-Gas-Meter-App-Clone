@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.MainPage"
              Title="HMN Scanner" 
-             BackgroundColor="White">
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
         <!-- Place new controls here -->
@@ -55,7 +56,8 @@
                 TextColor="White"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="{StaticResource SecondaryMint}"
-                HeightRequest="60"/>
+                HeightRequest="60"
+                Command="{Binding LogOutCommand}"/>
     </StackLayout>
 
 </ContentPage>
