@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.View;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.ViewModel
 {
@@ -10,21 +11,21 @@ namespace HMNGasApp.ViewModel
     {
 
         public ICommand ManualCommand { get; set; }
-        public ICommand BackToHomePageCommand { get; set; }
+        public ICommand ReturnNavCommand { get; set; }
+        public ICommand SettingsPageNavCommand { get; set; }
 
         public ManualPageViewModel()
         {
-            ManualCommand = new Command(async () => await Navigation.PushAsync(new MainPage()));
-
-            BackToHomePageCommand = new Command(() => BackToHomePage());
+            ManualCommand = new Command(async () => await ExecuteManualCommand());
+            ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
+            //SettingsPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new SettingsPage()));
 
         }
 
-        async void BackToHomePage()
+        private async Task ExecuteManualCommand()
         {
-            await Navigation.PopModalAsync();
-
+            await Navigation.PushAsync(new MainPage());
         }
-      
+
     }
 }

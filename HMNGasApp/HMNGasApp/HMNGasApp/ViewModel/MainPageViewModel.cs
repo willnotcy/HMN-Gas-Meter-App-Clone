@@ -7,11 +7,13 @@ namespace HMNGasApp.ViewModel
 {
     public class MainPageViewModel : BaseViewModel
     {
-        public ICommand ManualNavCommand { get; set; }
+        public ICommand ManualPageNavCommand { get; set; }
+        public ICommand InfoPageNavCommand { get; set; }
 
         public MainPageViewModel()
         {
-            ManualNavCommand = new Command(async () => await Navigation.PushModalAsync(new ManualPage()));
+            ManualPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new ManualPage()));
+            InfoPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new InfoPage()));
         }
     }
 }

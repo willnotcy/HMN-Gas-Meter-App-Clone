@@ -11,6 +11,8 @@ namespace HMNGasApp.ViewModel
     {
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand ReturnNavCommand { get; set; }
+        public ICommand SettingsPageNavCommand { get; set; }
 
         private string _accountNum;
         public string AccountNum
@@ -74,6 +76,8 @@ namespace HMNGasApp.ViewModel
 
             LoadCommand = new Command(() => ExecuteLoadCommand());
             //EditCommand = new Command(() => ExecuteEditCommand());
+            ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
+            //SettingsPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new SettingsPage()));
         }
 
         private void ExecuteEditCommand()

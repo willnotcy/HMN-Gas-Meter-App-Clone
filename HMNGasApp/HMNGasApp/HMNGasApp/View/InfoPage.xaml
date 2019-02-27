@@ -9,11 +9,18 @@
                          VerticalOptions="Center" 
                          HeightRequest="80">
                 <StackLayout Padding="10, 35, 10, 25"  Orientation="Horizontal">
-                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="StartAndExpand" />
-                    <Label Font="Bold" Text="MINE OPLYSNINGER" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
-                    <Image Source="round_settings.png" HorizontalOptions="EndAndExpand"/>
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="StartAndExpand" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
+                    <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SettingsPageNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
                 </StackLayout>
-                
             </StackLayout>
             <StackLayout Spacing="45" Padding="30" >
                 <StackLayout Orientation="Horizontal">

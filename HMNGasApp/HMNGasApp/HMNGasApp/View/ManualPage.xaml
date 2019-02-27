@@ -7,26 +7,40 @@
              xmlns:viewModel="clr-namespace:HMNGasApp.ViewModel"
              BackgroundColor="White">
     <ContentPage.Content>
-    </ContentPage.Content>
-    
-    <StackLayout>
-    <Button Text="Back"
-            Command="{Binding BackToHomePageCommand}"
-            Margin="10,50,300,10"/>
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="80">
+                <StackLayout Padding="10, 35, 10, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="StartAndExpand" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold" Text="Manuel indtastning" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
+                    <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SettingsPageNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </StackLayout>
+            </StackLayout>    
             
-    <Label Text="Indtast dit forbrug:"
-           TextColor="#5b5d60"
-           Font="Bold, 30"
-           HorizontalTextAlignment="Center"
-           Margin="10, 100, 20, 10"/>
-        <Entry x:Name="forbrug"
-               Margin="50,10,50,10"
-               FontSize="10"
-               Placeholder="Forbrug..."
-               />
-        <Button Text="Send"
-                TextColor="White"
-                Margin="90,50,90,10"
-                BackgroundColor="#73c4aa"/>
-    </StackLayout>
+            <Label Text="Indtast dit forbrug:"
+                   TextColor="#5b5d60"
+                   Font="Bold, 30"
+                   HorizontalTextAlignment="Center"
+                   Margin="10, 100, 20, 10"/>
+            <Entry x:Name="forbrug"
+                   Margin="50,10,50,10"
+                   FontSize="10"
+                   Placeholder="Forbrug..."
+                   />
+            <Button Text="Send"
+                    TextColor="White"
+                    Margin="90,50,90,10"
+                    BackgroundColor="#73c4aa"
+                    Command="{Binding ManualCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

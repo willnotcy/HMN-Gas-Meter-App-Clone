@@ -9,15 +9,19 @@
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label BackgroundColor="#4a8472"
-               Text="HMN Scanner"
-               HorizontalTextAlignment="Center"
-               VerticalTextAlignment="Center"
-               HeightRequest="60"
-               FontSize="20"
-               TextColor="White"
-               
-               />
+        <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="80">
+            <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                <Label Font="Bold" Text="HMN Scanner" FontSize="Large" TextColor="White" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0"/>
+                <Image Source="round_account_circle_white.png" Margin="0,0,10,0" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding InfoPageNavCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </StackLayout>
+        </StackLayout>
+
         <Button Text="Scan"
                 TextColor="White"
                 Padding="15"
@@ -27,7 +31,7 @@
                 BackgroundColor="#4a8472"/>
         <Button Text="Tast selv"
                 TextColor="White"
-                Command="{Binding ManualNavCommand}"
+                Command="{Binding ManualPageNavCommand}"
                 Margin="10,10,10,10"
                 Padding="15"
                 BorderRadius="7"
