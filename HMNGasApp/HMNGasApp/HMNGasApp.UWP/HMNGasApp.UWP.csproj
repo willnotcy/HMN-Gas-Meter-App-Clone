@@ -132,13 +132,6 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="round_account_circle_black_24dp.png" />
-    <Content Include="round_call_black_24dp.png" />
-    <Content Include="round_date_range_black_24dp.png" />
-    <Content Include="round_email_black_24dp.png" />
-    <Content Include="round_equalizer_black_24dp.png" />
-    <Content Include="round_info_black_24dp.png" />
-    <Content Include="round_location_on_black_24dp.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
