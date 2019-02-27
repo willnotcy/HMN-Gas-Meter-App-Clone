@@ -2,22 +2,34 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Xamarin.Forms;
 
 namespace HMNGasApp.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public INavigation Navigation { get; set; }
         private bool _isBusy = false;
-        public bool isBusy
+        public bool IsBusy
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = null, Action onChanged = null)
-        { if (EqualityComparer<T>.Default.Equals(backingStore, value))
+        private string _title;
+        public string Title
+        {
+            get => _title;
+            set => SetProperty(ref _title, value);
+        }
+
+        public INavigation Navigation { get; set; }
+
+        protected bool SetProperty<T>(ref T backingStore, T value,
+            [CallerMemberName]string propertyName = null,
+            Action onChanged = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(backingStore, value))
             {
                 return false;
             }
@@ -32,6 +44,5 @@ namespace HMNGasApp.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
 }

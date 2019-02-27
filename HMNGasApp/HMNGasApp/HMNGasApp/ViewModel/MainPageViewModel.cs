@@ -11,7 +11,7 @@ namespace HMNGasApp.ViewModel
 
         public MainPageViewModel()
         {
-            ManualNavCommand = new Command(async () => await Navigation.PushAsync(new View.ManualPage()));
+            ManualNavCommand = new Command(async () => await Navigation.PushModalAsync(new ManualPage()));
         }
     }
 }

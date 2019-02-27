@@ -1,12 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HMNGasApp.View.LoginPage">
+             x:Class="HMNGasApp.View.LoginPage"
+             xmlns:converters="clr-namespace:HMNGasApp.Converters"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical" >
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="200">
+                <Label Text="HMN Scanner" FontSize="30" HorizontalOptions="Center" TextColor="White" Margin="100"/>
+            </StackLayout>
+            <StackLayout  VerticalOptions="CenterAndExpand" 
+                          HorizontalOptions="CenterAndExpand" 
+                          Padding="20">
+                <Label Text="Kundenummer" FontSize="20" Margin="10"/>
+                <components:RoundedEntry x:Name="customerId" 
+                                         Text="{Binding CustomerId}" 
+                                         Placeholder="Indtast kundenummer" 
+                                         WidthRequest="400" 
+                                         FontSize="20"
+                                         />
+                <Label Text="Kodeord" FontSize="20" Margin="10"/>
+                <components:RoundedEntry x:Name="password" 
+                                         Text="{Binding Password}" 
+                                         Placeholder="Indtast kodeord" 
+                                         FontSize="20" 
+                                         IsPassword="True"
+                                         />
+            </StackLayout>
+            <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
+                <Button Text="Log in" 
+                        IsEnabled="false" 
+                        Command="{Binding SignInCommand}" 
+                        BackgroundColor="{StaticResource SecondaryMint}" 
+                        VerticalOptions="FillAndExpand" 
+                        TextColor="White"
+                        FontSize="30">
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference customerId}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference password}, Path=Text.Length, Converter={StaticResource dataHasBeenEntered}}" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
