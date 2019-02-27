@@ -11,7 +11,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -34,5 +34,20 @@
 	<string>HMNGasApp</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
+	<key>UIAppFonts</key>
+	<array>
+	    <string>OpenSans-Bold.ttf</string>
+	    <string>OpenSans-BoldItalic.ttf</string>
+	    <string>OpenSans-ExtraBold.ttf</string>
+	    <string>OpenSans-ExtraBoldItalic.ttf</string>
+	    <string>OpenSans-Italic.ttf</string>
+	    <string>OpenSans-Light.ttf</string>
+	    <string>OpenSans-LightItalic.ttf</string>
+	    <string>OpenSans-Regular.ttf</string>
+	    <string>OpenSans-SemiBold.ttf</string>
+	    <string>OpenSans-SemiBoldItalic.ttf</string>
+	    <string>Scandia-Bold.otf</string>
+	    <string>Scandia-Regular.otf</string>
+	</array>
 </dict>
 </plist>
