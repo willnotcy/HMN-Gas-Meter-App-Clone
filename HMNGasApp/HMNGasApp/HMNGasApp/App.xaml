@@ -4,6 +4,14 @@
              x:Class="HMNGasApp.App">
     <Application.Resources>
         <ResourceDictionary>
+             <!-- Fonts -->
+            <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
+                <On Platform="UWP" Value="/Assets/Scandia-Bold.otf#Scandia Bold"/>
+                <On Platform="iOS" Value="OpenSans-Regular" />
+            </OnPlatform>
+
+            <!-- Colors -->
             <Color x:Key="PrimaryOrange">#E37222</Color>
             <Color x:Key="PrimaryGreen">#338671</Color>
             <Color x:Key="PrimaryBlue">#26578A</Color>
@@ -12,6 +20,17 @@
             <Color x:Key="SecondaryCurry">#FEAC2C</Color>
             <Color x:Key="SecondaryMint">#54C7A9</Color>
             <Color x:Key="SecondaryAzur">#26A2D6</Color>
+            
+            <!-- Font styles -->
+            <Style x:Key="Heading" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontFamily">
+                    <Setter.Value>
+                        
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

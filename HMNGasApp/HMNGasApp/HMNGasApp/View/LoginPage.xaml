@@ -14,7 +14,8 @@
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                          VerticalOptions="Center" 
                          HeightRequest="200">
-                <Label Text="HMN Scanner" FontSize="30" HorizontalOptions="Center" TextColor="White" Margin="100"/>
+                <Label Text="HMN Scanner" FontSize="30" HorizontalOptions="Center" TextColor="White" FontAttributes="Bold"/>
+                <Label Text="HMN Scanner" Style="{StaticResource Heading}" HorizontalOptions="Center" TextColor="White"/>
             </StackLayout>
             <StackLayout  VerticalOptions="CenterAndExpand" 
                           HorizontalOptions="CenterAndExpand" 
