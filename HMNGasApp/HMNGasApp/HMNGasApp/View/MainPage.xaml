@@ -5,7 +5,8 @@
              x:Class="HMNGasApp.View.MainPage"
              xmlns:viewModel="clr-namespace:HMNGasApp.ViewModel"
              Title="HMN Scanner" 
-             BackgroundColor="White">
+             BackgroundColor="White"
+             NavigationPage.HasNavigationBar="False">
 
     <StackLayout>
         <!-- Place new controls here -->
@@ -48,7 +49,8 @@
                 TextColor="White"
                 VerticalOptions="EndAndExpand"
                 BackgroundColor="#73c4aa"
-                HeightRequest="60"/>
+                HeightRequest="60"
+                Command="{Binding LogOutCommand}"/>
     </StackLayout>
 
 </ContentPage>
