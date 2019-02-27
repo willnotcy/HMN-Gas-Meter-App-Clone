@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="85f86057-2894-4837-9590-72cc7ed89b78"
-    Publisher="CN=e6bece27-54ed-4535-bba5-61f1b5f14f47"
+    Name="96f158f6-73de-40ce-9b4b-376a60dc5a91"
+    Publisher="CN=16af3daf-4f5e-4a91-952e-e34caa6a8143"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>HMNGasApp.UWP</DisplayName>
-    <PublisherDisplayName>e6bece27-54ed-4535-bba5-61f1b5f14f47</PublisherDisplayName>
+    <PublisherDisplayName>16af3daf-4f5e-4a91-952e-e34caa6a8143</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

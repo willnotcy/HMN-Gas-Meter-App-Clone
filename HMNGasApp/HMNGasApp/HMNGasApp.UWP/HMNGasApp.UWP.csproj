@@ -4,8 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{7F0C0262-86E0-4542-956C-F2DF804384B9}</ProjectGuid>
-    <TemplateGuid>{98C37F10-6541-44BE-B1E6-7EB3EB8C08F1}</TemplateGuid>
+    <ProjectGuid>{99C0CA39-75D3-494F-9AB2-0B4CFBC893C5}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HMNGasApp.UWP</RootNamespace>
@@ -104,7 +103,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
@@ -132,10 +130,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-100.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
-    <Content Include="xamarin_logo.png" />
-    <Content Include="add.png" />
-    <Content Include="save.png" />
-    <Content Include="cancel.png" />
+    <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -153,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HMNGasApp\HMNGasApp.csproj">
-      <Project>{3B51492B-A5AD-4677-B51E-674E18DC4415}</Project>
+      <Project>{A0427963-5762-4291-837C-06B98C620432}</Project>
       <Name>HMNGasApp</Name>
     </ProjectReference>
   </ItemGroup>
