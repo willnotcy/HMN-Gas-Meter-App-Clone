@@ -15,7 +15,6 @@ namespace HMNGasApp.iOS
 
             if (Control != null)
             {
-                // do whatever you want to the UITextField here!
                 Control.BorderStyle = UITextBorderStyle.RoundedRect;
             }
         }

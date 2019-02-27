@@ -68,6 +68,20 @@
     <Compile Include="RoundedEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidAsset Include="Assets\Scandia-Bold.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\Scandia-Regular.otf" />
+    <AndroidAsset Include="Assets\OpenSans-SemiBoldItalic.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Bold.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-BoldItalic.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-ExtraBold.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-ExtraBoldItalic.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Italic.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Light.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-LightItalic.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-Regular.ttf" />
+    <AndroidAsset Include="Assets\OpenSans-SemiBold.ttf" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
