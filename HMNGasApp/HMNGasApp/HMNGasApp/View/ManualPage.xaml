@@ -10,7 +10,9 @@
     </ContentPage.Content>
     
     <StackLayout>
-    
+    <Button Text="Back"
+            Command="{Binding BackToHomePageCommand}"
+            Margin="10,50,300,10"/>
             
     <Label Text="Indtast dit forbrug:"
            TextColor="#5b5d60"
@@ -26,7 +28,5 @@
                 TextColor="White"
                 Margin="90,50,90,10"
                 BackgroundColor="#73c4aa"/>
-        <Button Text="Back"
-            Command="{Binding BackToHomePageCommand}"/>
     </StackLayout>
 </ContentPage>
