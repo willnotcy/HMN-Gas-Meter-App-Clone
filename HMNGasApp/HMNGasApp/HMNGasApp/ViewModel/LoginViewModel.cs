@@ -35,10 +35,11 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteSignInCommand()
         {
-            if(IsBusy)
+            if (IsBusy)
             {
                 return;
             }
+            IsBusy = true;
 
             //TODO Implement with api
             SignedIn = true;
