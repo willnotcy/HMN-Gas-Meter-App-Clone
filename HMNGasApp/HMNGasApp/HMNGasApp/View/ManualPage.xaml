@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.ManualPage"
              Title="Tast Selv"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
@@ -29,11 +30,12 @@
                    Font="Bold, 30"
                    HorizontalTextAlignment="Center"
                    Margin="10, 100, 20, 10"/>
-            <Entry x:Name="forbrug"
-                   Margin="50,10,50,10"
-                   FontSize="10"
-                   Placeholder="Forbrug..."
-                   />
+            <components:RoundedEntry x:Name="usage" 
+                                         Text="{Binding UsageInput}" 
+                                         Placeholder="Forbrug..." 
+                                         Margin="50,10,50,10"
+                                         FontSize="15"
+                                         Keyboard="Numeric"/>
             <Button Text="Send"
                     TextColor="White"
                     Margin="90,50,90,10"

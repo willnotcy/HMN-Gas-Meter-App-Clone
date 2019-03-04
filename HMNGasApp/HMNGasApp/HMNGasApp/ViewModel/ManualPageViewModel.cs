@@ -13,6 +13,15 @@ namespace HMNGasApp.ViewModel
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
 
+        private int _usageInput;
+
+        public int UsageInput
+        {
+            get => _usageInput;
+            set => SetProperty(ref _usageInput, value);
+        }
+
+
         public ManualPageViewModel()
         {
             ManualCommand = new Command(async () => await ExecuteManualCommand());
