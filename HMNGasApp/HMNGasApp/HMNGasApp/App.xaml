@@ -38,6 +38,14 @@
                 <Setter Property="FontSize" Value="20"/>
                 <Setter Property="FontFamily" Value="{StaticResource OpenSans}"/>
             </Style>
+
+            <Style x:Key="SignInButton" TargetType="Button" >
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
+                <Setter Property="Margin" Value="0,20,0,20" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

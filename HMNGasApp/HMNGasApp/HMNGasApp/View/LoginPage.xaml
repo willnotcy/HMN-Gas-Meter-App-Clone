@@ -12,9 +12,9 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*" />
-                <RowDefinition Height="5*" />
+                <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <Grid BackgroundColor="{StaticResource PrimaryGreen}"
@@ -33,18 +33,23 @@
                        TextColor="White"
                        Grid.Row="1"/>
             </Grid>
-            <StackLayout Padding="15,50,15,0"
+            <StackLayout Padding="30,70,30,0"
                          Grid.Row="1">
-                <Label Text="Kundenummer" 
-                       Style="{StaticResource BodyText}" />
+                <Label Text="Kunde nr." 
+                       Style="{StaticResource BodyText}"
+                       FontSize="14"
+                       Margin="30,0,0,0"/>
                 <components:RoundedEntry x:Name="customerId" 
                                          Text="{Binding CustomerId}" 
-                                         Placeholder="Indtast kundenummer" 
+                                         Placeholder="Indtast kunde nr." 
                                          FontSize="20"
+                                         HeightRequest="60"
                                          Keyboard="Numeric"/>
 
                 <Label Text="Kodeord" 
-                       Style="{StaticResource BodyText}" />
+                       Style="{StaticResource BodyText}"
+                       FontSize="14"
+                       Margin="30,20,0,0"/>
 
                 <components:RoundedEntry x:Name="password" 
                                          Text="{Binding Password}" 
@@ -57,13 +62,12 @@
             <StackLayout VerticalOptions="EndAndExpand"
                          BackgroundColor="{StaticResource SecondaryMint}"
                          Grid.Row="2">
-                <Button Text="Log in" 
+                <Button Text="Log ind" 
                         IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
-                        VerticalOptions="FillAndExpand" 
-                        TextColor="White"
-                        FontSize="30">
+                        VerticalOptions="CenterAndExpand" 
+                        Style="{StaticResource SignInButton}">
                     <Button.Triggers>
                         <MultiTrigger TargetType="Button">
                             <MultiTrigger.Conditions>

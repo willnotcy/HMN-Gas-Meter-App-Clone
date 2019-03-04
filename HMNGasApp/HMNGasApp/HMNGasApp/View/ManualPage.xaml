@@ -34,11 +34,13 @@
                                          Text="{Binding UsageInput}" 
                                          Placeholder="Forbrug..." 
                                          Margin="50,10,50,10"
+                                         HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
-            <Button Text="Send"
+            <Button Text="SEND"
                     TextColor="White"
                     Margin="90,50,90,10"
+                    BorderRadius="7"
                     BackgroundColor="{StaticResource SecondaryMint}"
                     Command="{Binding ManualCommand}"/>
         </StackLayout>

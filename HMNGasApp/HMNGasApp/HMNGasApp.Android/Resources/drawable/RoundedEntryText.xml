@@ -4,11 +4,11 @@ android:shape="rectangle" android:padding="10dp"  >
   <!--solid defines the fill color of the Editor-->
   <solid android:color="#FFFFFF"/>
   <!--stroke defines the border color-->
-  <stroke android:width="2dp" android:color="#000000" />
+  <stroke android:width="2dp" android:color="#338671" />
   <!--the corner radius-->
   <corners
-   android:bottomRightRadius="18dp"
-   android:bottomLeftRadius="18dp"
-   android:topLeftRadius="18dp"
-   android:topRightRadius="18dp"/>
+   android:bottomRightRadius="30dp"
+   android:bottomLeftRadius="30dp"
+   android:topLeftRadius="30dp"
+   android:topRightRadius="30dp"/>
 </shape>

@@ -13,9 +13,9 @@ namespace HMNGasApp.ViewModel
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
 
-        private int _usageInput;
+        private int? _usageInput;
 
-        public int UsageInput
+        public int? UsageInput
         {
             get => _usageInput;
             set => SetProperty(ref _usageInput, value);
