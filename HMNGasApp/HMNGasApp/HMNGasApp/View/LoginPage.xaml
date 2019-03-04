@@ -30,7 +30,8 @@
                                          Text="{Binding CustomerId}" 
                                          Placeholder="Indtast kundenummer" 
                                          WidthRequest="400" 
-                                         FontSize="20"/>
+                                         FontSize="20"
+                                         Keyboard="Numeric"/>
                 
                 <Label Text="Kodeord" 
                        Style="{StaticResource BodyText}" 
