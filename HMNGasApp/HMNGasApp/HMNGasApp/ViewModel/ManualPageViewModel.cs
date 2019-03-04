@@ -30,8 +30,16 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteManualCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
             await App.Current.MainPage.DisplayAlert("Data indsendt", "Din manuelle indtastning er blevet godkendt", "Tilbage til menu");
             await Navigation.PopModalAsync();
+
+            IsBusy = false;
         }
     }
 }
