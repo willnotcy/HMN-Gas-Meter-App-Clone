@@ -35,9 +35,16 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteSignInCommand()
         {
+            if(IsBusy)
+            {
+                return;
+            }
+
             //TODO Implement with api
             SignedIn = true;
             await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+
+            IsBusy = false;
         }
 
     }
