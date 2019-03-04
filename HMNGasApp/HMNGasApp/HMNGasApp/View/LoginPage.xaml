@@ -10,44 +10,57 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" >
-            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
-                         VerticalOptions="Center" 
-                         HeightRequest="200">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid BackgroundColor="{StaticResource PrimaryGreen}"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+
+                </Grid.RowDefinitions>
+
                 <Label Text="HMN Scanner" 
                        Style="{StaticResource Heading}" 
                        HorizontalOptions="CenterAndExpand" 
-                       TextColor="White" 
-                       Margin="50, 125, 50, 50"/>
-            </StackLayout>
-            <StackLayout VerticalOptions="CenterAndExpand" 
-                         HorizontalOptions="CenterAndExpand" 
-                         Padding="20">
+                       VerticalTextAlignment="Center"
+                       TextColor="White"
+                       Grid.Row="1"/>
+            </Grid>
+            <StackLayout Padding="15,50,15,0"
+                         Grid.Row="1">
                 <Label Text="Kundenummer" 
-                       Style="{StaticResource BodyText}" 
-                       Margin="10"/>
+                       Style="{StaticResource BodyText}" />
                 <components:RoundedEntry x:Name="customerId" 
                                          Text="{Binding CustomerId}" 
                                          Placeholder="Indtast kundenummer" 
-                                         WidthRequest="400" 
                                          FontSize="20"
                                          Keyboard="Numeric"/>
-                
+
                 <Label Text="Kodeord" 
-                       Style="{StaticResource BodyText}" 
-                       Margin="10"/>
-                
+                       Style="{StaticResource BodyText}" />
+
                 <components:RoundedEntry x:Name="password" 
                                          Text="{Binding Password}" 
                                          Placeholder="Indtast kodeord" 
                                          FontSize="20" 
+                                         HeightRequest="60"
                                          IsPassword="True"/>
             </StackLayout>
-            <StackLayout VerticalOptions="EndAndExpand" HeightRequest="100">
+
+            <StackLayout VerticalOptions="EndAndExpand"
+                         BackgroundColor="{StaticResource SecondaryMint}"
+                         Grid.Row="2">
                 <Button Text="Log in" 
                         IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
-                        BackgroundColor="{StaticResource SecondaryMint}" 
+                        BackgroundColor="{StaticResource SecondaryMint}"
                         VerticalOptions="FillAndExpand" 
                         TextColor="White"
                         FontSize="30">
@@ -69,6 +82,6 @@
                     </Button.Triggers>
                 </Button>
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
