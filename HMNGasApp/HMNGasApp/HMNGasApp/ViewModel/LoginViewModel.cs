@@ -25,6 +25,16 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _customerId, value);
         }
 
+        private string _password;
+
+        public string Password
+        {
+            get => _password;
+            set => SetProperty(ref _password, value);
+        }
+
+
+
 
         public LoginViewModel()
         {
@@ -40,6 +50,12 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
+
+            if(Password == null || CustomerId == null)
+            {
+                await App.Current.MainPage.DisplayAlert("Tomme felter.", "Kundenummer og kodeord felterne kan ikke være tomme", "Okay");
+                return;
+            }
 
             //TODO Implement with api
             SignedIn = true;

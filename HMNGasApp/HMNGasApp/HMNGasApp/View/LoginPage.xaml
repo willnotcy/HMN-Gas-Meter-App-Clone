@@ -63,27 +63,10 @@
                          BackgroundColor="{StaticResource SecondaryMint}"
                          Grid.Row="2">
                 <Button Text="Log ind" 
-                        IsEnabled="false" 
                         Command="{Binding SignInCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
                         VerticalOptions="CenterAndExpand" 
                         Style="{StaticResource SignInButton}">
-                    <Button.Triggers>
-                        <MultiTrigger TargetType="Button">
-                            <MultiTrigger.Conditions>
-                                <BindingCondition Binding="{Binding Source={x:Reference customerId}, 
-                                                                    Path=Text.Length, 
-                                                                    Converter={StaticResource dataHasBeenEntered}}" 
-                                                  Value="true"/>
-                                <BindingCondition Binding="{Binding Source={x:Reference password}, 
-                                                                    Path=Text.Length, 
-                                                                    Converter={StaticResource dataHasBeenEntered}}" 
-                                                  Value="true"/>
-                            </MultiTrigger.Conditions>
-                            <Setter Property="IsEnabled" 
-                                    Value="True"/>
-                        </MultiTrigger>
-                    </Button.Triggers>
                 </Button>
             </StackLayout>
         </Grid>
