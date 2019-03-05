@@ -22,17 +22,13 @@ namespace HMNGasApp.iOS
 
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
-            await Task.Run(() =>
-            {
-                var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, ""));
+            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, ""));
 
-                var response = service.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+            var response = service.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
 
-                var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
 
-                return result;
-            });
-            return (false, "Something went wrong");
+            return result;
         }
     }
 }

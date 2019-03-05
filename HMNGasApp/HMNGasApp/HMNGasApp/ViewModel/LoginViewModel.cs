@@ -8,19 +8,7 @@ namespace HMNGasApp.ViewModel
 {
     public class LoginViewModel : BaseViewModel
     {
-        private static ILoginSoapService _customerSoapService;
-        public static ILoginSoapService CustomerSoapService
-        {
-            get
-            {
-                if (_customerSoapService == null)
-                {
-                    _customerSoapService = DependencyService.Get<ILoginSoapService>();
-                }
-
-                return _customerSoapService;
-            }
-        }
+        private readonly ILoginSoapService _service;
 
         public ICommand SignInCommand { get; set; }
 
@@ -52,19 +40,22 @@ namespace HMNGasApp.ViewModel
         {
             Title = "Log in";
 
-
+            _service = DependencyService.Get<ILoginSoapService>();
 
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
         }
 
         private async Task ExecuteSignInCommand()
         {
-            //TODO Implement with api
-            //await CustomerSoapService.NewLogin(CustomerId, Password);
-            await CustomerSoapService.NewLogin("1000214", "7151");
-            SignedIn = true;
-            await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+            var result = await _service.NewLogin("1000214", "7151");
+            if(result.Item1)
+            {
+                SignedIn = true;
+                await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
+            }
         }
-
     }
 }
