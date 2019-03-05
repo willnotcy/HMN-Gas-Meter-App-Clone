@@ -14,7 +14,6 @@ namespace HMNGasApp.ViewModel
         public ICommand SignInCommand { get; set; }
 
         private bool _signedIn;
-
         public bool SignedIn
         {
             get => _signedIn;
@@ -22,7 +21,6 @@ namespace HMNGasApp.ViewModel
         }
 
         private string _customerId;
-
         public string CustomerId
         {
             get => _customerId;
@@ -30,7 +28,6 @@ namespace HMNGasApp.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get => _password;
@@ -48,7 +45,7 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteSignInCommand()
         {
-            var result = await _service.NewLogin("1000214", "7151");
+            var result = await _service.NewLogin(CustomerId, Password);
             if(result.Item1)
             {
                 SignedIn = true;
