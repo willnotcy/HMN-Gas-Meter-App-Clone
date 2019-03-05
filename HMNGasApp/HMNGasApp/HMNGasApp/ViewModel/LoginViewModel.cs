@@ -51,11 +51,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            if(Password == null || CustomerId == null)
-            {
-                await App.Current.MainPage.DisplayAlert("Tomme felter.", "Kundenummer og kodeord felterne kan ikke være tomme", "Okay");
-                return;
-            }
+            
 
             //TODO Implement with api
             SignedIn = true;
