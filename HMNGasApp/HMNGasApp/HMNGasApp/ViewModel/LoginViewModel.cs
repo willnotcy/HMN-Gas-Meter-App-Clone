@@ -38,6 +38,9 @@ namespace HMNGasApp.ViewModel
         {
             Title = "Log in";
 
+            Password = "";
+            CustomerId = "";
+
             _service = DependencyService.Get<ILoginSoapService>();
 
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
