@@ -52,10 +52,6 @@ namespace HMNGasApp.ViewModel
             if(result.Item1)
             {
                 SignedIn = true;
-
-                var context = DependencyService.Get<IUserContext>();
-                context.securityKey = result.Item2;
-
                 await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
             } else
             {

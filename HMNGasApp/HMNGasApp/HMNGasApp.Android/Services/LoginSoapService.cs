@@ -30,6 +30,12 @@ namespace HMNGasApp.Droid
 
             var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
 
+            if (result.Item1)
+            {
+                config.SecurityKey = result.Item2;
+                config.CustomerId = customerId;
+            }
+
             return result;
         }
     }

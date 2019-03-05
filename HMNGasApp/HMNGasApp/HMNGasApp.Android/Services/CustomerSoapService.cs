@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using HMNGasApp.Droid.HMNGasnet;
 using HMNGasApp.Droid.Services;
 using HMNGasApp.Model;
@@ -22,21 +20,26 @@ namespace HMNGasApp.Droid.Services
             };
         }
 
-        public Task<List<Model.Customer>> GetCustomersAsync()
+        public async Task<Model.Customer> GetCustomerAsync()
         {
-            throw new NotImplementedException();
+            var config = DependencyService.Resolve<IConfig>();
+            var context = new HMNGasnet.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = config.SecurityKey };
+
+            var result = service.getCustomers(new CustomerRequest {AccountNum = config.CustomerId, UserContext = context, OrgNo = ""});
+
+            return FromXellentCustomer(result.Customers[0]);
         }
 
-        //public async Task<List<Model.Customer>> GetCustomersAsync()
-        //{
-        //    return await Task.Run(() =>
-        //    {
-        //        var context = new UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = "" };
-        //        //var result = await service.getCustomersAsync(new CustomerRequest {AccountNum = });
-
-        //        //return new List<Model.Customer>(result);
-
-        //    });
-        //}
+        public Model.Customer FromXellentCustomer(HMNGasnet.Customer customer)
+        {
+            return new Model.Customer()
+            {
+                AccountNum = customer.AccountNum,
+                Address = customer.Address,
+                Email = customer.Email,
+                Name = customer.Name,
+                Phone = customer.Phone
+            };
+        }
     }
 }

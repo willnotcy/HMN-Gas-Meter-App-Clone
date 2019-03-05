@@ -1,11 +1,15 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.Model;
+using HMNGasApp.Services;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
     {
+        private readonly ICustomerSoapService _service;
+
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
@@ -70,7 +74,7 @@ namespace HMNGasApp.ViewModel
         public InfoViewModel()
         {
             //TODO: Title = "MINE OPLYSNINGER";
-
+            _service = DependencyService.Get<ICustomerSoapService>();
             LoadCommand = new Command(() => ExecuteLoadCommand());
             //EditCommand = new Command(() => ExecuteEditCommand());
             ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
@@ -81,10 +85,9 @@ namespace HMNGasApp.ViewModel
         {
         }
 
-        private void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
-            //Hack
-            var customer = new Customer { AccountNum = "1343545", Address = "Kongehaven 24", Email = "apal@itu.dk", Name = "Alexander Pálsson", Phone = "27501015", MeterNum = "HMN 16.20.649" };
+            var customer = await _service.GetCustomerAsync();
             Init(customer);
         }
 

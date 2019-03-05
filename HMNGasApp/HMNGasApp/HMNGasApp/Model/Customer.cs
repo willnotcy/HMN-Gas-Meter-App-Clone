@@ -1,6 +1,6 @@
 ﻿namespace HMNGasApp.Model
 {
-    public class Customer
+    public class Customer : ICustomer
     {
         public string AccountNum { get; set; }
         public string Email { get; set; }
@@ -11,6 +11,7 @@
 
         public Customer()
         {
+
         }
     }
 }
