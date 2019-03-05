@@ -1,12 +1,12 @@
 ﻿using System.Threading.Tasks;
 using HMNGasApp.Helpers;
-using HMNGasApp.iOS;
 using HMNGasApp.iOS.HMNGasnet;
+using HMNGasApp.iOS.Services;
 using HMNGasApp.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(LoginSoapService))]
-namespace HMNGasApp.iOS
+namespace HMNGasApp.iOS.Services
 {
     public class LoginSoapService : ILoginSoapService
     {

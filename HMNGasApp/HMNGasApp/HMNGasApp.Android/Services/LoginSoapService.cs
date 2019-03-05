@@ -1,13 +1,13 @@
 ﻿using System.Threading.Tasks;
-using HMNGasApp.Droid;
 using HMNGasApp.Droid.HMNGasnet;
+using HMNGasApp.Droid.Services;
 using HMNGasApp.Helpers;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(LoginSoapService))]
-namespace HMNGasApp.Droid
+namespace HMNGasApp.Droid.Services
 {
     public class LoginSoapService : ILoginSoapService
     {

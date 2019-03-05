@@ -90,7 +90,8 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="LoginSoapService.cs" />
+    <Compile Include="Services\CustomerSoapService.cs" />
+    <Compile Include="Services\LoginSoapService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="RoundedEntryRenderer.cs" />
