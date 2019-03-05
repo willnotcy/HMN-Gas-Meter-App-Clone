@@ -1,4 +1,5 @@
-﻿using HMNGasApp.View;
+﻿using HMNGasApp.Services;
+using HMNGasApp.View;
 using HMNGasApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +16,8 @@ namespace HMNGasApp
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
         public IServiceProvider Container => _lazyProvider.Value;
+
+        public string securityKey = "";
 
         public App()
         {
