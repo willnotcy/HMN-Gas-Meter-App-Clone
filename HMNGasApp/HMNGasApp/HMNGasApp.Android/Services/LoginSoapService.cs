@@ -2,6 +2,7 @@
 using HMNGasApp.Droid;
 using HMNGasApp.Droid.HMNGasnet;
 using HMNGasApp.Helpers;
+using HMNGasApp.Model;
 using HMNGasApp.Services;
 using Xamarin.Forms;
 
@@ -22,7 +23,8 @@ namespace HMNGasApp.Droid
 
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
-            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, ""));
+            var config = DependencyService.Resolve<IConfig>();
+            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, config.ApiKey));
 
             var response = service.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
 
