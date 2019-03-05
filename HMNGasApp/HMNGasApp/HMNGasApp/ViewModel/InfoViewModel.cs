@@ -1,12 +1,15 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.Model;
+using HMNGasApp.Services;
 using System.Threading.Tasks;
 
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
     {
+        private readonly ICustomerSoapService _service;
+
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
@@ -70,12 +73,9 @@ namespace HMNGasApp.ViewModel
 
         public InfoViewModel()
         {
-            //TODO: Title = "MINE OPLYSNINGER";
-
-            LoadCommand = new Command(() => ExecuteLoadCommand());
-            //EditCommand = new Command(() => ExecuteEditCommand());
+            _service = DependencyService.Get<ICustomerSoapService>();
+            LoadCommand = new Command(async () => await ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            //SettingsPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new SettingsPage()));
         }
 
         private void ExecuteEditCommand()
@@ -90,16 +90,15 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        private void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
             if(IsBusy)
             {
                 return;
             }
             IsBusy = true;
-
-            //Hack
-            var customer = new Customer { AccountNum = "1343545", Address = "Kongehaven 24", Email = "apal@itu.dk", Name = "Alexander Pálsson", Phone = "27501015", MeterNum = "HMN 16.20.649" };
+            
+            var customer = await _service.GetCustomerAsync();
             Init(customer);
 
             IsBusy = false;
@@ -128,7 +127,6 @@ namespace HMNGasApp.ViewModel
             MeterNum = c.MeterNum;
             LatestMeasure = "4025,34 m3";
             MeasureDate = "01-02-19";
-
         }
     }
 }
