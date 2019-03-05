@@ -73,22 +73,48 @@ namespace HMNGasApp.ViewModel
 
         public InfoViewModel()
         {
-            //TODO: Title = "MINE OPLYSNINGER";
             _service = DependencyService.Get<ICustomerSoapService>();
-            LoadCommand = new Command(() => ExecuteLoadCommand());
-            //EditCommand = new Command(() => ExecuteEditCommand());
-            ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
-            //SettingsPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new SettingsPage()));
+            LoadCommand = new Command(async () => await ExecuteLoadCommand());
+            ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
         }
 
         private void ExecuteEditCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+
+            IsBusy = false;
         }
 
         private async Task ExecuteLoadCommand()
         {
+            if(IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+            
             var customer = await _service.GetCustomerAsync();
             Init(customer);
+
+            IsBusy = false;
+        }
+
+        private async Task ExecuteReturnNavCommand ()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PopModalAsync();
+
+            IsBusy = false;
         }
 
         public void Init(Customer c)
@@ -101,7 +127,6 @@ namespace HMNGasApp.ViewModel
             MeterNum = c.MeterNum;
             LatestMeasure = "4025,34 m3";
             MeasureDate = "01-02-19";
-
         }
     }
 }

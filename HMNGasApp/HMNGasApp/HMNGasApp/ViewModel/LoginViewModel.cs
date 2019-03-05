@@ -48,6 +48,12 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteSignInCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
             var result = await _service.NewLogin(CustomerId, Password);
             if(result.Item1)
             {
@@ -57,6 +63,8 @@ namespace HMNGasApp.ViewModel
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
             }
+
+            IsBusy = false;
         }
     }
 }

@@ -14,14 +14,48 @@ namespace HMNGasApp.ViewModel
 
         public MainPageViewModel()
         {
-            ManualPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new ManualPage()));
-            InfoPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new InfoPage()));
+            ManualPageNavCommand = new Command(async () => await ExecuteManualPageNavCommand());
+            InfoPageNavCommand = new Command(async () => await ExecuteInfoPageNavCommand());
             LogOutCommand = new Command(async () => await ExecuteLogOutCommand());
         }
 
         private async Task ExecuteLogOutCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
             await Navigation.PopModalAsync();
+
+            IsBusy = false;
+        }
+
+        private async Task ExecuteInfoPageNavCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PushModalAsync(new InfoPage());
+
+            IsBusy = false;
+        }
+
+        private async Task ExecuteManualPageNavCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PushModalAsync(new ManualPage());
+
+            IsBusy = false;
         }
     }
 }
