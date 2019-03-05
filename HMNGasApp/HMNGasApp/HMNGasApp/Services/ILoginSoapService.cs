@@ -4,6 +4,6 @@ namespace HMNGasApp.Services
 {
     public interface ILoginSoapService
     {
-        Task NewLogin(string customerId, string password);
+        Task<(bool, string)> NewLogin(string customerId, string password);
     }
 }
