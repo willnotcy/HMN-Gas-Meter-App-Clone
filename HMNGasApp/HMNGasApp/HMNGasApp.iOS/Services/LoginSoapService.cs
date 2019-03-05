@@ -2,6 +2,7 @@
 using HMNGasApp.Helpers;
 using HMNGasApp.iOS.HMNGasnet;
 using HMNGasApp.iOS.Services;
+using HMNGasApp.Model;
 using HMNGasApp.Services;
 using Xamarin.Forms;
 
@@ -22,11 +23,18 @@ namespace HMNGasApp.iOS.Services
 
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
-            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, ""));
+            var config = DependencyService.Resolve<IConfig>();
+            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, config.ApiKey));
 
             var response = service.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
 
             var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+            if (result.Item1)
+            {
+                config.SecurityKey = result.Item2;
+                config.CustomerId = customerId;
+            }
 
             return result;
         }
