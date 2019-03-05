@@ -37,6 +37,15 @@
                                          HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
+            <Label TextColor="{StaticResource PrimaryDarkGrey}"
+                   HorizontalOptions="FillAndExpand"
+                   HorizontalTextAlignment="Center"
+                   Opacity="0.5"
+                   FontSize="12">
+                <Label.Text>
+                Eller indmeld 24/7 via tlf.: +45 20 14 34 79
+                </Label.Text>
+            </Label>
             <Button Text="SEND"
                     TextColor="White"
                     Margin="90,50,90,10"
