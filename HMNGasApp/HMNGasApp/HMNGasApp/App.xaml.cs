@@ -1,4 +1,7 @@
-﻿using HMNGasApp.View;
+﻿using HMNGasApp.Helpers;
+using HMNGasApp.Model;
+using HMNGasApp.Services;
+using HMNGasApp.View;
 using HMNGasApp.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -15,6 +18,8 @@ namespace HMNGasApp
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
         public IServiceProvider Container => _lazyProvider.Value;
+
+        public string securityKey = "";
 
         public App()
         {
@@ -42,10 +47,18 @@ namespace HMNGasApp
         {
             var services = new ServiceCollection();
 
+            var context = new UserContext();
+            var config = new Config
+            {
+                ApiKey = Secrets.ApiKey
+            };
+
             services.AddScoped<LoginViewModel>();
             services.AddScoped<InfoViewModel>();
             services.AddScoped<MainPageViewModel>();
             services.AddScoped<ManualPageViewModel>();
+            services.AddSingleton<IUserContext>(context);
+            services.AddSingleton<IConfig>(config);
 
             return services.BuildServiceProvider();
         }
