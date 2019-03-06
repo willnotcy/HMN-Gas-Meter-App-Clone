@@ -1,11 +1,15 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.Model;
+using HMNGasApp.Services;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
     {
+        private readonly ICustomerSoapService _service;
+
         public ICommand LoadCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
@@ -69,23 +73,48 @@ namespace HMNGasApp.ViewModel
 
         public InfoViewModel()
         {
-            //TODO: Title = "MINE OPLYSNINGER";
-
-            LoadCommand = new Command(() => ExecuteLoadCommand());
-            //EditCommand = new Command(() => ExecuteEditCommand());
-            ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
-            //SettingsPageNavCommand = new Command(async () => await Navigation.PushModalAsync(new SettingsPage()));
+            _service = DependencyService.Get<ICustomerSoapService>();
+            LoadCommand = new Command(async () => await ExecuteLoadCommand());
+            ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
         }
 
         private void ExecuteEditCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+
+            IsBusy = false;
         }
 
-        private void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
-            //Hack
-            var customer = new Customer { AccountNum = "1343545", Address = "Kongehaven 24", Email = "apal@itu.dk", Name = "Alexander Pálsson", Phone = "27501015", MeterNum = "HMN 16.20.649" };
+            if(IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+            
+            var customer = await _service.GetCustomerAsync();
             Init(customer);
+
+            IsBusy = false;
+        }
+
+        private async Task ExecuteReturnNavCommand ()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PopModalAsync();
+
+            IsBusy = false;
         }
 
         public void Init(Customer c)
@@ -98,7 +127,6 @@ namespace HMNGasApp.ViewModel
             MeterNum = c.MeterNum;
             LatestMeasure = "4025,34 m3";
             MeasureDate = "01-02-19";
-
         }
     }
 }

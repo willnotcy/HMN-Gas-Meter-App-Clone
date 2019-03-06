@@ -27,7 +27,8 @@ namespace HMNGasApp.Droid
             if (Control != null)
             {
                 Control.Background = Forms.Context.GetDrawable(Resource.Drawable.RoundedEntryText);
-                Control.SetPadding(30, 10, 10, 10);
+                Control.Gravity = GravityFlags.CenterVertical;
+                Control.SetPadding(80, 10, 10, 10);
             }
         }
     }
