@@ -71,9 +71,9 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _measureDate, value);
         }
 
-        public InfoViewModel()
+        public InfoViewModel(ICustomerSoapService service)
         {
-            _service = DependencyService.Get<ICustomerSoapService>();
+            _service = service;
             LoadCommand = new Command(async () => await ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
         }
