@@ -59,6 +59,7 @@ namespace HMNGasApp
             services.AddScoped<ManualPageViewModel>();
             services.AddSingleton<IUserContext>(context);
             services.AddSingleton<IConfig>(config);
+            services.AddScoped<ILoginSoapService, LoginSoapService>();
 
             return services.BuildServiceProvider();
         }

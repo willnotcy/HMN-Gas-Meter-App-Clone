@@ -22,6 +22,9 @@
     <Reference Include="System.ComponentModel.Annotations">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Services">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v1.0\System.Web.Services.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
