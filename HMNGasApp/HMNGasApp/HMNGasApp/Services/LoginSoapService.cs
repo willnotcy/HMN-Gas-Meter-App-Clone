@@ -20,6 +20,12 @@ namespace HMNGasApp.Services
             _config = config;
         }
 
+        /// <summary>
+        /// Attempts to obtain a new login from the given parameters.
+        /// </summary>
+        /// <param name="customerId"></param>
+        /// <param name="password"></param>
+        /// <returns>Tuple of success and security key</returns>
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
             var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));

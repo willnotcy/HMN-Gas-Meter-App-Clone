@@ -19,6 +19,10 @@ namespace HMNGasApp.Services
             _config = config;
         }
 
+        /// <summary>
+        /// Obtains customer information for the current customer
+        /// </summary>
+        /// <returns>Customer object</returns>
         public Model.Customer GetCustomer()
         {
             var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
@@ -27,7 +31,12 @@ namespace HMNGasApp.Services
 
             return FromXellentCustomer(result.Customers[0]);
         }
-
+        
+        /// <summary>
+        /// Converts a XellentAPI customer object a less detailed Customer object
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns>Customer object</returns>
         public Model.Customer FromXellentCustomer(WebServices.Customer customer)
         {
             return new Model.Customer()
