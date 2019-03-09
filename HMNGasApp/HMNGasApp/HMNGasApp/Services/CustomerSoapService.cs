@@ -10,22 +10,20 @@ namespace HMNGasApp.Services
 {
     public class CustomerSoapService : ICustomerSoapService
     {
-        XellentAPI service;
+        private readonly IXellentAPI _client;
+        private readonly IConfig _config;
 
-        public CustomerSoapService()
+        public CustomerSoapService(IXellentAPI client, IConfig config)
         {
-            service = new XellentAPI()
-            {
-                Url = "http://xel-webfront-test.gasnet.dk:81/TEST/XellentAPI.asmx"
-            };
+            _client = client;
+            _config = config;
         }
 
-        public async Task<Model.Customer> GetCustomerAsync()
+        public Model.Customer GetCustomer()
         {
-            var config = DependencyService.Resolve<IConfig>();
-            var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = config.SecurityKey };
+            var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
-            var result = service.getCustomers(new CustomerRequest { AccountNum = config.CustomerId, UserContext = context, OrgNo = "" });
+            var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
 
             return FromXellentCustomer(result.Customers[0]);
         }

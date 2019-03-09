@@ -11,12 +11,12 @@ namespace HMNGasApp.Services
 {
     public class LoginSoapService : ILoginSoapService
     {
-        private readonly IXellentAPI _service;
+        private readonly IXellentAPI _client;
         private readonly IConfig _config;
 
-        public LoginSoapService(IXellentAPI service, IConfig config)
+        public LoginSoapService(IXellentAPI client, IConfig config)
         {
-            _service = service;
+            _client = client;
             _config = config;
         }
 
@@ -24,7 +24,7 @@ namespace HMNGasApp.Services
         {
             var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-            var response = _service.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+            var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
 
             var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
 
