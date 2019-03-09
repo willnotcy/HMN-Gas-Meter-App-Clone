@@ -17,4 +17,10 @@
     <ProjectReference Include="..\HMNGasApp\HMNGasApp\HMNGasApp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Web.Services">
+      <HintPath>..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\Xamarin.iOS\v1.0\System.Web.Services.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

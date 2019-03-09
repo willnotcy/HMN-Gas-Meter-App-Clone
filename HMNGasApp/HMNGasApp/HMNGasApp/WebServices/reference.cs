@@ -28,7 +28,7 @@ namespace HMNGasApp.WebServices
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name = "XellentAPISoap", Namespace = "XellentCI_WebAPI_ns")]
-    public partial class XellentAPI : System.Web.Services.Protocols.SoapHttpClientProtocol
+    public partial class XellentAPI : System.Web.Services.Protocols.SoapHttpClientProtocol, IXellentAPI
     {
 
         private System.Threading.SendOrPostCallback canConnectOperationCompleted;
