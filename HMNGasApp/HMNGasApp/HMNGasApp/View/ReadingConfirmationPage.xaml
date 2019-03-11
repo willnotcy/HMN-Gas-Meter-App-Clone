@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="HMNGasApp.View.ManualPage"
-             Title="Tast Selv"
-             BackgroundColor="White"
-             xmlns:components="clr-namespace:HMNGasApp.View.Components">
+             x:Class="HMNGasApp.View.ReadingConfirmationPage"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             >
     <ContentPage.Content>
         <StackLayout>
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
@@ -16,40 +15,41 @@
                             <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Font="Bold" 
-                           Text="Manuel indtastning" 
+                    <Label Style="{StaticResource Heading}" 
+                           Text="Bekræft aflæsning" 
                            FontSize="Large" 
                            TextColor="White" 
                            HorizontalOptions="CenterAndExpand" 
                            Margin="0,0,50,0"  />
                 </StackLayout>
-            </StackLayout>    
-            
-            <Label Text="Indtast dit forbrug:"
+            </StackLayout>
+            <Label Text="Dit forbrug:"
                    TextColor="{StaticResource PrimaryDarkGrey}"
+                   Style="{StaticResource BodyText}"
+                   Font="Bold, 25"
+                   HorizontalTextAlignment="Center"
+                   Margin="10, 50, 20, 10"/>
+            
+            <Label Text="{Binding UsageInput}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 30"
                    HorizontalTextAlignment="Center"
-                   Margin="10, 100, 20, 10"/>
-            <components:RoundedEntry x:Name="usage" 
-                                         Text="{Binding UsageInput}" 
-                                         Placeholder="Forbrug..." 
-                                         Style="{StaticResource BodyText}"
-                                         Margin="50,10,50,10"
-                                         HeightRequest="60"
-                                         FontSize="15"
-                                         Keyboard="Numeric"/>
-            <Label TextColor="{StaticResource PrimaryDarkGrey}"
-                   HorizontalOptions="FillAndExpand"
+                   />
+            
+            <Label Text="Kundenummer:"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
+                   FontSize="10"
                    HorizontalTextAlignment="Center"
-                   Opacity="0.5"
-                   FontSize="12">
-                <Label.Text>
-                Eller indmeld 24/7 via tlf.: +45 20 14 34 79
-                </Label.Text>
-            </Label>
-            <Button Text="SEND"
+                   Margin="10, 50, 20, 10"/>
+            
+            <Label Text="{Binding AccountNum}"
+                   Style="{StaticResource BodyText}"
+                   FontSize="Small"
+                   HorizontalTextAlignment="Center"
+                   />
+            
+            <Button Text="Indsend"
                     TextColor="White"
                     Margin="90,50,90,10"
                     BorderRadius="7"

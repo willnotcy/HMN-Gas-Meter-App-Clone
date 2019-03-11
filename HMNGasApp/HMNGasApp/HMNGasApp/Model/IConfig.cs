@@ -7,5 +7,7 @@
         string SecurityKey { get; set; }
 
         string CustomerId { get; set; }
+
+        string Name { get; set; }
     }
 }
