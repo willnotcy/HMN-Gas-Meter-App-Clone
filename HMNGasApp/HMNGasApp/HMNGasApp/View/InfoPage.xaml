@@ -16,7 +16,7 @@
                 <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
                 <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SettingsPageNavCommand}" />
+                        <TapGestureRecognizer Command="{Binding EditCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
@@ -25,7 +25,7 @@
             <StackLayout Spacing="45" Padding="30" >
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
-                    <Label Text="{Binding Name}" Font="Bold" VerticalOptions="Center"/>
+                    <Entry x:Name="EditableName" Text="{Binding Name}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
@@ -37,14 +37,14 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
-                        <Label Text="{Binding Email}"/>
+                        <Entry x:Name="EditableEMail" Text="{Binding Email}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
-                        <Label Text="{Binding Phone}"/>
+                        <Entry x:Name="EditablePhone" Text="{Binding Phone}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>

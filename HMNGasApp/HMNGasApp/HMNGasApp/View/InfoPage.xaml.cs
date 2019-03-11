@@ -9,6 +9,7 @@ namespace HMNGasApp.View
     public partial class InfoPage : ContentPage
     {
         private readonly InfoViewModel _viewModel;
+    
 
         public InfoPage()
         {
@@ -16,6 +17,14 @@ namespace HMNGasApp.View
 
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
+            MessagingCenter.Subscribe<InfoViewModel>(this, "EnableEdit", (sender) => EnableEdit());
+        }
+
+        private void EnableEdit()
+        {
+            EditableName.IsReadOnly = false;
+            EditablePhone.IsReadOnly = false;
+            EditableEMail.IsReadOnly = false;
         }
 
         protected override void OnAppearing()

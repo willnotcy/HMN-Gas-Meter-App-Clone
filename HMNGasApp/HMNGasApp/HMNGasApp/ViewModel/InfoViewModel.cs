@@ -14,7 +14,9 @@ namespace HMNGasApp.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
+        public ICommand SaveInfoCommand { get; set; }
 
+        #region Info
         private string _accountNum;
         public string AccountNum
         {
@@ -70,12 +72,20 @@ namespace HMNGasApp.ViewModel
             get => _measureDate;
             set => SetProperty(ref _measureDate, value);
         }
+        #endregion
 
         public InfoViewModel(ICustomerSoapService service)
         {
             _service = service;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
+            EditCommand = new Command(() => ExecuteEditCommand());
+            SaveInfoCommand = new Command(() => ExecuteSaveInfoCommand());
+        }
+
+        private void ExecuteSaveInfoCommand()
+        {
+
         }
 
         private void ExecuteEditCommand()
@@ -86,6 +96,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            MessagingCenter.Send(this, "EnableEdit");
 
             IsBusy = false;
         }
