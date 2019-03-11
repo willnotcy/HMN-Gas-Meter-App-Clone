@@ -63,8 +63,8 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
-            this.Navigation.RemovePage(Navigation.ModalStack[Navigation.ModalStack.Count - 2]);
-            await Navigation.PopModalAsync();
+            this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }

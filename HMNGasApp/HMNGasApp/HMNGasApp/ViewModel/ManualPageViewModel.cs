@@ -36,7 +36,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }
@@ -55,9 +55,14 @@ namespace HMNGasApp.ViewModel
             }
             else
             {
-                await Navigation.PushModalAsync(new ReadingConfirmationPage(UsageInput));
+                await Navigation.PushAsync(new ReadingConfirmationPage(UsageInput));
             }
             IsBusy = false;
+        }
+
+        public void Reset()
+        {
+            UsageInput = null;
         }
     }
 }

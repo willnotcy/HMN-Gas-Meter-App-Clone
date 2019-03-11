@@ -4,7 +4,8 @@
              x:Class="HMNGasApp.View.ManualPage"
              Title="Tast Selv"
              BackgroundColor="White"
-             xmlns:components="clr-namespace:HMNGasApp.View.Components">
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <StackLayout>
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 

@@ -13,5 +13,11 @@ namespace HMNGasApp.View
             BindingContext = viewModel = DependencyService.Resolve<ManualPageViewModel>();
             viewModel.Navigation = Navigation;
         }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            viewModel.Reset();
+        }
     }
 }
