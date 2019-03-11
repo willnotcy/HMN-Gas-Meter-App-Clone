@@ -17,14 +17,14 @@ namespace HMNGasApp.View
 
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
-            MessagingCenter.Subscribe<InfoViewModel>(this, "EnableEdit", (sender) => EnableEdit());
+            MessagingCenter.Subscribe<InfoViewModel>(this, "EnableEdit", (sender) => ToggleEdit());
         }
 
-        private void EnableEdit()
+        private void ToggleEdit()
         {
-            EditableName.IsReadOnly = false;
-            EditablePhone.IsReadOnly = false;
-            EditableEMail.IsReadOnly = false;
+            EditableName.IsReadOnly = !EditableName.IsReadOnly;
+            EditablePhone.IsReadOnly = !EditablePhone.IsReadOnly;
+            EditableEMail.IsReadOnly = !EditableEMail.IsReadOnly;
         }
 
         protected override void OnAppearing()
