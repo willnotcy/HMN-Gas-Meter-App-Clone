@@ -1,5 +1,5 @@
 ﻿using HMNGasApp.ViewModel;
-
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -15,6 +15,10 @@ namespace HMNGasApp.View
         {
             InitializeComponent();
 
+            EditableName.TextChanged += OnTextChanged;
+            EditablePhone.TextChanged += OnTextChanged;
+            EditableEMail.TextChanged += OnTextChanged;
+
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
             MessagingCenter.Subscribe<InfoViewModel>(this, "EnableEdit", (sender) => ToggleEdit());
@@ -25,6 +29,11 @@ namespace HMNGasApp.View
             EditableName.IsReadOnly = !EditableName.IsReadOnly;
             EditablePhone.IsReadOnly = !EditablePhone.IsReadOnly;
             EditableEMail.IsReadOnly = !EditableEMail.IsReadOnly;
+        }
+
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            Button.IsVisible = true;
         }
 
         protected override void OnAppearing()

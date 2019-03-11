@@ -36,14 +36,14 @@
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
-                    <StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand">
                         <Entry x:Name="EditableEMail" Text="{Binding Email}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
-                    <StackLayout>
+                    <StackLayout HorizontalOptions="FillAndExpand">
                         <Entry x:Name="EditablePhone" Text="{Binding Phone}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
@@ -69,6 +69,7 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <Button x:Name="Button" Text="Save" Command="{Binding SaveInfoCommand}" IsVisible="False"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

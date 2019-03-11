@@ -23,30 +23,34 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public Model.Customer GetCustomer()
+        public WebServices.Customer GetCustomer()
         {
             var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
             var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
 
-            return FromXellentCustomer(result.Customers[0]);
+            return result.Customers[0];
         }
-        
-        /// <summary>
-        /// Converts a XellentAPI customer object a less detailed Customer object
-        /// </summary>
-        /// <param name="customer"></param>
-        /// <returns>Customer object</returns>
-        public Model.Customer FromXellentCustomer(WebServices.Customer customer)
+
+        public bool EditCustomer(WebServices.Customer customer)
         {
-            return new Model.Customer()
+            var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
+
+            var result = _client.newCustContactInfo(new NewCustContactInfoRequest { AccountNum = customer.AccountNum, AlternativeCustomerCode = customer.AlternativeCustomerCode,
+                                                                                    AlternativeCustomerNumber = customer.AlternativeCustomerNumber, BirthDate = customer.BirthDate,
+                                                                                    CellPhone = customer.CellularPhone, City = customer.City, CustBankAcc = customer.CustBankAcc,
+                                                                                    Email = customer.Email, LanguageId = customer.LanguageId, Name = customer.Name,
+                                                                                    NetsShareToEbox = customer.NetsShareToEbox, Phone = customer.Phone, PostOfficeBox = customer.PostOfficeBox,
+                                                                                    Residence = customer.Residence, SecondaryCellPhone = customer.SecondaryCellularPhone,
+                                                                                    SecondaryEmail = customer.SecondaryEmail, Street = customer.Street, TeleFax = customer.TeleFax,
+                                                                                    ZipCode = customer.ZipCode, UserContext = context });
+            if (result.ResponseCode.Equals("Ok"))
             {
-                AccountNum = customer.AccountNum,
-                Address = customer.Address,
-                Email = customer.Email,
-                Name = customer.Name,
-                Phone = customer.Phone
-            };
+                return true;
+            } else
+            {
+                return false;
+            }
         }
     }
 }

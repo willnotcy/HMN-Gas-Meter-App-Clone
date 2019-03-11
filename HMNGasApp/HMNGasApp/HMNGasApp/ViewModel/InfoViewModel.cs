@@ -4,6 +4,7 @@ using HMNGasApp.Model;
 using HMNGasApp.Services;
 using System.Threading.Tasks;
 
+
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
@@ -17,6 +18,13 @@ namespace HMNGasApp.ViewModel
         public ICommand SaveInfoCommand { get; set; }
 
         #region Info
+        private WebServices.Customer _customer;
+        public WebServices.Customer Customer
+        {
+            get { return _customer; }
+            set { _customer = value; }
+        }
+
         private string _accountNum;
         public string AccountNum
         {
@@ -38,11 +46,26 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _phone, value);
         }
 
-        private string _address;
-        public string Address
+        private string _street;
+        public string Street
         {
-            get => _address;
-            set => SetProperty(ref _address, value);
+            get => _street;
+            set => SetProperty(ref _street, value);
+        }
+
+        private string _zipCode;
+        public string ZipCode
+        {
+            get { return _zipCode; }
+            set { _zipCode = value; }
+        }
+
+        private string _city;
+
+        public string City
+        {
+            get { return _city; }
+            set { _city = value; }
         }
 
         private string _name;
@@ -80,12 +103,24 @@ namespace HMNGasApp.ViewModel
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             EditCommand = new Command(() => ExecuteEditCommand());
-            SaveInfoCommand = new Command(() => ExecuteSaveInfoCommand());
+            SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
         }
 
-        private void ExecuteSaveInfoCommand()
+        private async Task ExecuteSaveInfoCommand()
         {
+            Customer.Name = Name;
+            Customer.Phone = Phone;
+            Customer.Street = Street;
+            Customer.ZipCode = ZipCode;
+            Customer.City = City;
 
+            var result = _service.EditCustomer(Customer);
+
+            if (!result)
+            {
+                //TODO Get text from languagefile
+                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+            }
         }
 
         private void ExecuteEditCommand()
@@ -128,14 +163,16 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        public void Init(Customer c)
+        public void Init(WebServices.Customer c)
         {
+            Customer = c;
             AccountNum = c.AccountNum;
             Name = c.Name;
-            Address = c.Address;
+            Street = c.Address;
             Email = c.Email;
             Phone = c.Phone;
-            MeterNum = c.MeterNum;
+            //TODO FIX
+            MeterNum = "12346789";
             LatestMeasure = "4025,34 m3";
             MeasureDate = "01-02-19";
         }
