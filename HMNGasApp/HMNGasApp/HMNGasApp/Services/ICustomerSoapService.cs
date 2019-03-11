@@ -6,6 +6,6 @@ namespace HMNGasApp.Services
 {
     public interface ICustomerSoapService
     {
-        Task<Customer> GetCustomerAsync();
+        Customer GetCustomer();
     }
 }

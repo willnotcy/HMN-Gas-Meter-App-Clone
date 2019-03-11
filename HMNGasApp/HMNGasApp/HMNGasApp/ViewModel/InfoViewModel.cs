@@ -71,10 +71,10 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _measureDate, value);
         }
 
-        public InfoViewModel()
+        public InfoViewModel(ICustomerSoapService service)
         {
-            _service = DependencyService.Get<ICustomerSoapService>();
-            LoadCommand = new Command(async () => await ExecuteLoadCommand());
+            _service = service;
+            LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
         }
 
@@ -90,15 +90,15 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        private async Task ExecuteLoadCommand()
+        private void ExecuteLoadCommand()
         {
-            if(IsBusy)
+            if (IsBusy)
             {
                 return;
             }
             IsBusy = true;
-            
-            var customer = await _service.GetCustomerAsync();
+
+            var customer = _service.GetCustomer();
             Init(customer);
 
             IsBusy = false;

@@ -34,14 +34,16 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _password, value);
         }
 
-        public LoginViewModel()
+        public LoginViewModel(ILoginSoapService service)
         {
             Title = "Log in";
+
+            _service = service;
 
             Password = "";
             CustomerId = "";
 
-            _service = DependencyService.Get<ILoginSoapService>();
+            //_service = DependencyService.Get<ILoginSoapService>();
 
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
         }

@@ -3,6 +3,7 @@ using HMNGasApp.Model;
 using HMNGasApp.Services;
 using HMNGasApp.View;
 using HMNGasApp.ViewModel;
+using HMNGasApp.WebServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xamarin.Forms;
@@ -18,8 +19,6 @@ namespace HMNGasApp
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
         public IServiceProvider Container => _lazyProvider.Value;
-
-        public string securityKey = "";
 
         public App()
         {
@@ -47,7 +46,7 @@ namespace HMNGasApp
         {
             var services = new ServiceCollection();
 
-            var context = new UserContext();
+            var context = new Model.UserContext();
             var config = new Config
             {
                 ApiKey = Secrets.ApiKey
@@ -59,6 +58,9 @@ namespace HMNGasApp
             services.AddScoped<ManualPageViewModel>();
             services.AddSingleton<IUserContext>(context);
             services.AddSingleton<IConfig>(config);
+            services.AddScoped<ILoginSoapService, LoginSoapService>();
+            services.AddScoped<ICustomerSoapService, CustomerSoapService>();
+            services.AddScoped<IXellentAPI, XellentAPI>();
 
             return services.BuildServiceProvider();
         }
