@@ -20,8 +20,6 @@ namespace HMNGasApp
 
         public IServiceProvider Container => _lazyProvider.Value;
 
-        public string securityKey = "";
-
         public App()
         {
             InitializeComponent();
