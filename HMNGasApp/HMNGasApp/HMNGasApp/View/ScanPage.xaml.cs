@@ -81,6 +81,8 @@ namespace HMNGasApp.View
                 {
                     TextLabel.Text = "Processing image...";
 
+                    //TODO Experiment with PageSegmentationMode https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality#page-segmentation-method
+                    _tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
                     bool success = await _tesseractApi.SetImage(result);
                     activityIndicator.IsRunning = false;
                     if (success)
