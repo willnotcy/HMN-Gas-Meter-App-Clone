@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="HMNGasApp.View.InfoPage"
-                Title="{Binding Title}">
+                Title="{Binding Title}"
+                xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <StackLayout>
         <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                                 VerticalOptions="Center" 
@@ -25,7 +26,12 @@
             <StackLayout Spacing="45" Padding="30" >
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
-                    <Entry x:Name="EditableName" Text="{Binding Name}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
+                    <components:NoBorderEntry x:Name="EditableName"
+                                              Text="{Binding Name}"
+                                              Style="Bold"
+                                              HorizontalOptions="FillAndExpand"
+                                              IsReadOnly="true"
+                                              VerticalOptions="Center"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
@@ -37,14 +43,26 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <Entry x:Name="EditableEMail" Keyboard="Email" Text="{Binding Email}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
+                        <components:NoBorderEntry x:Name="EditableEMail"
+                                                  Keyboard="Email"
+                                                  Text="{Binding Email}"
+                                                  Style="Bold"
+                                                  HorizontalOptions="FillAndExpand"
+                                                  IsReadOnly="true"
+                                                  VerticalOptions="Center"/>
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <Entry x:Name="EditablePhone" Keyboard="Telephone" Text="{Binding Phone}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
+                        <components:NoBorderEntry x:Name="EditablePhone"
+                                                  Keyboard="Telephone"
+                                                  Text="{Binding Phone}"
+                                                  Style="Bold"
+                                                  HorizontalOptions="FillAndExpand"
+                                                  IsReadOnly="true"
+                                                  VerticalOptions="Center"/>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>

@@ -108,6 +108,7 @@
     <BundleResource Include="Resources\OpenSans-SemiBoldItalic.ttf" />
     <BundleResource Include="Resources\Scandia-Bold.otf" />
     <BundleResource Include="Resources\Scandia-Regular.otf" />
+    <Compile Include="NoBorderEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\round_call_black.imageset\baseline_call_black.png">
