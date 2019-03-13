@@ -111,6 +111,7 @@ namespace HMNGasApp.ViewModel
         {
             Customer.Name = Name;
             Customer.Phone = Phone;
+            Customer.Email = Email;
             Customer.Street = Street;
             Customer.ZipCode = ZipCode;
             Customer.City = City;
