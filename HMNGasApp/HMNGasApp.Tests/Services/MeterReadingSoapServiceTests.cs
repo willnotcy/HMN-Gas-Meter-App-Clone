@@ -83,17 +83,34 @@ namespace HMNGasApp.Tests.Services
             client.Setup(s => s.getInstallations(It.IsAny<InstallationRequest>()))
                 .Returns(new InstallationResponse() { Installations = installationList.ToArray()});
 
-            var entry = new MeterReadingOrder();
-            var orderList = new List<MeterReadingOrder>()
-            {
-                entry
-            };
-            client.Setup(s => s.getMeterReadingOrder(It.IsAny<MeterReadingOrderRequest>()))
-                .Returns(new MeterReadingOrderResponse() { MeterReadingOrders = orderList.ToArray()});
-
             var service = new MeterReadingSoapService(client.Object, config.Object);
 
             var result = service.NewMeterReading("7373");
+
+            Assert.True(result.Item1);
+            Assert.NotNull(result.Item2);
+        }
+
+        [Fact]
+        public void GetActiveMeterReading_returns_active_readings()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+
+            var entry = new MeterReadingOrder();
+            var list = new List<MeterReadingOrder>()
+            {
+                entry
+            };
+
+            client.Setup(s => s.getactiveMeterReadings(It.IsAny<ActiveMeterReadingRequest>())).
+                    Returns(new MeterReadingOrderResponse() { MeterReadingOrders = list.ToArray() });
+
+            var service = new MeterReadingSoapService(client.Object, config.Object);
+ 
+            var activeReading = new MeterReadingOrder();
+
+            var result = service.GetActiveMeterReadings();
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);

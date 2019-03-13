@@ -54,19 +54,16 @@ namespace HMNGasApp.Services
 
         public (bool, string) NewMeterReading(string reading)
         {
-            var installation = GetInstallations();
-
             var active = GetActiveMeterReadings();
 
-            if (!installation.Item1 || !active.Item1)
+            if (!active.Item1)
                 return (false, "Du har ingen åbne aflæsningskort.");
 
-            var installationValues = installation.Item2;
             var activeValues = active.Item2;
 
             var readings = new List<NewMeterReading>()
             {
-                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = installationValues.AttachmentNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = activeValues.ReadingDate, ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
+                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = activeValues.InstNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = activeValues.ReadingDate, ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
             };
 
             var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
