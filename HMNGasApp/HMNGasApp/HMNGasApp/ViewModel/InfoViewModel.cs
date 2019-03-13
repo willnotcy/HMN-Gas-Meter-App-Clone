@@ -12,10 +12,11 @@ namespace HMNGasApp.ViewModel
         private readonly ICustomerSoapService _service;
 
         public ICommand LoadCommand { get; set; }
-        public ICommand EditCommand { get; set; }
+        public ICommand EditMode { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
         public ICommand SaveInfoCommand { get; set; }
+        public bool ButtonVisibility = false;
 
         #region Info
         private WebServices.Customer _customer;
@@ -102,7 +103,7 @@ namespace HMNGasApp.ViewModel
             _service = service;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            EditCommand = new Command(() => ExecuteEditCommand());
+            EditMode = new Command(() => ExecuteEditMode());
             SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
         }
 
@@ -116,6 +117,13 @@ namespace HMNGasApp.ViewModel
 
             var result = _service.EditCustomer(Customer);
 
+            //fix
+            {
+                await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+            }
+
+            await Navigation.PopModalAsync();
+
             if (!result)
             {
                 //TODO Get text from languagefile
@@ -123,7 +131,7 @@ namespace HMNGasApp.ViewModel
             }
         }
 
-        private void ExecuteEditCommand()
+        private void ExecuteEditMode()
         {
             if (IsBusy)
             {
@@ -134,6 +142,8 @@ namespace HMNGasApp.ViewModel
             MessagingCenter.Send(this, "EnableEdit");
 
             IsBusy = false;
+
+
         }
 
         private void ExecuteLoadCommand()

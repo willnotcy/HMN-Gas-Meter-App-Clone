@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="HMNGasApp.View.InfoPage"
@@ -16,7 +16,7 @@
                 <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
                 <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditCommand}" />
+                        <TapGestureRecognizer Command="{Binding EditMode}" />
                     </Image.GestureRecognizers>
                 </Image>
             </StackLayout>
@@ -37,14 +37,14 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <Entry x:Name="EditableEMail" Text="{Binding Email}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
+                        <Entry x:Name="EditableEMail" Keyboard="Email" Text="{Binding Email}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <Entry x:Name="EditablePhone" Text="{Binding Phone}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
+                        <Entry x:Name="EditablePhone" Keyboard="Telephone" Text="{Binding Phone}" Style="Bold" HorizontalOptions="FillAndExpand"  IsReadOnly="true" VerticalOptions="Center"/>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
@@ -69,7 +69,7 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                <Button x:Name="Button" Text="Save" Command="{Binding SaveInfoCommand}" IsVisible="False"/>
+                <Button x:Name="SaveInfoButton" Text="Save" Command="{Binding SaveInfoCommand}" IsVisible = "false"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

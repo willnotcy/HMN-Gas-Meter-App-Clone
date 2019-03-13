@@ -9,15 +9,15 @@ namespace HMNGasApp.View
     public partial class InfoPage : ContentPage
     {
         private readonly InfoViewModel _viewModel;
-    
+
 
         public InfoPage()
         {
             InitializeComponent();
 
-            EditableName.TextChanged += OnTextChanged;
-            EditablePhone.TextChanged += OnTextChanged;
-            EditableEMail.TextChanged += OnTextChanged;
+           // EditableName.TextChanged += OnTextChanged;
+           // EditablePhone.TextChanged += OnTextChanged;
+           // EditableEMail.TextChanged += OnTextChanged;
 
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
@@ -29,12 +29,13 @@ namespace HMNGasApp.View
             EditableName.IsReadOnly = !EditableName.IsReadOnly;
             EditablePhone.IsReadOnly = !EditablePhone.IsReadOnly;
             EditableEMail.IsReadOnly = !EditableEMail.IsReadOnly;
+            SaveInfoButton.IsVisible = true;
         }
-
-        private void OnTextChanged(object sender, TextChangedEventArgs e)
+      
+       /* private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            Button.IsVisible = true;
-        }
+                Button.IsVisible = true;
+        }*/
 
         protected override void OnAppearing()
         {
