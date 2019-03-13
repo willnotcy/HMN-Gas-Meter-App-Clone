@@ -66,11 +66,17 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = _service.GetInstallations();
-            
-            await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
-            this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-            await Navigation.PopAsync();
+            var result = _service.NewMeterReading(UsageInput);
+
+            if (!result.Item1)
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "OK");
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
+                this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+                await Navigation.PopAsync();
+            }
 
             IsBusy = false;
         }

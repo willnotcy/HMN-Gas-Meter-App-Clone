@@ -1,6 +1,7 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace HMNGasApp.Services
@@ -24,17 +25,74 @@ namespace HMNGasApp.Services
 
             var response = _client.getInstallations(request);
 
+            if (response == null)
+                return (false, null);
+
             return (true, response.Installations[0]);
         }
 
-        public (bool, MeterReadingOrderResponse) GetMeterReadingOrder(Installation installation)
+        public (bool, MeterReadingOrder) GetMeterReadingOrder(Installation installation, MeterReadingOrder active)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var date = DateTime.Now;
+
+                var request = new MeterReadingOrderRequest() { AccountNum = _config.CustomerId, AttachmentNum = installation.AttachmentNum, Fom = date, DeliveryCategory = "", ReadingCardNum = active.ReadingCardNum, ToDate = date, UserContext = _config.Context };
+
+                var response = _client.getMeterReadingOrder(request);
+
+                if (response == null)
+                    return (false, null);
+
+                return (true, response.MeterReadingOrders[0]);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public (bool, string) NewMeterReading()
+        public (bool, string) NewMeterReading(string reading)
         {
-            throw new NotImplementedException();
+            var installation = GetInstallations();
+
+            var active = GetActiveMeterReadings();
+
+            if (!installation.Item1 || !active.Item1)
+                return (false, "Du har ingen åbne aflæsningskort.");
+
+            var installationValues = installation.Item2;
+            var activeValues = active.Item2;
+
+            var readings = new List<NewMeterReading>()
+            {
+                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = installationValues.AttachmentNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = activeValues.ReadingDate, ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
+            };
+
+            var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
+
+            var response = _client.newMeterReading(request);
+
+            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+            return result;
+        }
+
+        public (bool, MeterReadingOrder) GetActiveMeterReadings()
+        {
+            try
+            {
+                var request = new ActiveMeterReadingRequest() { AccountNum = _config.CustomerId, UserContext = _config.Context };
+
+                var response = _client.getactiveMeterReadings(request);
+                
+                return (true, response.MeterReadingOrders[0]);
+            }
+            catch (Exception)
+            {
+                return (false, null);
+            }
+
         }
     }
 }
