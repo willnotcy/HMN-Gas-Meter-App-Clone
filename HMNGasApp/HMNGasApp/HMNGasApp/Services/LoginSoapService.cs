@@ -13,11 +13,13 @@ namespace HMNGasApp.Services
     {
         private readonly IXellentAPI _client;
         private readonly IConfig _config;
+        private readonly IConnectService _connectService;
 
-        public LoginSoapService(IXellentAPI client, IConfig config)
+        public LoginSoapService(IXellentAPI client, IConnectService connectService, IConfig config)
         {
             _client = client;
             _config = config;
+            _connectService = connectService;
         }
 
         /// <summary>
@@ -30,17 +32,31 @@ namespace HMNGasApp.Services
         {
             var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-            var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+            var canConnect = _connectService.canConnect();
 
-            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-            if (result.Item1)
+            if (canConnect)
             {
-                _config.SecurityKey = result.Item2;
-                _config.CustomerId = customerId;
+                (bool, string) result = (false, "Not ok");
+
+                for(int i = 0; i < 3; i++)
+                {
+                    var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+
+                    result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                    if (result.Item1)
+                    {
+                        _config.SecurityKey = result.Item2;
+                        _config.CustomerId = customerId;
+
+                        return result;
+                    }
+                }
+
+                return result;
             }
 
-            return result;
+            return (false, "Kunne ikke få forbindelse");
         }
     }
 }

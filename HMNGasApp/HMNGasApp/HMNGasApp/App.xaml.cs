@@ -60,7 +60,7 @@ namespace HMNGasApp
             services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
-            services.AddScoped<IXellentAPI, XellentAPI>();
+            services.AddSingleton<IXellentAPI, XellentAPI>();
 
             return services.BuildServiceProvider();
         }
