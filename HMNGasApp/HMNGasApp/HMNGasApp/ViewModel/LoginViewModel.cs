@@ -43,8 +43,6 @@ namespace HMNGasApp.ViewModel
             Password = "";
             CustomerId = "";
 
-            //_service = DependencyService.Get<ILoginSoapService>();
-
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
         }
 
@@ -64,6 +62,27 @@ namespace HMNGasApp.ViewModel
             } else
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
+            }
+
+            IsBusy = false;
+        }
+
+        private async Task ExecuteSignOutCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            var result = await _service.Logout();
+            if (result)
+            {
+                SignedIn = false;
+                await Navigation.PopModalAsync();
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt - prøv igen", "Okay");
             }
 
             IsBusy = false;

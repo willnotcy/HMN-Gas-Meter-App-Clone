@@ -61,5 +61,21 @@ namespace HMNGasApp.Tests.Services
             Assert.False(result.Item1);
             Assert.Equal("Kunne ikke få forbindelse", result.Item2);
         }
+
+        [Fact]
+        public async Task Logout_if_successfull_returns_true()
+        {
+            var client = new Mock<IXellentAPI>();
+            var connectService = new Mock<IConnectService>();
+            var config = new Config { SecurityKey = "anfkasjnfajk"};
+            client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "" });
+
+            var service = new LoginSoapService(client.Object, connectService.Object, config);
+
+            var result = await service.Logout();
+
+            Assert.True(result);
+            Assert.Equal("", config.SecurityKey);
+        }
     }
 }

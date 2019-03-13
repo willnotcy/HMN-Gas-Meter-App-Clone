@@ -58,5 +58,14 @@ namespace HMNGasApp.Services
 
             return (false, "Kunne ikke få forbindelse");
         }
+
+        public async Task<bool> Logout()
+        {
+            var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
+
+            _config.SecurityKey = "";
+
+            return result.ErrorCode.Equals("");
+        }
     }
 }
