@@ -1,4 +1,4 @@
-﻿namespace HMNGasApp.Model
+﻿namespace HMNGasApp.WebServices
 {
     public interface IUserContext
     {
@@ -8,6 +8,6 @@
         int Logg { get; set; }
         int MaxRows { get; set; }
         string securityKey { get; set; }
-        int StartRows { get; set; }
+        int StartRow { get; set; }
     }
 }

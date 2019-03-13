@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Model;
+using HMNGasApp.Services;
 using HMNGasApp.View;
 using Xamarin.Forms;
 
@@ -9,6 +10,8 @@ namespace HMNGasApp.ViewModel
 {
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
+        private readonly IMeterReadingSoapService _service;
+
         private string _usageInput;
         private string _accountNum;
         public ICommand ManualCommand { get; set; }
@@ -28,8 +31,9 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _accountNum, value);
         }
 
-        public ReadingConfirmationPageViewModel(IConfig config)
+        public ReadingConfirmationPageViewModel(IMeterReadingSoapService service, IConfig config)
         {
+            _service = service;
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             _config = config;
@@ -62,6 +66,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var result = _service.GetInstallations();
+            
             await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
             this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
             await Navigation.PopAsync();

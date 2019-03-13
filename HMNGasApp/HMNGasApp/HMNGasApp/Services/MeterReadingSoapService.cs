@@ -1,9 +1,7 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace HMNGasApp.Services
 {
@@ -20,7 +18,13 @@ namespace HMNGasApp.Services
 
         public (bool, Installation) GetInstallations()
         {
-            throw new NotImplementedException();
+            var date = DateTime.Now;
+
+            var request = new InstallationRequest() { AccountNum = _config.CustomerId, Fom = date, UserContext = _config.Context, AttachmentNum = "", ContractNum = "", DeliveryCategory = "" };
+
+            var response = _client.getInstallations(request);
+
+            return (true, response.Installations[0]);
         }
 
         public (bool, MeterReadingOrderResponse) GetMeterReadingOrder(Installation installation)

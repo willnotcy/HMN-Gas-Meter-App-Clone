@@ -5246,7 +5246,7 @@ namespace HMNGasApp.WebServices
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace = "XellentCI_WebAPI_ns")]
-    public partial class UserContext
+    public partial class UserContext : IUserContext
     {
 
         private string callerField;
