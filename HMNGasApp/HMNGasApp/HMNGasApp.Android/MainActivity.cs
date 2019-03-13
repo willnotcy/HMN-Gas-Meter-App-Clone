@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -7,6 +6,9 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Xamarin.Forms;
+using Tesseract;
+using Tesseract.Droid;
+using Android.Content;
 
 namespace HMNGasApp.Droid
 {
@@ -20,6 +22,9 @@ namespace HMNGasApp.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            //var container = TinyIoCContainer.Current;
+
             LoadApplication(new App());
         }
     }

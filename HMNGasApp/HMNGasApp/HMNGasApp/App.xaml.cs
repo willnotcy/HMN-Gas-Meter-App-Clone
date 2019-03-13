@@ -6,6 +6,7 @@ using HMNGasApp.ViewModel;
 using HMNGasApp.WebServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using Tesseract;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -56,6 +57,7 @@ namespace HMNGasApp
             services.AddScoped<InfoViewModel>();
             services.AddScoped<MainPageViewModel>();
             services.AddScoped<ManualPageViewModel>();
+            services.AddScoped<ScanViewModel>();
             services.AddSingleton<IUserContext>(context);
             services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();

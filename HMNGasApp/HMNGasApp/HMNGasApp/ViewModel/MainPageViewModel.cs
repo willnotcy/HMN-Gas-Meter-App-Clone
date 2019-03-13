@@ -10,13 +10,28 @@ namespace HMNGasApp.ViewModel
     {
         public ICommand ManualPageNavCommand { get; set; }
         public ICommand InfoPageNavCommand { get; set; }
+        public ICommand ScanPageNavCommand { get; }
         public ICommand LogOutCommand { get; set; }
 
         public MainPageViewModel()
         {
             ManualPageNavCommand = new Command(async () => await ExecuteManualPageNavCommand());
             InfoPageNavCommand = new Command(async () => await ExecuteInfoPageNavCommand());
+            ScanPageNavCommand = new Command(async () => await ExecuteScanPageNavCommand());
             LogOutCommand = new Command(async () => await ExecuteLogOutCommand());
+        }
+
+        private async Task ExecuteScanPageNavCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PushModalAsync(new ScanPage());
+
+            IsBusy = false;
         }
 
         private async Task ExecuteLogOutCommand()
