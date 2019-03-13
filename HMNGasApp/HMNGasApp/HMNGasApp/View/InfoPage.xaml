@@ -87,7 +87,13 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                <Button x:Name="SaveInfoButton" Text="Save" Command="{Binding SaveInfoCommand}" IsVisible = "false"/>
+                <Button x:Name="SaveInfoButton"
+                        Text="Save"
+                        Command="{Binding SaveInfoCommand}"
+                        IsVisible = "false"
+                        BackgroundColor="{StaticResource PrimaryGreen}"
+                        TextColor="White"
+                        Margin="110,0,110,0"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

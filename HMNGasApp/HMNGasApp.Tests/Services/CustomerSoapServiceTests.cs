@@ -34,5 +34,22 @@ namespace HMNGasApp.Tests.Services
             Assert.Equal("James On", result.Name);
             Assert.Equal("12345678", result.Phone);
         }
+
+        /*[Fact]
+        public void EditCustomer_updates_info()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+
+            var customers = new List<WebServices.Customer>();
+
+            customers.Equals("0");
+
+            var api = new CustomerSoapService(client.Object, config.Object);
+
+            var result = api.EditCustomer(true);
+        }*/
+
     }
+
 }
