@@ -5,7 +5,7 @@
     <ScrollView>
         <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
             <Button Text="Capture photo" x:Name="GetPhotoButton" Clicked="GetPhotoButton_OnClicked"></Button>
-            <Button Text="Capture photo using gray scale" x:Name="GetPhotoGrayScaleButton" Clicked="GetPhotoGrayScaleButton_OnClicked"></Button>
+            <!--<Button Text="Capture photo using gray scale" x:Name="GetPhotoGrayScaleButton" Clicked="GetPhotoGrayScaleButton_OnClicked"></Button>-->
             <ActivityIndicator x:Name="activityIndicator"></ActivityIndicator>
             <Image x:Name="PhotoImage"></Image>
             <Label HorizontalOptions="Center" x:Name="TextLabel" />

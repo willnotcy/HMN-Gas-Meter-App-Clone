@@ -9,6 +9,10 @@ using Xamarin.Forms;
 using Tesseract;
 using Tesseract.Droid;
 using Android.Content;
+using TinyIoC;
+using XLabs.Platform.Device;
+using XLabs.Ioc;
+using XLabs.Ioc.TinyIOC;
 
 namespace HMNGasApp.Droid
 {
@@ -20,10 +24,20 @@ namespace HMNGasApp.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+            StrictMode.SetVmPolicy(builder.Build());
+
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            //var container = TinyIoCContainer.Current;
+            var container = TinyIoCContainer.Current;
+            container.Register<IDevice>(AndroidDevice.CurrentDevice);
+            container.Register<ITesseractApi>((cont, parameters) =>
+            {
+                return new TesseractApi(ApplicationContext, AssetsDeployment.OncePerInitialization);
+            });
+
+            Resolver.SetResolver(new TinyResolver(container));
 
             LoadApplication(new App());
         }
