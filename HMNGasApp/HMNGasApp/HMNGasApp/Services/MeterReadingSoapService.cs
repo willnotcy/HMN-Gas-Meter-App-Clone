@@ -61,9 +61,12 @@ namespace HMNGasApp.Services
 
             var activeValues = active.Item2;
 
+            if(float.Parse(reading) < float.Parse(activeValues.PrevReading.Replace(",", ".")))
+                return (false, "Din måling kan ikke være lavere end sidste års måling.");
+                
             var readings = new List<NewMeterReading>()
             {
-                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = activeValues.InstNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = activeValues.ReadingDate, ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
+                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = activeValues.InstNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = DateTime.Now.ToString("yyyy-MM-dd"), ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
             };
 
             var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
@@ -89,7 +92,6 @@ namespace HMNGasApp.Services
             {
                 return (false, null);
             }
-
         }
     }
 }
