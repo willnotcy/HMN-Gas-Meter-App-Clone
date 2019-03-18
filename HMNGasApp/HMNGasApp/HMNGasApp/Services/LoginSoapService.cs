@@ -31,35 +31,37 @@ namespace HMNGasApp.Services
         /// <param name="customerId">Account number</param>
         /// <param name="password">Password</param>
         /// <returns>Tuple of success and security key</returns>
-        public async Task<(bool, string)> NewLogin(string customerId, string password)
+        public async Task<(bool, string)> NewLoginAsync(string customerId, string password)
         {
-            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
-
-            var canConnect = _connectService.canConnect();
-
-            if (canConnect)
+            return await Task.Run(() =>
             {
-                (bool, string) result = (false, "Not ok");
+                var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-                for(int i = 0; i < 3; i++)
+                var canConnect = _connectService.canConnect();
+
+                if (canConnect)
                 {
-                    var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+                    (bool, string) result = (false, "Not ok");
 
-                    result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-                    if (result.Item1)
+                    for (int i = 0; i < 3; i++)
                     {
-                        _config.SecurityKey = result.Item2;
-                        _config.CustomerId = customerId;
+                        var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
 
-                        return result;
+                        result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                        if (result.Item1)
+                        {
+                            _config.SecurityKey = result.Item2;
+                            _config.CustomerId = customerId;
+
+                            return result;
+                        }
                     }
+                    return result;
                 }
+                return (false, "Kunne ikke få forbindelse");
+            });
 
-                return result;
-            }
-
-            return (false, "Kunne ikke få forbindelse");
         }
 
         /// <summary>
@@ -68,17 +70,20 @@ namespace HMNGasApp.Services
         /// <returns>Success of operation</returns>
         public async Task<bool> Logout()
         {
-            var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
-
-            if (result.ErrorCode.Equals("0"))
+            return await Task.Run(() =>
             {
-                _config.SecurityKey = "";
-                return true;
-            } else
-            {
-                return false;
-            }
+                var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
 
+                if (result.ErrorCode.Equals("0"))
+                {
+                    _config.SecurityKey = "";
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
         }
     }
 }

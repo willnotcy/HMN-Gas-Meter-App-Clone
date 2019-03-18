@@ -125,7 +125,7 @@ namespace HMNGasApp.ViewModel
             Email = c.Email;
             Phone = c.Phone;
             MeterNum = c.MeterNum;
-            LatestMeasure = "4025,34 m3";
+            LatestMeasure = "4025,345 m3";
             MeasureDate = "01-02-19";
         }
     }
