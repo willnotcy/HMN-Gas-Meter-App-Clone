@@ -9,38 +9,76 @@ using Xamarin.Forms;
 
 namespace HMNGasApp.Services
 {
+    /// <summary>
+    /// Class responsible for handling the login and logout for the application
+    /// </summary>
     public class LoginSoapService : ILoginSoapService
     {
         private readonly IXellentAPI _client;
         private readonly IConfig _config;
+        private readonly IConnectService _connectService;
 
-        public LoginSoapService(IXellentAPI client, IConfig config)
+        public LoginSoapService(IXellentAPI client, IConnectService connectService, IConfig config)
         {
             _client = client;
             _config = config;
+            _connectService = connectService;
         }
 
         /// <summary>
         /// Attempts to obtain a new login from the given parameters.
         /// </summary>
-        /// <param name="customerId"></param>
-        /// <param name="password"></param>
+        /// <param name="customerId">Account number</param>
+        /// <param name="password">Password</param>
         /// <returns>Tuple of success and security key</returns>
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
             var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-            var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+            var canConnect = _connectService.canConnect();
 
-            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-            if (result.Item1)
+            if (canConnect)
             {
-                _config.SecurityKey = result.Item2;
-                _config.CustomerId = customerId;
+                (bool, string) result = (false, "Not ok");
+
+                for(int i = 0; i < 3; i++)
+                {
+                    var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+
+                    result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                    if (result.Item1)
+                    {
+                        _config.SecurityKey = result.Item2;
+                        _config.CustomerId = customerId;
+
+                        return result;
+                    }
+                }
+
+                return result;
             }
 
-            return result;
+            return (false, "Kunne ikke få forbindelse");
+        }
+
+        /// <summary>
+        /// Logs out the current user from the API
+        /// </summary>
+        /// <returns>Success of operation</returns>
+        public async Task<bool> Logout()
+        {
+            var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
+
+            if (result.ErrorCode.Equals("0"))
+            {
+                _config.SecurityKey = "";
+                return true;
+            } else
+            {
+                return false;
+            }
+
         }
     }
 }
