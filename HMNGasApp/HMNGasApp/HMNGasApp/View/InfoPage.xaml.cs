@@ -15,10 +15,6 @@ namespace HMNGasApp.View
         {
             InitializeComponent();
 
-           // EditableName.TextChanged += OnTextChanged;
-           // EditablePhone.TextChanged += OnTextChanged;
-           // EditableEMail.TextChanged += OnTextChanged;
-
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
             MessagingCenter.Subscribe<InfoViewModel>(this, "EnableEdit", (sender) => ToggleEdit());
@@ -27,16 +23,14 @@ namespace HMNGasApp.View
         private void ToggleEdit()
         {
             EditableName.IsReadOnly = !EditableName.IsReadOnly;
+            EditableName.BackgroundColor = Color.LightBlue;
             EditablePhone.IsReadOnly = !EditablePhone.IsReadOnly;
+            EditablePhone.BackgroundColor = Color.LightBlue;
             EditableEMail.IsReadOnly = !EditableEMail.IsReadOnly;
+            EditableEMail.BackgroundColor = Color.LightBlue;
             SaveInfoButton.IsVisible = true;
         }
       
-       /* private void OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-                Button.IsVisible = true;
-        }*/
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
