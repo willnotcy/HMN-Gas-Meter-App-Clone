@@ -6,11 +6,15 @@ using System.Text;
 
 namespace HMNGasApp.Services
 {
+    /// <summary>
+    /// This class has been added in order to check if the API is ready to receive requests. 
+    /// By calling canConnect, it returns true or false if the the api is ready or not
+    /// </summary>
     public class ConnectService : IConnectService
     {
         private readonly string Firm = "HNG";
         private IXellentAPI _client;
-        private IConfig _config;
+        private readonly IConfig _config;
 
         public ConnectService(IXellentAPI Client)
         {

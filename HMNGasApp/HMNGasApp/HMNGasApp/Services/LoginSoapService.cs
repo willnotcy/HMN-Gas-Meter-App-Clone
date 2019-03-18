@@ -9,6 +9,9 @@ using Xamarin.Forms;
 
 namespace HMNGasApp.Services
 {
+    /// <summary>
+    /// Class responsible for handling the login and logout for the application
+    /// </summary>
     public class LoginSoapService : ILoginSoapService
     {
         private readonly IXellentAPI _client;
@@ -25,8 +28,8 @@ namespace HMNGasApp.Services
         /// <summary>
         /// Attempts to obtain a new login from the given parameters.
         /// </summary>
-        /// <param name="customerId"></param>
-        /// <param name="password"></param>
+        /// <param name="customerId">Account number</param>
+        /// <param name="password">Password</param>
         /// <returns>Tuple of success and security key</returns>
         public async Task<(bool, string)> NewLogin(string customerId, string password)
         {
@@ -59,13 +62,23 @@ namespace HMNGasApp.Services
             return (false, "Kunne ikke få forbindelse");
         }
 
+        /// <summary>
+        /// Logs out the current user from the API
+        /// </summary>
+        /// <returns>Success of operation</returns>
         public async Task<bool> Logout()
         {
             var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
 
-            _config.SecurityKey = "";
+            if (result.ErrorCode.Equals("0"))
+            {
+                _config.SecurityKey = "";
+                return true;
+            } else
+            {
+                return false;
+            }
 
-            return result.ErrorCode.Equals("");
         }
     }
 }

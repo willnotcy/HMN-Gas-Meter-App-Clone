@@ -68,7 +68,7 @@ namespace HMNGasApp.Tests.Services
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
             var config = new Config { SecurityKey = "anfkasjnfajk"};
-            client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "" });
+            client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "0", ResponseCode = "Ok", ResponseMessage = "" });
 
             var service = new LoginSoapService(client.Object, connectService.Object, config);
 
@@ -76,6 +76,21 @@ namespace HMNGasApp.Tests.Services
 
             Assert.True(result);
             Assert.Equal("", config.SecurityKey);
+        }
+
+        [Fact]
+        public async Task Logout_if_unsuccessfull_returns_false()
+        {
+            var client = new Mock<IXellentAPI>();
+            var connectService = new Mock<IConnectService>();
+            var config = new Config { SecurityKey = "anfkasjnfajk" };
+            client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "1000", ResponseCode = "Not ok", ResponseMessage = "" });
+            var service = new LoginSoapService(client.Object, connectService.Object, config);
+
+            var result = await service.Logout();
+
+            Assert.False(result);
+            Assert.Equal("anfkasjnfajk", config.SecurityKey);
         }
     }
 }
