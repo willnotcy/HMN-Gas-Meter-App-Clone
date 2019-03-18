@@ -70,5 +70,7 @@ namespace HMNGasApp.ViewModel
 
             IsBusy = false;
         }
+
+        
     }
 }

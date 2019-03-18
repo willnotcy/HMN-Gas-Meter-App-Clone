@@ -20,8 +20,6 @@ namespace HMNGasApp
 
         public IServiceProvider Container => _lazyProvider.Value;
 
-        public string securityKey = "";
-
         public App()
         {
             InitializeComponent();
@@ -65,7 +63,8 @@ namespace HMNGasApp
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
-            services.AddScoped<IXellentAPI, XellentAPI>();
+            services.AddSingleton<IXellentAPI, XellentAPI>();
+            services.AddScoped<IConnectService, ConnectService>();
 
             return services.BuildServiceProvider();
         }
