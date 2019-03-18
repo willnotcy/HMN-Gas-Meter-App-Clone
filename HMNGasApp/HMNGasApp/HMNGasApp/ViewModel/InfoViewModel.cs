@@ -121,7 +121,7 @@ namespace HMNGasApp.ViewModel
             Customer.ZipCode = ZipCode;
             Customer.City = City;
 
-            var result = _service.EditCustomer(Customer);
+            var result = await _service.EditCustomerAsync(Customer);
 
             //fix
             {
@@ -150,11 +150,9 @@ namespace HMNGasApp.ViewModel
             MessagingCenter.Send(this, "EnableEdit");
 
             IsBusy = false;
-
-
         }
 
-        private void ExecuteLoadCommand()
+        private async void ExecuteLoadCommand()
         {
             if (IsBusy)
             {
@@ -162,7 +160,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var customer = _service.GetCustomer();
+            var customer = await _service.GetCustomerAsync();
             Init(customer);
 
             IsBusy = false;
