@@ -26,21 +26,24 @@ namespace HMNGasApp.Services
         /// <param name="customerId"></param>
         /// <param name="password"></param>
         /// <returns>Tuple of success and security key</returns>
-        public async Task<(bool, string)> NewLogin(string customerId, string password)
+        public async Task<(bool, string)> NewLoginAsync(string customerId, string password)
         {
-            var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
-
-            var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
-
-            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-            if (result.Item1)
+            return await Task.Run(() =>
             {
-                _config.SecurityKey = result.Item2;
-                _config.CustomerId = customerId;
-            }
+                var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-            return result;
+                var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+
+                var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                if (result.Item1)
+                {
+                    _config.SecurityKey = result.Item2;
+                    _config.CustomerId = customerId;
+                }
+
+                return result;
+            });
         }
     }
 }

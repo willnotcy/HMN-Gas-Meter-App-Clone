@@ -2,6 +2,7 @@
 using HMNGasApp.WebServices;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace HMNGasApp.Services
@@ -17,81 +18,93 @@ namespace HMNGasApp.Services
             _config = config;
         }
 
-        public (bool, Installation) GetInstallations()
+        public async Task<(bool, Installation)> GetInstallationsAsync()
         {
-            var date = DateTime.Now;
-
-            var request = new InstallationRequest() { AccountNum = _config.CustomerId, Fom = date, UserContext = _config.Context, AttachmentNum = "", ContractNum = "", DeliveryCategory = "" };
-
-            var response = _client.getInstallations(request);
-
-            if (response == null)
-                return (false, null);
-
-            return (true, response.Installations[0]);
-        }
-
-        public (bool, MeterReadingOrder) GetMeterReadingOrder(Installation installation, MeterReadingOrder active)
-        {
-            try
+            return await Task.Run(() => 
             {
                 var date = DateTime.Now;
 
-                var request = new MeterReadingOrderRequest() { AccountNum = _config.CustomerId, AttachmentNum = installation.AttachmentNum, Fom = date, DeliveryCategory = "", ReadingCardNum = active.ReadingCardNum, ToDate = date, UserContext = _config.Context };
+                var request = new InstallationRequest() { AccountNum = _config.CustomerId, Fom = date, UserContext = _config.Context, AttachmentNum = "", ContractNum = "", DeliveryCategory = "" };
 
-                var response = _client.getMeterReadingOrder(request);
+                var response = _client.getInstallations(request);
 
                 if (response == null)
                     return (false, null);
 
-                return (true, response.MeterReadingOrders[0]);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+                return (true, response.Installations[0]);
+            });
         }
 
-        public (bool, string) NewMeterReading(string reading)
+        public async Task<(bool, MeterReadingOrder)> GetMeterReadingOrderAsync(Installation installation, MeterReadingOrder active)
         {
-            var active = GetActiveMeterReadings();
-
-            if (!active.Item1)
-                return (false, "Du har ingen gyldige aflæsningskort.");
-
-            var activeValues = active.Item2;
-
-            if(float.Parse(reading) < float.Parse(activeValues.PrevReading.Replace(",", ".")))
-                return (false, "Din måling kan ikke være lavere end sidste års måling.");
-                
-            var readings = new List<NewMeterReading>()
+            return await Task.Run(() =>
             {
-                new NewMeterReading { AccountNum = _config.CustomerId, InstNum = activeValues.InstNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = DateTime.Now.ToString("yyyy-MM-dd"), ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
-            };
+                try
+                {
+                    var date = DateTime.Now;
 
-            var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
+                    var request = new MeterReadingOrderRequest() { AccountNum = _config.CustomerId, AttachmentNum = installation.AttachmentNum, Fom = date, DeliveryCategory = "", ReadingCardNum = active.ReadingCardNum, ToDate = date, UserContext = _config.Context };
 
-            var response = _client.newMeterReading(request);
+                    var response = _client.getMeterReadingOrder(request);
 
-            var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+                    if (response == null)
+                        return (false, null);
 
-            return result;
+                    return (true, response.MeterReadingOrders[0]);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            });
         }
 
-        public (bool, MeterReadingOrder) GetActiveMeterReadings()
+        public async Task<(bool, string)> NewMeterReadingAsync(string reading)
         {
-            try
+            return await Task.Run(() =>
             {
-                var request = new ActiveMeterReadingRequest() { AccountNum = _config.CustomerId, UserContext = _config.Context };
+                var active = GetActiveMeterReadingsAsync().Result;
 
-                var response = _client.getactiveMeterReadings(request);
-                
-                return (true, response.MeterReadingOrders[0]);
-            }
-            catch (Exception)
+                if (!active.Item1)
+                    return (false, "Du har ingen gyldige aflæsningskort.");
+
+                var activeValues = active.Item2;
+
+                if (float.Parse(reading) < float.Parse(activeValues.PrevReading.Replace(",", ".")))
+                    return (false, "Din måling kan ikke være lavere end sidste års måling.");
+
+                var readings = new List<NewMeterReading>()
+                {
+                    new NewMeterReading { AccountNum = _config.CustomerId, InstNum = activeValues.InstNum, DeliveryCategory = activeValues.DeliveryCategory, CompanyId = activeValues.CompanyId, CounterNum = activeValues.CounterNum, DelPointNum = activeValues.DelPointNum, MeterJournalId = activeValues.MeterJournalId, MeterNum = activeValues.MeterNum, QuantityCodeValue = activeValues.QuantityCodeValue, Reading = reading, ReadingCardLine = activeValues.ReadingCardLine, ReadingCardNum = activeValues.ReadingCardNum, ReadingDate = DateTime.Now.ToString("yyyy-MM-dd"), ReadingMethodNum = activeValues.ReadingMethodNum, ReadingStatus = activeValues.ReadingStatus, ReasonToReading = activeValues.ReasonToReading }
+                };
+
+                var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
+
+                var response = _client.newMeterReading(request);
+
+                var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                return result;
+            });
+        }
+
+        public async Task<(bool, MeterReadingOrder)> GetActiveMeterReadingsAsync()
+        {
+            return await Task.Run(() =>
             {
-                return (false, null);
-            }
+                try
+                {
+                    var request = new ActiveMeterReadingRequest() { AccountNum = _config.CustomerId, UserContext = _config.Context };
+
+                    var response = _client.getactiveMeterReadings(request);
+
+                    return (true, response.MeterReadingOrders[0]);
+                }
+                catch (Exception)
+                {
+                    return (false, null);
+                }
+            });
         }
     }
 }

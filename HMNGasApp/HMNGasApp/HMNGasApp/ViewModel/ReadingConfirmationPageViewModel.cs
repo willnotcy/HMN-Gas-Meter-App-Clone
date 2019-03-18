@@ -67,7 +67,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = _service.NewMeterReading(UsageInput);
+            var result = _service.NewMeterReadingAsync(UsageInput).Result;
 
             if (!result.Item1)
             {

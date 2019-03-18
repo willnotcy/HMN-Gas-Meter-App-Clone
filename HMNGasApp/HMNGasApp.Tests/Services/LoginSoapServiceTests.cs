@@ -20,7 +20,7 @@ namespace HMNGasApp.Tests.Services
 
             var service = new LoginSoapService(client.Object, config.Object);
 
-            var result = await service.NewLogin("73", "credentials");
+            var result = await service.NewLoginAsync("73", "credentials");
 
             Assert.True(result.Item1);
             Assert.Equal("securitykey", result.Item2);
@@ -36,7 +36,7 @@ namespace HMNGasApp.Tests.Services
 
             var service = new LoginSoapService(client.Object, config.Object);
 
-            var result = await service.NewLogin("73", "team pull");
+            var result = await service.NewLoginAsync("73", "team pull");
 
             Assert.False(result.Item1);
             Assert.Equal("Not Ok", result.Item2);

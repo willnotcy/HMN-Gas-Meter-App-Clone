@@ -57,7 +57,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = await _service.NewLogin(CustomerId, Password);
+            var result = await _service.NewLoginAsync(CustomerId, Password);
             if(result.Item1)
             {
                 SignedIn = true;

@@ -28,7 +28,7 @@ namespace HMNGasApp.Tests.Services
 
             var service = new MeterReadingSoapService(client.Object, config.Object);
 
-            var result = service.GetInstallations();
+            var result = service.GetInstallationsAsync().Result;
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
@@ -53,7 +53,7 @@ namespace HMNGasApp.Tests.Services
             var installation = new Installation();
             var activeReading = new MeterReadingOrder();
            
-            var result = service.GetMeterReadingOrder(installation, activeReading);
+            var result = service.GetMeterReadingOrderAsync(installation, activeReading).Result;
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
@@ -67,7 +67,7 @@ namespace HMNGasApp.Tests.Services
             client.Setup(s => s.newMeterReading(It.IsAny<NewMeterReadingRequest>()))
                 .Returns(new newMeterReadingResponse() { ErrorCode = "", ResponseCode = "", ResponseMessage = ""});
 
-            var active = new MeterReadingOrder();
+            var active = new MeterReadingOrder() { PrevReading = "7000"};
             var list = new List<MeterReadingOrder>()
             {
                 active
@@ -85,7 +85,7 @@ namespace HMNGasApp.Tests.Services
 
             var service = new MeterReadingSoapService(client.Object, config.Object);
 
-            var result = service.NewMeterReading("7373");
+            var result = service.NewMeterReadingAsync("7373").Result;
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
@@ -110,7 +110,7 @@ namespace HMNGasApp.Tests.Services
  
             var activeReading = new MeterReadingOrder();
 
-            var result = service.GetActiveMeterReadings();
+            var result = service.GetActiveMeterReadingsAsync().Result;
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
