@@ -27,11 +27,11 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
                     <components:NoBorderEntry x:Name="EditableName"
-                                              Text="{Binding Name}"
-                                              Style="Bold"
-                                              HorizontalOptions="FillAndExpand"
-                                              IsReadOnly="true"
-                                              VerticalOptions="Center"/>
+                                                Text="{Binding Name}"
+                                                Style="Bold"
+                                                HorizontalOptions="FillAndExpand"
+                                                IsReadOnly="true"
+                                                VerticalOptions="Center"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
@@ -44,12 +44,12 @@
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <components:NoBorderEntry x:Name="EditableEMail"
-                                                  Keyboard="Email"
-                                                  Text="{Binding Email}"
-                                                  Style="Bold"
-                                                  HorizontalOptions="FillAndExpand"
-                                                  IsReadOnly="true"
-                                                  VerticalOptions="Center"/>
+                                                    Keyboard="Email"
+                                                    Text="{Binding Email}"
+                                                    Style="Bold"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    IsReadOnly="true"
+                                                    VerticalOptions="Center"/>
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
@@ -57,12 +57,12 @@
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <components:NoBorderEntry x:Name="EditablePhone"
-                                                  Keyboard="Telephone"
-                                                  Text="{Binding Phone}"
-                                                  Style="Bold"
-                                                  HorizontalOptions="FillAndExpand"
-                                                  IsReadOnly="true"
-                                                  VerticalOptions="Center"/>
+                                                    Keyboard="Telephone"
+                                                    Text="{Binding Phone}"
+                                                    Style="Bold"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    IsReadOnly="true"
+                                                    VerticalOptions="Center"/>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
@@ -87,6 +87,13 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <ActivityIndicator x:Name="activityIndicator"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"
+                        Color="Black"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        />
                 <Button x:Name="SaveInfoButton"
                         Text="Save"
                         Command="{Binding SaveInfoCommand}"
@@ -96,18 +103,8 @@
                         Margin="110,0,110,0"/>
             </StackLayout>
         </ScrollView>
-    <ActivityIndicator x:Name="activityIndicator"
-                       IsVisible="{Binding IsBusy}"
-                       IsRunning="{Binding IsBusy}"
-                       Color="Black"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"
-                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                   Property=Height,
-                                                   Factor=0.33}"
-                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                   Property=Height,
-                                                   Factor=0.33}" />
+
     </StackLayout>
+
 
 </ContentPage>

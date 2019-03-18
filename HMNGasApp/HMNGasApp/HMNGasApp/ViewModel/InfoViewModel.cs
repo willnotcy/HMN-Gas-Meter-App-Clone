@@ -121,16 +121,15 @@ namespace HMNGasApp.ViewModel
             Customer.ZipCode = ZipCode;
             Customer.City = City;
 
-            var result = await _service.EditCustomerAsync(Customer);
+            var result = await Task.Run(() => _service.EditCustomerAsync(Customer));
 
-            //fix
+            //var result = _service.EditCustomerAsync(Customer);
+
+            if(result)
             {
                 await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-            }
-
-            await Navigation.PopModalAsync();
-
-            if (!result)
+                await Navigation.PopModalAsync();
+            } else
             {
                 //TODO Get text from languagefile
                 await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");

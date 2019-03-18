@@ -23,7 +23,7 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public WebServices.Customer GetCustomer()
+        public async Task<WebServices.Customer> GetCustomerAsync()
         {
             var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
@@ -32,7 +32,7 @@ namespace HMNGasApp.Services
             return result.Customers[0];
         }
 
-        public bool EditCustomer(WebServices.Customer customer)
+        public async Task<bool> EditCustomerAsync(WebServices.Customer customer)
         {
             var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
