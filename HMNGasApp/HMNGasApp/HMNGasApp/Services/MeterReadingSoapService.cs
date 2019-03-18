@@ -26,16 +26,23 @@ namespace HMNGasApp.Services
         {
             return await Task.Run(() => 
             {
-                var date = DateTime.Now;
+                try
+                {
+                    var date = DateTime.Now;
 
-                var request = new InstallationRequest() { AccountNum = _config.CustomerId, Fom = date, UserContext = _config.Context, AttachmentNum = "", ContractNum = "", DeliveryCategory = "" };
+                    var request = new InstallationRequest() { AccountNum = _config.CustomerId, Fom = date, UserContext = _config.Context, AttachmentNum = "", ContractNum = "", DeliveryCategory = "" };
 
-                var response = _client.getInstallations(request);
+                    var response = _client.getInstallations(request);
 
-                if (response == null)
+                    if (response == null)
+                        return (false, null);
+
+                    return (true, response.Installations[0]);
+                }
+                catch (Exception)
+                {
                     return (false, null);
-
-                return (true, response.Installations[0]);
+                }
             });
         }
 
@@ -58,7 +65,7 @@ namespace HMNGasApp.Services
                 }
                 catch (Exception)
                 {
-                    throw;
+                    return (false, null);
                 }
             });
         }
