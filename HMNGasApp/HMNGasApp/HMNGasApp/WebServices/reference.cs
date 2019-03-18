@@ -23,6 +23,7 @@ namespace HMNGasApp.WebServices
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Threading.Tasks;
 
 
     /// <remarks/>
@@ -3227,7 +3228,7 @@ namespace HMNGasApp.WebServices
         {
             object[] results = this.Invoke("newCustContactInfo", new object[] {
                         Request});
-            return ((NewCustContactInfoResponse)(results[0]));
+            return ((NewCustContactInfoResponse) (results[0]));
         }
 
         /// <remarks/>

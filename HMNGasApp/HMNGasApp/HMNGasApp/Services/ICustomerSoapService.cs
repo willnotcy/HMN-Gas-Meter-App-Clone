@@ -1,4 +1,4 @@
-﻿using HMNGasApp.Model;
+﻿using HMNGasApp.WebServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,6 +6,8 @@ namespace HMNGasApp.Services
 {
     public interface ICustomerSoapService
     {
-        Customer GetCustomer();
+        Task<(bool, Customer)> GetCustomerAsync();
+
+        Task<bool> EditCustomerAsync(Customer Customer);
     }
 }

@@ -5,8 +5,11 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
 using HMNGasApp.Droid;
@@ -14,24 +17,26 @@ using HMNGasApp.View.Components;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(RoundedEntry), typeof(RoundedEntryRenderer))]
+[assembly: ExportRenderer(typeof(NoBorderEntry), typeof(NoBorderEntryRenderer))]
 namespace HMNGasApp.Droid
 {
 #pragma warning disable CS0618 // Type or member is obsolete
     /// <summary>
-    /// Class for creating rounded borders in Entries, Android
+    /// Class for disabling the border in Entries, Android
     /// </summary>
-    public class RoundedEntryRenderer : EntryRenderer
+    public class NoBorderEntryRenderer : EntryRenderer
     {
+        public NoBorderEntryRenderer(Context context) : base(context)
+        {
+        }
 
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
+
             if (Control != null)
             {
-                Control.Background = Forms.Context.GetDrawable(Resource.Drawable.RoundedEntryText);
-                Control.Gravity = GravityFlags.CenterVertical;
-                Control.SetPadding(80, 10, 10, 10);
+                Control.Background = new ColorDrawable(Android.Graphics.Color.Transparent);
             }
         }
     }

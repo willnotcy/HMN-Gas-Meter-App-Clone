@@ -4,22 +4,20 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(RoundedEntry), typeof(RoundedEntryRenderer))]
+[assembly: ExportRenderer(typeof(NoBorderEntry), typeof(NoBorderEntryRenderer))]
 namespace HMNGasApp.iOS
 {
     /// <summary>
-    /// Class for creating rounded borders in Entries, iOS
+    /// Class for disabling the border in Entries, iOS
     /// </summary>
-    public class RoundedEntryRenderer : EntryRenderer
+    public class NoBorderEntryRenderer : EntryRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
             base.OnElementChanged(e);
+            Control.Layer.BorderWidth = 0;
+            Control.BorderStyle = UITextBorderStyle.None;
 
-            if (Control != null)
-            {
-                Control.BorderStyle = UITextBorderStyle.RoundedRect;
-            }
         }
     }
 }
