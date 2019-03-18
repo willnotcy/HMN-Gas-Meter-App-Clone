@@ -6,13 +6,14 @@ using Moq;
 using HMNGasApp.WebServices;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.Tests.Services
 {
     public class MeterReadingSoapServiceTests
     {
         [Fact]
-        public void GetInstallations_given_valid_login_and_customerId_returns_true_and_Installation()
+        public async Task GetInstallations_given_valid_login_and_customerId_returns_true_and_Installation()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
@@ -28,14 +29,14 @@ namespace HMNGasApp.Tests.Services
 
             var service = new MeterReadingSoapService(client.Object, config.Object);
 
-            var result = service.GetInstallationsAsync().Result;
+            var result = await service.GetInstallationsAsync();
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
         }
 
         [Fact]
-        public void GetMeterReadingOrder_given_valid_installation_returns_true_and_MeterReadingOrderResponse()
+        public async Task GetMeterReadingOrder_given_valid_installation_returns_true_and_MeterReadingOrderResponse()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
@@ -52,15 +53,15 @@ namespace HMNGasApp.Tests.Services
             var service = new MeterReadingSoapService(client.Object, config.Object);
             var installation = new Installation();
             var activeReading = new MeterReadingOrder();
-           
-            var result = service.GetMeterReadingOrderAsync(installation, activeReading).Result;
+
+            var result = await service.GetMeterReadingOrderAsync(installation, activeReading);
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
         }
 
         [Fact]
-        public void NewMeterReading_given_valid_request_returns_true_and_ResponseMessage()
+        public async Task NewMeterReading_given_valid_request_returns_true_and_ResponseMessage()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
@@ -85,14 +86,14 @@ namespace HMNGasApp.Tests.Services
 
             var service = new MeterReadingSoapService(client.Object, config.Object);
 
-            var result = service.NewMeterReadingAsync("7373").Result;
+            var result = await service.NewMeterReadingAsync("7373");
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
         }
 
         [Fact]
-        public void GetActiveMeterReading_returns_active_readings()
+        public async Task GetActiveMeterReading_returns_active_readings()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
@@ -110,7 +111,7 @@ namespace HMNGasApp.Tests.Services
  
             var activeReading = new MeterReadingOrder();
 
-            var result = service.GetActiveMeterReadingsAsync().Result;
+            var result = await service.GetActiveMeterReadingsAsync();
 
             Assert.True(result.Item1);
             Assert.NotNull(result.Item2);
