@@ -45,7 +45,6 @@
                 <Setter Property="Margin" Value="0,20,0,20" />
                 <Setter Property="TextColor" Value="White" />
             </Style>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

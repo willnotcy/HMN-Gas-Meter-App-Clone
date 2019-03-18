@@ -27,11 +27,11 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
                     <components:NoBorderEntry x:Name="EditableName"
-                                                Text="{Binding Name}"
-                                                Style="Bold"
-                                                HorizontalOptions="FillAndExpand"
-                                                IsReadOnly="true"
-                                                VerticalOptions="Center"/>
+                                              Text="{Binding Name}"
+                                              Style="Bold"
+                                              HorizontalOptions="FillAndExpand"
+                                              IsReadOnly="True"
+                                              VerticalOptions="Center"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>

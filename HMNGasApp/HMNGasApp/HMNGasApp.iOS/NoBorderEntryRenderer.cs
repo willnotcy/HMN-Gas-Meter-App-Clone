@@ -14,6 +14,7 @@ namespace HMNGasApp.iOS
             base.OnElementChanged(e);
             Control.Layer.BorderWidth = 0;
             Control.BorderStyle = UITextBorderStyle.None;
+
         }
     }
 }

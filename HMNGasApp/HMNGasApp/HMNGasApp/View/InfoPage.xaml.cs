@@ -22,12 +22,13 @@ namespace HMNGasApp.View
 
         private void ToggleEdit()
         {
+            var color = (Color) Application.Current.Resources["PrimaryOrange"];
             EditableName.IsReadOnly = !EditableName.IsReadOnly;
-            EditableName.BackgroundColor = Color.LightBlue;
+            EditableName.TextColor = color;
             EditablePhone.IsReadOnly = !EditablePhone.IsReadOnly;
-            EditablePhone.BackgroundColor = Color.LightBlue;
+            EditablePhone.TextColor = color;
             EditableEMail.IsReadOnly = !EditableEMail.IsReadOnly;
-            EditableEMail.BackgroundColor = Color.LightBlue;
+            EditableEMail.TextColor = color;
             SaveInfoButton.IsVisible = true;
         }
       
