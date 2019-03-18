@@ -46,27 +46,12 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-
-        private string _street;
-        public string Street
+        
+        private string _address;
+        public string Address
         {
-            get => _street;
-            set => SetProperty(ref _street, value);
-        }
-
-        private string _zipCode;
-        public string ZipCode
-        {
-            get { return _zipCode; }
-            set { _zipCode = value; }
-        }
-
-        private string _city;
-
-        public string City
-        {
-            get { return _city; }
-            set { _city = value; }
+            get => _address;
+            set => SetProperty(ref _address, value);
         }
 
         private string _name;
@@ -117,9 +102,7 @@ namespace HMNGasApp.ViewModel
             Customer.Name = Name;
             Customer.Phone = Phone;
             Customer.Email = Email;
-            Customer.Street = Street;
-            Customer.ZipCode = ZipCode;
-            Customer.City = City;
+            Customer.Address = Address;
 
             var result = await _service.EditCustomerAsync(Customer);
 
