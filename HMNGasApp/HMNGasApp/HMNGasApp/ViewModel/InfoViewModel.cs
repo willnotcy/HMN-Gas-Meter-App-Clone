@@ -187,7 +187,7 @@ namespace HMNGasApp.ViewModel
             Customer = c;
             AccountNum = c.AccountNum;
             Name = c.Name;
-            Street = c.Address;
+            Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
             MeterNum = c.MeterNum;
