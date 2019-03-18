@@ -18,6 +18,10 @@ namespace HMNGasApp.Services
             _config = config;
         }
 
+        /// <summary>
+        /// Returns information about the current customer's installation.
+        /// </summary>
+        /// <returns>success and installation object</returns>
         public async Task<(bool, Installation)> GetInstallationsAsync()
         {
             return await Task.Run(() => 
@@ -61,9 +65,9 @@ namespace HMNGasApp.Services
 
         public async Task<(bool, string)> NewMeterReadingAsync(string reading)
         {
-            return await Task.Run(() =>
+            return await Task.Run(async () =>
             {
-                var active = GetActiveMeterReadingsAsync().Result;
+                var active = await GetActiveMeterReadingsAsync();
 
                 if (!active.Item1)
                     return (false, "Du har ingen gyldige aflæsningskort.");
