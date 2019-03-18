@@ -1,4 +1,6 @@
-﻿namespace HMNGasApp.Model
+﻿using HMNGasApp.WebServices;
+
+namespace HMNGasApp.Model
 {
     public interface IConfig
     {
@@ -7,5 +9,9 @@
         string SecurityKey { get; set; }
 
         string CustomerId { get; set; }
+
+        string Name { get; set; }
+
+        UserContext Context { get; set; }
     }
 }

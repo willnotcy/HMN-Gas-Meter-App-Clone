@@ -192,9 +192,8 @@ namespace HMNGasApp.ViewModel
             Street = c.Address;
             Email = c.Email;
             Phone = c.Phone;
-            //TODO FIX
-            MeterNum = "12346789";
-            LatestMeasure = "4025,34 m3";
+            MeterNum = c.MeterNum;
+            LatestMeasure = "4025,345 m3";
             MeasureDate = "01-02-19";
         }
     }
