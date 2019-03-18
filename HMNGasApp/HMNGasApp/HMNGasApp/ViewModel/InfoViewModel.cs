@@ -109,6 +109,11 @@ namespace HMNGasApp.ViewModel
 
         private async Task ExecuteSaveInfoCommand()
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
             Customer.Name = Name;
             Customer.Phone = Phone;
             Customer.Email = Email;
@@ -130,6 +135,8 @@ namespace HMNGasApp.ViewModel
                 //TODO Get text from languagefile
                 await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
             }
+
+            IsBusy = false;
         }
 
         private void ExecuteEditMode()

@@ -96,5 +96,18 @@
                         Margin="110,0,110,0"/>
             </StackLayout>
         </ScrollView>
+    <ActivityIndicator x:Name="activityIndicator"
+                       IsVisible="{Binding IsBusy}"
+                       IsRunning="{Binding IsBusy}"
+                       Color="Black"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"
+                       RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                   Property=Height,
+                                                   Factor=0.33}"
+                       RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                   Property=Height,
+                                                   Factor=0.33}" />
     </StackLayout>
+
 </ContentPage>
