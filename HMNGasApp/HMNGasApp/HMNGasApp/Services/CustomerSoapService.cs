@@ -23,13 +23,21 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public async Task<WebServices.Customer> GetCustomerAsync()
+        public async Task<(bool, WebServices.Customer)> GetCustomerAsync()
         {
             var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
             var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
 
-            return result.Customers[0];
+            if(result != null && result.Customers.Length == 1)
+            {
+                return (true, result.Customers[0]);
+            }
+            else
+            {
+                return (false, null);
+            }
+
         }
 
         public async Task<bool> EditCustomerAsync(WebServices.Customer customer)
@@ -44,7 +52,7 @@ namespace HMNGasApp.Services
                                                                                     Residence = customer.Residence, SecondaryCellPhone = customer.SecondaryCellularPhone,
                                                                                     SecondaryEmail = customer.SecondaryEmail, Street = customer.Street, TeleFax = customer.TeleFax,
                                                                                     ZipCode = customer.ZipCode, UserContext = context });
-            if (result.ResponseCode.Equals("Ok"))
+            if (result != null && result.ResponseCode.Equals("Ok"))
             {
                 return true;
             } else

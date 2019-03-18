@@ -159,8 +159,14 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var customer = await _service.GetCustomerAsync();
-            Init(customer);
+            var result = await _service.GetCustomerAsync();
+            if (result.Item1)
+            {
+                Init(result.Item2);
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, da vi skulle hente dine oplysninger", "Ok");
+            }
 
             IsBusy = false;
         }

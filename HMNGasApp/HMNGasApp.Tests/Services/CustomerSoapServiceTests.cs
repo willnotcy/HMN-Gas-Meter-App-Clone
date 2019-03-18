@@ -13,7 +13,7 @@ namespace HMNGasApp.Tests.Services
     public class CustomerSoapServiceTests
     {
         [Fact]
-        public void GetCustomer_returns_customer()
+        public async Task GetCustomer_given_valid_login_returns_customer()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
@@ -26,30 +26,56 @@ namespace HMNGasApp.Tests.Services
 
             var api = new CustomerSoapService(client.Object, config.Object);
 
-            var result = api.GetCustomer();
+            var result = await api.GetCustomerAsync();
 
-            Assert.Equal("73", result.AccountNum);
-            Assert.Equal("Bow St, Smithfield Village, Ireland", result.Address);
-            Assert.Equal("test@test.dk", result.Email);
-            Assert.Equal("James On", result.Name);
-            Assert.Equal("12345678", result.Phone);
+            Assert.Equal("73", result.Item2.AccountNum);
+            Assert.Equal("Bow St, Smithfield Village, Ireland", result.Item2.Address);
+            Assert.Equal("test@test.dk", result.Item2.Email);
+            Assert.Equal("James On", result.Item2.Name);
+            Assert.Equal("12345678", result.Item2.Phone);
         }
 
-        /*[Fact]
-        public void EditCustomer_updates_info()
+        [Fact]
+        public async Task GetCustomer_returns_false_when_api_doesnt_respond()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
 
-            var customers = new List<WebServices.Customer>();
+            var service = new CustomerSoapService(client.Object, config.Object);
 
-            customers.Equals("0");
+            var result = await service.GetCustomerAsync();
 
-            var api = new CustomerSoapService(client.Object, config.Object);
+            Assert.False(result.Item1);
+            Assert.Null(result.Item2);
+        }
 
-            var result = api.EditCustomer(true);
-        }*/
+        [Fact]
+        public async Task EditCustomer_given_valid_customer_returns_true()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+            client.Setup(s => s.newCustContactInfo(It.IsAny<NewCustContactInfoRequest>())).Returns(new NewCustContactInfoResponse { ResponseCode = "Ok", ErrorCode = "0", ResponseMessage = "Succesfuld opdatering af kundedetaljer"});
+            var service = new CustomerSoapService(client.Object, config.Object);
 
+            var customer = new WebServices.Customer();
+
+            var result = await service.EditCustomerAsync(customer);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task EditCustomer_given_invalid_customer_returns_false()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+            var service = new CustomerSoapService(client.Object, config.Object);
+
+            var customer = new WebServices.Customer();
+
+            var result = await service.EditCustomerAsync(customer);
+
+            Assert.False(result);
+        }
     }
-
 }
