@@ -21,7 +21,7 @@ namespace HMNGasApp.Services
         /// <summary>
         /// Returns information about the current customer's installation.
         /// </summary>
-        /// <returns>success and installation object</returns>
+        /// <returns>status and Installation object</returns>
         public async Task<(bool, Installation)> GetInstallationsAsync()
         {
             return await Task.Run(() => 
@@ -46,6 +46,12 @@ namespace HMNGasApp.Services
             });
         }
 
+        /// <summary>
+        /// Returns meter reading orders based on current customer installation.
+        /// </summary>
+        /// <param name="installation"></param>
+        /// <param name="active"></param>
+        /// <returns>status and MeterReadingOrder object</returns>
         public async Task<(bool, MeterReadingOrder)> GetMeterReadingOrderAsync(Installation installation, MeterReadingOrder active)
         {
             return await Task.Run(() =>
@@ -70,6 +76,11 @@ namespace HMNGasApp.Services
             });
         }
 
+        /// <summary>
+        /// Sends a new meter reading to the xellent api.
+        /// </summary>
+        /// <param name="reading"></param>
+        /// <returns>status and responsecode</returns>
         public async Task<(bool, string)> NewMeterReadingAsync(string reading)
         {
             return await Task.Run(async () =>
@@ -99,6 +110,10 @@ namespace HMNGasApp.Services
             });
         }
 
+        /// <summary>
+        /// Returns any active meter reading orders.
+        /// </summary>
+        /// <returns>status and MeterReadingOrder object</returns>
         public async Task<(bool, MeterReadingOrder)> GetActiveMeterReadingsAsync()
         {
             return await Task.Run(() =>
