@@ -62,7 +62,7 @@ namespace HMNGasApp.ViewModel
             {
                 SignedIn = true;
                 _config.Context.securityKey = result.Item2;
-                await Navigation.PushAsync(new NavigationPage(new MainPage()));
+                await Navigation.PushAsync(new MainPage());
             } else
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");

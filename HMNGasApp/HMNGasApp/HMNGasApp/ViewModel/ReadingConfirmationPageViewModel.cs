@@ -53,7 +53,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Navigation.PopModalAsync();
+            this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }

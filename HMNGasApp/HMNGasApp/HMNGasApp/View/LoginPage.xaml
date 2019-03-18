@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.LoginPage"
              xmlns:converters="clr-namespace:HMNGasApp.Converters"
-             xmlns:components="clr-namespace:HMNGasApp.View.Components">
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
