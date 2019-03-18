@@ -123,8 +123,6 @@ namespace HMNGasApp.ViewModel
 
             var result = await _service.EditCustomerAsync(Customer);
 
-            //var result = _service.EditCustomerAsync(Customer);
-
             if(result)
             {
                 await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
