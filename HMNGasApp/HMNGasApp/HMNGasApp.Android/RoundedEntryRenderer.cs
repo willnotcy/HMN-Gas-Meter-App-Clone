@@ -18,6 +18,9 @@ using Xamarin.Forms.Platform.Android;
 namespace HMNGasApp.Droid
 {
 #pragma warning disable CS0618 // Type or member is obsolete
+    /// <summary>
+    /// Class for creating rounded borders in Entries, Android
+    /// </summary>
     public class RoundedEntryRenderer : EntryRenderer
     {
 

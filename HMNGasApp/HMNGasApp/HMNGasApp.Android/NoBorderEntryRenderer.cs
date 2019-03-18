@@ -21,6 +21,9 @@ using Xamarin.Forms.Platform.Android;
 namespace HMNGasApp.Droid
 {
 #pragma warning disable CS0618 // Type or member is obsolete
+    /// <summary>
+    /// Class for disabling the border in Entries, Android
+    /// </summary>
     public class NoBorderEntryRenderer : EntryRenderer
     {
         public NoBorderEntryRenderer(Context context) : base(context)

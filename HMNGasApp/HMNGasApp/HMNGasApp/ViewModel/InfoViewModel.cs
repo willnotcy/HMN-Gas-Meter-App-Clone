@@ -121,7 +121,7 @@ namespace HMNGasApp.ViewModel
             Customer.ZipCode = ZipCode;
             Customer.City = City;
 
-            var result = await Task.Run(() => _service.EditCustomerAsync(Customer));
+            var result = await _service.EditCustomerAsync(Customer);
 
             //var result = _service.EditCustomerAsync(Customer);
 

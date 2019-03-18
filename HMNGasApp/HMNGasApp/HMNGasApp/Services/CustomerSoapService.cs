@@ -8,6 +8,9 @@ using Xamarin.Forms;
 
 namespace HMNGasApp.Services
 {
+    /// <summary>
+    /// Class for handling request regarding retrieval and update of customer information
+    /// </summary>
     public class CustomerSoapService : ICustomerSoapService
     {
         private readonly IXellentAPI _client;
@@ -40,25 +43,49 @@ namespace HMNGasApp.Services
 
         }
 
-        public async Task<bool> EditCustomerAsync(WebServices.Customer customer)
+        /// <summary>
+        /// Updates information regarding input customer
+        /// </summary>
+        /// <param name="Customer"></param>
+        /// <returns></returns>
+        public async Task<bool> EditCustomerAsync(WebServices.Customer Customer)
         {
-            var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
+            return await Task.Run(() =>
+            {
+                var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
 
-            var result = _client.newCustContactInfo(new NewCustContactInfoRequest { AccountNum = customer.AccountNum, AlternativeCustomerCode = customer.AlternativeCustomerCode,
-                                                                                    AlternativeCustomerNumber = customer.AlternativeCustomerNumber, BirthDate = customer.BirthDate,
-                                                                                    CellPhone = customer.CellularPhone, City = customer.City, CustBankAcc = customer.CustBankAcc,
-                                                                                    Email = customer.Email, LanguageId = customer.LanguageId, Name = customer.Name,
-                                                                                    NetsShareToEbox = customer.NetsShareToEbox, Phone = customer.Phone, PostOfficeBox = customer.PostOfficeBox,
-                                                                                    Residence = customer.Residence, SecondaryCellPhone = customer.SecondaryCellularPhone,
-                                                                                    SecondaryEmail = customer.SecondaryEmail, Street = customer.Street, TeleFax = customer.TeleFax,
-                                                                                    ZipCode = customer.ZipCode, UserContext = context });
-            if (result != null && result.ResponseCode.Equals("Ok"))
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
+                var result = _client.newCustContactInfo(new NewCustContactInfoRequest
+                {
+                    AccountNum = Customer.AccountNum,
+                    AlternativeCustomerCode = Customer.AlternativeCustomerCode,
+                    AlternativeCustomerNumber = Customer.AlternativeCustomerNumber,
+                    BirthDate = Customer.BirthDate,
+                    CellPhone = Customer.CellularPhone,
+                    City = Customer.City,
+                    CustBankAcc = Customer.CustBankAcc,
+                    Email = Customer.Email,
+                    LanguageId = Customer.LanguageId,
+                    Name = Customer.Name,
+                    NetsShareToEbox = Customer.NetsShareToEbox,
+                    Phone = Customer.Phone,
+                    PostOfficeBox = Customer.PostOfficeBox,
+                    Residence = Customer.Residence,
+                    SecondaryCellPhone = Customer.SecondaryCellularPhone,
+                    SecondaryEmail = Customer.SecondaryEmail,
+                    Street = Customer.Street,
+                    TeleFax = Customer.TeleFax,
+                    ZipCode = Customer.ZipCode,
+                    UserContext = context
+                });
+                if (result != null && result.ResponseCode.Equals("Ok"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            });
         }
     }
 }
