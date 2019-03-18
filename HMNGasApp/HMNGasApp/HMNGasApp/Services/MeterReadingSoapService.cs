@@ -57,7 +57,7 @@ namespace HMNGasApp.Services
             var active = GetActiveMeterReadings();
 
             if (!active.Item1)
-                return (false, "Du har ingen åbne aflæsningskort.");
+                return (false, "Du har ingen gyldige aflæsningskort.");
 
             var activeValues = active.Item2;
 
