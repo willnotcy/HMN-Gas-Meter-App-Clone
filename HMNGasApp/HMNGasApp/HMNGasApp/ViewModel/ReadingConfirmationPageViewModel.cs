@@ -53,7 +53,6 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
             await Navigation.PopAsync();
 
             IsBusy = false;
@@ -75,9 +74,10 @@ namespace HMNGasApp.ViewModel
             } else
             {
                 await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
-                this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
-                await Navigation.PopAsync();
             }
+
+            this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }
