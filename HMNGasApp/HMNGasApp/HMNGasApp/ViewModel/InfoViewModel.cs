@@ -4,6 +4,7 @@ using HMNGasApp.Model;
 using HMNGasApp.Services;
 using System.Threading.Tasks;
 
+
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
@@ -11,9 +12,19 @@ namespace HMNGasApp.ViewModel
         private readonly ICustomerSoapService _service;
 
         public ICommand LoadCommand { get; set; }
-        public ICommand EditCommand { get; set; }
+        public ICommand EditMode { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
+        public ICommand SaveInfoCommand { get; set; }
+        public bool ButtonVisibility = false;
+
+        #region Info
+        private WebServices.Customer _customer;
+        public WebServices.Customer Customer
+        {
+            get { return _customer; }
+            set { _customer = value; }
+        }
 
         private string _accountNum;
         public string AccountNum
@@ -35,7 +46,7 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-
+        
         private string _address;
         public string Address
         {
@@ -70,27 +81,45 @@ namespace HMNGasApp.ViewModel
             get => _measureDate;
             set => SetProperty(ref _measureDate, value);
         }
+        #endregion
 
         public InfoViewModel(ICustomerSoapService service)
         {
             _service = service;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
+            EditMode = new Command(() => ExecuteEditMode());
+            SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
         }
 
-        private void ExecuteEditCommand()
+        private async Task ExecuteSaveInfoCommand()
         {
             if (IsBusy)
             {
                 return;
             }
             IsBusy = true;
+            Customer.Name = Name;
+            Customer.Phone = Phone;
+            Customer.Email = Email;
+            Customer.Address = Address;
 
+            var result = await _service.EditCustomerAsync(Customer);
+
+            if(result)
+            {
+                await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                await Navigation.PopModalAsync();
+            } else
+            {
+                //TODO Get text from languagefile
+                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+            }
 
             IsBusy = false;
         }
 
-        private void ExecuteLoadCommand()
+        private void ExecuteEditMode()
         {
             if (IsBusy)
             {
@@ -98,8 +127,27 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var customer = _service.GetCustomer();
-            Init(customer);
+            MessagingCenter.Send(this, "EnableEdit");
+
+            IsBusy = false;
+        }
+
+        private async void ExecuteLoadCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            var result = await _service.GetCustomerAsync();
+            if (result.Item1)
+            {
+                Init(result.Item2);
+            } else
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, da vi skulle hente dine oplysninger", "Ok");
+            }
 
             IsBusy = false;
         }
@@ -117,15 +165,16 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        public void Init(Customer c)
+        public void Init(WebServices.Customer c)
         {
+            Customer = c;
             AccountNum = c.AccountNum;
             Name = c.Name;
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
-            MeterNum = c.MeterNum;
-            LatestMeasure = "4025,34 m3";
+            MeterNum = "1234567";
+            LatestMeasure = "4025,345 m3";
             MeasureDate = "01-02-19";
         }
     }

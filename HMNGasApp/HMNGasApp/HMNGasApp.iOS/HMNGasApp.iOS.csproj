@@ -109,6 +109,7 @@
     <BundleResource Include="Resources\Scandia-Bold.otf" />
     <BundleResource Include="Resources\Scandia-Regular.otf" />
     <BundleResource Include="Resources\Anyline_Capitals.traineddata" />
+    <Compile Include="NoBorderEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\round_call_black.imageset\baseline_call_black.png">
@@ -285,7 +286,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
     <PackageReference Include="Xamarin.Tesseract">
       <Version>0.3.4</Version>
     </PackageReference>
@@ -295,6 +295,7 @@
     <PackageReference Include="XLabs.IoC.TinyIoC">
       <Version>2.0.5782</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>

@@ -66,7 +66,7 @@
                         VerticalOptions="EndAndExpand"
                         BackgroundColor="{StaticResource SecondaryMint}"
                         Style="{StaticResource SignInButton}"
-                        Command="{Binding LogOutCommand}"/>
+                        Command="{Binding SignOutCommand}"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -25,7 +25,7 @@ namespace HMNGasApp
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
-            MainPage = new LoginPage();
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()
@@ -47,10 +47,12 @@ namespace HMNGasApp
         {
             var services = new ServiceCollection();
 
-            var context = new Model.UserContext();
+            var context = new UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = "" };
+
             var config = new Config
             {
-                ApiKey = Secrets.ApiKey
+                ApiKey = Secrets.ApiKey,
+                Context = context
             };
 
             services.AddScoped<LoginViewModel>();
@@ -59,10 +61,13 @@ namespace HMNGasApp
             services.AddScoped<ManualPageViewModel>();
             services.AddScoped<ScanViewModel>();
             services.AddSingleton<IUserContext>(context);
+            services.AddScoped<ReadingConfirmationPageViewModel>();
             services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
-            services.AddScoped<IXellentAPI, XellentAPI>();
+            services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
+            services.AddSingleton<IXellentAPI, XellentAPI>();
+            services.AddScoped<IConnectService, ConnectService>();
 
             return services.BuildServiceProvider();
         }
