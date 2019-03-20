@@ -34,11 +34,7 @@ namespace HMNGasApp.View
 
             PhotoImage.Source = ImageSource.FromStream(() => { return result.Source; });
 
-            activityIndicator.IsRunning = true;
-
             await _vm.Recognise(result.Source);
-
-            activityIndicator.IsRunning = false;
         }
 
         private async Task<MediaFile> TakePic()

@@ -18,7 +18,14 @@ namespace HMNGasApp.ViewModel
         public ICommand ScanCommand { get; set; }
         public ICommand ReturnNavCommand { get; }
 
-        public string LabelText { get; set; }
+        private string _labelText;
+
+        public string LabelText
+        {
+            get { return _labelText; }
+            set { SetProperty(ref _labelText, value); ; }
+        }
+
 
         public ScanViewModel()
         {
@@ -55,6 +62,12 @@ namespace HMNGasApp.ViewModel
 
         public async Task Recognise(Stream result)
         {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
             if (result == null) return;
             LabelText = "Initializing";
 
@@ -97,6 +110,8 @@ namespace HMNGasApp.ViewModel
                     }
                 }
             }
+
+            IsBusy = false;
         }
     }
 }
