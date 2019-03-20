@@ -12,14 +12,15 @@ using XLabs.Ioc;
 
 namespace HMNGasApp.ViewModel
 {
+    /// <summary>
+    /// Class containing the view model for the scanpage. This is the class responsible for handling the OCR, by using OpenCV and Tesseract
+    /// </summary>
     public class ScanViewModel : BaseViewModel
     {
         private readonly ITesseractApi _tesseractApi;
-        public ICommand ScanCommand { get; set; }
         public ICommand ReturnNavCommand { get; }
 
         private string _labelText;
-
         public string LabelText
         {
             get { return _labelText; }
@@ -29,21 +30,7 @@ namespace HMNGasApp.ViewModel
         public ScanViewModel()
         {
             _tesseractApi = DependencyService.Get<ITesseract>().TesseractApi;
-            ScanCommand = new Command(async () => await ExecuteScanCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-        }
-
-        private async Task ExecuteScanCommand()
-        {
-            if (IsBusy)
-            {
-                return;
-            }
-            IsBusy = true;
-
-            await Navigation.PopModalAsync();
-
-            IsBusy = false;
         }
 
         private async Task ExecuteReturnNavCommand()
@@ -59,6 +46,11 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
+        /// <summary>
+        /// Method for recognizing the characters. Input comes from the ScanPage.xaml.cs, and is then processed into words
+        /// </summary>
+        /// <param name="result">Stream of bytes of the picture to process</param>
+        /// <returns></returns>
         public async Task Recognise(Stream result)
         {
             if (IsBusy)
@@ -83,6 +75,8 @@ namespace HMNGasApp.ViewModel
 
                     //TODO Experiment with PageSegmentationMode https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality#page-segmentation-method
                     _tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
+
+                    //TODO Implement opencv image processing
                     bool success = await _tesseractApi.SetImage(result);
                     if (success)
                     {
