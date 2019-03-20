@@ -78,6 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoundedEntryRenderer.cs" />
     <Compile Include="NoBorderEntryRenderer.cs" />
+    <Compile Include="Tesseract.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Scandia-Bold.otf">

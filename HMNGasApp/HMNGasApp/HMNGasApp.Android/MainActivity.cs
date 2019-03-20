@@ -32,10 +32,6 @@ namespace HMNGasApp.Droid
 
             var container = TinyIoCContainer.Current;
             container.Register<IDevice>(AndroidDevice.CurrentDevice);
-            container.Register<ITesseractApi>((cont, parameters) =>
-            {
-                return new TesseractApi(ApplicationContext, AssetsDeployment.OncePerInitialization);
-            });
 
             Resolver.SetResolver(new TinyResolver(container));
 

@@ -2,13 +2,9 @@
 using XLabs.Ioc;
 using XLabs.Platform.Services.Media;
 using Xamarin.Forms;
-using Tesseract;
 using System;
-using System.Drawing;
-using System.IO;
 using HMNGasApp.ViewModel;
 using Xamarin.Forms.Xaml;
-using HMNGasApp.Helpers;
 using XLabs.Platform.Device;
 
 namespace HMNGasApp.View
@@ -16,7 +12,6 @@ namespace HMNGasApp.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPage : ContentPage
     {
-        private readonly ITesseractApi _tesseractApi;
         private readonly IDevice _device;
         private readonly ScanViewModel _vm;
 
@@ -25,7 +20,6 @@ namespace HMNGasApp.View
             InitializeComponent();
 
             BindingContext = _vm = DependencyService.Resolve<ScanViewModel>();
-            _tesseractApi = Resolver.Resolve<ITesseractApi>();
             _device = Resolver.Resolve<IDevice>();
             _vm.Navigation = Navigation;
         }
@@ -40,7 +34,11 @@ namespace HMNGasApp.View
 
             PhotoImage.Source = ImageSource.FromStream(() => { return result.Source; });
 
-            await Recognise(result.Source);
+            activityIndicator.IsRunning = true;
+
+            await _vm.Recognise(result.Source);
+
+            activityIndicator.IsRunning = true;
         }
 
         private async Task<MediaFile> TakePic()
@@ -64,52 +62,5 @@ namespace HMNGasApp.View
 
         //    await Recognise(grayScale);
         //}
-
-        public async Task Recognise(Stream result) {
-            if (result == null) return;
-            activityIndicator.IsRunning = true;
-            TextLabel.Text = "initializing";
-
-            if (!_tesseractApi.Initialized)
-            {
-                var initialised = await _tesseractApi.Init("any");
-                if (!initialised)
-                {
-                    TextLabel.Text = "Couldn't start Tesseract";
-                    activityIndicator.IsRunning = false;
-                } else
-                {
-                    TextLabel.Text = "Processing image...";
-
-                    //TODO Experiment with PageSegmentationMode https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality#page-segmentation-method
-                    _tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
-                    bool success = await _tesseractApi.SetImage(result);
-                    activityIndicator.IsRunning = false;
-                    if (success)
-                    {
-                        var words = _tesseractApi.Results(PageIteratorLevel.Word);
-                        var symbols = _tesseractApi.Results(PageIteratorLevel.Symbol);
-                        var blocks = _tesseractApi.Results(PageIteratorLevel.Block);
-                        var paragraphs = _tesseractApi.Results(PageIteratorLevel.Paragraph);
-                        var lines = _tesseractApi.Results(PageIteratorLevel.Textline);
-
-                        var textResult = "";
-
-                        var enumerator = words.GetEnumerator();
-
-                        while (enumerator.MoveNext())
-                        {
-                            var item = enumerator.Current.Text;
-                            textResult += item + " ";
-                        }
-                        TextLabel.Text = textResult;
-                    }
-                    else
-                    {
-                        TextLabel.Text = "didnt work";
-                    }
-                }
-            }
-        }
     }
 }
