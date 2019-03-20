@@ -56,7 +56,7 @@ namespace HMNGasApp.ViewModel
         public async Task Recognise(Stream result)
         {
             if (result == null) return;
-            LabelText = "initializing";
+            LabelText = "Initializing";
 
             if (!_tesseractApi.Initialized)
             {
@@ -70,7 +70,7 @@ namespace HMNGasApp.ViewModel
                     LabelText = "Processing image...";
 
                     //TODO Experiment with PageSegmentationMode https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality#page-segmentation-method
-                    _tesseractApi.SetPageSegmentationMode((PageSegmentationMode)5);
+                    _tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
                     bool success = await _tesseractApi.SetImage(result);
                     if (success)
                     {
@@ -93,7 +93,7 @@ namespace HMNGasApp.ViewModel
                     }
                     else
                     {
-                        LabelText = "didnt work";
+                        LabelText = "Didn't work";
                     }
                 }
             }

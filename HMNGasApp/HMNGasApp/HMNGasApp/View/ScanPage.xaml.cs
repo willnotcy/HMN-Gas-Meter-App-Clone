@@ -38,7 +38,7 @@ namespace HMNGasApp.View
 
             await _vm.Recognise(result.Source);
 
-            activityIndicator.IsRunning = true;
+            activityIndicator.IsRunning = false;
         }
 
         private async Task<MediaFile> TakePic()
