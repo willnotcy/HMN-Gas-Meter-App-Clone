@@ -26,7 +26,6 @@ namespace HMNGasApp.ViewModel
             set { SetProperty(ref _labelText, value); ; }
         }
 
-
         public ScanViewModel()
         {
             _tesseractApi = DependencyService.Get<ITesseract>().TesseractApi;

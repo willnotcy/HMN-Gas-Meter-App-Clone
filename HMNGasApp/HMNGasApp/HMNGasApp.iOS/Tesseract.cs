@@ -13,6 +13,7 @@ using Xamarin.Forms;
 [assembly: Dependency(typeof(HMNGasApp.iOS.Tesseract))]
 namespace HMNGasApp.iOS
 {
+    //TODO Check if this dependency works
     public class Tesseract : ITesseract
     {
         public ITesseractApi TesseractApi { get; private set; }
