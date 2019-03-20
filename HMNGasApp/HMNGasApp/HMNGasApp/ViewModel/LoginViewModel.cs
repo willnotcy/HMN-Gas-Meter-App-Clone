@@ -1,6 +1,7 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.Services;
 using HMNGasApp.View;
+using HMNGasApp.WebServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -10,6 +11,7 @@ namespace HMNGasApp.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         private readonly ILoginSoapService _service;
+        private readonly IConfig _config;
 
         public ICommand SignInCommand { get; set; }
 
@@ -34,14 +36,15 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _password, value);
         }
 
-        public LoginViewModel()
+        public LoginViewModel(ILoginSoapService service, IConfig config)
         {
             Title = "Log in";
 
+            _service = service;
+            _config = config;
+
             Password = "";
             CustomerId = "";
-
-            _service = DependencyService.Get<ILoginSoapService>();
 
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
         }
@@ -54,11 +57,12 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = await _service.NewLogin(CustomerId, Password);
+            var result = await _service.NewLoginAsync(CustomerId, Password);
             if(result.Item1)
             {
                 SignedIn = true;
-                await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+                _config.Context.securityKey = result.Item2;
+                await Navigation.PushAsync(new MainPage());
             } else
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
@@ -66,5 +70,7 @@ namespace HMNGasApp.ViewModel
 
             IsBusy = false;
         }
+
+        
     }
 }

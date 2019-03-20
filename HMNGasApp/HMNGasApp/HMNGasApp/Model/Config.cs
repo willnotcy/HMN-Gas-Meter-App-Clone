@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HMNGasApp.WebServices;
 
 namespace HMNGasApp.Model
 {
@@ -11,5 +9,9 @@ namespace HMNGasApp.Model
         public string SecurityKey { get; set; }
 
         public string CustomerId { get; set; }
+
+        public string Name { get; set; }
+
+        public UserContext Context { get; set; }
     }
 }
