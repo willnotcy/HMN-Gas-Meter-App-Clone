@@ -190,6 +190,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            EditEnabled = false;
+
             await Navigation.PopModalAsync();
 
             IsBusy = false;

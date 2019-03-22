@@ -53,10 +53,13 @@
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
                     <components:NoBorderEntry x:Name="EditableName"
                                               Text="{Binding Name}"
-                                              Style="Bold"
+                                              Style="{StaticResource CustomerInfoComponent}"
+                                              FontSize="20"
                                               HorizontalOptions="FillAndExpand"
                                               IsReadOnly="True"
-                                              VerticalOptions="Center">
+                                              VerticalOptions="Center"
+                                              Placeholder="Jens Jensen"
+                                              IsTextPredictionEnabled="False">
                         <components:NoBorderEntry.Triggers>
                             <DataTrigger 
                                 TargetType="components:NoBorderEntry"
@@ -75,7 +78,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
-                        <Label Text="{Binding Address}"/>
+                        <Label Text="{Binding Address}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Addresse" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
@@ -85,10 +88,11 @@
                         <components:NoBorderEntry x:Name="EditableEMail"
                                                     Keyboard="Email"
                                                     Text="{Binding Email}"
-                                                    Style="Bold"
+                                                    Style="{StaticResource CustomerInfoComponent}"
                                                     HorizontalOptions="FillAndExpand"
                                                     IsReadOnly="True"
-                                                    VerticalOptions="Center">
+                                                    VerticalOptions="Center"
+                                                    Placeholder="Jens.jensen@gmail.com">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"
@@ -113,10 +117,11 @@
                         <components:NoBorderEntry x:Name="EditablePhone"
                                                     Keyboard="Telephone"
                                                     Text="{Binding Phone}"
-                                                    Style="Bold"
+                                                    Style="{StaticResource CustomerInfoComponent}"
                                                     HorizontalOptions="FillAndExpand"
                                                     IsReadOnly="True"
-                                                    VerticalOptions="Center">
+                                                    VerticalOptions="Center"
+                                                    Placeholder="+45 12 34 56 78">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"
@@ -137,21 +142,21 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding MeterNum}" />
+                        <Label Text="{Binding MeterNum}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Måler nr." FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_equalizer_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding LatestMeasure}" />
+                        <Label Text="{Binding LatestMeasure}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_date_range_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding MeasureDate}" />
+                        <Label Text="{Binding MeasureDate}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
