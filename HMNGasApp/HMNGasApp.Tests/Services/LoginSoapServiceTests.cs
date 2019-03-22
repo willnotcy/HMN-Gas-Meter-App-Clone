@@ -36,17 +36,18 @@ namespace HMNGasApp.Tests.Services
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
             var meterService = new Mock<IMeterReadingSoapService>();
-            var config = new Mock<IConfig>();
+            var config = new Config();
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "4", ResponseMessage = "", ResponseCode = "Not Ok" });
             connectService.Setup(s => s.canConnect()).Returns(true);
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
             var result = await service.NewLoginAsync("73", "team pull");
 
             Assert.False(result.Item1);
             Assert.Equal("Not Ok", result.Item2);
+            Assert.Null(config.MeterReadings);
         }
 
         [Fact]
@@ -55,15 +56,16 @@ namespace HMNGasApp.Tests.Services
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
             var meterService = new Mock<IMeterReadingSoapService>();
-            var config = new Mock<IConfig>();
+            var config = new Config();
             connectService.Setup(s => s.canConnect()).Returns(false);
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
             var result = await service.NewLoginAsync("73", "team pull");
 
             Assert.False(result.Item1);
             Assert.Equal("Kunne ikke få forbindelse", result.Item2);
+            Assert.Null(config.MeterReadings);
         }
 
         [Fact]
