@@ -51,7 +51,7 @@ namespace HMNGasApp.Services
 
                         if (result.Item1)
                         {
-                            _config.SecurityKey = result.Item2;
+                            _config.Context.securityKey = result.Item2;
                             _config.CustomerId = customerId;
 
                             return result;
@@ -72,11 +72,11 @@ namespace HMNGasApp.Services
         {
             return await Task.Run(() =>
             {
-                var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey } });
+                var result = _client.logout(new LogoutRequest { WebLogin = _config.CustomerId, UserContext = _config.Context});
 
                 if (result.ErrorCode.Equals("0"))
                 {
-                    _config.SecurityKey = "";
+                    _config.Context.securityKey = "";
                     return true;
                 }
                 else

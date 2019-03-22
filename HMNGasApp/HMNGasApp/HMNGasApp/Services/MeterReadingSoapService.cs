@@ -1,6 +1,7 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -133,6 +134,16 @@ namespace HMNGasApp.Services
             });
         }
 
+        public async Task<List<MeterReading>> GetMeterReadings()
+        {
+            return await Task.Run(() =>
+            {
+                var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = new DateTime(), ToDate = DateTime.Now, UserContext = _config.Context };
 
+                var response = _client.getMeterReadings(request);
+
+                return response.MeterReadings.ToList();
+            });
+        }
     }
 }

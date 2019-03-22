@@ -7,8 +7,6 @@ namespace HMNGasApp.Model
     {
         public string ApiKey { get; set; }
 
-        public string SecurityKey { get; set; }
-
         public string CustomerId { get; set; }
 
         public string Name { get; set; }
