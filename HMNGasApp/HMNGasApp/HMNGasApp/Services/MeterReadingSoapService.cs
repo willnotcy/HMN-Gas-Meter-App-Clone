@@ -134,11 +134,11 @@ namespace HMNGasApp.Services
             });
         }
 
-        public async Task<List<MeterReading>> GetMeterReadings()
+        public async Task<List<MeterReading>> GetMeterReadings(DateTime from, DateTime to)
         {
             return await Task.Run(() =>
             {
-                var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = new DateTime(), ToDate = DateTime.Now, UserContext = _config.Context };
+                var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context };
 
                 var response = _client.getMeterReadings(request);
 
