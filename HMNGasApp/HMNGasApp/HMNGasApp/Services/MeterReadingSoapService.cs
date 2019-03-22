@@ -134,16 +134,23 @@ namespace HMNGasApp.Services
             });
         }
 
-        public async Task<List<MeterReading>> GetMeterReadings(DateTime from, DateTime to)
+        public async Task<(bool, List<MeterReading>)> GetMeterReadings(DateTime from, DateTime to)
         {
-            return await Task.Run(() =>
+            if((to - from).Ticks > 0)
             {
-                var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context };
+                return await Task.Run(() =>
+                {
+                    var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context };
 
-                var response = _client.getMeterReadings(request);
+                    var response = _client.getMeterReadings(request);
 
-                return response.MeterReadings.ToList();
-            });
+                    return (true, response.MeterReadings.ToList());
+                });
+            } else
+            {
+                return (false, default(List<MeterReading>));
+            }
+
         }
     }
 }

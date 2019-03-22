@@ -15,12 +15,14 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
+            var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Mock<IConfig>();
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "", ResponseMessage = "securitykey", ResponseCode = ""});
             connectService.Setup(s => s.canConnect()).Returns(true);
+            config.Setup(s => s.Context).Returns(new UserContext());
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
 
             var result = await service.NewLoginAsync("73", "credentials");
 
@@ -33,12 +35,13 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
+            var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Mock<IConfig>();
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "4", ResponseMessage = "", ResponseCode = "Not Ok" });
             connectService.Setup(s => s.canConnect()).Returns(true);
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
 
             var result = await service.NewLoginAsync("73", "team pull");
 
@@ -51,10 +54,11 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
+            var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Mock<IConfig>();
             connectService.Setup(s => s.canConnect()).Returns(false);
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
 
             var result = await service.NewLoginAsync("73", "team pull");
 
@@ -67,10 +71,11 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
+            var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Config { Context = new UserContext { securityKey = "anfkasjnfajk" } };
             client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "0", ResponseCode = "Ok", ResponseMessage = "" });
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config);
+            var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
             var result = await service.Logout();
 
@@ -83,9 +88,10 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
+            var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Config { Context = new UserContext { securityKey = "anfkasjnfajk" } };
             client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "1000", ResponseCode = "Not ok", ResponseMessage = "" });
-            var service = new LoginSoapService(client.Object, connectService.Object, config);
+            var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
             var result = await service.Logout();
 

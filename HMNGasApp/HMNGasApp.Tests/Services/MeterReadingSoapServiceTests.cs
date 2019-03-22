@@ -199,5 +199,35 @@ namespace HMNGasApp.Tests.Services
             Assert.False(result.Item1);
             Assert.Null(result.Item2);
         }
+
+        [Fact]
+        public async Task GetMeterReadings_given_valid_dates_returns_list_of_readings()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+            client.Setup(s => s.getMeterReadings(It.IsAny<MeterReadingsRequest>())).Returns(new MeterReadingsResponse { MeterReadings = new[] { new MeterReading { } } });
+
+            var service = new MeterReadingSoapService(client.Object, config.Object);
+
+            var result = await service.GetMeterReadings(DateTime.Today.AddYears(-5), DateTime.Today);
+
+            Assert.True(result.Item1);
+            Assert.NotEmpty(result.Item2);
+        }
+
+        [Fact]
+        public async Task GetMeterReadings_given_invalid_dates_returns_false()
+        {
+            var client = new Mock<IXellentAPI>();
+            var config = new Mock<IConfig>();
+            client.Setup(s => s.getMeterReadings(It.IsAny<MeterReadingsRequest>())).Returns(new MeterReadingsResponse { MeterReadings = new[] { new MeterReading { } } });
+
+            var service = new MeterReadingSoapService(client.Object, config.Object);
+
+            var result = await service.GetMeterReadings(DateTime.Today.AddYears(5), DateTime.Today);
+
+            Assert.False(result.Item1);
+            Assert.Null(result.Item2);
+        }
     }
 }

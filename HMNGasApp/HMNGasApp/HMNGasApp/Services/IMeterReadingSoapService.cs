@@ -11,6 +11,6 @@ namespace HMNGasApp.Services
         Task<(bool, MeterReadingOrder)> GetMeterReadingOrderAsync(Installation installation, MeterReadingOrder active);
         Task<(bool, string)> NewMeterReadingAsync(string reading);
         Task<(bool, MeterReadingOrder)> GetActiveMeterReadingsAsync();
-        Task<List<MeterReading>> GetMeterReadings(DateTime from, DateTime to);
+        Task<(bool, List<MeterReading>)> GetMeterReadings(DateTime from, DateTime to);
     }
 }
