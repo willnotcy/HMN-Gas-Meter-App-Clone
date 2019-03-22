@@ -14,24 +14,63 @@
                         <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
-                <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
+            <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
+                <Image Source="round_pencil_white.png" HorizontalOptions="EndAndExpand" x:Name="EditImage">
                     <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditMode}" />
+                        <TapGestureRecognizer Command="{Binding EditModeCommand}" />
                     </Image.GestureRecognizers>
+                    <Image.Triggers>
+                        <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabled}"
+                            Value="True">
+                            <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
+                <Image Source="round_checked_white.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditCheckedImage" IsVisible="False">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                    </Image.GestureRecognizers>
+                    <Image.Triggers>
+                        <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabled}"
+                            Value="True">
+                            <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                        </DataTrigger>
+                    </Image.Triggers>
                 </Image>
             </StackLayout>
         </StackLayout>
         <ScrollView>
             <StackLayout Spacing="45" Padding="30" >
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
+                    <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
                     <components:NoBorderEntry x:Name="EditableName"
                                               Text="{Binding Name}"
                                               Style="Bold"
                                               HorizontalOptions="FillAndExpand"
                                               IsReadOnly="True"
-                                              VerticalOptions="Center"/>
+                                              VerticalOptions="Center">
+                        <components:NoBorderEntry.Triggers>
+                            <DataTrigger 
+                                TargetType="components:NoBorderEntry"
+                                Binding="{Binding EditEnabled}"
+		                        Value="true">
+                                <Setter 
+                                    Property="IsReadOnly"
+                                    Value="False"/>
+                                <Setter
+                                    Property="TextColor"
+                                    Value="{StaticResource PrimaryOrange}"/>
+                            </DataTrigger>
+                        </components:NoBorderEntry.Triggers>
+                    </components:NoBorderEntry>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
@@ -48,8 +87,23 @@
                                                     Text="{Binding Email}"
                                                     Style="Bold"
                                                     HorizontalOptions="FillAndExpand"
-                                                    IsReadOnly="true"
-                                                    VerticalOptions="Center"/>
+                                                    IsReadOnly="True"
+                                                    VerticalOptions="Center">
+                            <components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                TargetType="components:NoBorderEntry"
+                                Binding="{Binding EditEnabled}"
+		                        Value="true">
+                                    <Setter 
+                                    Property="IsReadOnly"
+                                    Value="False"/>
+                                    <Setter
+                                    Property="TextColor"
+                                    Value="{StaticResource PrimaryOrange}"/>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
+                        </components:NoBorderEntry>
+                        
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
@@ -61,8 +115,22 @@
                                                     Text="{Binding Phone}"
                                                     Style="Bold"
                                                     HorizontalOptions="FillAndExpand"
-                                                    IsReadOnly="true"
-                                                    VerticalOptions="Center"/>
+                                                    IsReadOnly="True"
+                                                    VerticalOptions="Center">
+                            <components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                TargetType="components:NoBorderEntry"
+                                Binding="{Binding EditEnabled}"
+		                        Value="true">
+                                    <Setter 
+                                    Property="IsReadOnly"
+                                    Value="False"/>
+                                    <Setter
+                                    Property="TextColor"
+                                    Value="{StaticResource PrimaryOrange}"/>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
+                        </components:NoBorderEntry>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>

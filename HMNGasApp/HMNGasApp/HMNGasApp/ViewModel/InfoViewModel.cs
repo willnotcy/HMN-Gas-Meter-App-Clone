@@ -12,11 +12,12 @@ namespace HMNGasApp.ViewModel
         private readonly ICustomerSoapService _service;
 
         public ICommand LoadCommand { get; set; }
-        public ICommand EditMode { get; set; }
+        public ICommand EditModeCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
         public ICommand SaveInfoCommand { get; set; }
         public bool ButtonVisibility = false;
+        public Color textColor = (Color) Application.Current.Resources["PrimaryOrange"];
 
         #region Info
         private WebServices.Customer _customer;
@@ -81,6 +82,29 @@ namespace HMNGasApp.ViewModel
             get => _measureDate;
             set => SetProperty(ref _measureDate, value);
         }
+
+        private bool _readonly;
+        public bool Readonly
+        {
+            get => _readonly;
+            set => SetProperty(ref _readonly, value);
+        }
+
+        private Color _textColor;
+        public Color TextColor
+        {
+            get => _textColor;
+            set => SetProperty(ref _textColor, value);
+        }
+
+        private bool _editEnabled;
+        public bool EditEnabled
+        {
+            get => _editEnabled;
+            set => SetProperty(ref _editEnabled, value);
+        }
+
+
         #endregion
 
         public InfoViewModel(ICustomerSoapService service)
@@ -88,8 +112,9 @@ namespace HMNGasApp.ViewModel
             _service = service;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            EditMode = new Command(() => ExecuteEditMode());
+            EditModeCommand = new Command(() => ExecuteEditModeCommand());
             SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
+            EditEnabled = false;
         }
 
         private async Task ExecuteSaveInfoCommand()
@@ -116,10 +141,13 @@ namespace HMNGasApp.ViewModel
                 await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
             }
 
+            Readonly = true;
+            EditEnabled = false;
+
             IsBusy = false;
         }
 
-        private void ExecuteEditMode()
+        private void ExecuteEditModeCommand()
         {
             if (IsBusy)
             {
@@ -127,7 +155,9 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            MessagingCenter.Send(this, "EnableEdit");
+            EditEnabled = true;
+
+            Readonly = false;
 
             IsBusy = false;
         }
