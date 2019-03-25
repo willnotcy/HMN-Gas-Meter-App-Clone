@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="HMNGasApp.View.UsagePage"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                         VerticalOptions="Center" 
+                         HeightRequest="80">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource Heading}" 
+                           Text="Mit Forbrug" 
+                           FontSize="Large" 
+                           TextColor="White" 
+                           HorizontalOptions="CenterAndExpand" 
+                           Margin="0,0,50,0"  />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout>
+                <microcharts:ChartView 
+                    x:Name="chartView"
+                    Chart="{Binding GraphData}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
