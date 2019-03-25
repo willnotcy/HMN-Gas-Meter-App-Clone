@@ -6,29 +6,38 @@
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
-                         VerticalOptions="Center" 
-                         HeightRequest="80">
-                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
-                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
-                        </Image.GestureRecognizers>
-                    </Image>
-                    <Label Style="{StaticResource Heading}" 
-                           Text="Mit Forbrug" 
-                           FontSize="Large" 
-                           TextColor="White" 
-                           HorizontalOptions="CenterAndExpand" 
-                           Margin="0,0,50,0"  />
-                </StackLayout>
-            </StackLayout>
-            <StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid BackgroundColor="{StaticResource PrimaryGreen}"
+                  Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+
+                </Grid.RowDefinitions>
+
+                <Label Text="Mit Forbrug" 
+                       Style="{StaticResource Heading}" 
+                       HorizontalOptions="CenterAndExpand" 
+                       VerticalTextAlignment="Center"
+                       TextColor="White"
+                       Grid.Row="1"/>
+            </Grid>
+            <StackLayout Padding="30,70,30,0"
+                         Grid.Row="1">
                 <microcharts:ChartView 
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     x:Name="chartView"
                     Chart="{Binding GraphData}"/>
             </StackLayout>
-        </StackLayout>
+
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

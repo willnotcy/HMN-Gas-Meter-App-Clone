@@ -3,9 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
-using Xamarin.Forms;
 using Microcharts;
 using SkiaSharp;
+using HMNGasApp.Model;
+using Xamarin.Forms;
 
 namespace HMNGasApp.ViewModel
 {
@@ -20,10 +21,23 @@ namespace HMNGasApp.ViewModel
 		}
 
 		public ICommand ReturnNavCommand { get; set; }
-		public UsagePageViewModel(ICustomerSoapService service)
-		{	
+		private readonly IConfig _config;
+		public UsagePageViewModel(IConfig config)
+		{
+			_config = config;
 			ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
-			testsetup();
+			setup();
+		}
+
+		public void setup()
+		{
+			var readings= _config.MeterReadings;
+			var entries = new List<Microcharts.Entry>();
+			foreach(var r in readings)
+			{
+				entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate, ValueLabel = r.Reading});
+			}
+			GraphData = new LineChart() { Entries = entries };
 		}
 
 		public void testsetup()
@@ -54,7 +68,7 @@ namespace HMNGasApp.ViewModel
 					 Color = SKColor.Parse("#3498db")
 				 }
 			};
-			GraphData = new BarChart() { Entries = entries };
+			GraphData = new LineChart() { Entries = entries };
 
 		}
 	}
