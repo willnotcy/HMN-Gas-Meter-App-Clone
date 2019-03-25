@@ -2,7 +2,6 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.UsagePage"
-             xmlns:components="clr-namespace:HMNGasApp.View.Components"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -16,9 +15,8 @@
                   Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*" />
-
                 </Grid.RowDefinitions>
 
                 <Label Text="Mit Forbrug" 
@@ -28,16 +26,12 @@
                        TextColor="White"
                        Grid.Row="1"/>
             </Grid>
-            <StackLayout Padding="30,70,30,0"
-                         Grid.Row="1">
+            <StackLayout Grid.Row="1">
                 <microcharts:ChartView 
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="CenterAndExpand"
                     x:Name="chartView"
-                    Chart="{Binding GraphData}"/>
+                    Chart="{Binding GraphData}"
+                    VerticalOptions="FillAndExpand"/>
             </StackLayout>
-
-            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
