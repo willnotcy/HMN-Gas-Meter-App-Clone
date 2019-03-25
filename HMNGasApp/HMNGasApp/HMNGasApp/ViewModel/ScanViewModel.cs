@@ -9,6 +9,8 @@ using System.Windows.Input;
 using Tesseract;
 using Xamarin.Forms;
 using XLabs.Ioc;
+using XLabs.Platform.Device;
+using XLabs.Platform.Services.Media;
 
 namespace HMNGasApp.ViewModel
 {
@@ -18,19 +20,30 @@ namespace HMNGasApp.ViewModel
     public class ScanViewModel : BaseViewModel
     {
         private readonly ITesseractApi _tesseractApi;
+        private readonly IDevice _device;
         public ICommand ReturnNavCommand { get; }
+        public ICommand TakePictureCommand { get; }
 
         private string _labelText;
         public string LabelText
         {
             get { return _labelText; }
-            set { SetProperty(ref _labelText, value); ; }
+            set { SetProperty(ref _labelText, value); }
+        }
+
+        private ImageSource _photoImage;
+        public ImageSource ImageSource
+        {
+            get { return _photoImage; }
+            set { SetProperty(ref _photoImage, value); }
         }
 
         public ScanViewModel()
         {
             _tesseractApi = DependencyService.Get<ITesseract>().TesseractApi;
+            _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
+            TakePictureCommand = new Command(async () => await ExecuteTakePictureCommand());
         }
 
         private async Task ExecuteReturnNavCommand()
@@ -46,12 +59,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        /// <summary>
-        /// Method for recognizing the characters. Input comes from the ScanPage.xaml.cs, and is then processed into words
-        /// </summary>
-        /// <param name="result">Stream of bytes of the picture to process</param>
-        /// <returns></returns>
-        public async Task Recognise(Stream result)
+        public async Task ExecuteTakePictureCommand()
         {
             if (IsBusy)
             {
@@ -59,6 +67,26 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var mediaStorageOptions = new CameraMediaStorageOptions
+            {
+                DefaultCamera = CameraDevice.Rear
+            };
+            var result = await _device.MediaPicker.TakePhotoAsync(mediaStorageOptions);
+
+            ImageSource = ImageSource.FromStream(() => { return result.Source; });
+
+            await Recognise(result.Source);
+
+            IsBusy = false;
+        }
+
+        /// <summary>
+        /// Method for recognizing the characters. Input comes from the ScanPage.xaml.cs, and is then processed into words
+        /// </summary>
+        /// <param name="result">Stream of bytes of the picture to process</param>
+        /// <returns></returns>
+        private async Task Recognise(Stream result)
+        {
             if (result == null) return;
             LabelText = "Initializing";
 
@@ -103,8 +131,6 @@ namespace HMNGasApp.ViewModel
                     }
                 }
             }
-
-            IsBusy = false;
         }
     }
 }
