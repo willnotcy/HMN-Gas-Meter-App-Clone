@@ -146,7 +146,7 @@ namespace HMNGasApp.Services
             {
                 return await Task.Run(() =>
                 {
-                    var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context };
+                    var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context, AttachmentNum = "", DeliveryCategory = "" };
 
                     var response = _client.getMeterReadings(request);
 
