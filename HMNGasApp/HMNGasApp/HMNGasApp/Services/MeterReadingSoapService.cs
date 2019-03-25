@@ -134,9 +134,17 @@ namespace HMNGasApp.Services
             });
         }
 
+        /// <summary>
+        /// Returns previous meter readings
+        /// </summary>
+        /// <param name="from">From date</param>
+        /// <param name="to">To date</param>
+        /// <returns>List of meter readings</returns>
         public async Task<(bool, List<MeterReading>)> GetMeterReadings(DateTime from, DateTime to)
         {
-            if((to - from).Ticks > 0)
+            var helper = (to - from).TotalMilliseconds;
+
+            if((to - from).TotalMilliseconds > 0)
             {
                 return await Task.Run(() =>
                 {
@@ -150,7 +158,6 @@ namespace HMNGasApp.Services
             {
                 return (false, default(List<MeterReading>));
             }
-
         }
     }
 }

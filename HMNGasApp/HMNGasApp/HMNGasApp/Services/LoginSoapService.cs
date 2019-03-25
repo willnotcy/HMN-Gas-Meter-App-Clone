@@ -55,6 +55,7 @@ namespace HMNGasApp.Services
                         {
                             _config.Context.securityKey = result.Item2;
                             _config.CustomerId = customerId;
+                            _config.MeterReadings = await GetMeterReadings();
 
                             return result;
                         }
@@ -66,6 +67,10 @@ namespace HMNGasApp.Services
 
         }
 
+        /// <summary>
+        /// Helper method for retrieving the meter readings
+        /// </summary>
+        /// <returns>List of meter readings</returns>
         private async Task<List<MeterReading>> GetMeterReadings()
         {
             var fromDate = DateTime.Today.AddYears(-5);

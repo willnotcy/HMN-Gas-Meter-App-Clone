@@ -15,19 +15,20 @@ namespace HMNGasApp.Tests.Services
         {
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
-            var meterService = new Mock<IMeterReadingSoapService>();
-            var config = new Mock<IConfig>();
+            var config = new Config { Context = new UserContext() };
+            var meterService = new MeterReadingSoapService(client.Object, config);           
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "", ResponseMessage = "securitykey", ResponseCode = ""});
+            client.Setup(s => s.getMeterReadings(It.IsAny<MeterReadingsRequest>())).Returns(new MeterReadingsResponse { MeterReadings = new[] { new MeterReading()} });
             connectService.Setup(s => s.canConnect()).Returns(true);
-            config.Setup(s => s.Context).Returns(new UserContext());
 
-            var service = new LoginSoapService(client.Object, connectService.Object, config.Object, meterService.Object);
+            var service = new LoginSoapService(client.Object, connectService.Object, config, meterService);
 
             var result = await service.NewLoginAsync("73", "credentials");
 
             Assert.True(result.Item1);
             Assert.Equal("securitykey", result.Item2);
+            Assert.NotNull(config.MeterReadings);
         }
 
         [Fact]
