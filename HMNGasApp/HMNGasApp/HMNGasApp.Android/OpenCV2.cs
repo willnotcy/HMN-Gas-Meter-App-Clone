@@ -20,6 +20,7 @@ using OpenCV.Core;
 using OpenCV.ImgCodecs;
 using OpenCV.ImgProc;
 using Android.Graphics;
+using System.Numerics;
 
 [assembly: Dependency(typeof(HMNGasApp.Droid.OpenCV2))]
 namespace HMNGasApp.Droid
@@ -56,8 +57,10 @@ namespace HMNGasApp.Droid
             var mat = StreamToMat(image);
 
             //Image proccessing
+            //TODO: make canny thresholds work for any contrasted image using histogram
             var cannyThreshold1 = 100;
             var cannyThreshold2 = 200;
+            var houghLinesThreshold = 140;
             
             //Converting to GrayScale
             Mat gray = new Mat();
@@ -68,9 +71,35 @@ namespace HMNGasApp.Droid
             Imgproc.Canny(gray, edges, cannyThreshold1, cannyThreshold2);
 
             //Detect and correct remaining skew (+/- 30 deg)
+            Mat lines = new Mat();
+            
+            Imgproc.HoughLines(edges, lines, 1, Math.PI / 180f, houghLinesThreshold);
 
 
+            //Filter lines by theta and compute average
 
+            Mat filteredLines = new Mat();
+            float theta_min = 60f * (float) Math.PI / 180f;
+            float theta_max = 120f * (float) Math.PI / 180f;
+            float theta_avr = 0f;
+            float theta_deg = 0f;
+
+            for(int i = 0; i < lines.Size().Area(); i++ )
+            {
+                float theta = (float) lines.Get(i,i)[1];
+                if (theta > theta_min && theta < theta_max)
+                {
+                    filteredLines.Push_back(lines);
+                    theta_avr += theta;
+                }
+            }
+
+            if (filteredLines.Size().Area() > 0)
+            {
+                theta_avr /= (float) filteredLines.Size().Area();
+                theta_deg = (theta_avr / (float) Math.PI * 180f) - 90;
+            }
+        
             var stream = MatToStream(edges);
             return stream;
         }
