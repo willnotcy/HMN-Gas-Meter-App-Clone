@@ -11,26 +11,27 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid BackgroundColor="{StaticResource PrimaryGreen}"
-                  Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Label Text="Mit Forbrug" 
-                       Style="{StaticResource Heading}" 
-                       HorizontalOptions="CenterAndExpand" 
-                       VerticalTextAlignment="Center"
-                       TextColor="White"
-                       Grid.Row="1"/>
-            </Grid>
-            <StackLayout Grid.Row="1">
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                        VerticalOptions="Center" 
+                        Grid.Row="0">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Label Font="Bold" 
+                    Text="Mit Forbrug" 
+                    FontSize="Large" 
+                    TextColor="White" 
+                    HorizontalOptions="CenterAndExpand" 
+                    />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="1"
+                         Margin="30,10,10,100">
                 <microcharts:ChartView 
                     x:Name="chartView"
                     Chart="{Binding GraphData}"
-                    VerticalOptions="FillAndExpand"/>
+                    VerticalOptions="FillAndExpand"
+                    BackgroundColor="Default"
+                    HeightRequest="400"
+                    />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
