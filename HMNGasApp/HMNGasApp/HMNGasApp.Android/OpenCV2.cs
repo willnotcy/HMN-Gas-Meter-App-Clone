@@ -18,6 +18,7 @@ using OpenCV.Android;
 using System.IO;
 using OpenCV.Core;
 using OpenCV.ImgCodecs;
+using OpenCV.ImgProc;
 using Android.Graphics;
 
 [assembly: Dependency(typeof(HMNGasApp.Droid.OpenCV2))]
@@ -53,7 +54,13 @@ namespace HMNGasApp.Droid
             }
 
             var mat = StreamToMat(image);
-            var stream = MatToStream(mat);
+
+            //Image proccessing
+            Mat mgray = new Mat();
+
+            Imgproc.CvtColor(mat, mgray, Imgproc.ColorBgr2gray);
+
+            var stream = MatToStream(mgray);
             return stream;
         }
 
@@ -63,7 +70,7 @@ namespace HMNGasApp.Droid
             var bmp = BitmapFactory.DecodeStream(image);
 
             Mat mat = new Mat();
-            Bitmap bmp32 = bmp.Copy(Bitmap.Config.RgbaF16, true);
+            Bitmap bmp32 = bmp.Copy(Bitmap.Config.Argb8888, true);
             Utils.BitmapToMat(bmp32, mat);
             return mat;
         }
