@@ -27,31 +27,38 @@ namespace HMNGasApp.ViewModel
 		{
 			_config = config;
 			ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
-			setup();
+			Setup();
 		}
 
-		public void setup()
+		public void Setup()
 		{
 			var readings= _config.MeterReadings;
 			var entries = new List<Microcharts.Entry>();
-		//	var bla = ((Xamarin.Forms.Color)App.Current.Resources["SecondaryMint"]).;
+
 			foreach (var r in readings)
 			{
-				entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate,
-																			ValueLabel = r.Reading,
-																			Color = SKColor.Parse("#54C7A9"
-																			)
-				});
+                if(r.ReasonToReading == "Ordinær")
+                {
+				    entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate,
+																			    ValueLabel = FormatValueLabel(r.Reading),
+																			    Color = SKColor.Parse("#54C7A9")
+                    });
+                }
 			}
 			GraphData = new LineChart() { Entries = entries,
-										  LineSize =13,
-										  LabelTextSize=50,
+										  LineSize = 10,
+										  LabelTextSize = 30,
 										  PointSize = 40,
-										  
+                                          LineAreaAlpha = 100
 			};
 		}
 
-		public void testsetup()
+        private string FormatValueLabel(string vl)
+        {
+            return string.Format("{0:G29}", decimal.Parse(vl));
+        }
+
+		public void Testsetup()
 		{
 			var entries = new[]{
 				 new Microcharts.Entry(212)

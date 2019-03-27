@@ -8,7 +8,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
             <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
@@ -24,14 +24,13 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Grid.Row="1"
-                         Margin="30,10,10,100">
+                         >
                 <microcharts:ChartView 
-                    x:Name="chartView"
-                    Chart="{Binding GraphData}"
-                    VerticalOptions="FillAndExpand"
-                    BackgroundColor="Default"
-                    HeightRequest="400"
-                    />
+                        x:Name="chartView"
+                        Chart="{Binding GraphData}"
+                        BackgroundColor="Default"
+                        HeightRequest="400"
+                        />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
