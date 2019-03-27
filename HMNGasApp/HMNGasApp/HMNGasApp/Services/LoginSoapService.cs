@@ -43,19 +43,16 @@ namespace HMNGasApp.Services
                 {
                     (bool, string) result = (false, "Not ok");
 
-                    for (int i = 0; i < 3; i++)
+                    var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+
+                    result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                    if (result.Item1)
                     {
-                        var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+                        _config.SecurityKey = result.Item2;
+                        _config.CustomerId = customerId;
 
-                        result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-                        if (result.Item1)
-                        {
-                            _config.SecurityKey = result.Item2;
-                            _config.CustomerId = customerId;
-
-                            return result;
-                        }
+                        return result;
                     }
                     return result;
                 }
