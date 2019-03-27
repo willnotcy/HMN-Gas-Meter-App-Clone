@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-
-
 using HMNGasApp.Services;
 using Xamarin.Forms;
 using OpenCV;
@@ -58,38 +55,51 @@ namespace HMNGasApp.Droid
 
             //Image proccessing
             //TODO: make canny thresholds work for any contrasted image using histogram
-            var cannyThreshold1 = 100;
-            var cannyThreshold2 = 200;
-            var houghLinesThreshold = 140;
+            var cannyThreshold1 = 50;
+            var cannyThreshold2 = 150;
+            var houghLinesThreshold = 4;
             
             //Converting to GrayScale
             Mat gray = new Mat();
             Imgproc.CvtColor(mat, gray, Imgproc.ColorBgr2gray);
             
-            //Detecting edges using Canny Algorithem;
+            //Detecting edges using Canny Algorithm
             Mat edges = new Mat();
             Imgproc.Canny(gray, edges, cannyThreshold1, cannyThreshold2);
 
             //Detect and correct remaining skew (+/- 30 deg)
             Mat lines = new Mat();
-            
-            Imgproc.HoughLines(edges, lines, 1, Math.PI / 180f, houghLinesThreshold);
+            Imgproc.HoughLinesP(edges, lines, 1, Math.PI / 180, 50, 50, 10);
 
+            var t1 = edges.Type();
+            var t2 = lines.Type();
+
+            var c1 = lines.Cols();
+            var c2 = edges.Cols();
+
+            var r1 = lines.Rows();
+            var r2 = edges.Rows();
+
+            var cc1 = lines.Col(0);
+            var cc2 = edges.Col(1);
+
+            
 
             //Filter lines by theta and compute average
-
+        
             Mat filteredLines = new Mat();
-            float theta_min = 60f * (float) Math.PI / 180f;
-            float theta_max = 120f * (float) Math.PI / 180f;
-            float theta_avr = 0f;
-            float theta_deg = 0f;
-
-            for(int i = 0; i < lines.Size().Area(); i++ )
+            double theta_min = 60 * Math.PI / 180;
+            double theta_max = 120 * Math.PI / 180;
+            double theta_avr = 0;
+            double theta_deg = 0;
+            /*
+            for(int i = 0; i < lines.Cols(); i++ )
             {
-                float theta = (float) lines.Get(i,i)[1];
+                var wtf = lines.Get(1, i);
+                double theta = lines.Get(1,i).FirstOrDefault();
                 if (theta > theta_min && theta < theta_max)
                 {
-                    filteredLines.Push_back(lines);
+                    filteredLines.Push_back(lines.Row(i));
                     theta_avr += theta;
                 }
             }
@@ -99,7 +109,7 @@ namespace HMNGasApp.Droid
                 theta_avr /= (float) filteredLines.Size().Area();
                 theta_deg = (theta_avr / (float) Math.PI * 180f) - 90;
             }
-        
+            */
             var stream = MatToStream(edges);
             return stream;
         }
@@ -119,7 +129,7 @@ namespace HMNGasApp.Droid
         {
             using (var vect = new MatOfByte())
             {
-                if (Imgcodecs.Imencode(".jpg", m, vect))
+                if (Imgcodecs.Imencode(".png", m, vect))
                 {
                     var stream = new MemoryStream(vect.ToArray());
                     return stream;
