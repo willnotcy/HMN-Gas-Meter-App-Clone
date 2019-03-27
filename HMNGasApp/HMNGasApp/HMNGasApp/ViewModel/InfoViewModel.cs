@@ -12,12 +12,13 @@ namespace HMNGasApp.ViewModel
         private readonly ICustomerSoapService _service;
 
         public ICommand LoadCommand { get; set; }
-        public ICommand EditModeCommand { get; set; }
+        public ICommand EditModeNameCommand { get; set; }
+        public ICommand EditModeEmailCommand { get; set; }
+        public ICommand EditModePhoneCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
         public ICommand SaveInfoCommand { get; set; }
         public bool ButtonVisibility = false;
-        public Color textColor = (Color) Application.Current.Resources["PrimaryOrange"];
 
         #region Info
         private WebServices.Customer _customer;
@@ -90,18 +91,25 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _readonly, value);
         }
 
-        private Color _textColor;
-        public Color TextColor
+        private bool _editEnabledName;
+        public bool EditEnabledName
         {
-            get => _textColor;
-            set => SetProperty(ref _textColor, value);
+            get => _editEnabledName;
+            set => SetProperty(ref _editEnabledName, value);
         }
 
-        private bool _editEnabled;
-        public bool EditEnabled
+        private bool _editEnabledEmail;
+        public bool EditEnabledEmail
         {
-            get => _editEnabled;
-            set => SetProperty(ref _editEnabled, value);
+            get => _editEnabledEmail;
+            set => SetProperty(ref _editEnabledEmail, value);
+        }
+
+        private bool _editEnabledPhone;
+        public bool EditEnabledPhone
+        {
+            get => _editEnabledPhone;
+            set => SetProperty(ref _editEnabledPhone, value);
         }
 
 
@@ -112,9 +120,13 @@ namespace HMNGasApp.ViewModel
             _service = service;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            EditModeCommand = new Command(() => ExecuteEditModeCommand());
+            EditModeNameCommand = new Command(() => ExecuteEditModeNameCommand());
+            EditModeEmailCommand = new Command(() => ExecuteEditModeEmailCommand());
+            EditModePhoneCommand = new Command(() => ExecuteEditModePhoneCommand());
             SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
-            EditEnabled = false;
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
         }
 
         private async Task ExecuteSaveInfoCommand()
@@ -134,7 +146,6 @@ namespace HMNGasApp.ViewModel
             if(result)
             {
                 await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                await Navigation.PopModalAsync();
             } else
             {
                 //TODO Get text from languagefile
@@ -142,12 +153,14 @@ namespace HMNGasApp.ViewModel
             }
 
             Readonly = true;
-            EditEnabled = false;
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
 
             IsBusy = false;
         }
 
-        private void ExecuteEditModeCommand()
+        private void ExecuteEditModeNameCommand()
         {
             if (IsBusy)
             {
@@ -155,7 +168,35 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            EditEnabled = true;
+            EditEnabledName = true;
+
+            Readonly = false;
+
+            IsBusy = false;
+        }
+        private void ExecuteEditModeEmailCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            EditEnabledEmail = true;
+
+            Readonly = false;
+
+            IsBusy = false;
+        }
+        private void ExecuteEditModePhoneCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            EditEnabledPhone = true;
 
             Readonly = false;
 
@@ -190,7 +231,9 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            EditEnabled = false;
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
 
             await Navigation.PopModalAsync();
 

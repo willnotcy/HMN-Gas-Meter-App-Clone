@@ -14,66 +14,65 @@
                         <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-            <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
-                <Image Source="round_pencil_white.png" HorizontalOptions="EndAndExpand" x:Name="EditImage">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditModeCommand}" />
-                    </Image.GestureRecognizers>
-                    <Image.Triggers>
-                        <DataTrigger
-                            TargetType="Image"
-                            Binding="{Binding EditEnabled}"
-                            Value="True">
-                            <Setter
-                                Property="IsVisible"
-                                Value="False"/>
-                        </DataTrigger>
-                    </Image.Triggers>
-                </Image>
-                <Image Source="round_checked_white.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditCheckedImage" IsVisible="False">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
-                    </Image.GestureRecognizers>
-                    <Image.Triggers>
-                        <DataTrigger
-                            TargetType="Image"
-                            Binding="{Binding EditEnabled}"
-                            Value="True">
-                            <Setter
-                                Property="IsVisible"
-                                Value="True"/>
-                        </DataTrigger>
-                    </Image.Triggers>
-                </Image>
+                <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
             </StackLayout>
         </StackLayout>
         <ScrollView>
             <StackLayout Spacing="45" Padding="30" >
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
-                    <components:NoBorderEntry x:Name="EditableName"
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <components:NoBorderEntry x:Name="EditableName"
                                               Text="{Binding Name}"
                                               Style="{StaticResource CustomerInfoComponent}"
                                               FontSize="20"
-                                              HorizontalOptions="FillAndExpand"
-                                              IsReadOnly="True"
+                                              HorizontalOptions="Fill"
+                                              IsReadOnly="True"                                             
                                               VerticalOptions="Center"
                                               Placeholder="Jens Jensen"
                                               IsTextPredictionEnabled="False">
                         <components:NoBorderEntry.Triggers>
                             <DataTrigger 
                                 TargetType="components:NoBorderEntry"
-                                Binding="{Binding EditEnabled}"
+                                Binding="{Binding EditEnabledName}"
 		                        Value="true">
                                 <Setter 
                                     Property="IsReadOnly"
                                     Value="False"/>
-                                <Setter
-                                    Property="TextColor"
-                                    Value="{StaticResource PrimaryOrange}"/>
                             </DataTrigger>
                         </components:NoBorderEntry.Triggers>
                     </components:NoBorderEntry>
+                    </StackLayout>
+                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModeNameCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledName}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditNameImage" IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledName}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
@@ -89,27 +88,56 @@
                                                     Keyboard="Email"
                                                     Text="{Binding Email}"
                                                     Style="{StaticResource CustomerInfoComponent}"
-                                                    HorizontalOptions="FillAndExpand"
+                                                    HorizontalOptions="Fill"
                                                     IsReadOnly="True"
+                                                    MaxLength="30"
                                                     VerticalOptions="Center"
+                                                    IsTextPredictionEnabled="False"
                                                     Placeholder="Jens.jensen@gmail.com">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"
-                                Binding="{Binding EditEnabled}"
+                                Binding="{Binding EditEnabledEmail}"
 		                        Value="true">
                                     <Setter 
                                     Property="IsReadOnly"
                                     Value="False"/>
-                                    <Setter
-                                    Property="TextColor"
-                                    Value="{StaticResource PrimaryOrange}"/>
                                 </DataTrigger>
-                            </components:NoBorderEntry.Triggers>
+                            </components:NoBorderEntry.Triggers>     
                         </components:NoBorderEntry>
-                        
+                     
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
+                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditEmailImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModeEmailCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledEmail}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditEmailImage" IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledEmail}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
@@ -120,24 +148,53 @@
                                                     Style="{StaticResource CustomerInfoComponent}"
                                                     HorizontalOptions="FillAndExpand"
                                                     IsReadOnly="True"
+                                                    MaxLength="30"
                                                     VerticalOptions="Center"
+                                                    IsTextPredictionEnabled="False"
                                                     Placeholder="+45 12 34 56 78">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"
-                                Binding="{Binding EditEnabled}"
+                                Binding="{Binding EditEnabledPhone}"
 		                        Value="true">
                                     <Setter 
                                     Property="IsReadOnly"
                                     Value="False"/>
-                                    <Setter
-                                    Property="TextColor"
-                                    Value="{StaticResource PrimaryOrange}"/>
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
+                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditPhoneImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModePhoneCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledPhone}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditPhoneImage" IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledPhone}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />

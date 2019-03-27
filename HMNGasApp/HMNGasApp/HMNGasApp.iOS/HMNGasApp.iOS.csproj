@@ -111,6 +111,30 @@
     <Compile Include="NoBorderEntryRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_checked_black.imageset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_checked_black.imageset\round_check_black_36pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_checked_black.imageset\round_check_black_36pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_checked_black.imageset\round_check_black_36pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\baseline_create_black_36pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\baseline_create_black_36pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\baseline_create_black_36pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_checked_white.imageset\round_check_white_36pt_1x.png">
       <Visible>false</Visible>
     </ImageAsset>
@@ -118,6 +142,15 @@
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_checked_white.imageset\round_check_white_36pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_1x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_3x.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_pencil_white.imageset\Contents.json">
