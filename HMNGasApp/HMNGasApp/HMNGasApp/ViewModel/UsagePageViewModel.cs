@@ -7,6 +7,7 @@ using Microcharts;
 using SkiaSharp;
 using HMNGasApp.Model;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace HMNGasApp.ViewModel
 {
@@ -33,11 +34,21 @@ namespace HMNGasApp.ViewModel
 		{
 			var readings= _config.MeterReadings;
 			var entries = new List<Microcharts.Entry>();
-			foreach(var r in readings)
+		//	var bla = ((Xamarin.Forms.Color)App.Current.Resources["SecondaryMint"]).;
+			foreach (var r in readings)
 			{
-				entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate, ValueLabel = r.Reading});
+				entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate,
+																			ValueLabel = r.Reading,
+																			Color = SKColor.Parse("#54C7A9"
+																			)
+				});
 			}
-			GraphData = new LineChart() { Entries = entries };
+			GraphData = new LineChart() { Entries = entries,
+										  LineSize =13,
+										  LabelTextSize=50,
+										  PointSize = 40,
+										  
+			};
 		}
 
 		public void testsetup()
