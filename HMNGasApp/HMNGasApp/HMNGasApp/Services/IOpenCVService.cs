@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HMNGasApp.Services
+{
+    public interface IOpenCVService
+    {
+        void SetInput();
+
+        Stream Process(Stream image);
+
+        void OpenCamera();
+    }
+}

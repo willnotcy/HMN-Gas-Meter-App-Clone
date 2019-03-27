@@ -21,6 +21,7 @@ namespace HMNGasApp.ViewModel
     {
         private readonly ITesseractApi _tesseractApi;
         private readonly IDevice _device;
+        private readonly IOpenCVService _openCVService;
         public ICommand ReturnNavCommand { get; }
         public ICommand TakePictureCommand { get; }
 
@@ -41,6 +42,7 @@ namespace HMNGasApp.ViewModel
         public ScanViewModel()
         {
             _tesseractApi = DependencyService.Get<ITesseract>().TesseractApi;
+            _openCVService = DependencyService.Get<IOpenCVService>();
             _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             TakePictureCommand = new Command(async () => await ExecuteTakePictureCommand());
@@ -73,7 +75,9 @@ namespace HMNGasApp.ViewModel
             };
             var result = await _device.MediaPicker.TakePhotoAsync(mediaStorageOptions);
 
-            ImageSource = ImageSource.FromStream(() => { return result.Source; });
+            var whatever = _openCVService.Process(result.Source);
+
+            ImageSource = ImageSource.FromStream(() => { return whatever; });
 
             await Recognise(result.Source);
 
