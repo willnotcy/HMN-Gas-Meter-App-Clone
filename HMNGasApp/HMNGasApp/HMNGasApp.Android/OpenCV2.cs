@@ -56,11 +56,22 @@ namespace HMNGasApp.Droid
             var mat = StreamToMat(image);
 
             //Image proccessing
-            Mat mgray = new Mat();
+            var cannyThreshold1 = 100;
+            var cannyThreshold2 = 200;
+            
+            //Converting to GrayScale
+            Mat gray = new Mat();
+            Imgproc.CvtColor(mat, gray, Imgproc.ColorBgr2gray);
+            
+            //Detecting edges using Canny Algorithem;
+            Mat edges = new Mat();
+            Imgproc.Canny(gray, edges, cannyThreshold1, cannyThreshold2);
 
-            Imgproc.CvtColor(mat, mgray, Imgproc.ColorBgr2gray);
+            //Detect and correct remaining skew (+/- 30 deg)
 
-            var stream = MatToStream(mgray);
+
+
+            var stream = MatToStream(edges);
             return stream;
         }
 
