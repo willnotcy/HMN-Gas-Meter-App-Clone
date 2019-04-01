@@ -178,7 +178,7 @@ namespace HMNGasApp.ViewModel
             //HACK: hardcoded
             GSRN = "6969696";
             MeterNum = "1234567";
-            LatestMeasure = "4025" + "\u00B3";
+            LatestMeasure = "4025" + "m\u00B3";
             MeasureDate = "01-02-19";
         }
     }
