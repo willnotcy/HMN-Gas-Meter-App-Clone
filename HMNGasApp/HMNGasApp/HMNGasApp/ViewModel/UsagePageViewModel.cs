@@ -35,27 +35,39 @@ namespace HMNGasApp.ViewModel
 			var readings= _config.MeterReadings;
 			var entries = new List<Microcharts.Entry>();
 
+            float previous = default(float);
 			foreach (var r in readings)
 			{
+                if (previous == default(float))
+                {
+                    previous = float.Parse(r.Reading);
+                    continue;
+                }
+
                 if(r.ReasonToReading == "Ordinær")
                 {
-				    entries.Add(new Microcharts.Entry(float.Parse(r.Reading)) { Label = r.ReadingDate,
-																			    ValueLabel = FormatValueLabel(r.Reading),
-																			    Color = SKColor.Parse("#54C7A9")
+                    var parsedReading = float.Parse(r.Reading);
+				    entries.Add(new Microcharts.Entry(parsedReading - previous) { Label = r.ReadingDate,
+																			               ValueLabel = FormatValueLabel(float.Parse(r.Reading) - previous),
+																			               Color = SKColor.Parse("#54C7A9")
                     });
+                    previous = parsedReading;
                 }
 			}
+
 			GraphData = new LineChart() { Entries = entries,
 										  LineSize = 10,
 										  LabelTextSize = 30,
 										  PointSize = 40,
-                                          LineAreaAlpha = 100
+                                          LineAreaAlpha = 100, 
+                                          LineMode = LineMode.Straight
 			};
 		}
 
-        private string FormatValueLabel(string vl)
+        private string FormatValueLabel(float vl)
         {
-            return string.Format("{0:G29}", decimal.Parse(vl));
+            return "" + ((Int32) vl);
+            
         }
 
 		public void Testsetup()
