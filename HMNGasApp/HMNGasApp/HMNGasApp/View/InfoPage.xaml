@@ -5,18 +5,26 @@
                 Title="{Binding Title}"
                 xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <StackLayout>
+        <!--#region Header-->
         <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                                 VerticalOptions="Center" 
                                 HeightRequest="80">
-            <StackLayout Padding="10, 35, 10, 25"  Orientation="Horizontal">
+            <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
                 <Image Source="round_arrow_back_white.png"  HorizontalOptions="StartAndExpand" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="StartAndExpand"/>
+                <Label Font="Bold"
+                       Text="Mine Oplysninger" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="StartAndExpand" 
+                       Margin="0,0,40,0"/>
             </StackLayout>
         </StackLayout>
+        <!--#endregion-->
+        <!--#region Info view: Name, Address, Email, Phone...-->
         <ScrollView>
             <StackLayout Spacing="45" Padding="30" >
                 <ActivityIndicator x:Name="activityIndicator"
@@ -24,8 +32,8 @@
                         IsRunning="{Binding IsBusy}"
                         Color="{StaticResource PrimaryGreen}"
                         VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="CenterAndExpand"
-                        />
+                        HorizontalOptions="CenterAndExpand"/>
+                <!--#region Name-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
@@ -38,7 +46,7 @@
                                               VerticalOptions="Center"
                                               Placeholder="Jens Jensen"
                                               MinimumWidthRequest="10">
-                        <components:NoBorderEntry.Triggers>
+                            <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                     TargetType="components:NoBorderEntry"
                                     Binding="{Binding EditEnabledName}"
@@ -48,7 +56,7 @@
                                         Value="False"/>
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
-                    </components:NoBorderEntry>
+                        </components:NoBorderEntry>
                         <Label Text="Navn" FontSize="Micro"/>
                     </StackLayout>
                     <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage">
@@ -81,7 +89,9 @@
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
-                    </StackLayout>
+                </StackLayout>
+                <!--#endregion-->
+                <!--#region Address-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
@@ -89,6 +99,8 @@
                         <Label Text="Addresse" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region Email-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
@@ -112,12 +124,14 @@
                                     Property="IsReadOnly"
                                     Value="False"/>
                                 </DataTrigger>
-                            </components:NoBorderEntry.Triggers>     
+                            </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
-                     
+
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
-                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditEmailImage">
+                    <Image Source="round_pencil_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="EditEmailImage">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EditModeEmailCommand}" />
                         </Image.GestureRecognizers>
@@ -132,7 +146,10 @@
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
-                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditEmailImage" IsVisible="False">
+                    <Image Source="round_checked_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="FinishEditEmailImage" 
+                           IsVisible="False">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
                         </Image.GestureRecognizers>
@@ -148,6 +165,8 @@
                         </Image.Triggers>
                     </Image>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region Phone-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
@@ -175,7 +194,9 @@
                         </components:NoBorderEntry>
                         <Label Text="Mobil" FontSize="Micro"/>
                     </StackLayout>
-                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditPhoneImage">
+                    <Image Source="round_pencil_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="EditPhoneImage">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EditModePhoneCommand}" />
                         </Image.GestureRecognizers>
@@ -190,7 +211,10 @@
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
-                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditPhoneImage" IsVisible="False">
+                    <Image Source="round_checked_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="FinishEditPhoneImage" 
+                           IsVisible="False">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
                         </Image.GestureRecognizers>
@@ -206,6 +230,8 @@
                         </Image.Triggers>
                     </Image>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region MeterNum-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
@@ -213,6 +239,8 @@
                         <Label Text="Måler nr." FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region LatestMeasure-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_equalizer_black.png" Margin="0,0,15,0" />
                     <StackLayout>
@@ -220,6 +248,8 @@
                         <Label Text="Seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region MeasureDate-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_date_range_black.png" Margin="0,0,15,0" />
                     <StackLayout>
@@ -227,18 +257,9 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                
-                <Button x:Name="SaveInfoButton"
-                        Text="Save"
-                        Command="{Binding SaveInfoCommand}"
-                        IsVisible = "false"
-                        BackgroundColor="{StaticResource PrimaryGreen}"
-                        TextColor="White"
-                        Margin="110,0,110,0"/>
+                <!--#endregion-->
             </StackLayout>
         </ScrollView>
-
+        <!--#endregion-->
     </StackLayout>
-
-
 </ContentPage>
