@@ -19,6 +19,13 @@
         </StackLayout>
         <ScrollView>
             <StackLayout Spacing="45" Padding="30" >
+                <ActivityIndicator x:Name="activityIndicator"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"
+                        Color="Black"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"
+                        />
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
@@ -30,7 +37,9 @@
                                               IsReadOnly="True"                                             
                                               VerticalOptions="Center"
                                               Placeholder="Jens Jensen"
-                                              IsTextPredictionEnabled="False">
+                                              IsTextPredictionEnabled="False"
+                                              MaxLength="20"
+                                              >
                         <components:NoBorderEntry.Triggers>
                             <DataTrigger 
                                 TargetType="components:NoBorderEntry"
@@ -217,13 +226,7 @@
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                <ActivityIndicator x:Name="activityIndicator"
-                        IsVisible="{Binding IsBusy}"
-                        IsRunning="{Binding IsBusy}"
-                        Color="Black"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="CenterAndExpand"
-                        />
+                
                 <Button x:Name="SaveInfoButton"
                         Text="Save"
                         Command="{Binding SaveInfoCommand}"
