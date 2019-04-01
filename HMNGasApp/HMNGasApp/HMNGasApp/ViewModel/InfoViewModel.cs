@@ -173,8 +173,9 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
+            //HACK: hardcoded
             MeterNum = "1234567";
-            LatestMeasure = "4025,345 m3";
+            LatestMeasure = "4025" + "\u00B3";
             MeasureDate = "01-02-19";
         }
     }
