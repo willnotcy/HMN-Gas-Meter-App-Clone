@@ -147,10 +147,19 @@
     <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_1x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_1x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_2x.png">
       <Visible>false</Visible>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_2x1.png">
+      <Visible>false</Visible>
+    </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\round_pencil_black.imageset\round_create_black_36pt_3x1.png">
       <Visible>false</Visible>
     </ImageAsset>
     <ImageAsset Include="Assets.xcassets\round_pencil_white.imageset\Contents.json">
