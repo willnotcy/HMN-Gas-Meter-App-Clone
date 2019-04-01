@@ -22,7 +22,7 @@
                 <ActivityIndicator x:Name="activityIndicator"
                         IsVisible="{Binding IsBusy}"
                         IsRunning="{Binding IsBusy}"
-                        Color="Black"
+                        Color="{StaticResource PrimaryGreen}"
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"
                         />
@@ -37,24 +37,23 @@
                                               IsReadOnly="True"                                             
                                               VerticalOptions="Center"
                                               Placeholder="Jens Jensen"
-                                              IsTextPredictionEnabled="False"
-                                              MaxLength="20"
-                                              >
+                                              MinimumWidthRequest="10">
                         <components:NoBorderEntry.Triggers>
-                            <DataTrigger 
-                                TargetType="components:NoBorderEntry"
-                                Binding="{Binding EditEnabledName}"
-		                        Value="true">
-                                <Setter 
-                                    Property="IsReadOnly"
-                                    Value="False"/>
-                            </DataTrigger>
-                        </components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                    TargetType="components:NoBorderEntry"
+                                    Binding="{Binding EditEnabledName}"
+		                            Value="true">
+                                    <Setter
+                                        Property="IsReadOnly"
+                                        Value="False"/>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
                     </components:NoBorderEntry>
+                        <Label Text="Navn" FontSize="Micro"/>
                     </StackLayout>
                     <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding EditModeNameCommand}" />
+                            <TapGestureRecognizer Command="{Binding EditModeNameCommand}"/>
                         </Image.GestureRecognizers>
                         <Image.Triggers>
                             <DataTrigger
@@ -62,8 +61,8 @@
                             Binding="{Binding EditEnabledName}"
                             Value="True">
                                 <Setter
-                                Property="IsVisible"
-                                Value="False"/>
+                                    Property="IsVisible"
+                                    Value="False"/>
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
@@ -82,7 +81,7 @@
                             </DataTrigger>
                         </Image.Triggers>
                     </Image>
-                </StackLayout>
+                    </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
@@ -93,7 +92,7 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <components:NoBorderEntry x:Name="EditableEMail"
+                        <components:NoBorderEntry x:Name="EditableEmail"
                                                     Keyboard="Email"
                                                     Text="{Binding Email}"
                                                     Style="{StaticResource CustomerInfoComponent}"
@@ -102,7 +101,8 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="Jens.jensen@gmail.com">
+                                                    Placeholder="Jens.jensen@gmail.com"
+                                                    MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"
@@ -160,7 +160,8 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="+45 12 34 56 78">
+                                                    Placeholder="+45 12 34 56 78"
+                                                    MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
                                 TargetType="components:NoBorderEntry"

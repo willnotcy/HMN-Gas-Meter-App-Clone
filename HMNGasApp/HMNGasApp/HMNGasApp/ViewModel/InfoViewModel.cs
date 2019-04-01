@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
 using System.Threading.Tasks;
-
+using System;
 
 namespace HMNGasApp.ViewModel
 {
@@ -15,6 +15,7 @@ namespace HMNGasApp.ViewModel
         public ICommand EditModeNameCommand { get; set; }
         public ICommand EditModeEmailCommand { get; set; }
         public ICommand EditModePhoneCommand { get; set; }
+        public ICommand SetFocusCommand { get; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
         public ICommand SaveInfoCommand { get; set; }
@@ -169,6 +170,8 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             EditEnabledName = true;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
 
             Readonly = false;
 
@@ -182,7 +185,9 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            EditEnabledName = false;
             EditEnabledEmail = true;
+            EditEnabledPhone = false;
 
             Readonly = false;
 
@@ -196,6 +201,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            EditEnabledName = false;
+            EditEnabledEmail = false;
             EditEnabledPhone = true;
 
             Readonly = false;

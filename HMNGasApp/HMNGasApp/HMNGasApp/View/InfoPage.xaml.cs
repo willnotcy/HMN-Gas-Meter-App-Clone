@@ -17,6 +17,8 @@ namespace HMNGasApp.View
 
             BindingContext = _viewModel = DependencyService.Resolve<InfoViewModel>();
             _viewModel.Navigation = Navigation;
+
+            if(EditableName.IsReadOnly == false) { EditableName.Focus(); }
         }
       
         protected override void OnAppearing()
