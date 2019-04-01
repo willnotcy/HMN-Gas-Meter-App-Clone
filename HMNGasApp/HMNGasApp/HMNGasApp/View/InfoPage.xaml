@@ -77,7 +77,7 @@
                     <Image Source="round_equalizer_black.png" Margin="0,0,15,0" />
                     <StackLayout>
                         <Label Text="{Binding LatestMeasure}" />
-                        <Label Text="Seneste måling" FontSize="Micro"/>
+                        <Label Text="Seneste måleraflæsning" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">

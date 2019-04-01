@@ -26,7 +26,7 @@
                 </StackLayout>
             </StackLayout>    
             
-            <Label Text="Indtast dit forbrug:"
+            <Label Text="Indtast din måleraflæsning:"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 30"
@@ -34,7 +34,7 @@
                    Margin="10, 100, 20, 10"/>
             <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding UsageInput}" 
-                                         Placeholder="Forbrug..." 
+                                         Placeholder="Måleraflæsning..." 
                                          Style="{StaticResource BodyText}"
                                          Margin="50,10,50,10"
                                          HeightRequest="60"
