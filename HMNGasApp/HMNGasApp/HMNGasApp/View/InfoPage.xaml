@@ -69,6 +69,13 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
+                        <Label Text="{Binding GSRN}" />
+                        <Label Text="Aftagenummer (GSRN)" FontSize="Micro"/>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_info_black.png" Margin="0,0,15,0" />
+                    <StackLayout>
                         <Label Text="{Binding MeterNum}" />
                         <Label Text="Måler nr." FontSize="Micro"/>
                     </StackLayout>
