@@ -50,7 +50,7 @@
                 Eller indmeld 24/7 via tlf.: +45 20 14 34 79
                 </Label.Text>
             </Label>
-            <Button Text="SEND"
+            <Button Text="Bekræft"
                     TextColor="White"
                     Margin="90,50,90,10"
                     BorderRadius="7"
