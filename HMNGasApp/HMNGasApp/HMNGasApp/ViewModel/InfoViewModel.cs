@@ -106,15 +106,9 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
-            //Check if any changes has been made, and if not - don't save
-            if (Customer.Name == Name.Trim()
-                && Customer.Phone == Phone.Trim()
-                && Customer.Email == Email.Trim())
-            {
 
-            }
-            //else we save the new information
-            else
+            //Check if any changes has been made, and if not - don't save
+            if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
             {
                 Customer.Name = Name.Trim();
                 Customer.Phone = Phone.Trim();
@@ -133,6 +127,7 @@ namespace HMNGasApp.ViewModel
                     await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
                 }
             }
+
             IsBusy = false;
         }
 
