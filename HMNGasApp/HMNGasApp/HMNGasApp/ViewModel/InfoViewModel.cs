@@ -49,7 +49,14 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-        
+
+        private string _gsrn;
+        public string GSRN
+        {
+            get => _gsrn;
+            set => SetProperty(ref _gsrn, value);
+        }
+
         private string _address;
         public string Address
         {
@@ -137,20 +144,26 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
-            Customer.Name = Name;
-            Customer.Phone = Phone;
-            Customer.Email = Email;
-            Customer.Address = Address;
 
-            var result = await _service.EditCustomerAsync(Customer);
+            //Check if any changes has been made, and if not - don't save
+            if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
+            {
+                Customer.Name = Name.Trim();
+                Customer.Phone = Phone.Trim();
+                Customer.Email = Email.Trim();
 
-            if(result)
-            {
-                await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-            } else
-            {
-                //TODO Get text from languagefile
-                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                var result = await _service.EditCustomerAsync(Customer);
+
+                if (result)
+                {
+                    await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    //TODO: Get text from languagefile
+                    await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                }
             }
 
             Readonly = true;
@@ -255,8 +268,10 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
+            //HACK: hardcoded
+            GSRN = "6969696";
             MeterNum = "1234567";
-            LatestMeasure = "4025,345 m3";
+            LatestMeasure = "4025" + "m\u00B3";
             MeasureDate = "01-02-19";
         }
     }

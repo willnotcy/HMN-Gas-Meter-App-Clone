@@ -245,8 +245,15 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding MeterNum}" Style="{StaticResource CustomerInfoLabel}"/>
-                        <Label Text="Måler nr." FontSize="Micro"/>
+                        <Label Text="{Binding GSRN}" Style="{StaticResource CustomerInfoLabel}" />
+                        <Label Text="Aftagenummer (GSRN)" FontSize="Micro" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_info_black.png" Margin="0,0,15,0" />
+                    <StackLayout>
+                        <Label Text="{Binding MeterNum}" Style="{StaticResource CustomerInfoLabel}" />
+                        <Label Text="Måler nr." FontSize="Micro" />
                     </StackLayout>
                 </StackLayout>
                 <!--#endregion-->
