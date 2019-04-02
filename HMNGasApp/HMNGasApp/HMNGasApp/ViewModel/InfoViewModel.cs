@@ -46,8 +46,13 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-        private string _GSRN;
-        public string GSRN { get; private set; }
+
+        private string _gsrn;
+        public string GSRN
+        {
+            get => _gsrn;
+            set => SetProperty(ref _gsrn, value);
+        }
 
         private string _address;
         public string Address
