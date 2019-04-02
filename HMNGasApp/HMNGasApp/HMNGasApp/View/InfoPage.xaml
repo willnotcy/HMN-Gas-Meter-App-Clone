@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="HMNGasApp.View.InfoPage"
+                xmlns:events="clr-namespace:HMNGasApp.View.Events"
                 Title="{Binding Title}"
                 xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <StackLayout>
@@ -54,6 +55,9 @@
                                     <Setter
                                         Property="IsReadOnly"
                                         Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
@@ -123,6 +127,9 @@
                                     <Setter 
                                     Property="IsReadOnly"
                                     Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
@@ -189,6 +196,9 @@
                                     <Setter 
                                     Property="IsReadOnly"
                                     Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
