@@ -3,11 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.View.ScanPage">
     <ScrollView>
-        <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
-            <Button Text="Capture photo" x:Name="GetPhotoButton" Command="{Binding TakePictureCommand}"></Button>
-            <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsBusy}"/>
-            <Image x:Name="PhotoImage" Source="{Binding ImageSource}"></Image>
-            <Label HorizontalOptions="Center" Text="{Binding LabelText}" />
+        <StackLayout>
+            <!--#region Header-->
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                                VerticalOptions="Center" 
+                                HeightRequest="80">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold"
+                       Text="Scan måler" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Margin="0,0,50,0"/>
+                </StackLayout>
+            </StackLayout>
+            <!--#endregion-->
+            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
+                <Button Text="Capture photo" x:Name="GetPhotoButton" Command="{Binding TakePictureCommand}"></Button>
+                <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsBusy}"/>
+                <Image x:Name="PhotoImage" Source="{Binding ImageSource}"></Image>
+                <Label HorizontalOptions="Center" Text="{Binding LabelText}" />
+            </StackLayout>
         </StackLayout>
     </ScrollView>
 </ContentPage>

@@ -91,10 +91,10 @@ namespace HMNGasApp.Droid.OCR
             var blur = _openCV.MedianBlur(gray);
 
             // Detect edges using canny.
-            var edges = _openCV.Canny(gray, cT1, cT2);
+            var edges = _openCV.Canny(blur, cT1, cT2);
 
             // Detect straight lines using Hough Lines Transform.
-            var lines = _openCV.HoughLines(gray, houghThresh);
+            var lines = _openCV.HoughLines(edges, houghThresh);
 
             // Rotate image based on detected lines average gradient.
             var thetaDegrees = _openCV.GetAverageLineTheta(lines);
@@ -113,7 +113,7 @@ namespace HMNGasApp.Droid.OCR
             mRgba = withBoundingBoxes;
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
-            if(alignedContours.Item2.Count < 7)
+            if(alignedContours.Item2.Count < 4)
             {
                 return mRgba;
             }
