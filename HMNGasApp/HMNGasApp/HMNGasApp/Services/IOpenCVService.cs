@@ -8,9 +8,6 @@ namespace HMNGasApp.Services
 {
     public interface IOpenCVService
     {
-        void SetInput();
-
-        Stream Process(Stream image);
 
         void OpenCamera();
     }

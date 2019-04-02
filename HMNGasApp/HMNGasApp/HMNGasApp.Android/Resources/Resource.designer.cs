@@ -6770,26 +6770,26 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c0064
 			public const int list_item = 2131492964;
 			
-			// aapt resource value: 0x7f0c00d1
-			public const int main_appbar = 2131493073;
+			// aapt resource value: 0x7f0c00d2
+			public const int main_appbar = 2131493074;
+			
+			// aapt resource value: 0x7f0c00d5
+			public const int main_scrollview = 2131493077;
 			
 			// aapt resource value: 0x7f0c00d4
-			public const int main_scrollview = 2131493076;
+			public const int main_tablayout = 2131493076;
 			
 			// aapt resource value: 0x7f0c00d3
-			public const int main_tablayout = 2131493075;
+			public const int main_toolbar = 2131493075;
 			
-			// aapt resource value: 0x7f0c00d2
-			public const int main_toolbar = 2131493074;
-			
-			// aapt resource value: 0x7f0c00dc
-			public const int masked = 2131493084;
+			// aapt resource value: 0x7f0c00dd
+			public const int masked = 2131493085;
 			
 			// aapt resource value: 0x7f0c00c4
 			public const int media_actions = 2131493060;
 			
-			// aapt resource value: 0x7f0c00da
-			public const int message = 2131493082;
+			// aapt resource value: 0x7f0c00db
+			public const int message = 2131493083;
 			
 			// aapt resource value: 0x7f0c0031
 			public const int middle = 2131492913;
@@ -6989,14 +6989,14 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c008d
 			public const int select_dialog_listview = 2131493005;
 			
-			// aapt resource value: 0x7f0c00d5
-			public const int shellcontent_appbar = 2131493077;
+			// aapt resource value: 0x7f0c00d6
+			public const int shellcontent_appbar = 2131493078;
+			
+			// aapt resource value: 0x7f0c00d8
+			public const int shellcontent_scrollview = 2131493080;
 			
 			// aapt resource value: 0x7f0c00d7
-			public const int shellcontent_scrollview = 2131493079;
-			
-			// aapt resource value: 0x7f0c00d6
-			public const int shellcontent_toolbar = 2131493078;
+			public const int shellcontent_toolbar = 2131493079;
 			
 			// aapt resource value: 0x7f0c0077
 			public const int shortcut = 2131492983;
@@ -7010,8 +7010,8 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c0025
 			public const int showTitle = 2131492901;
 			
-			// aapt resource value: 0x7f0c00d8
-			public const int sliding_tabs = 2131493080;
+			// aapt resource value: 0x7f0c00d9
+			public const int sliding_tabs = 2131493081;
 			
 			// aapt resource value: 0x7f0c0093
 			public const int smallLabel = 2131493011;
@@ -7052,6 +7052,9 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c008a
 			public const int submit_area = 2131493002;
 			
+			// aapt resource value: 0x7f0c00d1
+			public const int surfaceView = 2131493073;
+			
 			// aapt resource value: 0x7f0c001f
 			public const int tabMode = 2131492895;
 			
@@ -7091,8 +7094,8 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c0072
 			public const int title_template = 2131492978;
 			
-			// aapt resource value: 0x7f0c00d9
-			public const int toolbar = 2131493081;
+			// aapt resource value: 0x7f0c00da
+			public const int toolbar = 2131493082;
 			
 			// aapt resource value: 0x7f0c003e
 			public const int top = 2131492926;
@@ -7130,8 +7133,8 @@ namespace HMNGasApp.Droid
 			// aapt resource value: 0x7f0c0016
 			public const int view_offset_helper = 2131492886;
 			
-			// aapt resource value: 0x7f0c00db
-			public const int visible = 2131493083;
+			// aapt resource value: 0x7f0c00dc
+			public const int visible = 2131493084;
 			
 			// aapt resource value: 0x7f0c00b6
 			public const int volume_item_container = 2131493046;
@@ -7428,34 +7431,37 @@ namespace HMNGasApp.Droid
 			public const int notification_template_part_time = 2130968642;
 			
 			// aapt resource value: 0x7f040043
-			public const int RootLayout = 2130968643;
+			public const int opencv_camera = 2130968643;
 			
 			// aapt resource value: 0x7f040044
-			public const int select_dialog_item_material = 2130968644;
+			public const int RootLayout = 2130968644;
 			
 			// aapt resource value: 0x7f040045
-			public const int select_dialog_multichoice_material = 2130968645;
+			public const int select_dialog_item_material = 2130968645;
 			
 			// aapt resource value: 0x7f040046
-			public const int select_dialog_singlechoice_material = 2130968646;
+			public const int select_dialog_multichoice_material = 2130968646;
 			
 			// aapt resource value: 0x7f040047
-			public const int ShellContent = 2130968647;
+			public const int select_dialog_singlechoice_material = 2130968647;
 			
 			// aapt resource value: 0x7f040048
-			public const int support_simple_spinner_dropdown_item = 2130968648;
+			public const int ShellContent = 2130968648;
 			
 			// aapt resource value: 0x7f040049
-			public const int Tabbar = 2130968649;
+			public const int support_simple_spinner_dropdown_item = 2130968649;
 			
 			// aapt resource value: 0x7f04004a
-			public const int Toolbar = 2130968650;
+			public const int Tabbar = 2130968650;
 			
 			// aapt resource value: 0x7f04004b
-			public const int tooltip = 2130968651;
+			public const int Toolbar = 2130968651;
 			
 			// aapt resource value: 0x7f04004c
-			public const int week = 2130968652;
+			public const int tooltip = 2130968652;
+			
+			// aapt resource value: 0x7f04004d
+			public const int week = 2130968653;
 			
 			static Layout()
 			{

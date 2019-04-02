@@ -15,8 +15,8 @@ namespace HMNGasApp.Droid
 {
     class Callback : BaseLoaderCallback
     {
-        private readonly OpenCV2 _activity;
-        public Callback(Context context, OpenCV2 activity)
+        private readonly OpenCVServiceDroid _activity;
+        public Callback(Context context, OpenCVServiceDroid activity)
             : base(context)
         {
             _activity = activity;
