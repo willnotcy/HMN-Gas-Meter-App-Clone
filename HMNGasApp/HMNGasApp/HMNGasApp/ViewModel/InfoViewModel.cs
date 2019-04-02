@@ -46,7 +46,14 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-        
+
+        private string _gsrn;
+        public string GSRN
+        {
+            get => _gsrn;
+            set => SetProperty(ref _gsrn, value);
+        }
+
         private string _address;
         public string Address
         {
@@ -183,8 +190,10 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
+            //HACK: hardcoded
+            GSRN = "6969696";
             MeterNum = "1234567";
-            LatestMeasure = "4025,345 m3";
+            LatestMeasure = "4025" + "m\u00B3";
             MeasureDate = "01-02-19";
         }
     }
