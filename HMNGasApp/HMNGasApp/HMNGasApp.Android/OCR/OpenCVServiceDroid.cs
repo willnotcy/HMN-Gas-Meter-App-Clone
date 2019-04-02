@@ -20,6 +20,7 @@ using Android.Graphics;
 using System.Numerics;
 using Point = OpenCV.Core.Point;
 using Rect = OpenCV.Core.Rect;
+using HMNGasApp.Droid.OCR;
 
 [assembly: Dependency(typeof(HMNGasApp.Droid.OpenCVServiceDroid))]
 namespace HMNGasApp.Droid
@@ -27,9 +28,6 @@ namespace HMNGasApp.Droid
     public class OpenCVServiceDroid : IOpenCVService
     {
         private BaseLoaderCallback mLoaderCallback;
-
-        public IOpenCVService OpenCVService { get; private set; }
-
 
         #region Converter methods
 
@@ -301,12 +299,8 @@ namespace HMNGasApp.Droid
 
         public void OpenCamera()
         {
-            
-        }
-
-        public void Process()
-        {
-            throw new NotImplementedException();
+            var intent = new Intent(Android.App.Application.Context, typeof(OpenCVCameraActivity));
+            Android.App.Application.Context.StartActivity(intent);
         }
     }
 }

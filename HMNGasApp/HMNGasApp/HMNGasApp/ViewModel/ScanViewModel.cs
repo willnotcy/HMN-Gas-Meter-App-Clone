@@ -46,6 +46,21 @@ namespace HMNGasApp.ViewModel
             _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             TakePictureCommand = new Command(async () => await ExecuteTakePictureCommand());
+
+            MessagingCenter.Subscribe<CameraResultMessage>(this, CameraResultMessage.Key, async (sender) =>
+            {
+                var digits = sender.Digits;
+                var image = sender.Image;
+
+                LabelText = "";
+
+                foreach (Stream stream in digits)
+                {
+                    await Recognise(stream);
+                }
+
+                ImageSource = ImageSource.FromStream(() => { return image; });
+            });
         }
 
         private async Task ExecuteReturnNavCommand()
@@ -69,17 +84,10 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var mediaStorageOptions = new CameraMediaStorageOptions
+            await Task.Run(() =>
             {
-                DefaultCamera = CameraDevice.Rear
-            };
-            var result = await _device.MediaPicker.TakePhotoAsync(mediaStorageOptions);
-
-            var whatever = _openCVService.Process(result.Source);
-
-            ImageSource = ImageSource.FromStream(() => { return whatever; });
-
-            await Recognise(result.Source);
+                _openCVService.OpenCamera();
+            });
 
             IsBusy = false;
         }
@@ -92,8 +100,6 @@ namespace HMNGasApp.ViewModel
         private async Task Recognise(Stream result)
         {
             if (result == null) return;
-            LabelText = "Initializing";
-
             if (!_tesseractApi.Initialized)
             {
                 var initialised = await _tesseractApi.Init("any");
@@ -103,10 +109,8 @@ namespace HMNGasApp.ViewModel
                 }
                 else
                 {
-                    LabelText = "Processing image...";
-
                     //TODO Experiment with PageSegmentationMode https://github.com/tesseract-ocr/tesseract/wiki/ImproveQuality#page-segmentation-method
-                    _tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
+                    //_tesseractApi.SetPageSegmentationMode((PageSegmentationMode) 5);
 
                     //TODO Implement opencv image processing
                     bool success = await _tesseractApi.SetImage(result);
