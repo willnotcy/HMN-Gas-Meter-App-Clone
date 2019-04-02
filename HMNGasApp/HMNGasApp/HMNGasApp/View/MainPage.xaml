@@ -49,7 +49,7 @@
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
-                <Button Text="MIT FORBRUG"
+                <Button Text="MINE MÅLERAFLÆSNINGER"
                         TextColor="White"
                         Margin="10,10,10,50"
                         Padding="15"
