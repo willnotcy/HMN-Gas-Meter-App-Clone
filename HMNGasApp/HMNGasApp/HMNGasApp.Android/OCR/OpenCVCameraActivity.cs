@@ -113,7 +113,7 @@ namespace HMNGasApp.Droid.OCR
             mRgba = withBoundingBoxes;
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
-            if(alignedContours.Item2.Count < 4)
+            if(alignedContours.Item2.Count < 8)
             {
                 return mRgba;
             }
