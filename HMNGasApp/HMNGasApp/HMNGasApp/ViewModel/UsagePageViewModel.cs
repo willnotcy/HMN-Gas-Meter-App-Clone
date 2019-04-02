@@ -66,7 +66,7 @@ namespace HMNGasApp.ViewModel
 
         private string FormatValueLabel(float vl)
         {
-            return "" + ((Int32) vl);
+            return "" + ((Int64) vl);
             
         }
 
