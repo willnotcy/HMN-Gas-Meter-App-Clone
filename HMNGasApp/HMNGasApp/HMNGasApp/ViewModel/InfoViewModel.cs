@@ -157,7 +157,6 @@ namespace HMNGasApp.ViewModel
                 if (result)
                 {
                     await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                    await Navigation.PopModalAsync();
                 }
                 else
                 {
