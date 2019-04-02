@@ -106,21 +106,26 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
-            Customer.Name = Name;
-            Customer.Phone = Phone;
-            Customer.Email = Email;
-            Customer.Address = Address;
 
-            var result = await _service.EditCustomerAsync(Customer);
+            //Check if any changes has been made, and if not - don't save
+            if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
+            {
+                Customer.Name = Name.Trim();
+                Customer.Phone = Phone.Trim();
+                Customer.Email = Email.Trim();
 
-            if(result)
-            {
-                await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                await Navigation.PopModalAsync();
-            } else
-            {
-                //TODO Get text from languagefile
-                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                var result = await _service.EditCustomerAsync(Customer);
+
+                if (result)
+                {
+                    await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                    await Navigation.PopModalAsync();
+                }
+                else
+                {
+                    //TODO: Get text from languagefile
+                    await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                }
             }
 
             IsBusy = false;
