@@ -13,7 +13,7 @@ namespace HMNGasApp.View.Events
 
         protected override async void Invoke(NoBorderEntry sender)
         {
-            await Task.Delay(1000);
+            await Task.Delay(200);
 
             if (Focused)
             {
