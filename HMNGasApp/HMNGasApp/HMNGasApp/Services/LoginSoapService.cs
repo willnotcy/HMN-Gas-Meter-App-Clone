@@ -45,21 +45,17 @@ namespace HMNGasApp.Services
                 {
                     (bool, string) result = (false, "Not ok");
 
-                    for (int i = 0; i < 3; i++)
+                    var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
+
+                    result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+
+                    if (result.Item1)
                     {
-                        var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
-
-                        result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
-
-                        if (result.Item1)
-                        {
-                            _config.Context.securityKey = result.Item2;
-                            _config.CustomerId = customerId;
-                            _config.MeterReadings = await GetMeterReadings();
-
-                            return result;
-                        }
+                        _config.Context.securityKey = result.Item2;
+                        _config.CustomerId = customerId;
+                        _config.MeterReadings = await GetMeterReadings();
                     }
+
                     return result;
                 }
                 return (false, "Kunne ikke få forbindelse");
