@@ -49,12 +49,8 @@
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
-<<<<<<< HEAD
                 <Button Text="MINE MÅLERAFLÆSNINGER"
-=======
-                <Button Text="MIT FORBRUG"
                         Command="{Binding UsagePageNavCommand}"
->>>>>>> 7d962bff4d47e94a40e23ee82bef0aa0ebc2fc41
                         TextColor="White"
                         Margin="10,10,10,50"
                         Padding="15"
