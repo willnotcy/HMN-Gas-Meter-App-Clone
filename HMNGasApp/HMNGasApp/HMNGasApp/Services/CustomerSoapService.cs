@@ -28,7 +28,7 @@ namespace HMNGasApp.Services
         /// <returns>Customer object</returns>
         public async Task<(bool, WebServices.Customer)> GetCustomerAsync()
         {
-            var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
+            var context = _config.Context;
 
             var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
 
@@ -52,7 +52,7 @@ namespace HMNGasApp.Services
         {
             return await Task.Run(() =>
             {
-                var context = new WebServices.UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = _config.SecurityKey };
+                var context = _config.Context;
 
                 var result = _client.newCustContactInfo(new NewCustContactInfoRequest
                 {

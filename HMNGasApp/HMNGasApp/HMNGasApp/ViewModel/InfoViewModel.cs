@@ -3,16 +3,21 @@ using Xamarin.Forms;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
 using System.Threading.Tasks;
-
+using HMNGasApp.WebServices;
+using System.Linq;
 
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
     {
         private readonly ICustomerSoapService _service;
+        private readonly IConfig _config;
 
         public ICommand LoadCommand { get; set; }
-        public ICommand EditMode { get; set; }
+        public ICommand EditModeNameCommand { get; set; }
+        public ICommand EditModeEmailCommand { get; set; }
+        public ICommand EditModePhoneCommand { get; set; }
+        public ICommand SetFocusCommand { get; }
         public ICommand ReturnNavCommand { get; set; }
         public ICommand SettingsPageNavCommand { get; set; }
         public ICommand SaveInfoCommand { get; set; }
@@ -46,7 +51,14 @@ namespace HMNGasApp.ViewModel
             get => _phone;
             set => SetProperty(ref _phone, value);
         }
-        
+
+        private string _gsrn;
+        public string GSRN
+        {
+            get => _gsrn;
+            set => SetProperty(ref _gsrn, value);
+        }
+
         private string _address;
         public string Address
         {
@@ -81,15 +93,51 @@ namespace HMNGasApp.ViewModel
             get => _measureDate;
             set => SetProperty(ref _measureDate, value);
         }
+
+        private bool _readonly;
+        public bool Readonly
+        {
+            get => _readonly;
+            set => SetProperty(ref _readonly, value);
+        }
+
+        private bool _editEnabledName;
+        public bool EditEnabledName
+        {
+            get => _editEnabledName;
+            set => SetProperty(ref _editEnabledName, value);
+        }
+
+        private bool _editEnabledEmail;
+        public bool EditEnabledEmail
+        {
+            get => _editEnabledEmail;
+            set => SetProperty(ref _editEnabledEmail, value);
+        }
+
+        private bool _editEnabledPhone;
+        public bool EditEnabledPhone
+        {
+            get => _editEnabledPhone;
+            set => SetProperty(ref _editEnabledPhone, value);
+        }
+
+
         #endregion
 
-        public InfoViewModel(ICustomerSoapService service)
+        public InfoViewModel(ICustomerSoapService service, IConfig config)
         {
             _service = service;
+            _config = config;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            EditMode = new Command(() => ExecuteEditMode());
+            EditModeNameCommand = new Command(() => ExecuteEditModeNameCommand());
+            EditModeEmailCommand = new Command(() => ExecuteEditModeEmailCommand());
+            EditModePhoneCommand = new Command(() => ExecuteEditModePhoneCommand());
             SaveInfoCommand = new Command(async () => await ExecuteSaveInfoCommand());
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
         }
 
         private async Task ExecuteSaveInfoCommand()
@@ -99,27 +147,36 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
-            Customer.Name = Name;
-            Customer.Phone = Phone;
-            Customer.Email = Email;
-            Customer.Address = Address;
 
-            var result = await _service.EditCustomerAsync(Customer);
+            //Check if any changes has been made, and if not - don't save
+            if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
+            {
+                Customer.Name = Name.Trim();
+                Customer.Phone = Phone.Trim();
+                Customer.Email = Email.Trim();
 
-            if(result)
-            {
-                await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                await Navigation.PopModalAsync();
-            } else
-            {
-                //TODO Get text from languagefile
-                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                var result = await _service.EditCustomerAsync(Customer);
+
+                if (result)
+                {
+                    await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                }
+                else
+                {
+                    //TODO: Get text from languagefile
+                    await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                }
             }
+
+            Readonly = true;
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
 
             IsBusy = false;
         }
 
-        private void ExecuteEditMode()
+        private void ExecuteEditModeNameCommand()
         {
             if (IsBusy)
             {
@@ -127,7 +184,43 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            MessagingCenter.Send(this, "EnableEdit");
+            EditEnabledName = true;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
+
+            Readonly = false;
+
+            IsBusy = false;
+        }
+        private void ExecuteEditModeEmailCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            EditEnabledName = false;
+            EditEnabledEmail = true;
+            EditEnabledPhone = false;
+
+            Readonly = false;
+
+            IsBusy = false;
+        }
+        private void ExecuteEditModePhoneCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = true;
+
+            Readonly = false;
 
             IsBusy = false;
         }
@@ -160,6 +253,10 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            EditEnabledName = false;
+            EditEnabledEmail = false;
+            EditEnabledPhone = false;
+
             await Navigation.PopModalAsync();
 
             IsBusy = false;
@@ -173,9 +270,20 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
-            MeterNum = "1234567";
-            LatestMeasure = "4025,345 m3";
-            MeasureDate = "01-02-19";
+            GSRN = "6969696";
+
+            var latestReading = _config.MeterReadings.LastOrDefault();
+            if(latestReading != null)
+            {
+                MeterNum = latestReading.MeterNum;
+                LatestMeasure = latestReading.Reading + " m\u00B3";
+                MeasureDate = latestReading.ReadingDate;
+            } else
+            {
+                MeterNum = "";
+                LatestMeasure = "";
+                MeasureDate = "";
+            }
         }
     }
 }

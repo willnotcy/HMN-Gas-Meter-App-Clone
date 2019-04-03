@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="HMNGasApp.App">
+             x:Class="HMNGasApp.App"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <Application.Resources>
         <ResourceDictionary>
              <!-- Fonts -->
@@ -44,6 +45,20 @@
                 <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
                 <Setter Property="Margin" Value="0,20,0,20" />
                 <Setter Property="TextColor" Value="White" />
+            </Style>
+
+            <Style x:Key="CustomerInfoLabel" TargetType="Label" >
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
+                <Setter Property="TextColor" Value="Black" />
+            </Style>
+            
+            <Style x:Key="CustomerInfoComponent" TargetType="components:NoBorderEntry" >
+                <Setter Property="FontSize" Value="17" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
+                <Setter Property="TextColor" Value="Black" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
