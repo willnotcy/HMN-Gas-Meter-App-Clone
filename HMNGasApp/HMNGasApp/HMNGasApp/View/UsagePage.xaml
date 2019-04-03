@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="HMNGasApp.View.UsagePage"
+             BackgroundColor="White"
+             Title="Mit Forbrug"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                        VerticalOptions="Center" 
+                        Grid.Row="0">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold" 
+                    Text="Mit Forbrug" 
+                    FontSize="Large" 
+                    TextColor="White"
+                    Margin="0,0,50,0"
+                    HorizontalOptions="CenterAndExpand" 
+                    />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Grid.Row="1"
+                         >
+                <microcharts:ChartView 
+                        x:Name="chartView"
+                        Chart="{Binding GraphData}"
+                        BackgroundColor="Default"
+                        HeightRequest="400"
+                        />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

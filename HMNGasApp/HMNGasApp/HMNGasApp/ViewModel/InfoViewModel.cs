@@ -3,13 +3,15 @@ using Xamarin.Forms;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
 using System.Threading.Tasks;
-using System;
+using HMNGasApp.WebServices;
+using System.Linq;
 
 namespace HMNGasApp.ViewModel
 {
     public class InfoViewModel : BaseViewModel
     {
         private readonly ICustomerSoapService _service;
+        private readonly IConfig _config;
 
         public ICommand LoadCommand { get; set; }
         public ICommand EditModeNameCommand { get; set; }
@@ -123,9 +125,10 @@ namespace HMNGasApp.ViewModel
 
         #endregion
 
-        public InfoViewModel(ICustomerSoapService service)
+        public InfoViewModel(ICustomerSoapService service, IConfig config)
         {
             _service = service;
+            _config = config;
             LoadCommand = new Command(() => ExecuteLoadCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             EditModeNameCommand = new Command(() => ExecuteEditModeNameCommand());
@@ -267,11 +270,20 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
-            //HACK: hardcoded
             GSRN = "6969696";
-            MeterNum = "1234567";
-            LatestMeasure = "4025" + "m\u00B3";
-            MeasureDate = "01-02-19";
+
+            var latestReading = _config.MeterReadings.LastOrDefault();
+            if(latestReading != null)
+            {
+                MeterNum = latestReading.MeterNum;
+                LatestMeasure = latestReading.Reading + " m\u00B3";
+                MeasureDate = latestReading.ReadingDate;
+            } else
+            {
+                MeterNum = "";
+                LatestMeasure = "";
+                MeasureDate = "";
+            }
         }
     }
 }

@@ -66,12 +66,14 @@ namespace HMNGasApp
             services.AddScoped<MainPageViewModel>();
             services.AddScoped<ManualPageViewModel>();
             services.AddScoped<ReadingConfirmationPageViewModel>();
-            services.AddSingleton<IConfig>(config);
+			services.AddScoped<UsagePageViewModel>();
+			services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
+			
 
             return services.BuildServiceProvider();
         }

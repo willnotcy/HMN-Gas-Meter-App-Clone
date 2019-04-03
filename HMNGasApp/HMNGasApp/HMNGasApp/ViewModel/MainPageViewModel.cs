@@ -14,6 +14,7 @@ namespace HMNGasApp.ViewModel
         public ICommand ManualPageNavCommand { get; set; }
         public ICommand InfoPageNavCommand { get; set; }
         public ICommand SignOutCommand { get; set; }
+		public ICommand UsagePageNavCommand { get; set; }
 
         public MainPageViewModel(ILoginSoapService service)
         {
@@ -21,6 +22,7 @@ namespace HMNGasApp.ViewModel
 
             ManualPageNavCommand = new Command(async () => await ExecuteManualPageNavCommand());
             InfoPageNavCommand = new Command(async () => await ExecuteInfoPageNavCommand());
+			UsagePageNavCommand = new Command(async () => await ExecuteUsagePageNavCommand());
             SignOutCommand = new Command(async () => await ExecuteSignOutCommand());
         }
 
@@ -70,5 +72,18 @@ namespace HMNGasApp.ViewModel
 
             IsBusy = false;
         }
-    }
+
+		private async Task ExecuteUsagePageNavCommand()
+		{
+			if (IsBusy)
+			{
+				return;
+			}
+			IsBusy = true;
+
+			await Navigation.PushAsync(new UsagePage());
+
+			IsBusy = false;
+		}
+	}
 }

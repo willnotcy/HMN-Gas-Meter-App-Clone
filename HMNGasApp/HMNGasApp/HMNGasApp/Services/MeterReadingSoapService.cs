@@ -142,13 +142,11 @@ namespace HMNGasApp.Services
         /// <returns>List of meter readings</returns>
         public async Task<(bool, List<MeterReading>)> GetMeterReadings(DateTime from, DateTime to)
         {
-            var helper = (to - from).TotalMilliseconds;
-
             if((to - from).TotalMilliseconds > 0)
             {
                 return await Task.Run(() =>
                 {
-                    var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context };
+                    var request = new MeterReadingsRequest { AccountNum = _config.CustomerId, Fom = from, ToDate = to, UserContext = _config.Context, AttachmentNum = "", DeliveryCategory = "" };
 
                     var response = _client.getMeterReadings(request);
 
