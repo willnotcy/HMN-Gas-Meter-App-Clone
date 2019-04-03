@@ -50,6 +50,7 @@
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
                 <Button Text="MINE MÅLERAFLÆSNINGER"
+                        Command="{Binding UsagePageNavCommand}"
                         TextColor="White"
                         Margin="10,10,10,50"
                         Padding="15"

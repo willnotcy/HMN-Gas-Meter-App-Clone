@@ -35,8 +35,8 @@ namespace HMNGasApp
 
         protected override void OnSleep()
         {
-            var config = DependencyService.Resolve<IConfig>();
-            if(config.SecurityKey != null || config.SecurityKey != "")
+            var context = DependencyService.Resolve<IUserContext>();
+            if (context.securityKey != null || context.securityKey != "")
             {
                 var service = DependencyService.Get<ILoginSoapService>();
                 Task.Run(async () => await service.Logout());
@@ -66,12 +66,14 @@ namespace HMNGasApp
             services.AddScoped<MainPageViewModel>();
             services.AddScoped<ManualPageViewModel>();
             services.AddScoped<ReadingConfirmationPageViewModel>();
-            services.AddSingleton<IConfig>(config);
+			services.AddScoped<UsagePageViewModel>();
+			services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
+			
 
             return services.BuildServiceProvider();
         }
