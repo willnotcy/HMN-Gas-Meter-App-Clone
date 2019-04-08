@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.UsagePage"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:charting="clr-namespace:XLabs.Forms.Charting.Controls;assembly=XLabs.Forms.Charting"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
@@ -25,12 +25,15 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <microcharts:ChartView 
-                        x:Name="chartView"
-                        Chart="{Binding GraphData}"
-                        BackgroundColor="Default"
+                <charting:Chart 
                         HeightRequest="400"
-                        />
+                        WidthRequest="400"
+                        Spacing="10"
+                        Series="{Binding GraphData}"
+                        BackgroundColor="{StaticResource PrimaryGreen}"
+                        Color="{StaticResource PrimaryBlue}"
+                        >
+                </charting:Chart>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

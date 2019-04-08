@@ -285,13 +285,10 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microcharts">
-      <Version>0.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="Microcharts.Forms">
-      <Version>0.7.1</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
+    <PackageReference Include="XLabs.Forms.Charting">
+      <Version>2.0.5782</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
