@@ -93,7 +93,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }
