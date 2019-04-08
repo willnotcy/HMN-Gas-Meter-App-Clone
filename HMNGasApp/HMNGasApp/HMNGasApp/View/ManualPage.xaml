@@ -47,9 +47,21 @@
                    Opacity="0.5"
                    FontSize="12">
                 <Label.Text>
-                Eller indmeld 24/7 via tlf.: +45 20 14 34 79
+                Eller indmeld via tlf.: +45 62 25 90 00
                 </Label.Text>
             </Label>
+            
+            <Image Source="eksempel.png"
+                   Margin="15,10,15,10"/>
+            
+            <Label Text="Bemærk: det er kun tallene inden for det orange felt der skal indsendes."
+                   TextColor="{StaticResource PrimaryDarkGrey}"
+                   HorizontalOptions="FillAndExpand"
+                   Style="{StaticResource BodyText}"
+                   HorizontalTextAlignment="Center"
+                   Opacity="0.5"
+                   FontSize="12"/>
+            
             <Button Text="Bekræft"
                     TextColor="White"
                     Margin="90,50,90,10"
