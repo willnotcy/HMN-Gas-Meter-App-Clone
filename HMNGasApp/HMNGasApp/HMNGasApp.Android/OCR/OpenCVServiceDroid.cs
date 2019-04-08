@@ -285,7 +285,11 @@ namespace HMNGasApp.Droid
 
             return mat;
         }
-
+        public Mat DrawRectangle(Mat mat, Rect rect, Scalar colour)
+        {
+            Imgproc.Rectangle(mat, new Point(rect.X - 2, rect.Y - 2), new Point(rect.X + rect.Width + 2, rect.Y + rect.Height + 2), new Scalar(0, 255, 0));
+            return mat;
+        }
         #endregion
         #region Sort methods
 

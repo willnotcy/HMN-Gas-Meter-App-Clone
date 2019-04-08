@@ -14,6 +14,8 @@ using HMNGasApp.Helpers;
 using OpenCV.Android;
 using OpenCV.Core;
 using Xamarin.Forms;
+using Point = OpenCV.Core.Point;
+using Size = OpenCV.Core.Size;
 
 namespace HMNGasApp.Droid.OCR
 {
@@ -84,8 +86,15 @@ namespace HMNGasApp.Droid.OCR
             var input = _openCV.Rotate(p0, -90);
             mRgba = input.Clone();
 
+            // ROI
+            var roi = new Rect(new Point(100, 100), new Size(_openCvCameraView.Width - 200, _openCvCameraView.Height / 8));
+
+            var submat = input.Submat(roi);
+
+            mRgba = _openCV.DrawRectangle(input, roi, new Scalar(0, 255, 0));
+
             // Turn image black and white.
-            var gray = _openCV.ToGray(input);
+            var gray = _openCV.ToGray(submat);
 
             // Blur image to reduce noise.
             var blur = _openCV.MedianBlur(gray);
@@ -110,7 +119,7 @@ namespace HMNGasApp.Droid.OCR
 
             // Draw bounding boxes on input image for user visualization.
             var withBoundingBoxes = _openCV.DrawBoundingBoxes(rotated.Clone(), alignedContours.Item2);
-            mRgba = withBoundingBoxes;
+            withBoundingBoxes.CopyTo(mRgba.Submat(roi));
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
             if(alignedContours.Item2.Count < 8)

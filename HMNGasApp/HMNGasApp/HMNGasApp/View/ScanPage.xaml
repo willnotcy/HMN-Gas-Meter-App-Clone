@@ -48,8 +48,7 @@
                     <Label HorizontalOptions="Center" 
                            Text="Kontrolbillede:"/>
                     <Image x:Name="PhotoImage" 
-                           Source="{Binding ImageSource}" 
-                           Scale="0.6"></Image>
+                           Source="{Binding ImageSource}"/>
                 </StackLayout>
                 <Button Text="BEKRÆFT"
                         TextColor="White"
