@@ -66,7 +66,7 @@ namespace HMNGasApp.ViewModel
             }
             else
             {
-                await Navigation.PushAsync(new ReadingConfirmationPage(LabelText.Replace(" ","")));
+                await Navigation.PushAsync(new ReadingConfirmationPage(LabelText));
             }
             IsBusy = false;
         }
