@@ -300,6 +300,7 @@ namespace HMNGasApp.Droid
         public void OpenCamera()
         {
             var intent = new Intent(Android.App.Application.Context, typeof(OpenCVCameraActivity));
+            intent.AddFlags(ActivityFlags.NewTask);
             Android.App.Application.Context.StartActivity(intent);
         }
     }
