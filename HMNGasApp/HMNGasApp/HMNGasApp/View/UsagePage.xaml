@@ -4,7 +4,8 @@
              x:Class="HMNGasApp.View.UsagePage"
              BackgroundColor="White"
              Title="Mit Forbrug"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
@@ -33,12 +34,7 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <microcharts:ChartView 
-                        x:Name="chartView"
-                        Chart="{Binding GraphData}"
-                        BackgroundColor="Default"
-                        HeightRequest="400"
-                        />
+                <oxy:PlotView Model="{Binding GraphData}" VerticalOptions="Center" HorizontalOptions="Center" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
