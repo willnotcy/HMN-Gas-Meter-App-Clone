@@ -11,6 +11,8 @@ namespace HMNGasApp.Helpers
 
         public List<Stream> Digits { get; set; }
 
+        public List<Stream> DigitsClone { get; set; }
+
         public Stream Image { get; set; }
     }
 }

@@ -13,6 +13,7 @@ using Android.Widget;
 using HMNGasApp.Helpers;
 using OpenCV.Android;
 using OpenCV.Core;
+using OpenCV.ImgProc;
 using Xamarin.Forms;
 using Point = OpenCV.Core.Point;
 using Size = OpenCV.Core.Size;
@@ -24,9 +25,6 @@ namespace HMNGasApp.Droid.OCR
     {
         private CameraBridgeViewBase _openCvCameraView;
         private OpenCVServiceDroid _openCV { get; set; }
-
-        private List<Stream> _digits;
-        private Mat _image;
 
         private Mat mRgba;
 
@@ -76,11 +74,11 @@ namespace HMNGasApp.Droid.OCR
         public Mat OnCameraFrame(Mat p0)
         {
             // TODO: provide these in a global config file
-            var cT1 = 140;
-            var cT2 = cT1 * 2;
-            var houghThresh = 350;
-            var contourMinHeight = 55;
-            var contourMaxHeight = 100;
+            var cT1 = 180;
+            var cT2 = cT1 * 3;
+            var houghThresh = 300;
+            var contourMinHeight = 60;
+            var contourMaxHeight = 90;
 
             // Initial rotation because camera starts in landscape mode.
             var input = _openCV.Rotate(p0, -90);
@@ -91,7 +89,7 @@ namespace HMNGasApp.Droid.OCR
 
             var submat = input.Submat(roi);
 
-            mRgba = _openCV.DrawRectangle(input, roi, new Scalar(0, 255, 0));
+            mRgba = _openCV.DrawRectangle(mRgba, roi, new Scalar(0, 255, 0));
 
             // Turn image black and white.
             var gray = _openCV.ToGray(submat);
@@ -118,14 +116,16 @@ namespace HMNGasApp.Droid.OCR
             var alignedContours = _openCV.FilterContoursByYPosition(contoursBySize.Item1, contoursBySize.Item2);
 
             // Converts back to colour
-            var bgr = _openCV.ToBGR(rotated.Clone());
+            Imgproc.CvtColor(rotated, rotated, Imgproc.ColorGray2rgba, 4);
 
             // Draw bounding boxes on input image for user visualization.
-            var withBoundingBoxes = _openCV.DrawBoundingBoxes(bgr, alignedContours.Item2);
+            
+            var withBoundingBoxes = _openCV.DrawBoundingBoxes(rotated.Clone(), alignedContours.Item2);
             withBoundingBoxes.CopyTo(mRgba.Submat(roi));
 
+
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
-            if(alignedContours.Item2.Count < 8)
+            if (alignedContours.Item2.Count != 8)
             {
                 return mRgba;
             }
@@ -133,10 +133,11 @@ namespace HMNGasApp.Droid.OCR
             // Prepare output for OCR and stop the camera feed.
             try
             {
-                _digits = new List<Stream>();
-                _image = new Mat();
+                var digits = new List<Stream>();
+                var image = new Mat();
+                var digitsClone = new List<Stream>();
 
-                _image = mRgba;
+                image = rotated;
 
                 // Sort digit bounding boxes left to right
                 var sorted = _openCV.SortRects(alignedContours.Item2);
@@ -144,12 +145,17 @@ namespace HMNGasApp.Droid.OCR
                 // Cut each digit individually based on bounding box.
                 foreach (Rect rect in sorted)
                 {
-                    _digits.Add(_openCV.MatToStream(new Mat(rotated, rect)));
+                    //rect.X = rect.X - 5;
+                    //rect.Y = rect.Y - 5;
+                    //rect.Width = rect.Width + 10;
+                    //rect.Height = rect.Height + 10;
+                    digits.Add(_openCV.MatToStream(new Mat(rotated, rect)));
+                    digitsClone.Add(_openCV.MatToStream(new Mat(rotated, rect)));
                 }
 
                 // TODO: Crop output image to region of interest when that is implemented.
                 // Return digits and final image to display on confirmation page.
-                MessagingCenter.Send(new CameraResultMessage { Digits = _digits, Image = _openCV.MatToStream(_image) }, CameraResultMessage.Key);
+                MessagingCenter.Send(new CameraResultMessage { DigitsClone = digitsClone, Digits = digits, Image = _openCV.MatToStream(image) }, CameraResultMessage.Key);
 
                 // Stop the camera feed and close the page
                 Finish();

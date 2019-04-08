@@ -49,6 +49,25 @@
                            Text="Kontrolbillede:"/>
                     <Image x:Name="PhotoImage" 
                            Source="{Binding ImageSource}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Image  
+                           Source="{Binding DigitSource}"/>
+                        <Image  
+                           Source="{Binding DigitSource2}"/>
+                        <Image  
+                           Source="{Binding DigitSource3}"/>
+                        <Image  
+                           Source="{Binding DigitSource4}"/>
+                        <Image  
+                           Source="{Binding DigitSource5}"/>
+                        <Image  
+                           Source="{Binding DigitSource6}"/>
+                        <Image  
+                           Source="{Binding DigitSource7}"/>
+                        <Image  
+                           Source="{Binding DigitSource8}"/>
+                    </StackLayout>
+                    
                 </StackLayout>
                 <Button Text="BEKRÆFT"
                         TextColor="White"
