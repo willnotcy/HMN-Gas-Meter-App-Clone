@@ -30,8 +30,6 @@
                         WidthRequest="400"
                         Spacing="10"
                         Series="{Binding GraphData}"
-                        BackgroundColor="{StaticResource PrimaryGreen}"
-                        Color="{StaticResource PrimaryBlue}"
                         >
                 </charting:Chart>
             </StackLayout>
