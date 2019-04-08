@@ -23,7 +23,7 @@
                            Margin="0,0,50,0"  />
                 </StackLayout>
             </StackLayout>
-            <Label Text="Dit forbrug:"
+            <Label Text="Din måleraflæsning:"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 25"

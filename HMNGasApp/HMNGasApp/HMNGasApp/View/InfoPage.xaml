@@ -2,109 +2,281 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="HMNGasApp.View.InfoPage"
+                xmlns:events="clr-namespace:HMNGasApp.View.Events"
                 Title="{Binding Title}"
                 xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <StackLayout>
+        <!--#region Header-->
         <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
                                 VerticalOptions="Center" 
                                 HeightRequest="80">
-            <StackLayout Padding="10, 35, 10, 25"  Orientation="Horizontal">
-                <Image Source="round_arrow_back_white.png"  HorizontalOptions="StartAndExpand" >
+            <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Label Font="Bold" Text="Mine Oplysninger" FontSize="Large" TextColor="White" HorizontalOptions="Center"/>
-                <Image Source="round_settings.png" HorizontalOptions="EndAndExpand" >
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding EditMode}" />
-                    </Image.GestureRecognizers>
-                </Image>
+                <Label Font="Bold"
+                       Text="Mine Oplysninger" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Margin="0,0,50,0"/>
             </StackLayout>
         </StackLayout>
+        <!--#endregion-->
+        <!--#region Info view: Name, Address, Email, Phone...-->
         <ScrollView>
             <StackLayout Spacing="45" Padding="30" >
+                <ActivityIndicator x:Name="activityIndicator"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"
+                        Color="{StaticResource PrimaryGreen}"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"/>
+                <!--#region Name-->
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="round_account_circle_black.png" Margin="0,0,15,0" />
-                    <components:NoBorderEntry x:Name="EditableName"
+                    <Image Source="round_account_circle_black.png" Margin="0,0,15,0"/>
+                    <StackLayout HorizontalOptions="FillAndExpand">
+                        <components:NoBorderEntry x:Name="EditableName"
                                               Text="{Binding Name}"
-                                              Style="Bold"
-                                              HorizontalOptions="FillAndExpand"
-                                              IsReadOnly="True"
-                                              VerticalOptions="Center"/>
+                                              Style="{StaticResource CustomerInfoComponent}"
+                                              FontSize="20"
+                                              HorizontalOptions="Fill"
+                                              IsReadOnly="True"                                             
+                                              VerticalOptions="Center"
+                                              Placeholder="Jens Jensen"
+                                              MinimumWidthRequest="10">
+                            <components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                    TargetType="components:NoBorderEntry"
+                                    Binding="{Binding EditEnabledName}"
+		                            Value="true">
+                                    <Setter
+                                        Property="IsReadOnly"
+                                        Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
+                        </components:NoBorderEntry>
+                        <Label Text="Navn" FontSize="Micro"/>
+                    </StackLayout>
+                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModeNameCommand}"/>
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledName}"
+                            Value="True">
+                                <Setter
+                                    Property="IsVisible"
+                                    Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" HorizontalOptions="EndAndExpand" x:Name="FinishEditNameImage" IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledName}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region Address-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
-                        <Label Text="{Binding Address}"/>
+                        <Label Text="{Binding Address}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Addresse" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region Email-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_email_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
-                        <components:NoBorderEntry x:Name="EditableEMail"
+                        <components:NoBorderEntry x:Name="EditableEmail"
                                                     Keyboard="Email"
                                                     Text="{Binding Email}"
-                                                    Style="Bold"
-                                                    HorizontalOptions="FillAndExpand"
-                                                    IsReadOnly="true"
-                                                    VerticalOptions="Center"/>
+                                                    Style="{StaticResource CustomerInfoComponent}"
+                                                    HorizontalOptions="Fill"
+                                                    IsReadOnly="True"
+                                                    MaxLength="30"
+                                                    VerticalOptions="Center"
+                                                    IsTextPredictionEnabled="False"
+                                                    Placeholder="Jens.jensen@gmail.com"
+                                                    MinimumWidthRequest="10">
+                            <components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                TargetType="components:NoBorderEntry"
+                                Binding="{Binding EditEnabledEmail}"
+		                        Value="true">
+                                    <Setter 
+                                    Property="IsReadOnly"
+                                    Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
+                        </components:NoBorderEntry>
+
                         <Label Text="E-mail" FontSize="Micro"/>
                     </StackLayout>
+                    <Image Source="round_pencil_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="EditEmailImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModeEmailCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledEmail}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="FinishEditEmailImage" 
+                           IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledEmail}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region Phone-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_call_black.png" Margin="0,0,15,0"/>
                     <StackLayout HorizontalOptions="FillAndExpand">
                         <components:NoBorderEntry x:Name="EditablePhone"
                                                     Keyboard="Telephone"
                                                     Text="{Binding Phone}"
-                                                    Style="Bold"
+                                                    Style="{StaticResource CustomerInfoComponent}"
                                                     HorizontalOptions="FillAndExpand"
-                                                    IsReadOnly="true"
-                                                    VerticalOptions="Center"/>
+                                                    IsReadOnly="True"
+                                                    MaxLength="30"
+                                                    VerticalOptions="Center"
+                                                    IsTextPredictionEnabled="False"
+                                                    Placeholder="+45 12 34 56 78"
+                                                    MinimumWidthRequest="10">
+                            <components:NoBorderEntry.Triggers>
+                                <DataTrigger 
+                                TargetType="components:NoBorderEntry"
+                                Binding="{Binding EditEnabledPhone}"
+		                        Value="true">
+                                    <Setter 
+                                    Property="IsReadOnly"
+                                    Value="False"/>
+                                    <DataTrigger.EnterActions>
+                                        <events:EntryFocusTriggerAction Focused="True" />
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </components:NoBorderEntry.Triggers>
+                        </components:NoBorderEntry>
                         <Label Text="Mobil" FontSize="Micro"/>
+                    </StackLayout>
+                    <Image Source="round_pencil_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="EditPhoneImage">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding EditModePhoneCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledPhone}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="False"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                    <Image Source="round_checked_black.png" 
+                           HorizontalOptions="EndAndExpand" 
+                           x:Name="FinishEditPhoneImage" 
+                           IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SaveInfoCommand}" />
+                        </Image.GestureRecognizers>
+                        <Image.Triggers>
+                            <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding EditEnabledPhone}"
+                            Value="True">
+                                <Setter
+                                Property="IsVisible"
+                                Value="True"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+                    </Image>
+                </StackLayout>
+                <!--#endregion-->
+                <!--#region MeterNum-->
+                <StackLayout Orientation="Horizontal">
+                    <Image Source="round_info_black.png" Margin="0,0,15,0" />
+                    <StackLayout>
+                        <Label Text="{Binding GSRN}" Style="{StaticResource CustomerInfoLabel}" />
+                        <Label Text="Aftagenummer (GSRN)" FontSize="Micro" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding MeterNum}" />
-                        <Label Text="Måler nr." FontSize="Micro"/>
+                        <Label Text="{Binding MeterNum}" Style="{StaticResource CustomerInfoLabel}" />
+                        <Label Text="Måler nr." FontSize="Micro" />
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region LatestMeasure-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_equalizer_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding LatestMeasure}" />
+                        <Label Text="{Binding LatestMeasure}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
+                <!--#endregion-->
+                <!--#region MeasureDate-->
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_date_range_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding MeasureDate}" />
+                        <Label Text="{Binding MeasureDate}" Style="{StaticResource CustomerInfoLabel}"/>
                         <Label Text="Dato for seneste måling" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
-                <ActivityIndicator x:Name="activityIndicator"
-                        IsVisible="{Binding IsBusy}"
-                        IsRunning="{Binding IsBusy}"
-                        Color="Black"
-                        VerticalOptions="CenterAndExpand"
-                        HorizontalOptions="CenterAndExpand"
-                        />
-                <Button x:Name="SaveInfoButton"
-                        Text="Save"
-                        Command="{Binding SaveInfoCommand}"
-                        IsVisible = "false"
-                        BackgroundColor="{StaticResource PrimaryGreen}"
-                        TextColor="White"
-                        Margin="110,0,110,0"/>
+                <!--#endregion-->
             </StackLayout>
         </ScrollView>
-
+        <!--#endregion-->
     </StackLayout>
-
-
 </ContentPage>
