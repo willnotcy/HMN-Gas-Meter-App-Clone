@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
              x:Class="HMNGasApp.View.ScanPage">
     <ScrollView>
         <StackLayout>
@@ -24,10 +25,29 @@
             </StackLayout>
             <!--#endregion-->
             <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
-                <Button Text="Capture photo" x:Name="GetPhotoButton" Command="{Binding TakePictureCommand}"></Button>
                 <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsBusy}"/>
+                <Label Text="Dit aflæste forbrug:"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
+                   Style="{StaticResource BodyText}"
+                   Font="Bold, 30"
+                   HorizontalTextAlignment="Center"
+                   Margin="10, 100, 20, 10"/>
+                <components:RoundedEntry x:Name="usage" 
+                                         Text="{Binding LabelText}" 
+                                         Placeholder="Forbrug..." 
+                                         Style="{StaticResource BodyText}"
+                                         Margin="50,10,50,10"
+                                         HeightRequest="60"
+                                         FontSize="15"
+                                         Keyboard="Numeric"/>
+                <Label HorizontalOptions="Center" Text="Kontrolbillede" />
                 <Image x:Name="PhotoImage" Source="{Binding ImageSource}"></Image>
-                <Label HorizontalOptions="Center" Text="{Binding LabelText}" />
+                <Button Text="BEKRÆFT"
+                    TextColor="White"
+                    Margin="90,50,90,10"
+                    BorderRadius="7"
+                    BackgroundColor="{StaticResource SecondaryMint}"
+                    Command="{Binding ConfirmReadingCommand}"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>

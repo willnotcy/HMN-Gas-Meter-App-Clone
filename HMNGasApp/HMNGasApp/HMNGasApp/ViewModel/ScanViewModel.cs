@@ -1,5 +1,6 @@
 ﻿using HMNGasApp.Helpers;
 using HMNGasApp.Services;
+using HMNGasApp.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,7 @@ namespace HMNGasApp.ViewModel
         private readonly IOpenCVService _openCVService;
         public ICommand ReturnNavCommand { get; }
         public ICommand OpenCameraCommand { get; }
+        public ICommand ConfirmReadingCommand { get; }
 
         private string _labelText;
         public string LabelText
@@ -46,23 +48,43 @@ namespace HMNGasApp.ViewModel
             _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             OpenCameraCommand = new Command(async () => await ExecuteOpenCameraCommand());
-
-            MessagingCenter.Subscribe<CameraResultMessage>(this, CameraResultMessage.Key, async (sender) =>
-            {
-                var digits = sender.Digits;
-                var image = sender.Image;
-
-                LabelText = "";
-
-                foreach (Stream stream in digits)
-                {
-                    await Recognise(stream);
-                }
-
-                ImageSource = ImageSource.FromStream(() => { return image; });
-            });
+            ConfirmReadingCommand = new Command(async () => await ExecuteConfirmReadingCommand());
+            MessagingCenter.Subscribe<CameraResultMessage>(this, CameraResultMessage.Key, async (sender) => await HandleResult(sender));
         }
 
+        private async Task ExecuteConfirmReadingCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            if (LabelText == null || LabelText.Equals(""))
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new ReadingConfirmationPage(LabelText.Replace(" ","")));
+            }
+            IsBusy = false;
+        }
+
+        private async Task HandleResult(CameraResultMessage sender)
+        {
+            var digits = sender.Digits;
+            var image = sender.Image;
+
+            LabelText = "";
+
+            foreach (Stream stream in digits)
+            {
+                await Recognise(stream);
+            }
+
+            ImageSource = ImageSource.FromStream(() => { return image; });
+        }
         private async Task ExecuteReturnNavCommand()
         {
             if (IsBusy)
