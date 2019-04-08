@@ -25,7 +25,11 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <oxy:PlotView Model="{Binding GraphData}" VerticalOptions="Center" HorizontalOptions="Center" />
+                <oxy:PlotView Model="{Binding GraphData}" 
+                              VerticalOptions="Fill" 
+                              HorizontalOptions="FillAndExpand"
+                              HeightRequest="400"
+                              WidthRequest="400"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
