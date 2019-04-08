@@ -40,7 +40,7 @@ namespace HMNGasApp.ViewModel
 
             var series = new LineSeries();
 
-            float previous = default(float);
+            double previous = default(float);
             foreach (var r in readings)
             {
                 if (previous == default(float))
@@ -51,7 +51,7 @@ namespace HMNGasApp.ViewModel
 
                 if (r.ReasonToReading == "Ordinær")
                 {
-                    var parsedReading = float.Parse(r.Reading) - previous;
+                    var parsedReading = double.Parse(r.Reading) - previous;
                     CheckValue(parsedReading);
                     var dateTime = Convert.ToDateTime(r.ReadingDate);
                     CheckDate(dateTime);
@@ -68,14 +68,14 @@ namespace HMNGasApp.ViewModel
             GraphData = plotModel;
 		}
 
-        private string FormatValueLabel(float vl)
+        private string FormatValueLabel(double vl)
         {
             return "" + ((Int64) vl);
         }
 
-        private void CheckValue(float value)
+        private void CheckValue(double value)
         {
-            MinimumValue = MinimumValue < value ? MinimumValue : value;
+            MinimumValue = MinimumValue < value && MinimumValue != default(double) ? MinimumValue : value;
             MaximumValue = MaximumValue > value ? MaximumValue : value;
         }
 
