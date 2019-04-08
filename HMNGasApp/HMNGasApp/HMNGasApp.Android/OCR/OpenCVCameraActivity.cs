@@ -117,8 +117,11 @@ namespace HMNGasApp.Droid.OCR
             var contoursBySize = _openCV.FilterContoursBySize(contours.Item1, contourMinHeight, contourMaxHeight);
             var alignedContours = _openCV.FilterContoursByYPosition(contoursBySize.Item1, contoursBySize.Item2);
 
+            // Converts back to colour
+            var bgr = _openCV.ToBGR(rotated.Clone());
+
             // Draw bounding boxes on input image for user visualization.
-            var withBoundingBoxes = _openCV.DrawBoundingBoxes(rotated.Clone(), alignedContours.Item2);
+            var withBoundingBoxes = _openCV.DrawBoundingBoxes(bgr, alignedContours.Item2);
             withBoundingBoxes.CopyTo(mRgba.Submat(roi));
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
