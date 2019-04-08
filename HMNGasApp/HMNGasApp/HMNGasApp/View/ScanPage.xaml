@@ -25,14 +25,17 @@
                 </StackLayout>
             </StackLayout>
             <!--#endregion-->
-            <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="10">
-                <ActivityIndicator x:Name="activityIndicator" IsRunning="{Binding IsBusy}"/>
+            <StackLayout VerticalOptions="Center" 
+                         HorizontalOptions="Center" 
+                         Padding="10">
+                <ActivityIndicator x:Name="activityIndicator" 
+                                   IsRunning="{Binding IsBusy}"/>
                 <Label Text="Dit aflæste forbrug:"
-                   TextColor="{StaticResource PrimaryDarkGrey}"
-                   Style="{StaticResource BodyText}"
-                   Font="Bold, 30"
-                   HorizontalTextAlignment="Center"
-                   Margin="10, 10"/>
+                       TextColor="{StaticResource PrimaryDarkGrey}"
+                       Style="{StaticResource BodyText}"
+                       Font="Bold, 30"
+                       HorizontalTextAlignment="Center"
+                       Margin="10, 10"/>
                 <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding Reading}" 
                                          Placeholder="Forbrug..." 
@@ -41,14 +44,19 @@
                                          HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
-                <Label HorizontalOptions="Center" Text="Kontrolbillede:" />
-                <Image x:Name="PhotoImage" Source="{Binding ImageSource}" Scale="0.6"></Image>
+                <StackLayout VerticalOptions="Center">
+                    <Label HorizontalOptions="Center" 
+                           Text="Kontrolbillede:"/>
+                    <Image x:Name="PhotoImage" 
+                           Source="{Binding ImageSource}" 
+                           Scale="0.6"></Image>
+                </StackLayout>
                 <Button Text="BEKRÆFT"
-                    TextColor="White"
-                    Margin="90, 10"
-                    BorderRadius="7"
-                    BackgroundColor="{StaticResource SecondaryMint}"
-                    Command="{Binding ConfirmReadingCommand}"/>
+                        TextColor="White"
+                        Margin="90, 10"
+                        BorderRadius="7"
+                        BackgroundColor="{StaticResource SecondaryMint}"
+                        Command="{Binding ConfirmReadingCommand}"/>
             </StackLayout>
         </StackLayout>
     </ScrollView>
