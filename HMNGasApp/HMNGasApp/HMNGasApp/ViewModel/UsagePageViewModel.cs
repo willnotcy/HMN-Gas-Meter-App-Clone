@@ -21,6 +21,11 @@ namespace HMNGasApp.ViewModel
             set { SetProperty(ref _graphData, value); }
         }
 
+        private double MinimumValue;
+        private double MaximumValue;
+        private DateTime Earliest;
+        private DateTime Latest;
+
         public UsagePageViewModel(IConfig config)
 		{
 			_config = config;
@@ -35,7 +40,7 @@ namespace HMNGasApp.ViewModel
 
             var series = new LineSeries();
 
-            float previous = default(float);
+            double previous = default(float);
             foreach (var r in readings)
             {
                 if (previous == default(float))
@@ -46,24 +51,40 @@ namespace HMNGasApp.ViewModel
 
                 if (r.ReasonToReading == "Ordinær")
                 {
-                    var parsedReading = float.Parse(r.Reading);
-                    series.Points.Add(new DataPoint(parsedReading - previous, DateTimeAxis.ToDouble(Convert.ToDateTime(r.ReadingDate))));
+                    var parsedReading = double.Parse(r.Reading) - previous;
+                    CheckValue(parsedReading);
+                    var dateTime = Convert.ToDateTime(r.ReadingDate);
+                    CheckDate(dateTime);
+                    series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateTime), parsedReading));
                     previous = parsedReading;
                 }
             }
 
 
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left});
-            plotModel.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom});
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Maximum = MaximumValue + (MaximumValue * 0.1), Minimum = MinimumValue - (MinimumValue * 0.1)});
+            plotModel.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = DateTimeAxis.ToDouble(Earliest), Maximum = DateTimeAxis.ToDouble(Latest), StringFormat = "yyyy-MM-dd" });
             plotModel.Series.Add(series);
 
-            
             GraphData = plotModel;
 		}
 
-        private string FormatValueLabel(float vl)
+        private string FormatValueLabel(double vl)
         {
             return "" + ((Int64) vl);
+
+        }
+
+        private void CheckValue(double value)
+        {
+            MinimumValue = MinimumValue < value && MinimumValue != default(double) ? MinimumValue : value;
+            MaximumValue = MaximumValue > value ? MaximumValue : value;
+        }
+
+        private void CheckDate(DateTime date)
+        {
+            Earliest = Earliest < date ? Earliest : date;
+            Latest = Latest > date ? Latest : date;
+
         }
 	}
 }
