@@ -27,11 +27,11 @@ namespace HMNGasApp.ViewModel
         public ICommand OpenCameraCommand { get; }
         public ICommand ConfirmReadingCommand { get; }
 
-        private string _labelText;
-        public string LabelText
+        private string _reading;
+        public string Reading
         {
-            get { return _labelText; }
-            set { SetProperty(ref _labelText, value); }
+            get { return _reading; }
+            set { SetProperty(ref _reading, value); }
         }
 
         private ImageSource _photoImage;
@@ -60,13 +60,13 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            if (LabelText == null || LabelText.Equals(""))
+            if (Reading == null || Reading.Equals(""))
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
             }
             else
             {
-                await Navigation.PushAsync(new ReadingConfirmationPage(LabelText));
+                await Navigation.PushAsync(new ReadingConfirmationPage(Reading));
             }
             IsBusy = false;
         }
@@ -76,7 +76,7 @@ namespace HMNGasApp.ViewModel
             var digits = sender.Digits;
             var image = sender.Image;
 
-            LabelText = "";
+            Reading = "";
 
             foreach (Stream stream in digits)
             {
@@ -127,7 +127,7 @@ namespace HMNGasApp.ViewModel
                 var initialised = await _tesseractApi.Init("any");
                 if (!initialised)
                 {
-                    LabelText = "Couldn't start Tesseract";
+                    Reading = "Couldn't start Tesseract";
                 }
                 else
                 {
@@ -153,11 +153,11 @@ namespace HMNGasApp.ViewModel
                             var item = enumerator.Current.Text;
                             textResult += item + " ";
                         }
-                        LabelText = textResult;
+                        Reading = textResult;
                     }
                     else
                     {
-                        LabelText = "Didn't work";
+                        Reading = "Didn't work";
                     }
                 }
             }
