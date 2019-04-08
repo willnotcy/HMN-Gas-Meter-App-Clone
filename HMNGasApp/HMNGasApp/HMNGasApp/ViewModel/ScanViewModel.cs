@@ -23,7 +23,7 @@ namespace HMNGasApp.ViewModel
         private readonly IDevice _device;
         private readonly IOpenCVService _openCVService;
         public ICommand ReturnNavCommand { get; }
-        public ICommand TakePictureCommand { get; }
+        public ICommand OpenCameraCommand { get; }
 
         private string _labelText;
         public string LabelText
@@ -45,7 +45,7 @@ namespace HMNGasApp.ViewModel
             _openCVService = DependencyService.Get<IOpenCVService>();
             _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
-            TakePictureCommand = new Command(async () => await ExecuteTakePictureCommand());
+            OpenCameraCommand = new Command(async () => await ExecuteOpenCameraCommand());
 
             MessagingCenter.Subscribe<CameraResultMessage>(this, CameraResultMessage.Key, async (sender) =>
             {
@@ -76,7 +76,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        public async Task ExecuteTakePictureCommand()
+        public async Task ExecuteOpenCameraCommand()
         {
             if (IsBusy)
             {
@@ -91,7 +91,7 @@ namespace HMNGasApp.ViewModel
 
             IsBusy = false;
         }
-
+        
         /// <summary>
         /// Method for recognizing the characters. Input comes from the ScanPage.xaml.cs, and is then processed into words
         /// </summary>

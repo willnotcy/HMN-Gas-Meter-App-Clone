@@ -21,5 +21,10 @@ namespace HMNGasApp.View
             BindingContext = _vm = DependencyService.Resolve<ScanViewModel>();
             _vm.Navigation = Navigation;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            _vm.OpenCameraCommand.Execute(null);
+        }
     }
 }
