@@ -1,12 +1,10 @@
-﻿using HMNGasApp.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 using System.Windows.Input;
 using HMNGasApp.Model;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 using Xamarin.Forms;
-using System.Linq;
-using XLabs.Forms.Charting.Controls;
 
 namespace HMNGasApp.ViewModel
 {
@@ -15,9 +13,9 @@ namespace HMNGasApp.ViewModel
 		public ICommand ReturnNavCommand { get; set; }
 		private readonly IConfig _config;
 
-        private SeriesCollection _graphData;
+        private PlotModel _graphData;
 
-        public SeriesCollection GraphData
+        public PlotModel GraphData
         {
             get { return _graphData; }
             set { SetProperty(ref _graphData, value); }
@@ -33,11 +31,9 @@ namespace HMNGasApp.ViewModel
 		private void Setup()
 		{
 			var readings= _config.MeterReadings;
-            var seriesCollection = new SeriesCollection();
-            var series = new Series { Type = ChartType.Line, Color = (Color) App.Current.Resources["PrimaryGreen"]};
-            
-            
-            var entries = new DataPointCollection();
+            var plotModel = new PlotModel { Title = "Seneste forbrug"};
+
+            var series = new LineSeries();
 
             float previous = default(float);
             foreach (var r in readings)
@@ -51,14 +47,18 @@ namespace HMNGasApp.ViewModel
                 if (r.ReasonToReading == "Ordinær")
                 {
                     var parsedReading = float.Parse(r.Reading);
-                    entries.Add(new DataPoint { Value = parsedReading - previous, Label = r.ReadingDate, Color = (Color) App.Current.Resources["PrimaryGreen"]});
+                    series.Points.Add(new DataPoint(parsedReading - previous, DateTimeAxis.ToDouble(Convert.ToDateTime(r.ReadingDate))));
                     previous = parsedReading;
                 }
             }
 
-            series.Points = entries;
-            seriesCollection.Add(series);
-            GraphData = seriesCollection;
+
+            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left});
+            plotModel.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom});
+            plotModel.Series.Add(series);
+
+            
+            GraphData = plotModel;
 		}
 
         private string FormatValueLabel(float vl)

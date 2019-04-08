@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.UsagePage"
-             xmlns:charting="clr-namespace:XLabs.Forms.Charting.Controls;assembly=XLabs.Forms.Charting"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
@@ -25,13 +25,7 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <charting:Chart 
-                        HeightRequest="400"
-                        WidthRequest="400"
-                        Spacing="10"
-                        Series="{Binding GraphData}"
-                        >
-                </charting:Chart>
+                <oxy:PlotView Model="{Binding GraphData}" VerticalOptions="Center" HorizontalOptions="Center" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
