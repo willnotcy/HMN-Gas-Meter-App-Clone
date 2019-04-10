@@ -105,6 +105,9 @@ namespace HMNGasApp.Droid.OCR
             //var edges = _openCV.AdaptiveThresh(blur);
             var edges = _openCV.OtsuThresh(blur);
 
+            //invert B/W
+            Core.Bitwise_not(edges, edges);
+
             // Detect straight lines using Hough Lines Transform.
             var lines = _openCV.HoughLines(edges, houghThresh);
 
@@ -150,11 +153,8 @@ namespace HMNGasApp.Droid.OCR
                 // Cut each digit individually based on bounding box.
                 foreach (Rect rect in sorted)
                 {
-                    //Invert B/W
-                    var digit = new Mat(rotated, rect);
-                    Core.Bitwise_not(digit, digit);
-                    digits.Add(_openCV.MatToStream(digit));
-                    digitsClone.Add(_openCV.MatToStream(digit));
+                    digits.Add(_openCV.MatToStream(new Mat(rotated, rect)));
+                    digitsClone.Add(_openCV.MatToStream(new Mat(rotated, rect)));
                 }
 
                 // TODO: Crop output image to region of interest when that is implemented.
