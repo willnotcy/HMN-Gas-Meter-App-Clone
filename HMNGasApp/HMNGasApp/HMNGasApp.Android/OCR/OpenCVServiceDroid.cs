@@ -272,6 +272,12 @@ namespace HMNGasApp.Droid
             Imgproc.EqualizeHist(mat, output);
             return output;
         }
+        public Mat AdaptiveThresh(Mat mat)
+        {
+            Mat output = new Mat();
+            Imgproc.AdaptiveThreshold(mat, output, 255, Imgproc.AdaptiveThreshMeanC, Imgproc.ThreshBinary, 15, 40);
+            return output;
+        }
         #endregion
         #region Drawing methods
 

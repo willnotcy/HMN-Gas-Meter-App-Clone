@@ -85,7 +85,7 @@ namespace HMNGasApp.Droid.OCR
             mRgba = input.Clone();
 
             // ROI
-            var roi = new Rect(new Point(100, 100), new Size(_openCvCameraView.Width - 200, _openCvCameraView.Height / 8));
+            var roi = new Rect(new Point(100, 100), new Size(100, 100));
 
             var submat = input.Submat(roi);
 
@@ -101,7 +101,8 @@ namespace HMNGasApp.Droid.OCR
             var blur = _openCV.MedianBlur(equalized);
 
             // Detect edges using canny.
-            var edges = _openCV.Canny(blur, cT1, cT2);
+            //var edges = _openCV.Canny(blur, cT1, cT2);
+            var edges = _openCV.AdaptiveThresh(blur);
 
             // Detect straight lines using Hough Lines Transform.
             var lines = _openCV.HoughLines(edges, houghThresh);
