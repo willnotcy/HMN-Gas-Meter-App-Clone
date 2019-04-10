@@ -250,6 +250,9 @@ namespace HMNGasApp.ViewModel
                     textResult += item + " ";
                 }
 
+                if (textResult == "")
+                    textResult = "?";
+
                 Reading += textResult;
             }
             else

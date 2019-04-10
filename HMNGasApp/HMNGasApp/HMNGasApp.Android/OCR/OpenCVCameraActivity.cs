@@ -75,10 +75,10 @@ namespace HMNGasApp.Droid.OCR
         }
         private Rect GetRoi(Mat mat)
         {
-            var scanBox = new Size((mat.Width() / 10) * 9,
-                                   mat.Height() / 8);
+            var scanBox = new Size(mat.Width() - ((mat.Width() / 6) * 2),
+                                   mat.Height() / 6);
 
-            var scanBoxStartingPoint = new Point(mat.Width() / 20,
+            var scanBoxStartingPoint = new Point(mat.Width() / 6,
                                                  (mat.Height() / 2) - (mat.Height() / 10));
 
             return new Rect(scanBoxStartingPoint, scanBox);
@@ -92,8 +92,8 @@ namespace HMNGasApp.Droid.OCR
             }
             // TODO: provide these in a global config file
             var houghThresh = 350;
-            var contourMinHeight = 60;
-            var contourMaxHeight = 90;
+            var contourMinHeight = 30;
+            var contourMaxHeight = 100;
 
             // Initial rotation because camera starts in landscape mode.
             var input = _openCV.Rotate(p0, -90);
@@ -110,22 +110,20 @@ namespace HMNGasApp.Droid.OCR
 
             // Blur image to reduce noise.
             var blur = _openCV.GaussianBlur(equalized);
+            //var blur = _openCV.MedianBlur(equalized);
 
             // Detect edges using canny.
             var edges = _openCV.OtsuThresh(blur);
 
-            //invert B/W
-            Core.Bitwise_not(edges, edges);
-
             // Detect straight lines using Hough Lines Transform.
-            var lines = _openCV.HoughLines(edges, houghThresh);
+            //var lines = _openCV.HoughLines(edges, houghThresh);
 
             // Rotate image based on detected lines average gradient.
-            var thetaDegrees = _openCV.GetAverageLineTheta(lines);
-            var rotated = _openCV.Rotate(edges, thetaDegrees);
+            //var thetaDegrees = _openCV.GetAverageLineTheta(lines);
+            //var rotated = _openCV.Rotate(edges, thetaDegrees);
 
             // Find contours in image. (clone because it this version of OpenCV applies some changes to the input image)
-            var clone = rotated.Clone();
+            var clone = edges.Clone();
             var contours = _openCV.FindContours(clone);
 
             // Filter contours based on size -> then by Y position and height of their bounding boxes.
@@ -133,11 +131,11 @@ namespace HMNGasApp.Droid.OCR
             var alignedContours = _openCV.FilterContoursByYPosition(contoursBySize.Item1, contoursBySize.Item2);
 
             // Converts back to colour
-            Imgproc.CvtColor(rotated, rotated, Imgproc.ColorGray2rgba, 4);
+            Imgproc.CvtColor(edges, edges, Imgproc.ColorGray2rgba, 4);
 
             // Draw bounding boxes on input image for user visualization.
             
-            var withBoundingBoxes = _openCV.DrawBoundingBoxes(rotated.Clone(), alignedContours.Item2);
+            var withBoundingBoxes = _openCV.DrawBoundingBoxes(edges.Clone(), alignedContours.Item2);
             withBoundingBoxes.CopyTo(mRgba.Submat(roi));
 
 
@@ -154,7 +152,7 @@ namespace HMNGasApp.Droid.OCR
                 var image = new Mat();
                 var digitsClone = new List<Stream>();
 
-                image = rotated;
+                image = edges;
 
                 // Sort digit bounding boxes left to right
                 var sorted = _openCV.SortRects(alignedContours.Item2);
@@ -162,8 +160,8 @@ namespace HMNGasApp.Droid.OCR
                 // Cut each digit individually based on bounding box.
                 foreach (Rect rect in sorted)
                 {
-                    digits.Add(_openCV.MatToStream(new Mat(rotated, rect)));
-                    digitsClone.Add(_openCV.MatToStream(new Mat(rotated, rect)));
+                    digits.Add(_openCV.MatToStream(new Mat(edges, rect)));
+                    digitsClone.Add(_openCV.MatToStream(new Mat(edges, rect)));
                 }
 
                 // TODO: Crop output image to region of interest when that is implemented.
