@@ -201,7 +201,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
 
-            if (EditEnabledEmail == true && (Email.Contains(";") || Email.Contains("/") || Email.Contains("<") || Email.Contains("$")))
+            if (EditEnabledEmail == true && (Customer.Email.Contains(";") || Customer.Email.Contains("/") || Customer.Email.Contains("<") || Customer.Email.Contains("$")))
             {
                 Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
                 EditEnabledName = false;
@@ -298,7 +298,7 @@ namespace HMNGasApp.ViewModel
             if(latestReading != null)
             {
                 MeterNum = latestReading.MeterNum;
-                LatestMeasure = latestReading.Reading + " m\u00B3";
+                LatestMeasure = latestReading.Reading.TrimEnd('0',',') + " m\u00B3";
                 MeasureDate = latestReading.ReadingDate;
             } else
             {

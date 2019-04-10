@@ -57,7 +57,8 @@
                         BorderRadius="7"
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
-
+                        
+                <Label Text=""/>
             </StackLayout>
             <StackLayout Grid.Row="2"
                          VerticalOptions="EndAndExpand"
