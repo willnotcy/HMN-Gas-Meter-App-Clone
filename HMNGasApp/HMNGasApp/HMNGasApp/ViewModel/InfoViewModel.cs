@@ -200,14 +200,36 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            EditEnabledName = false;
-            EditEnabledEmail = true;
-            EditEnabledPhone = false;
 
-            Readonly = false;
+            if (EditEnabledEmail == true && (Email.Contains(";") || Email.Contains("/") || Email.Contains("<") || Email.Contains("$")))
+            {
+                Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
+                EditEnabledName = false;
+                EditEnabledEmail = false;
+                EditEnabledPhone = false;
 
-            IsBusy = false;
+                Readonly = false;
+
+                IsBusy = false;
+            }
+            else
+            {
+
+                EditEnabledName = false;
+                EditEnabledEmail = true;
+                EditEnabledPhone = false;
+
+                Readonly = false;
+
+                IsBusy = false;
+            }
         }
+
+        private void CheckIllegalCharacters()
+        {
+
+        }
+
         private void ExecuteEditModePhoneCommand()
         {
             if (IsBusy)
