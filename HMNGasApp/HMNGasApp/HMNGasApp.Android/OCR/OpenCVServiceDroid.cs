@@ -266,7 +266,12 @@ namespace HMNGasApp.Droid
 
             return (alignedContours, alignedBounds);
         }
-
+        public Mat EqualizeHistogram(Mat mat)
+        {
+            Mat output = new Mat();
+            Imgproc.EqualizeHist(mat, output);
+            return output;
+        }
         #endregion
         #region Drawing methods
 

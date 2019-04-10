@@ -74,9 +74,9 @@ namespace HMNGasApp.Droid.OCR
         public Mat OnCameraFrame(Mat p0)
         {
             // TODO: provide these in a global config file
-            var cT1 = 180;
+            var cT1 = 140;
             var cT2 = cT1 * 3;
-            var houghThresh = 300;
+            var houghThresh = 350;
             var contourMinHeight = 60;
             var contourMaxHeight = 90;
 
@@ -94,8 +94,11 @@ namespace HMNGasApp.Droid.OCR
             // Turn image black and white.
             var gray = _openCV.ToGray(submat);
 
+            //Brightness and contrast correction
+            var equalized = _openCV.EqualizeHistogram(gray);
+
             // Blur image to reduce noise.
-            var blur = _openCV.MedianBlur(gray);
+            var blur = _openCV.MedianBlur(equalized);
 
             // Detect edges using canny.
             var edges = _openCV.Canny(blur, cT1, cT2);

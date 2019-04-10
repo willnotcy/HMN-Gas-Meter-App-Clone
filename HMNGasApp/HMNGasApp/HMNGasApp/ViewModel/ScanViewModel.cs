@@ -229,6 +229,7 @@ namespace HMNGasApp.ViewModel
             }
 
             _tesseract.SetWhitelist("0123456789");
+            _tesseract.SetPageSegmentationMode(PageSegmentationMode.SingleChar);
             bool success = await _tesseract.SetImage(result);
             if (success)
             {
