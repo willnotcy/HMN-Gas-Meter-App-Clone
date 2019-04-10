@@ -21,6 +21,7 @@ using System.Numerics;
 using Point = OpenCV.Core.Point;
 using Rect = OpenCV.Core.Rect;
 using HMNGasApp.Droid.OCR;
+using Size = OpenCV.Core.Size;
 
 [assembly: Dependency(typeof(HMNGasApp.Droid.OpenCVServiceDroid))]
 namespace HMNGasApp.Droid
@@ -276,6 +277,13 @@ namespace HMNGasApp.Droid
         {
             Mat output = new Mat();
             Imgproc.AdaptiveThreshold(mat, output, 255, Imgproc.AdaptiveThreshMeanC, Imgproc.ThreshBinary, 15, 40);
+            return output;
+        }
+        public Mat GaussianBlur(Mat mat)
+        {
+            Mat output = new Mat();
+            var kernel = new Size(3, 3);
+            Imgproc.GaussianBlur(mat, output, kernel, 0);
             return output;
         }
         #endregion

@@ -98,7 +98,7 @@ namespace HMNGasApp.Droid.OCR
             var equalized = _openCV.EqualizeHistogram(gray);
 
             // Blur image to reduce noise.
-            var blur = _openCV.MedianBlur(equalized);
+            var blur = _openCV.GaussianBlur(equalized);
 
             // Detect edges using canny.
             //var edges = _openCV.Canny(blur, cT1, cT2);
