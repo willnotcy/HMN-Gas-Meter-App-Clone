@@ -102,7 +102,8 @@ namespace HMNGasApp.Droid.OCR
 
             // Detect edges using canny.
             //var edges = _openCV.Canny(blur, cT1, cT2);
-            var edges = _openCV.AdaptiveThresh(blur);
+            //var edges = _openCV.AdaptiveThresh(blur);
+            var edges = _openCV.OtsuThresh(blur);
 
             // Detect straight lines using Hough Lines Transform.
             var lines = _openCV.HoughLines(edges, houghThresh);

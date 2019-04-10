@@ -279,6 +279,12 @@ namespace HMNGasApp.Droid
             Imgproc.AdaptiveThreshold(mat, output, 255, Imgproc.AdaptiveThreshMeanC, Imgproc.ThreshBinary, 15, 40);
             return output;
         }
+        public Mat OtsuThresh(Mat mat)
+        {
+            Mat output = new Mat();
+            Imgproc.Threshold(mat, output,0,255,Imgproc.ThreshBinary+Imgproc.ThreshOtsu);
+            return output;
+        }
         public Mat GaussianBlur(Mat mat)
         {
             Mat output = new Mat();
