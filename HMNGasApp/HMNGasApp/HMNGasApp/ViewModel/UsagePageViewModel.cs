@@ -40,29 +40,33 @@ namespace HMNGasApp.ViewModel
 
             var series = new LineSeries();
 
-            double previous = default(float);
             foreach (var r in readings)
             {
-                if (previous == default(float))
-                {
-                    previous = float.Parse(r.Reading);
-                    continue;
-                }
-
                 if (r.ReasonToReading == "Ordinær")
                 {
-                    var parsedReading = double.Parse(r.Reading) - previous;
-                    CheckValue(parsedReading);
+					var parsedReading = double.Parse(r.Consumption);
+					CheckValue(parsedReading);
                     var dateTime = Convert.ToDateTime(r.ReadingDate);
                     CheckDate(dateTime);
                     series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(dateTime), parsedReading));
-                    previous = parsedReading;
                 }
             }
 
-
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Maximum = MaximumValue + (MaximumValue * 0.1), Minimum = MinimumValue - (MinimumValue * 0.1)});
-            plotModel.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom, Minimum = DateTimeAxis.ToDouble(Earliest), Maximum = DateTimeAxis.ToDouble(Latest), StringFormat = "yyyy-MM-dd" });
+			
+           plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left/*,
+												Maximum = MaximumValue + (MaximumValue * 0.1),
+												Minimum = MinimumValue - (MinimumValue * 0.1),
+												IsPanEnabled = false,
+												IsZoomEnabled =false,
+				//								MajorTickSize = 7*/
+			});
+            plotModel.Axes.Add(new DateTimeAxis { Position = AxisPosition.Bottom,
+				StringFormat = "yyyy-MM-dd"/*,
+												  Minimum = DateTimeAxis.ToDouble(Earliest),
+											  	  Maximum = DateTimeAxis.ToDouble(Latest), 
+												  IsPanEnabled = false,
+												  IsZoomEnabled = false*/
+			});
             plotModel.Series.Add(series);
 
             GraphData = plotModel;
