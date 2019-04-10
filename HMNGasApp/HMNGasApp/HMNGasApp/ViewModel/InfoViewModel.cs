@@ -156,17 +156,25 @@ namespace HMNGasApp.ViewModel
                 Customer.Phone = Phone.Trim();
                 Customer.Email = Email.Trim();
 
-                var result = await _service.EditCustomerAsync(Customer);
+                if (VerifyEmail(Customer.Email))
+                {
 
-                if (result)
-                {
-                    await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                }
-                else
-                {
-                    //TODO: Get text from languagefile
-                    await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
-                }
+                    var result = await _service.EditCustomerAsync(Customer);
+
+                    if (result)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                    }
+                    else
+                    {
+                        //TODO: Get text from languagefile
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                    }
+
+                } else 
+                    {
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Din Email er ugyldig", "Okay");
+                    }
             }
 
             Readonly = true;
@@ -201,47 +209,19 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-
-
-            if (EditEnabledEmail == true && (Email.Contains(";") || Email.Contains("/") || Email.Contains("<") || Email.Contains("$")))
-            {
-                Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
-                EditEnabledName = false;
-                EditEnabledEmail = false;
-                EditEnabledPhone = false;
-
-                Readonly = false;
-
-                IsBusy = false;
-            }
-            else
-            {
-
-                EditEnabledName = false;
-                EditEnabledEmail = true;
-                EditEnabledPhone = false;
-
-                Readonly = false;
-
-                IsBusy = false;
-            }
+           
         }
 
-        private void CheckIllegalCharacters()
+        private bool VerifyEmail(string email) 
         {
-            var email = EditableEmail.Text;
-            var EmailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
-
-            if(Regex.IsMatch(email, EmailPattern)) 
+            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+            if(Regex.IsMatch(email, emailPattern)) 
                 {
-                    Application.Current.MainPage.DisplayAlert("Success", "Din email er cool. Dine oplysninger blev opdateret!", "Okay");
-
+                    return true;
                 }
-            else 
-                {
-                    Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
-                }
+            return false;
         }
+
 
         private void ExecuteEditModePhoneCommand()
         {
