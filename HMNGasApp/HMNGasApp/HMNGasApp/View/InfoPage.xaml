@@ -63,7 +63,7 @@
                         </components:NoBorderEntry>
                         <Label Text="Navn" FontSize="Micro"/>
                     </StackLayout>
-                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage">
+                    <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage" IsVisible="{Binding EditName}">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding EditModeNameCommand}"/>
                         </Image.GestureRecognizers>

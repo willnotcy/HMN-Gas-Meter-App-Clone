@@ -123,6 +123,13 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _editEnabledPhone, value);
         }
 
+        private bool _editName;
+        public bool EditName
+        {
+            get => _editName;
+            set => SetProperty(ref _editName, value);
+        }
+
 
         #endregion
 
@@ -139,6 +146,7 @@ namespace HMNGasApp.ViewModel
             EditEnabledName = false;
             EditEnabledEmail = false;
             EditEnabledPhone = false;
+            EditName = false; //Disables the ability to change name
         }
 
         private async Task ExecuteSaveInfoCommand()
@@ -177,10 +185,9 @@ namespace HMNGasApp.ViewModel
 
                 } else 
                     {
-                        await App.Current.MainPage.DisplayAlert("Fejl", "Din Email er ugyldig", "Okay");
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Din Email er ugyldig. Skriv en gyldig Email.", "Okay");
                     }
             }
-
 
 
             IsBusy = false;
