@@ -164,6 +164,10 @@ namespace HMNGasApp.ViewModel
                     if (result)
                     {
                         await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                        Readonly = true;
+                        EditEnabledName = false;
+                        EditEnabledEmail = false;
+                        EditEnabledPhone = false;
                     }
                     else
                     {
@@ -177,10 +181,7 @@ namespace HMNGasApp.ViewModel
                     }
             }
 
-            Readonly = true;
-            EditEnabledName = false;
-            EditEnabledEmail = false;
-            EditEnabledPhone = false;
+
 
             IsBusy = false;
         }
@@ -209,47 +210,25 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-<<<<<<< HEAD
-           
-=======
+            EditEnabledName = false;
+            EditEnabledEmail = true;
+            EditEnabledPhone = false;
 
-            if (EditEnabledEmail == true && (Customer.Email.Contains(";") || Customer.Email.Contains("/") || Customer.Email.Contains("<") || Customer.Email.Contains("$")))
-            {
-                Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
-                EditEnabledName = false;
-                EditEnabledEmail = false;
-                EditEnabledPhone = false;
+            Readonly = false;
 
-                Readonly = false;
+            IsBusy = false;
 
-                IsBusy = false;
-            }
-            else
-            {
-
-                EditEnabledName = false;
-                EditEnabledEmail = true;
-                EditEnabledPhone = false;
-
-                Readonly = false;
-
-                IsBusy = false;
-            }
->>>>>>> 58b905818c57e2a44d752dc17d57f9313daf92a9
         }
 
         private bool VerifyEmail(string email) 
         {
-<<<<<<< HEAD
             var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
             if(Regex.IsMatch(email, emailPattern)) 
                 {
                     return true;
                 }
             return false;
-=======
 
->>>>>>> 58b905818c57e2a44d752dc17d57f9313daf92a9
         }
 
 
