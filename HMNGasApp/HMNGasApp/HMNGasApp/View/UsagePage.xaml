@@ -33,7 +33,8 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <oxy:PlotView Model="{Binding GraphData}" 
+                <oxy:PlotView x:Name="PlotView"
+                              Model="{Binding GraphData}" 
                               VerticalOptions="Fill" 
                               HorizontalOptions="FillAndExpand"
                               HeightRequest="400"
