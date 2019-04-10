@@ -85,7 +85,7 @@ namespace HMNGasApp.Droid.OCR
             mRgba = input.Clone();
 
             // ROI
-            var roi = new Rect(new Point(100, 100), new Size(100, 100));
+            var roi = new Rect(new Point(_openCvCameraView.Width/10, _openCvCameraView.Height/2), new Size(_openCvCameraView.Width/5, _openCvCameraView.Height/8));
 
             var submat = input.Submat(roi);
 
