@@ -261,9 +261,8 @@
                 <StackLayout Orientation="Horizontal">
                     <Image Source="round_equalizer_black.png" Margin="0,0,15,0" />
                     <StackLayout>
-                        <Label Text="{Binding LatestMeasure, StringFormat={}{0:G27}"
-                               Style="{StaticResource CustomerInfoLabel}"
-                               TextColor="Gray"
+                        <Label Text="{Binding LatestMeasure}"
+                               Style= "{StaticResource CustomerInfoLabel}" 
                                />
                         <Label Text="Seneste måling" FontSize="Micro"/>
                     </StackLayout>
