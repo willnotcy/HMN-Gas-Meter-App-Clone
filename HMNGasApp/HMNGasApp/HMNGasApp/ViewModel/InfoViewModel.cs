@@ -202,12 +202,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
 
-<<<<<<< HEAD
             if (EditEnabledEmail == true && (Customer.Email.Contains(";") || Customer.Email.Contains("/") || Customer.Email.Contains("<") || Customer.Email.Contains("$")))
-=======
-
-            if (EditEnabledEmail == true && (Email.Contains(";") || Email.Contains("/") || Email.Contains("<") || Email.Contains("$")))
->>>>>>> 7b507caefb31a70e49655bb4a7ee0abcb2e314d5
             {
                 Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
                 EditEnabledName = false;
@@ -233,18 +228,7 @@ namespace HMNGasApp.ViewModel
 
         private void CheckIllegalCharacters()
         {
-            var email = EditableEmail.Text;
-            var EmailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
 
-            if(Regex.IsMatch(email, EmailPattern)) 
-                {
-                    Application.Current.MainPage.DisplayAlert("Success", "Din email er cool. Dine oplysninger blev opdateret!", "Okay");
-
-                }
-            else 
-                {
-                    Application.Current.MainPage.DisplayAlert("Fejl", "Email må ikke indeholde specialtegn", "Okay");
-                }
         }
 
         private void ExecuteEditModePhoneCommand()
