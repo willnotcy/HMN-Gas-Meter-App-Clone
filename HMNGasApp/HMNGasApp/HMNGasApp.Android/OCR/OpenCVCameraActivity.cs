@@ -27,6 +27,7 @@ namespace HMNGasApp.Droid.OCR
         private OpenCVServiceDroid _openCV { get; set; }
 
         private Mat mRgba;
+        private Rect roi;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,6 +38,8 @@ namespace HMNGasApp.Droid.OCR
             _openCvCameraView.Visibility = ViewStates.Visible;
             _openCvCameraView.SetCvCameraViewListener(this);
             _openCV = new OpenCVServiceDroid();
+
+
         }
 
         protected override void OnPause()
@@ -70,12 +73,24 @@ namespace HMNGasApp.Droid.OCR
                 _openCvCameraView.DisableView();
             }
         }
+        private Rect GetRoi(Mat mat)
+        {
+            var scanBox = new Size((mat.Width() / 10) * 9,
+                                   mat.Height() / 8);
+
+            var scanBoxStartingPoint = new Point(mat.Width() / 20,
+                                                 (mat.Height() / 2) - (mat.Height() / 10));
+
+            return new Rect(scanBoxStartingPoint, scanBox);
+        }
 
         public Mat OnCameraFrame(Mat p0)
         {
+            if(roi == null)
+            {
+                roi = GetRoi(p0);
+            }
             // TODO: provide these in a global config file
-            var cT1 = 140;
-            var cT2 = cT1 * 3;
             var houghThresh = 350;
             var contourMinHeight = 60;
             var contourMaxHeight = 90;
@@ -83,17 +98,6 @@ namespace HMNGasApp.Droid.OCR
             // Initial rotation because camera starts in landscape mode.
             var input = _openCV.Rotate(p0, -90);
             mRgba = input.Clone();
-
-            // ROI
-
-            var scanBox = new Size((input.Width()/10)*9, 
-                                   input.Height()/10);
-
-            var scanBoxStartingPoint = new Point(input.Width()/20,
-                                                 (input.Height()/2)-(input.Height()/10));
-
-            var roi = new Rect(scanBoxStartingPoint,scanBox);
-
             var submat = input.Submat(roi);
 
             mRgba = _openCV.DrawRectangle(mRgba, roi, new Scalar(0, 255, 0));
@@ -108,8 +112,6 @@ namespace HMNGasApp.Droid.OCR
             var blur = _openCV.GaussianBlur(equalized);
 
             // Detect edges using canny.
-            //var edges = _openCV.Canny(blur, cT1, cT2);
-            //var edges = _openCV.AdaptiveThresh(blur);
             var edges = _openCV.OtsuThresh(blur);
 
             //invert B/W
