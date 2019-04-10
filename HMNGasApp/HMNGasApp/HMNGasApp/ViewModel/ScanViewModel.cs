@@ -4,6 +4,7 @@ using HMNGasApp.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -247,10 +248,12 @@ namespace HMNGasApp.ViewModel
                 while (enumerator.MoveNext())
                 {
                     var item = enumerator.Current.Text;
-                    textResult += item + " ";
+                    textResult += item ;
                 }
 
-                if (textResult == "")
+                bool isDigit = textResult.All(char.IsDigit);
+
+                if (!isDigit)
                     textResult = "?";
 
                 Reading += textResult;

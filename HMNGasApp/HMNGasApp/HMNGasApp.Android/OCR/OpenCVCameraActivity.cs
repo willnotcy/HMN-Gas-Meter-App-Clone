@@ -71,6 +71,8 @@ namespace HMNGasApp.Droid.OCR
             if (_openCvCameraView != null)
             {
                 _openCvCameraView.DisableView();
+                _openCvCameraView = null;
+                _openCV = null;
             }
         }
         private Rect GetRoi(Mat mat)
