@@ -5,7 +5,17 @@
              xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <Application.Resources>
         <ResourceDictionary>
-             <!-- Fonts -->
+            <!-- Colors -->
+            <Color x:Key="PrimaryOrange">#E37222</Color>
+            <Color x:Key="PrimaryGreen">#338671</Color>
+            <Color x:Key="PrimaryBlue">#26578A</Color>
+            <Color x:Key="PrimaryDarkGrey">#64666A</Color>
+            <Color x:Key="SecondarySignalRed">#FF4138</Color>
+            <Color x:Key="SecondaryCurry">#FEAC2C</Color>
+            <Color x:Key="SecondaryMint">#54C7A9</Color>
+            <Color x:Key="SecondaryAzur">#26A2D6</Color>
+            
+            <!-- Fonts -->
             <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
                 <On Platform="iOS" Value="Scandia Bold" />
                 <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
@@ -17,16 +27,6 @@
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
                 <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
             </OnPlatform>
-
-            <!-- Colors -->
-            <Color x:Key="PrimaryOrange">#E37222</Color>
-            <Color x:Key="PrimaryGreen">#338671</Color>
-            <Color x:Key="PrimaryBlue">#26578A</Color>
-            <Color x:Key="PrimaryDarkGrey">#64666A</Color>
-            <Color x:Key="SecondarySignalRed">#FF4138</Color>
-            <Color x:Key="SecondaryCurry">#FEAC2C</Color>
-            <Color x:Key="SecondaryMint">#54C7A9</Color>
-            <Color x:Key="SecondaryAzur">#26A2D6</Color>
             
             <!-- Font styles -->
             <Style x:Key="Heading" TargetType="Label">
