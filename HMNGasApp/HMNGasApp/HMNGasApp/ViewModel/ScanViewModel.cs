@@ -224,12 +224,13 @@ namespace HMNGasApp.ViewModel
             if (!_tesseract.Initialized)
             {
                 var initialised = await _tesseract.Init("deu");
+                _tesseract.SetWhitelist("0123456789");
+                _tesseract.SetPageSegmentationMode(PageSegmentationMode.SingleChar);
                 if (!initialised)
                     return;
             }
 
-            _tesseract.SetWhitelist("0123456789");
-            _tesseract.SetPageSegmentationMode(PageSegmentationMode.SingleChar);
+            
             bool success = await _tesseract.SetImage(result);
             if (success)
             {
