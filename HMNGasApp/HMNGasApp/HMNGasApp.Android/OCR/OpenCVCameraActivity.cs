@@ -150,12 +150,11 @@ namespace HMNGasApp.Droid.OCR
                 // Cut each digit individually based on bounding box.
                 foreach (Rect rect in sorted)
                 {
-                    //rect.X = rect.X - 5;
-                    //rect.Y = rect.Y - 5;
-                    //rect.Width = rect.Width + 10;
-                    //rect.Height = rect.Height + 10;
-                    digits.Add(_openCV.MatToStream(new Mat(rotated, rect)));
-                    digitsClone.Add(_openCV.MatToStream(new Mat(rotated, rect)));
+                    //Invert B/W
+                    var digit = new Mat(rotated, rect);
+                    Core.Bitwise_not(digit, digit);
+                    digits.Add(_openCV.MatToStream(digit));
+                    digitsClone.Add(_openCV.MatToStream(digit));
                 }
 
                 // TODO: Crop output image to region of interest when that is implemented.
