@@ -60,16 +60,15 @@
                                          IsPassword="True"/>
             </StackLayout>
 
-            <StackLayout VerticalOptions="EndAndExpand"
-                         BackgroundColor="{StaticResource SecondaryMint}"
-                         Grid.Row="2">
-                <Button Text="Log ind" 
+            <Button Text="Log ind" 
                         Command="{Binding SignInCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
-                        VerticalOptions="CenterAndExpand" 
-                        Style="{StaticResource SignInButton}">
-                </Button>
-            </StackLayout>
+                        HeightRequest="100" 
+                        Style="{StaticResource SignInButton}"
+                        Grid.Row="2"
+                        Margin="0,-3"/>
+
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
