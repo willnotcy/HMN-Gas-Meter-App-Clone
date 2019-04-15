@@ -1,6 +1,8 @@
 ﻿using HMNGasApp.Helpers;
 using HMNGasApp.Services;
 using HMNGasApp.View;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -198,9 +200,30 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
-                _openCVService.OpenCamera();
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                if (status != PermissionStatus.Granted)
+                {
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                    {
+                        await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
+                    }
+
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                    //Best practice to always check that the key exists
+                    if (results.ContainsKey(Permission.Location))
+                        status = results[Permission.Location];
+                }
+
+                if (status == PermissionStatus.Granted)
+                {
+                    _openCVService.OpenCamera();
+                }
+                else if (status != PermissionStatus.Unknown)
+                {
+                    await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                }
             });
 
             IsBusy = false;

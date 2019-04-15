@@ -13,6 +13,8 @@ using TinyIoC;
 using XLabs.Platform.Device;
 using XLabs.Ioc;
 using XLabs.Ioc.TinyIOC;
+using Plugin.Permissions;
+using Plugin.CurrentActivity;
 
 namespace HMNGasApp.Droid
 {
@@ -33,9 +35,17 @@ namespace HMNGasApp.Droid
             var container = TinyIoCContainer.Current;
             container.Register<IDevice>(AndroidDevice.CurrentDevice);
 
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+
             Resolver.SetResolver(new TinyResolver(container));
 
             LoadApplication(new App());
+        }
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        {
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
 }

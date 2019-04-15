@@ -94,8 +94,8 @@ namespace HMNGasApp.Droid.OCR
             }
             // TODO: provide these in a global config file
             var houghThresh = 350;
-            var contourMinHeight = 30;
-            var contourMaxHeight = 100;
+            var contourMinHeight = p0.Height() / 34;
+            var contourMaxHeight = p0.Height() / 4;
 
             // Initial rotation because camera starts in landscape mode.
             var input = _openCV.Rotate(p0, -90);
@@ -136,10 +136,8 @@ namespace HMNGasApp.Droid.OCR
             Imgproc.CvtColor(edges, edges, Imgproc.ColorGray2rgba, 4);
 
             // Draw bounding boxes on input image for user visualization.
-            
             var withBoundingBoxes = _openCV.DrawBoundingBoxes(edges.Clone(), alignedContours.Item2);
             withBoundingBoxes.CopyTo(mRgba.Submat(roi));
-
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
             if (alignedContours.Item2.Count != 8)
@@ -207,8 +205,6 @@ namespace HMNGasApp.Droid.OCR
         public void OnPackageInstall(int p0, IInstallCallbackInterface p1)
         {
             throw new NotImplementedException();
-        }
-
-        
+        }      
     }
 }

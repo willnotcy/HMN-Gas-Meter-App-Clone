@@ -295,6 +295,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>3.0.0.12</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Tesseract">
       <Version>0.3.4</Version>
     </PackageReference>

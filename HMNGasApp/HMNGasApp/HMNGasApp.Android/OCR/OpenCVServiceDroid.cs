@@ -28,7 +28,7 @@ namespace HMNGasApp.Droid
 {
     public class OpenCVServiceDroid : IOpenCVService
     {
-        private BaseLoaderCallback mLoaderCallback;
+        private readonly BaseLoaderCallback mLoaderCallback;
 
         #region Converter methods
 
