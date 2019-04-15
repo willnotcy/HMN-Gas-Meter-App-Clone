@@ -18,7 +18,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Font="Bold" 
-                           Text="Manuel indtastning" 
+                           Text="{Binding TitleText}" 
                            FontSize="Large" 
                            TextColor="White" 
                            HorizontalOptions="CenterAndExpand" 
@@ -26,7 +26,7 @@
                 </StackLayout>
             </StackLayout>    
             
-            <Label Text="Indtast din måleraflæsning:"
+            <Label Text="{Binding IntructionsText}"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 30"
@@ -34,27 +34,25 @@
                    Margin="10, 100, 20, 10"/>
             <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding UsageInput}" 
-                                         Placeholder="Måleraflæsning..." 
+                                         Placeholder="{Binding Placeholder}" 
                                          Style="{StaticResource BodyText}"
                                          Margin="50,10,50,10"
                                          HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
-            <Label TextColor="{StaticResource PrimaryDarkGrey}"
+            
+            <Label Text="{Binding PhoneText}"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
                    HorizontalOptions="FillAndExpand"
                    Style="{StaticResource BodyText}"
                    HorizontalTextAlignment="Center"
                    Opacity="0.5"
-                   FontSize="12">
-                <Label.Text>
-                Eller indmeld via tlf.: +45 62 25 90 00
-                </Label.Text>
-            </Label>
-            
-            <Image Source="eksempel.png"
+                   FontSize="12"/>
+
+            <Image Source="{Binding ExamplePicture}"
                    Margin="15,10,15,10"/>
             
-            <Label Text="Bemærk: det er kun tallene inden for det orange felt der skal indsendes."
+            <Label Text="{Binding ExampleText}"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    HorizontalOptions="FillAndExpand"
                    Style="{StaticResource BodyText}"

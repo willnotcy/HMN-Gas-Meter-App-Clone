@@ -25,7 +25,12 @@ namespace HMNGasApp.ViewModel
 			UsagePageNavCommand = new Command(async () => await ExecuteUsagePageNavCommand());
             SignOutCommand = new Command(async () => await ExecuteSignOutCommand());
         }
-
+        public string _emergencyText;
+        private string EmergencyText
+        {
+            get => _emergencyText;
+            set => SetProperty(ref _emergencyText, value);
+        }
         private async Task ExecuteSignOutCommand()
         {
             if (IsBusy)
@@ -85,5 +90,9 @@ namespace HMNGasApp.ViewModel
 
 			IsBusy = false;
 		}
+        public void Init()
+        {
+            _emergencyText = "";
+        }
 	}
 }
