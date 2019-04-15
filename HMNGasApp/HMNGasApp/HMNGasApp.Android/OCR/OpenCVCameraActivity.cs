@@ -38,8 +38,6 @@ namespace HMNGasApp.Droid.OCR
             _openCvCameraView.Visibility = ViewStates.Visible;
             _openCvCameraView.SetCvCameraViewListener(this);
             _openCV = new OpenCVServiceDroid();
-
-
         }
 
         protected override void OnPause()
@@ -73,6 +71,8 @@ namespace HMNGasApp.Droid.OCR
                 _openCvCameraView.DisableView();
                 _openCvCameraView = null;
                 _openCV = null;
+                mRgba = null;
+                roi = null;
             }
         }
         private Rect GetRoi(Mat mat)
