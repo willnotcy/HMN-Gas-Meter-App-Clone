@@ -38,7 +38,8 @@
                               VerticalOptions="Fill" 
                               HorizontalOptions="FillAndExpand"
                               HeightRequest="400"
-                              WidthRequest="400"/>
+                              WidthRequest="400"
+                              Rotation="270"/>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
