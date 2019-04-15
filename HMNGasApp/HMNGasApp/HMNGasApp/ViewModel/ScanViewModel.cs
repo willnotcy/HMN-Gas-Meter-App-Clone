@@ -202,18 +202,18 @@ namespace HMNGasApp.ViewModel
 
             await Task.Run(async () =>
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
                 if (status != PermissionStatus.Granted)
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
                     {
                         await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
                     }
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
                     //Best practice to always check that the key exists
-                    if (results.ContainsKey(Permission.Location))
-                        status = results[Permission.Location];
+                    if (results.ContainsKey(Permission.Camera))
+                        status = results[Permission.Camera];
                 }
 
                 if (status == PermissionStatus.Granted)
