@@ -44,62 +44,6 @@ namespace HMNGasApp.ViewModel
             set { SetProperty(ref _photoImage, value); }
         }
 
-        private ImageSource _digitSource2;
-        public ImageSource DigitSource2
-        {
-            get { return _digitSource2; }
-            set { SetProperty(ref _digitSource2, value); }
-        }
-
-        private ImageSource _digitSource3;
-        public ImageSource DigitSource3
-        {
-            get { return _digitSource3; }
-            set { SetProperty(ref _digitSource3, value); }
-        }
-
-        private ImageSource _digitSource4;
-        public ImageSource DigitSource4
-        {
-            get { return _digitSource4; }
-            set { SetProperty(ref _digitSource4, value); }
-        }
-
-        private ImageSource _digitSource5;
-        public ImageSource DigitSource5
-        {
-            get { return _digitSource5; }
-            set { SetProperty(ref _digitSource5, value); }
-        }
-
-        private ImageSource _digitSource6;
-        public ImageSource DigitSource6
-        {
-            get { return _digitSource6; }
-            set { SetProperty(ref _digitSource6, value); }
-        }
-
-        private ImageSource _digitSource7;
-        public ImageSource DigitSource7
-        {
-            get { return _digitSource7; }
-            set { SetProperty(ref _digitSource7, value); }
-        }
-
-        private ImageSource _digitSource8;
-        public ImageSource DigitSource8
-        {
-            get { return _digitSource8; }
-            set { SetProperty(ref _digitSource8, value); }
-        }
-
-        private ImageSource _digitSource;
-        public ImageSource DigitSource
-        {
-            get { return _digitSource; }
-            set { SetProperty(ref _digitSource, value); }
-        }
-
         public ScanViewModel()
         {
             _tesseract = DependencyService.Get<ITesseract>().TesseractApi;
@@ -142,35 +86,6 @@ namespace HMNGasApp.ViewModel
 
             foreach (Stream stream in digits)
             {
-                switch (i)
-                {
-                    case 0:
-                        DigitSource = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 1:
-                        DigitSource2 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 2:
-                        DigitSource3 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 3:
-                        DigitSource4 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 4:
-                        DigitSource5 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 5:
-                        DigitSource6 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 6:
-                        DigitSource7 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                    case 7:
-                        DigitSource8 = ImageSource.FromStream(() => { return stream; });
-                        break;
-                }
-
-
                 await Recognise(digitsClone[i]);
                 i++;
             }
