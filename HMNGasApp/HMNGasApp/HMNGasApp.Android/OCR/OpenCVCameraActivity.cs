@@ -94,8 +94,8 @@ namespace HMNGasApp.Droid.OCR
             }
             // TODO: provide these in a global config file
             var houghThresh = 350;
-            var contourMinHeight = 30;
-            var contourMaxHeight = 100;
+            var contourMinHeight = p0.Height() / 34;
+            var contourMaxHeight = p0.Height() / 4;
 
             // Initial rotation because camera starts in landscape mode.
             var input = _openCV.Rotate(p0, -90);
@@ -171,6 +171,16 @@ namespace HMNGasApp.Droid.OCR
                 MessagingCenter.Send(new CameraResultMessage { DigitsClone = digitsClone, Digits = digits, Image = _openCV.MatToStream(image) }, CameraResultMessage.Key);
 
                 // Stop the camera feed and close the page
+                input.Release();
+                submat.Release();
+                gray.Release();
+                equalized.Release();
+                blur.Release();
+                edges.Release();
+                clone.Release();
+                contours.Item2.Release();
+                withBoundingBoxes.Release();
+                image.Release();
                 Finish();
             }
             catch (Exception)
