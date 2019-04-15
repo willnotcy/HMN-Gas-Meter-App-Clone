@@ -200,31 +200,40 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Task.Run(async () =>
+
+            try
             {
-                var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-                if (status != PermissionStatus.Granted)
+                await Task.Run(async () =>
                 {
-                    if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
+                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                    if (status != PermissionStatus.Granted)
                     {
-                        await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
+                        if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
+                        {
+                            await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
+                        }
+
+                        var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
+                        //Best practice to always check that the key exists
+                        if (results.ContainsKey(Permission.Camera))
+                            status = results[Permission.Camera];
                     }
 
-                    var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
-                    //Best practice to always check that the key exists
-                    if (results.ContainsKey(Permission.Camera))
-                        status = results[Permission.Camera];
-                }
-
-                if (status == PermissionStatus.Granted)
-                {
-                    _openCVService.OpenCamera();
-                }
-                else if (status != PermissionStatus.Unknown)
-                {
-                    await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
-                }
-            });
+                    if (status == PermissionStatus.Granted)
+                    {
+                        _openCVService.OpenCamera();
+                    }
+                    else if (status != PermissionStatus.Unknown)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                    }
+                });
+            }
+            catch (Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+            }
+            
 
             IsBusy = false;
         }
