@@ -5,6 +5,7 @@ using HMNGasApp.Services;
 using System.Threading.Tasks;
 using HMNGasApp.WebServices;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace HMNGasApp.ViewModel
 {
@@ -122,6 +123,13 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _editEnabledPhone, value);
         }
 
+        private bool _editName;
+        public bool EditName
+        {
+            get => _editName;
+            set => SetProperty(ref _editName, value);
+        }
+
 
         #endregion
 
@@ -138,6 +146,7 @@ namespace HMNGasApp.ViewModel
             EditEnabledName = false;
             EditEnabledEmail = false;
             EditEnabledPhone = false;
+            EditName = false; //Disables the ability to change name
         }
 
         private async Task ExecuteSaveInfoCommand()
@@ -155,23 +164,31 @@ namespace HMNGasApp.ViewModel
                 Customer.Phone = Phone.Trim();
                 Customer.Email = Email.Trim();
 
-                var result = await _service.EditCustomerAsync(Customer);
+                if (VerifyEmail(Customer.Email))
+                {
 
-                if (result)
-                {
-                    await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
-                }
-                else
-                {
-                    //TODO: Get text from languagefile
-                    await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
-                }
+                    var result = await _service.EditCustomerAsync(Customer);
+
+                    if (result)
+                    {
+                        await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                        Readonly = true;
+                        EditEnabledName = false;
+                        EditEnabledEmail = false;
+                        EditEnabledPhone = false;
+                    }
+                    else
+                    {
+                        //TODO: Get text from languagefile
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                    }
+
+                } else 
+                    {
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Ugyldig email.", "Okay");
+                    }
             }
 
-            Readonly = true;
-            EditEnabledName = false;
-            EditEnabledEmail = false;
-            EditEnabledPhone = false;
 
             IsBusy = false;
         }
@@ -207,7 +224,21 @@ namespace HMNGasApp.ViewModel
             Readonly = false;
 
             IsBusy = false;
+
         }
+
+        private bool VerifyEmail(string email) 
+        {
+            var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
+            if(Regex.IsMatch(email, emailPattern)) 
+                {
+                    return true;
+                }
+            return false;
+
+        }
+
+
         private void ExecuteEditModePhoneCommand()
         {
             if (IsBusy)
@@ -270,13 +301,14 @@ namespace HMNGasApp.ViewModel
             Address = c.Address;
             Email = c.Email;
             Phone = c.Phone;
+            //TODO: Add GSRN
             GSRN = "6969696";
 
             var latestReading = _config.MeterReadings.LastOrDefault();
             if(latestReading != null)
             {
                 MeterNum = latestReading.MeterNum;
-                LatestMeasure = latestReading.Reading + " m\u00B3";
+                LatestMeasure = latestReading.Reading.TrimEnd('0',',') + " m\u00B3";
                 MeasureDate = latestReading.ReadingDate;
             } else
             {
