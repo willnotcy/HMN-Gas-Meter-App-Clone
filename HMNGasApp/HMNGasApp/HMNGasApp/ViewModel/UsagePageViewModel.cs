@@ -49,7 +49,7 @@ namespace HMNGasApp.ViewModel
             };
 
             var dates = new List<string>();
-            for (int i = 0; i < readings.Count; i++)// var r in readings)
+            for (int i = readings.Count - 5; i < readings.Count; i++)// var r in readings)
             {
                 var r = readings.ElementAt(i);
                 var parsedReading = double.Parse(r.Consumption);
@@ -73,8 +73,7 @@ namespace HMNGasApp.ViewModel
                 IsZoomEnabled = false,
                 Title = "Dato",
                 AxislineStyle = LineStyle.Solid,
-                ItemsSource = dates,
-                FontSize = 10
+                ItemsSource = dates
             });
             plotModel.Series.Add(series);
 
