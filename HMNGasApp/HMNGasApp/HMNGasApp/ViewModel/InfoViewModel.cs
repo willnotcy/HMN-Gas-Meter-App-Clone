@@ -185,7 +185,7 @@ namespace HMNGasApp.ViewModel
 
                 } else 
                     {
-                        await App.Current.MainPage.DisplayAlert("Fejl", "Din Email er ugyldig. Skriv en gyldig Email.", "Okay");
+                        await App.Current.MainPage.DisplayAlert("Fejl", "Ugyldig email.", "Okay");
                     }
             }
 
