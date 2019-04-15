@@ -43,24 +43,23 @@ namespace HMNGasApp.ViewModel
             //TODO Hardcoded color, since impossible to get the correct color from Resource Dictionary ¯\_(ツ)_/¯
             var green = OxyColor.FromRgb(51, 134, 113);
 
-            var series = new BarSeries
+            var series = new ColumnSeries
             {
                 StrokeThickness = 1.0
             };
 
-            readings.Reverse();
             var dates = new List<string>();
             for (int i = 0; i < readings.Count; i++)// var r in readings)
             {
                 var r = readings.ElementAt(i);
                 var parsedReading = double.Parse(r.Consumption);
-                series.Items.Add(new BarItem { Value = parsedReading, Color = green,  });
-                dates.Add(r.ReadingDate);
+                series.Items.Add(new ColumnItem { Value = parsedReading, Color = green  });
+                dates.Add(FormatDate(r.ReadingDate));
             }
 
             plotModel.Axes.Add(new LinearAxis
             {
-                Position = AxisPosition.Top,
+                Position = AxisPosition.Left,
                 IsPanEnabled = false,
                 IsZoomEnabled = false,
                 Title = "Forbrug (m\u00b3)",
@@ -68,17 +67,25 @@ namespace HMNGasApp.ViewModel
             });
             plotModel.Axes.Add(new CategoryAxis
             {
-                Position = AxisPosition.Left,
-                StringFormat = "yyyy-MM-dd",
+                Position = AxisPosition.Bottom,
+                StringFormat = "dd-MM-yy",
                 IsPanEnabled = false,
                 IsZoomEnabled = false,
                 Title = "Dato",
                 AxislineStyle = LineStyle.Solid,
-                ItemsSource = dates
+                ItemsSource = dates,
+                FontSize = 10
             });
             plotModel.Series.Add(series);
 
             GraphData = plotModel;
+        }
+
+        private string FormatDate(string input)
+        {
+            var dateTime = Convert.ToDateTime(input);
+
+            return dateTime.ToString("dd-MM-yy");
         }
     }
 }
