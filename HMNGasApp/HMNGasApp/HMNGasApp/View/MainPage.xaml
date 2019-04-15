@@ -59,15 +59,13 @@
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
             </StackLayout>
-            <StackLayout Grid.Row="2"
-                         VerticalOptions="EndAndExpand"
-                         BackgroundColor="{StaticResource SecondaryMint}">
-                <Button Text="Log out"
-                        VerticalOptions="EndAndExpand"
+            <Button Text="Log ind" 
+                        Command="{Binding SignOutCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
+                        HeightRequest="100" 
                         Style="{StaticResource SignInButton}"
-                        Command="{Binding SignOutCommand}"/>
-            </StackLayout>
+                        Grid.Row="2"
+                        Margin="0,-3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
