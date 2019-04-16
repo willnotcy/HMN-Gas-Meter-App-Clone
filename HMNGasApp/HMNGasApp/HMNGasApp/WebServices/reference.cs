@@ -1030,9 +1030,9 @@ namespace HMNGasApp.WebServices
         [return: System.Xml.Serialization.XmlElementAttribute("Response")]
         public MeterReadingsResponse getMeterReadings(MeterReadingsRequest request)
         {
-            object[] results = this.Invoke("getMeterReadings", new object[] {
-                        request});
-            return ((MeterReadingsResponse)(results[0]));
+                object[] results = this.Invoke("getMeterReadings", new object[] {
+                            request});
+                return ((MeterReadingsResponse)(results[0]));
         }
 
         /// <remarks/>

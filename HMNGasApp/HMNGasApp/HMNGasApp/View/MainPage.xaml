@@ -50,24 +50,25 @@
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
-                <Button Text="MIT FORBRUG"
+                <Button Text="MINE MÅLERAFLÆSNINGER"
+                        Command="{Binding UsagePageNavCommand}"
                         TextColor="White"
                         Margin="10,10,10,50"
                         Padding="15"
                         BorderRadius="7"
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
-
+                        
+                <Label  Text="{Binding EmergencyText}"
+                        Margin="20,20"/>
             </StackLayout>
-            <StackLayout Grid.Row="2"
-                         VerticalOptions="EndAndExpand"
-                         BackgroundColor="{StaticResource SecondaryMint}">
-                <Button Text="Log out"
-                        VerticalOptions="EndAndExpand"
+            <Button Text="Log ind" 
+                        Command="{Binding SignOutCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
+                        HeightRequest="100" 
                         Style="{StaticResource SignInButton}"
-                        Command="{Binding SignOutCommand}"/>
-            </StackLayout>
+                        Grid.Row="2"
+                        Margin="0,-3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -15,6 +15,9 @@ using XLabs.Ioc;
 using XLabs.Ioc.TinyIOC;
 using Plugin.Permissions;
 using Plugin.CurrentActivity;
+using HMNGasApp.Services;
+using System.Threading.Tasks;
+
 
 namespace HMNGasApp.Droid
 {
@@ -39,13 +42,26 @@ namespace HMNGasApp.Droid
 
             Resolver.SetResolver(new TinyResolver(container));
 
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);
+
+
             LoadApplication(new App());
         }
+
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        private void ExceptionHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Task.Run(async () =>
+            {
+                var service = DependencyService.Get<ILoginSoapService>();
+                await service.Logout();
+            });
         }
     }
 }

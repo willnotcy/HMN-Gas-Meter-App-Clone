@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Foundation;
 using Tesseract;
 using Tesseract.iOS;
@@ -10,6 +10,9 @@ using UIKit;
 using XLabs.Ioc;
 using XLabs.Ioc.TinyIOC;
 using XLabs.Platform.Device;
+using HMNGasApp.Services;
+using UIKit;
+using Xamarin.Forms;
 
 namespace HMNGasApp.iOS
 {
@@ -29,6 +32,14 @@ namespace HMNGasApp.iOS
             // if you want to use a different Application Delegate class from "AppDelegate"
             // you can specify it here.
             UIApplication.Main(args, null, "AppDelegate");
+
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler((sender, arg) => {
+                Task.Run(async () =>
+                {
+                    var service = DependencyService.Get<ILoginSoapService>();
+                    await service.Logout();
+                });
+            });
         }
     }
 }

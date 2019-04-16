@@ -7,6 +7,7 @@ using HMNGasApp.WebServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Tesseract;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -35,7 +36,13 @@ namespace HMNGasApp
 
         protected override void OnSleep()
         {
-            // Handle when your app sleeps
+            var context = DependencyService.Resolve<IUserContext>();
+            if (context.securityKey != null || context.securityKey != "")
+            {
+                var service = DependencyService.Get<ILoginSoapService>();
+                Task.Run(async () => await service.Logout());
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnResume()
@@ -62,12 +69,14 @@ namespace HMNGasApp
             services.AddScoped<ScanViewModel>();
             services.AddSingleton<IUserContext>(context);
             services.AddScoped<ReadingConfirmationPageViewModel>();
-            services.AddSingleton<IConfig>(config);
+			services.AddScoped<UsagePageViewModel>();
+			services.AddSingleton<IConfig>(config);
             services.AddScoped<ILoginSoapService, LoginSoapService>();
             services.AddScoped<ICustomerSoapService, CustomerSoapService>();
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
+			
 
             return services.BuildServiceProvider();
         }
