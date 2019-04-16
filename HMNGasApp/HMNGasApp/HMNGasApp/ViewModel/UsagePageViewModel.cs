@@ -7,6 +7,7 @@ using OxyPlot.Axes;
 using OxyPlot.Series;
 using Xamarin.Forms;
 using System.Linq;
+using System.Globalization;
 
 namespace HMNGasApp.ViewModel
 {
@@ -52,7 +53,7 @@ namespace HMNGasApp.ViewModel
             for (int i = readings.Count - 5; i < readings.Count; i++)// var r in readings)
             {
                 var r = readings.ElementAt(i);
-                var parsedReading = double.Parse(r.Consumption);
+                var parsedReading = double.Parse(r.Consumption, CultureInfo.InvariantCulture);
                 series.Items.Add(new ColumnItem { Value = parsedReading, Color = green  });
                 dates.Add(FormatDate(r.ReadingDate));
             }
