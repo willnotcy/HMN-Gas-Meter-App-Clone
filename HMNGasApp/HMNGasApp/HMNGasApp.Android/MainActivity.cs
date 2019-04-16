@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -22,9 +21,8 @@ namespace HMNGasApp.Droid
 
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);
-
             LoadApplication(new App());
         }
 
