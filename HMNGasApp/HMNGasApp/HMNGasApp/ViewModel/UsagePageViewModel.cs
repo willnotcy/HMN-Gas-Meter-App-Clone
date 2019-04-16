@@ -27,7 +27,7 @@ namespace HMNGasApp.ViewModel
         public UsagePageViewModel(IConfig config)
         {
             _config = config;
-            ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
+            ReturnNavCommand = new Command(async () => await Navigation.PopAsync());
             Setup();
         }
 
