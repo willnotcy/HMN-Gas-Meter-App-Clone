@@ -40,7 +40,9 @@
                               HeightRequest="400"
                               WidthRequest="400"
                               />
-                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla sed orci non eros blandit vehicula nec quis sapien. Proin risus odio, tempor id mauris nec, lobortis pharetra odio. Mauris sodales velit at massa consectetur cursus. Donec accumsan sed diam in vulputate."
+                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor."
+                       Style="{StaticResource BodyText}"
+                       Margin="30,0,30,0"
                        />
             </StackLayout>
         </Grid>
