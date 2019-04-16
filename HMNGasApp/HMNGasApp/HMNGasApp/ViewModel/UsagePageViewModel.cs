@@ -50,7 +50,7 @@ namespace HMNGasApp.ViewModel
             };
 
             var dates = new List<string>();
-            for (int i = readings.Count - 5; i < readings.Count; i++)// var r in readings)
+            for (int i = readings.Count - 5; i < readings.Count; i++)
             {
                 var r = readings.ElementAt(i);
                 var parsedReading = double.Parse(r.Consumption, new CultureInfo("da"));
