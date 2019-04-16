@@ -53,7 +53,7 @@ namespace HMNGasApp.ViewModel
             for (int i = readings.Count - 5; i < readings.Count; i++)// var r in readings)
             {
                 var r = readings.ElementAt(i);
-                var parsedReading = double.Parse(r.Consumption, CultureInfo.InvariantCulture);
+                var parsedReading = double.Parse(r.Consumption, new CultureInfo("da"));
                 series.Items.Add(new ColumnItem { Value = parsedReading, Color = green  });
                 dates.Add(FormatDate(r.ReadingDate));
             }
