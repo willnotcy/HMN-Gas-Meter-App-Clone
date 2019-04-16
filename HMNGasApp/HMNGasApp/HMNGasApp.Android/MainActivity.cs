@@ -45,6 +45,9 @@ namespace HMNGasApp.Droid
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);
 
 
+            OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
+            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);
+
             LoadApplication(new App());
         }
 
