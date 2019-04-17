@@ -61,10 +61,10 @@
                 <Label  Text="{Binding EmergencyText}"
                         Margin="20,20"/>
             </StackLayout>
-            <Button Text="Log ind" 
+            <Button Text="Log ud" 
                         Command="{Binding SignOutCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
-                        HeightRequest="100" 
+                        HeightRequest="80" 
                         Style="{StaticResource SignInButton}"
                         Grid.Row="2"
                         Margin="0,-3"/>
