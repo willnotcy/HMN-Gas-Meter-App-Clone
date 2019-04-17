@@ -4,6 +4,7 @@
              x:Class="HMNGasApp.View.LoginPage"
              xmlns:converters="clr-namespace:HMNGasApp.Converters"
              xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             xmlns:Text="clr-namespace:HMNGasApp.Resource"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -58,6 +59,8 @@
                                          FontSize="20" 
                                          HeightRequest="60"
                                          IsPassword="True"/>
+
+                <Label Text="{x:Static Text:TextFile.Test}"/>
             </StackLayout>
 
             <Button Text="Log ind" 
