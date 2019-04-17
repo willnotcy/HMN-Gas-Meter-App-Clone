@@ -17,7 +17,6 @@ namespace HMNGasApp.ViewModel
         private readonly IConfig _config;
 
         private PlotModel _graphData;
-
         public PlotModel GraphData
         {
             get { return _graphData; }

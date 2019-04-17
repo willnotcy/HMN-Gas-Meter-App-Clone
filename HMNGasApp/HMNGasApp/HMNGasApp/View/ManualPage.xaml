@@ -31,12 +31,12 @@
                    Style="{StaticResource BodyText}"
                    Font="Bold, 30"
                    HorizontalTextAlignment="Center"
-                   Margin="10, 100, 20, 10"/>
+                   Margin="10, 100, 10, 10"/>
             <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding UsageInput}" 
                                          Placeholder="{Binding Placeholder}" 
                                          Style="{StaticResource BodyText}"
-                                         Margin="50,10,50,10"
+                                         Margin="50,10"
                                          HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
@@ -49,17 +49,6 @@
                    Opacity="0.5"
                    FontSize="12"/>
 
-            <Image Source="{Binding ExamplePicture}"
-                   Margin="15,10,15,10"/>
-            
-            <Label Text="{Binding ExampleText}"
-                   TextColor="{StaticResource PrimaryDarkGrey}"
-                   HorizontalOptions="FillAndExpand"
-                   Style="{StaticResource BodyText}"
-                   HorizontalTextAlignment="Center"
-                   Opacity="0.5"
-                   FontSize="12"/>
-            
             <Button Text="Bekræft"
                     TextColor="White"
                     Margin="90,50,90,10"
