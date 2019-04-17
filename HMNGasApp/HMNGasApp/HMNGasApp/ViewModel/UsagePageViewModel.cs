@@ -69,7 +69,6 @@ namespace HMNGasApp.ViewModel
             plotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
-                StringFormat = "dd-MM-yy",
                 IsPanEnabled = false,
                 IsZoomEnabled = false,
                 Title = "Dato",
