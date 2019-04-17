@@ -27,4 +27,8 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+
 </Project>

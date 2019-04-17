@@ -6,6 +6,6 @@ namespace HMNGasApp.Services
 {
     public interface IConnectService
     {
-        bool canConnect();
+        bool CanConnect();
     }
 }
