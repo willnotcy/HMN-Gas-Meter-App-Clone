@@ -5,11 +5,6 @@
              xmlns:converters="clr-namespace:HMNGasApp.Converters"
              xmlns:components="clr-namespace:HMNGasApp.View.Components"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
