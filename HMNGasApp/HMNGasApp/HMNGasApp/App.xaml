@@ -107,7 +107,7 @@
 
             <!--#region Usage Page-->
              <x:String x:Key="UsagePage.TitleText">HMN Scanner</x:String>
-             <x:String x:Key="UsagePage.MainText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor</x:String>
+             <x:String x:Key="UsagePage.MainText">Grafen ovenfor afspejler dit seneste forbrug ud fra dine seneste 5 aflæsninger</x:String>
             
             <!--#endregion-->
             
