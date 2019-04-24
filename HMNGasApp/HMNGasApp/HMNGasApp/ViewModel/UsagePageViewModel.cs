@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace HMNGasApp.ViewModel
 {
-    class UsagePageViewModel:BaseViewModel
+    public class UsagePageViewModel:BaseViewModel
     {
 		private Chart _GraphData;
 
