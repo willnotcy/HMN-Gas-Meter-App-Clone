@@ -2,6 +2,7 @@
 using HMNGasApp.Services;
 using HMNGasApp.View;
 using HMNGasApp.WebServices;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -12,6 +13,8 @@ namespace HMNGasApp.ViewModel
     {
         private readonly ILoginSoapService _service;
         private readonly IConfig _config;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
 
         public ICommand SignInCommand { get; set; }
 
@@ -65,7 +68,7 @@ namespace HMNGasApp.ViewModel
                 await Navigation.PushAsync(new MainPage());
             } else
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
             }
 
             IsBusy = false;

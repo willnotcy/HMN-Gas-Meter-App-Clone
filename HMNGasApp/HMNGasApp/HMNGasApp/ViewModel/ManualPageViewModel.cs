@@ -9,6 +9,8 @@ namespace HMNGasApp.ViewModel
 
     public class ManualPageViewModel : BaseViewModel
     {
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
 
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
@@ -93,7 +95,7 @@ namespace HMNGasApp.ViewModel
 
             if (UsageInput == null || UsageInput.Equals(""))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InputEmpty"], (String)res["Errors.Cancel.Okay"]);
             }
             else
             {

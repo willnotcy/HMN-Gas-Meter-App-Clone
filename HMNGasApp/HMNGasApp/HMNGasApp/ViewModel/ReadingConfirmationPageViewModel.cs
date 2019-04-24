@@ -11,6 +11,8 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
 
         private string _usageInput;
         private string _accountNum;
@@ -70,11 +72,12 @@ namespace HMNGasApp.ViewModel
 
             if (!result.Item1)
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
                 await Navigation.PopAsync();
             } else
             {
-                await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Success.Title.MeterRead"], (String)res["Success.Message.ReadingSent"], (String)res["Success.Cancel.Okay"]);
+
                 this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
                 await Navigation.PopAsync();
             }
