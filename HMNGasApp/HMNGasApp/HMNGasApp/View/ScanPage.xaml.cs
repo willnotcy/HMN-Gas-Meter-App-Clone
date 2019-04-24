@@ -1,11 +1,6 @@
-﻿    using System.Threading.Tasks;
-using XLabs.Ioc;
-using XLabs.Platform.Services.Media;
-using Xamarin.Forms;
-using System;
+﻿using Xamarin.Forms;
 using HMNGasApp.ViewModel;
 using Xamarin.Forms.Xaml;
-using XLabs.Platform.Device;
 
 namespace HMNGasApp.View
 {
