@@ -10,9 +10,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics;
 using System.Resources;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
@@ -21,13 +24,15 @@ namespace HMNGasApp
     {
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
+        private static readonly Uri _backendUrl = new Uri("https://localhost:44336/");
+
         public IServiceProvider Container => _lazyProvider.Value;
 
         public App()
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
-            Application.Current.Resources["Test"] = "Hello world!";
+            DemoStuff();
             MainPage = new NavigationPage(new LoginPage());
         }
 
@@ -76,9 +81,17 @@ namespace HMNGasApp
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
-			
+            services.AddScoped<IJSONRepository, JSONRepository>();
+
 
             return services.BuildServiceProvider();
+        }
+
+        private async Task DemoStuff()
+        {
+            var repo = DependencyService.Resolve<IJSONRepository>();
+            var res = await repo.Read();
+            System.Diagnostics.Debug.WriteLine(res);
         }
     }
 }
