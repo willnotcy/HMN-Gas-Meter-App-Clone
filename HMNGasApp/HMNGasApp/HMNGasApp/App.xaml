@@ -69,6 +69,17 @@
             <x:String x:Key="Test">Test</x:String>
             
             <!--#region Login Page-->
+
+            <x:String x:Key="LoginPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="LoginPage.CustomerNo">Kunde nr.</x:String>
+            <x:String x:Key="LoginPage.CustomerNoPlaceHolder">Indtast kunde nr.</x:String>
+
+            <x:String x:Key="LoginPage.CustomerPw">Kodeord</x:String>
+            <x:String x:Key="LoginPage.CustomerPwPlaceHolder">Indtast kodeord</x:String>
+
+            <x:String x:Key="LoginPage.LoginButton">Log ind</x:String>
+
             <!--#endregion-->
 
             <!--#region Main Page-->
@@ -92,6 +103,13 @@
             <!--#endregion-->
             
             <!--#region Reading Confirmation Page-->
+
+            <x:String x:Key="ReadingConfirmationPage.Title">Bekræft aflæsning</x:String>
+
+            <x:String x:Key="ReadingConfirmationPage.YourReading">Din måleraflæsning:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.CustomerNo">Kundenummer:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.Send">Indsend</x:String>
+
             <!--#endregion-->
 
             <!--#region Scan Page-->
