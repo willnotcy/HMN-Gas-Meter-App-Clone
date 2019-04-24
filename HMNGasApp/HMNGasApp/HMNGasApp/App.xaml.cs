@@ -27,6 +27,7 @@ namespace HMNGasApp
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
+            Application.Current.Resources["Test"] = "Hello world!";
             MainPage = new NavigationPage(new LoginPage());
         }
 

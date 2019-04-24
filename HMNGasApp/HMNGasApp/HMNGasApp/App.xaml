@@ -5,7 +5,7 @@
              xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- Colors -->
+            <!--#region Colors-->
             <Color x:Key="PrimaryOrange">#E37222</Color>
             <Color x:Key="PrimaryGreen">#338671</Color>
             <Color x:Key="PrimaryBlue">#26578A</Color>
@@ -14,8 +14,9 @@
             <Color x:Key="SecondaryCurry">#FEAC2C</Color>
             <Color x:Key="SecondaryMint">#54C7A9</Color>
             <Color x:Key="SecondaryAzur">#26A2D6</Color>
-            
-            <!-- Fonts -->
+            <!--#endregion-->
+
+            <!--#region Fonts-->
             <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
                 <On Platform="iOS" Value="Scandia Bold" />
                 <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
@@ -27,8 +28,9 @@
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
                 <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
             </OnPlatform>
+            <!--#endregion-->
             
-            <!-- Font styles -->
+            <!--#region Font styles-->
             <Style x:Key="Heading" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="40"/>
@@ -60,6 +62,35 @@
                 <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
                 <Setter Property="TextColor" Value="Black" />
             </Style>
+            <!--#endregion-->
+            
+            <!--#region Global Text-->
+
+            <x:String x:Key="Test">Test</x:String>
+            
+            <!--#region Login Page-->
+            <!--#endregion-->
+
+            <!--#region Main Page-->
+            <!--#endregion-->
+
+            <!--#region Info Page-->
+            <!--#endregion-->
+
+            <!--#region Usage Page-->
+            <!--#endregion-->
+            
+            <!--#region Manual Page-->
+            <!--#endregion-->
+            
+            <!--#region Reading Confirmation Page-->
+            <!--#endregion-->
+
+            <!--#region Scan Page-->
+            <!--#endregion-->
+
+            <!--#endregion-->
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
