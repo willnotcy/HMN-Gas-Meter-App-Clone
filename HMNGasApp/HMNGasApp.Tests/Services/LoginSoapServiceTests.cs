@@ -101,5 +101,20 @@ namespace HMNGasApp.Tests.Services
             Assert.False(result);
             Assert.Equal("anfkasjnfajk", config.Context.securityKey);
         }
+        [Fact]
+        public void ConfigGetApiKey_set_test()
+        {
+            //Arrange
+            var input = "Test123";
+            var expected = "Test123";
+            
+            //Act
+            var config = new Config {ApiKey=input};
+
+            var result = config.ApiKey;
+            
+            //Assert
+            Assert.Equal(expected, result);
+        }
     }
 }
