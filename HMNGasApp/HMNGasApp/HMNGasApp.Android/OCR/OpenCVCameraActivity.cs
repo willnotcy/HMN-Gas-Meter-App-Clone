@@ -93,7 +93,6 @@ namespace HMNGasApp.Droid.OCR
                 roi = GetRoi(p0);
             }
             // TODO: provide these in a global config file
-            var houghThresh = 350;
             var contourMinHeight = p0.Height() / 34;
             var contourMaxHeight = p0.Height() / 4;
 
@@ -101,6 +100,7 @@ namespace HMNGasApp.Droid.OCR
             var input = _openCV.Rotate(p0, -90);
             mRgba = input.Clone();
             var submat = input.Submat(roi);
+            var submatClone = submat.Clone();
 
             mRgba = _openCV.DrawRectangle(mRgba, roi, new Scalar(0, 255, 0));
 
@@ -132,11 +132,8 @@ namespace HMNGasApp.Droid.OCR
             var contoursBySize = _openCV.FilterContoursBySize(contours.Item1, contourMinHeight, contourMaxHeight);
             var alignedContours = _openCV.FilterContoursByYPosition(contoursBySize.Item1, contoursBySize.Item2);
 
-            // Converts back to colour
-            Imgproc.CvtColor(edges, edges, Imgproc.ColorGray2rgba, 4);
-
             // Draw bounding boxes on input image for user visualization.
-            var withBoundingBoxes = _openCV.DrawBoundingBoxes(edges.Clone(), alignedContours.Item2);
+            var withBoundingBoxes = _openCV.DrawBoundingBoxes(submatClone.Clone(), alignedContours.Item2);
             withBoundingBoxes.CopyTo(mRgba.Submat(roi));
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
@@ -152,7 +149,10 @@ namespace HMNGasApp.Droid.OCR
                 var image = new Mat();
                 var digitsClone = new List<Stream>();
 
-                image = edges;
+                // Transform BGR image to RGB
+                Imgproc.CvtColor(submatClone, submatClone, Imgproc.ColorBgr2rgba, 4);
+
+                image = submatClone;
 
                 // Sort digit bounding boxes left to right
                 var sorted = _openCV.SortRects(alignedContours.Item2);
@@ -177,6 +177,7 @@ namespace HMNGasApp.Droid.OCR
                 edges.Release();
                 clone.Release();
                 contours.Item2.Release();
+                submatClone.Release();
                 withBoundingBoxes.Release();
                 image.Release();
                 Finish();
