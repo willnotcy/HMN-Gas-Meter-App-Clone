@@ -38,8 +38,8 @@ namespace HMNGasApp
 
         protected override void OnSleep()
         {
-            var context = DependencyService.Resolve<IUserContext>();
-            if (context.securityKey != null || context.securityKey != "")
+            var context = DependencyService.Resolve<IConfig>().Context;
+            if (context.securityKey != null && context.securityKey != "")
             {
                 var service = DependencyService.Get<ILoginSoapService>();
                 Task.Run(async () => await service.Logout());

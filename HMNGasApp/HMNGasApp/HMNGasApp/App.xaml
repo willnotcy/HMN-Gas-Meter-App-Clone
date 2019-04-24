@@ -69,6 +69,17 @@
             <x:String x:Key="Test">Test</x:String>
             
             <!--#region Login Page-->
+
+            <x:String x:Key="LoginPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="LoginPage.CustomerNo">Kunde nr.</x:String>
+            <x:String x:Key="LoginPage.CustomerNoPlaceHolder">Indtast kunde nr.</x:String>
+
+            <x:String x:Key="LoginPage.CustomerPw">Kodeord</x:String>
+            <x:String x:Key="LoginPage.CustomerPwPlaceHolder">Indtast kodeord</x:String>
+
+            <x:String x:Key="LoginPage.LoginButton">Log ind</x:String>
+
             <!--#endregion-->
 
             <!--#region Main Page-->
@@ -85,6 +96,14 @@
             <!--#endregion-->
 
             <!--#region Info Page-->
+            <x:String x:Key="InfoPage.Title">Mine Oplysninger</x:String>
+            <x:String x:Key="InfoPage.NameLabel">Navn</x:String>
+            <x:String x:Key="InfoPage.AddressLabel">Addresse</x:String>
+            <x:String x:Key="InfoPage.EmailLabel">E-mail</x:String>
+            <x:String x:Key="InfoPage.PhoneLabel">Mobil</x:String>
+            <x:String x:Key="InfoPage.GSRNLabel">Aftagenummer (GSRN)</x:String>
+            <x:String x:Key="InfoPage.ReadingLabel">Seneste måling</x:String>
+            <x:String x:Key="InfoPage.ReadingDateLabel">Dato for seneste måling</x:String>
             <!--#endregion-->
 
             <!--#region Usage Page-->
@@ -94,6 +113,13 @@
             <!--#endregion-->
             
             <!--#region Reading Confirmation Page-->
+
+            <x:String x:Key="ReadingConfirmationPage.Title">Bekræft aflæsning</x:String>
+
+            <x:String x:Key="ReadingConfirmationPage.YourReading">Din måleraflæsning:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.CustomerNo">Kundenummer:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.Send">Indsend</x:String>
+
             <!--#endregion-->
 
             <!--#region Scan Page-->
