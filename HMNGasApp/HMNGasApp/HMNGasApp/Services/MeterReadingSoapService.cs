@@ -103,11 +103,11 @@ namespace HMNGasApp.Services
 
                 var request = new NewMeterReadingRequest() { UserContext = _config.Context, NewMeterReadings = readings.ToArray() };
 
-                var response = _client.newMeterReading(request);
+                //var response = _client.newMeterReading(request);
 
-                var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
+                //var result = response.ErrorCode.Equals("") ? (true, response.ResponseMessage) : (false, response.ResponseCode);
 
-                return result;
+                return (false, "hej");
             });
         }
 

@@ -17,7 +17,7 @@ namespace HMNGasApp.View
             BindingContext = _vm = DependencyService.Resolve<ReadingConfirmationPageViewModel>();
             _vm.Navigation = Navigation;
 
-            _vm.UsageInput = reading;
+            _vm.Init(reading);
 
         }
         public ReadingConfirmationPage() 

@@ -3,6 +3,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.View;
 using System.Threading.Tasks;
+using HMNGasApp.Model;
 
 namespace HMNGasApp.ViewModel
 {
@@ -12,6 +13,7 @@ namespace HMNGasApp.ViewModel
 
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
+        private readonly IConfig _config;
 
         private string _titleText;
         public string TitleText
@@ -63,11 +65,12 @@ namespace HMNGasApp.ViewModel
         }
 
 
-        public ManualPageViewModel()
+        public ManualPageViewModel(IConfig config)
         {
             Init();
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
+            _config = config;
         }
 
         private async Task ExecuteReturnNavCommand()

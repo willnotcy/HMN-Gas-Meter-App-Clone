@@ -37,12 +37,24 @@ namespace HMNGasApp.ViewModel
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             _config = config;
-            Init();
 
         }
 
-        private void Init()
+        public void Init(string reading)
         {
+            var numberSize = _config.MeterReadings.Count > 0 ? Int32.Parse(_config.MeterReadings[0].NumberSize) : 5;
+
+            if (reading.Contains(".")) 
+            {
+                reading = reading.Split('.')[0]; 
+            }
+
+            if (reading.Length > numberSize)
+            {
+                reading = reading.Substring(0, numberSize);
+            }
+
+            UsageInput = reading;
             AccountNum = _config.CustomerId;
         }
         private async Task ExecuteReturnNavCommand()
