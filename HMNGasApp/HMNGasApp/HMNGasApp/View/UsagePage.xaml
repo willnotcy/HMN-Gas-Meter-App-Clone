@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.UsagePage"
@@ -23,7 +23,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Font="Bold" 
-                    Text="Mit Forbrug" 
+                    Text="{x:StaticResource UsagePage.TitleText}" 
                     FontSize="Large" 
                     TextColor="White"
                     Margin="0,0,50,0"
@@ -40,7 +40,7 @@
                               HeightRequest="400"
                               WidthRequest="400"
                               />
-                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor."
+                <Label Text="{x:StaticResource UsagePage.MainText}"
                        Style="{StaticResource BodyText}"
                        Margin="30,0,30,0"
                        />
