@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.App"
@@ -20,13 +20,11 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
                 <On Platform="iOS" Value="Scandia Bold" />
                 <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
-                <On Platform="UWP" Value="Assets/Fonts/Scandia-Bold.otf#Scandia" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="OpenSans">
                 <On Platform="iOS" Value="OpenSans-Regular" />
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
-                <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
             </OnPlatform>
             <!--#endregion-->
             
@@ -83,6 +81,16 @@
             <!--#endregion-->
 
             <!--#region Main Page-->
+            
+            <x:String x:Key="MainPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="MainPage.ScanButton">SCAN</x:String>
+            <x:String x:Key="Mainpage.ManualUsageButton">TAST SELV</x:String>
+            <x:String x:Key="Mainpage.MyReadingsButton">MINE MÅLERAFLÆSNINGER</x:String>
+            
+            <x:String x:Key="Mainpage.LogInButton">Log ind</x:String>
+       
+            
             <!--#endregion-->
 
             <!--#region Info Page-->
@@ -100,9 +108,20 @@
             <!--#endregion-->
 
             <!--#region Usage Page-->
+             <x:String x:Key="UsagePage.TitleText">HMN Scanner</x:String>
+             <x:String x:Key="UsagePage.MainText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor</x:String>
+            
             <!--#endregion-->
             
             <!--#region Manual Page-->
+            
+            <x:String x:Key="ManualPage.TitleText">Manuel Indtastning</x:String>
+            <x:String x:Key="ManualPage.InstructionsText">Indtast din måleraflæsning:</x:String>
+            <x:String x:Key="ManualPage.PlaceholderText">Måleraflæsning...</x:String>
+            <x:String x:Key="ManualPage.PhoneText">Eller indmeld via tlf.: +45 62 25 90 00</x:String>
+            <x:String x:Key="ManualPage.ExampleText">Bemærk: det er kun tallene inden for det orange felt der skal indsendes.</x:String>
+            <x:String x:Key="ManualPage.ConfirmationText">Bekræft</x:String>
+            
             <!--#endregion-->
             
             <!--#region Reading Confirmation Page-->

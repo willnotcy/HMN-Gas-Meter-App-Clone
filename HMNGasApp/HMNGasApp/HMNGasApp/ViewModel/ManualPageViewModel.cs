@@ -103,11 +103,6 @@ namespace HMNGasApp.ViewModel
         }
         public void Init()
         {
-            _titleText = "Manuel Indtastning";
-            _placeholder = "Måleraflæsning...";
-            _intructionsText = "Indtast din måleraflæsning:";
-            _phoneText = "Eller indmeld via tlf.: +45 62 25 90 00";
-            _exampleText = "Bemærk: det er kun tallene inden for det orange felt der skal indsendes.";
             _examplePicture = "meter_example.jpg";
         }
         public void Reset()
