@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.App"
@@ -72,6 +72,16 @@
             <!--#endregion-->
 
             <!--#region Main Page-->
+            
+            <x:String x:Key="MainPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="MainPage.ScanButton">SCAN</x:String>
+            <x:String x:Key="Mainpage.ManualUsageButton">TAST SELV</x:String>
+            <x:String x:Key="Mainpage.MyReadingsButton">MINE MÅLERAFLÆSNINGER</x:String>
+            
+            <x:String x:Key="Mainpage.LogInButton">Log ind</x:String>
+       
+            
             <!--#endregion-->
 
             <!--#region Info Page-->
