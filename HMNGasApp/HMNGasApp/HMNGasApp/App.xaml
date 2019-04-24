@@ -93,9 +93,12 @@
 
             <!--#region Info Page-->
             <x:String x:Key="InfoPage.Title">Mine Oplysninger</x:String>
+            <x:String x:Key="InfoPage.NamePlaceholder">Jens Jensen</x:String>
             <x:String x:Key="InfoPage.NameLabel">Navn</x:String>
             <x:String x:Key="InfoPage.AddressLabel">Addresse</x:String>
+            <x:String x:Key="InfoPage.EmailPlaceholder">Jens.jensen@gmail.com</x:String>
             <x:String x:Key="InfoPage.EmailLabel">E-mail</x:String>
+            <x:String x:Key="InfoPage.PhonePlaceholder">+45 12 34 56 78</x:String>
             <x:String x:Key="InfoPage.PhoneLabel">Mobil</x:String>
             <x:String x:Key="InfoPage.GSRNLabel">Aftagenummer (GSRN)</x:String>
             <x:String x:Key="InfoPage.ReadingLabel">Seneste måling</x:String>

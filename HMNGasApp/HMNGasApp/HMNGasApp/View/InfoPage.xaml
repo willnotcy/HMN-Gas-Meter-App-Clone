@@ -45,7 +45,7 @@
                                               HorizontalOptions="Fill"
                                               IsReadOnly="True"                                             
                                               VerticalOptions="Center"
-                                              Placeholder="Jens Jensen"
+                                              Placeholder="{x:StaticResource InfoPage.NamePlaceholder}"
                                               MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
@@ -117,7 +117,7 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="Jens.jensen@gmail.com"
+                                                    Placeholder="{x:StaticResource InfoPage.EmailPlaceholder}"
                                                     MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
@@ -186,7 +186,7 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="+45 12 34 56 78"
+                                                    Placeholder="{x:StaticResource InfoPage.PhonePlaceholder}"
                                                     MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
