@@ -75,6 +75,14 @@
             <!--#endregion-->
 
             <!--#region Info Page-->
+            <x:String x:Key="InfoPage.Title">Mine Oplysninger</x:String>
+            <x:String x:Key="InfoPage.NameLabel">Navn</x:String>
+            <x:String x:Key="InfoPage.AddressLabel">Addresse</x:String>
+            <x:String x:Key="InfoPage.EmailLabel">E-mail</x:String>
+            <x:String x:Key="InfoPage.PhoneLabel">Mobil</x:String>
+            <x:String x:Key="InfoPage.GSRNLabel">Aftagenummer (GSRN)</x:String>
+            <x:String x:Key="InfoPage.ReadingLabel">Seneste måling</x:String>
+            <x:String x:Key="InfoPage.ReadingDateLabel">Dato for seneste måling</x:String>
             <!--#endregion-->
 
             <!--#region Usage Page-->
