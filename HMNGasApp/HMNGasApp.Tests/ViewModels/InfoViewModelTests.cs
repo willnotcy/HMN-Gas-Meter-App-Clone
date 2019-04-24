@@ -13,7 +13,8 @@ namespace HMNGasApp.Tests.ViewModels
     public class InfoViewModelTests
     {
         [Fact]
-        public void New_InfoViewModel_given_customer_can_return_inputs() {
+        public void New_InfoViewModel_given_customer_can_return_inputs()
+        {
             //Arrange
             var c = new Customer
             {
@@ -26,6 +27,7 @@ namespace HMNGasApp.Tests.ViewModels
 
             var client = new Mock<IXellentAPI>();
             var config = new Config();
+            config.MeterReadings.Add(null);
             var service = new CustomerSoapService(client.Object, config);
             var infoViewModel = new InfoViewModel(service, config) { };
 
@@ -108,6 +110,53 @@ namespace HMNGasApp.Tests.ViewModels
             var result = infoViewModel.Customer;
             //Assert
             Assert.Equal(c, result);
+        }
+        [Fact]
+        public void VerifyEmail_given_valid_input_returns_true()
+        {
+            //Arrange
+            var c = new Customer
+            {
+                AccountNum = "12345",
+                Address = "DRBYEN 12",
+                Email = "v@dr.dk",
+                Name = "Viktor",
+                Phone = "1234567"
+            };
+
+            var client = new Mock<IXellentAPI>();
+            var config = new Config();
+            var meterReading = new MeterReading
+            {
+                Reading = "999",
+                ReadingDate = "12-06-1996",
+                MeterNum = "1234"
+            };
+            config.MeterReadings.Add(meterReading);
+            var service = new CustomerSoapService(client.Object, config);
+            var infoViewModel = new InfoViewModel(service, config) { };
+
+            //Act
+            infoViewModel.Customer = c;
+
+            infoViewModel.AccountNum = c.AccountNum;
+            infoViewModel.Address = c.Address;
+            infoViewModel.Email = c.Email;
+            infoViewModel.Name = c.Name;
+            infoViewModel.Phone = c.Phone;
+
+            var customerFromModel = new Customer
+            {
+                AccountNum = infoViewModel.AccountNum,
+                Address = infoViewModel.Address,
+                Email = infoViewModel.Email,
+                Name = infoViewModel.Name,
+                Phone = infoViewModel.Phone
+            };
+
+            //Assert
+            Assert.Equal(c, customerFromModel);
+            Assert.Equal(c, infoViewModel.Customer);
         }
     }
 }
