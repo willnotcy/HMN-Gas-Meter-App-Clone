@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HMNGasApp.View.UsagePage"
+             xmlns:oxy="clr-namespace:OxyPlot.Xamarin.Forms;assembly=OxyPlot.Xamarin.Forms"
              BackgroundColor="White"
              Title="Mit Forbrug"
-             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
@@ -33,12 +33,17 @@
             </StackLayout>
             <StackLayout Grid.Row="1"
                          >
-                <microcharts:ChartView 
-                        x:Name="chartView"
-                        Chart="{Binding GraphData}"
-                        BackgroundColor="Default"
-                        HeightRequest="400"
-                        />
+                <oxy:PlotView x:Name="PlotView"
+                              Model="{Binding GraphData}" 
+                              VerticalOptions="Fill" 
+                              HorizontalOptions="FillAndExpand"
+                              HeightRequest="400"
+                              WidthRequest="400"
+                              />
+                <Label Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor."
+                       Style="{StaticResource BodyText}"
+                       Margin="30,0,30,0"
+                       />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,17 +11,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microcharts" Version="0.7.1" />
-    <PackageReference Include="Microcharts.Forms" Version="0.7.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Mobile.BuildTools" Version="1.4.0.638">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Xamarin.Tesseract" Version="0.3.4" />
+    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
+    <PackageReference Include="XLabs.IoC" Version="2.0.5782" />
+    <PackageReference Include="XLabs.IoC.TinyIoC" Version="2.0.5782" />
+    <PackageReference Include="XLabs.Platform" Version="2.0.5782" />
+    <PackageReference Include="OxyPlot.Xamarin.Forms" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="OpenCV">
+      <HintPath>..\HMNGasApp.Android\Lib\OpenCV.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Annotations">
       <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
@@ -33,6 +42,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="View\LoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\ScanPage.xaml">
+	  <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\UsagePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

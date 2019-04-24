@@ -31,6 +31,7 @@
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidSupportedAbis />
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,29 +42,50 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
+    <Reference Include="OpenCV, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\OpenCV.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.1.0\ref\netcoreapp2.1\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Plugin.Permissions">
+      <Version>3.0.0.12</Version>
+    </PackageReference>
     <PackageReference Include="Microcharts">
       <Version>0.7.1</Version>
     </PackageReference>
-    <PackageReference Include="Microcharts.Forms">
-      <Version>0.7.1</Version>
+    <PackageReference Include="OxyPlot.Xamarin.Android">
+      <Version>1.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="OxyPlot.Xamarin.Forms">
+      <Version>1.0.0</Version>
     </PackageReference>
     <PackageReference Include="System.Buffers">
       <Version>4.5.0</Version>
     </PackageReference>
-    <PackageReference Include="Tesseract">
-      <Version>3.3.0</Version>
+    <PackageReference Include="Xamarin.Tesseract">
+      <Version>0.3.4</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.Forms">
+      <Version>2.0.5782</Version>
+    </PackageReference>
+    <PackageReference Include="XLabs.IoC.TinyIoC">
+      <Version>2.0.5782</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
@@ -79,11 +101,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OCR\Callback.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="OCR\OpenCVCameraActivity.cs" />
+    <Compile Include="OCR\OpenCVServiceDroid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoundedEntryRenderer.cs" />
-    <Compile Include="NoBorderEntryRenderer.cs" />
+    <Compile Include="Components\RoundedEntryRenderer.cs" />
+    <Compile Include="Components\NoBorderEntryRenderer.cs" />
+    <Compile Include="OCR\Tesseract.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Scandia-Bold.otf">
@@ -100,6 +126,8 @@
     <AndroidAsset Include="Assets\OpenSans-LightItalic.ttf" />
     <AndroidAsset Include="Assets\OpenSans-Regular.ttf" />
     <AndroidAsset Include="Assets\OpenSans-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\tessdata\any.traineddata" />
+    <AndroidAsset Include="Assets\tessdata\deu.traineddata" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
@@ -121,6 +149,7 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
+    <AndroidResource Include="Resources\drawable\meter_example.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HMNGasApp\HMNGasApp.csproj">
@@ -313,6 +342,10 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\round_account_circle_white.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Lib\OpenCV.dll" />
+    <AndroidResource Include="Resources\layout\opencv_camera.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\drawable\round_pencil_white.png" />
   </ItemGroup>
   <ItemGroup>

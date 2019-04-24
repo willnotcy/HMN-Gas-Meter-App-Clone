@@ -13,6 +13,8 @@ namespace HMNGasApp.ViewModel
 
         public ICommand ManualPageNavCommand { get; set; }
         public ICommand InfoPageNavCommand { get; set; }
+        public ICommand ScanPageNavCommand { get; }
+        public ICommand LogOutCommand { get; set; }
         public ICommand SignOutCommand { get; set; }
 		public ICommand UsagePageNavCommand { get; set; }
 
@@ -23,8 +25,30 @@ namespace HMNGasApp.ViewModel
             ManualPageNavCommand = new Command(async () => await ExecuteManualPageNavCommand());
             InfoPageNavCommand = new Command(async () => await ExecuteInfoPageNavCommand());
 			UsagePageNavCommand = new Command(async () => await ExecuteUsagePageNavCommand());
+            ScanPageNavCommand = new Command(async () => await ExecuteScanPageNavCommand());
             SignOutCommand = new Command(async () => await ExecuteSignOutCommand());
         }
+		
+		public string _emergencyText;
+        private string EmergencyText
+        {
+            get => _emergencyText;
+            set => SetProperty(ref _emergencyText, value);
+        }
+
+        private async Task ExecuteScanPageNavCommand()
+        {
+            if (IsBusy)
+            {
+                return;
+            }
+            IsBusy = true;
+
+            await Navigation.PushAsync(new ScanPage());
+
+            IsBusy = false;
+        }
+
 
         private async Task ExecuteSignOutCommand()
         {
@@ -85,5 +109,9 @@ namespace HMNGasApp.ViewModel
 
 			IsBusy = false;
 		}
+        public void Init()
+        {
+            _emergencyText = "";
+        }
 	}
 }
