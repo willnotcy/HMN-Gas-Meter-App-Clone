@@ -79,7 +79,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            await Navigation.PushModalAsync(new InfoPage());
+            await Navigation.PushAsync(new InfoPage());
 
             IsBusy = false;
         }

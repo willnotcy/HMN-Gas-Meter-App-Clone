@@ -36,13 +36,6 @@ namespace HMNGasApp
 
         protected override void OnSleep()
         {
-            //var context = DependencyService.Resolve<IConfig>().Context;
-            //if (context.securityKey != null && context.securityKey != "")
-            //{
-            //    var service = DependencyService.Get<ILoginSoapService>();
-            //    Task.Run(async () => await service.Logout());
-            //    MainPage = new NavigationPage(new LoginPage());
-            //}
         }
 
         protected override void OnResume()

@@ -288,7 +288,7 @@ namespace HMNGasApp.ViewModel
             EditEnabledEmail = false;
             EditEnabledPhone = false;
 
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }
