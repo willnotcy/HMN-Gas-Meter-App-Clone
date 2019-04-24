@@ -24,8 +24,6 @@ namespace HMNGasApp.Tests.ViewModels
             var usagePageViewModel = new UsagePageViewModel(config);
 
             //Act
-            usagePageViewModel.Setup();
-
             var result = usagePageViewModel.GraphData;
 
             //Assert
