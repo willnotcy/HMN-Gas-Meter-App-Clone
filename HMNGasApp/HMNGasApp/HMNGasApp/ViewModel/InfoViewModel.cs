@@ -293,7 +293,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        public void Init(WebServices.Customer c)
+        public void Init(Customer c)
         {
             Customer = c;
             AccountNum = c.AccountNum;

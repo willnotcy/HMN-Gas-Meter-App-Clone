@@ -11,7 +11,7 @@ using System.Globalization;
 
 namespace HMNGasApp.ViewModel
 {
-    class UsagePageViewModel : BaseViewModel
+    public class UsagePageViewModel : BaseViewModel
     {
         public ICommand ReturnNavCommand { get; set; }
         private readonly IConfig _config;
