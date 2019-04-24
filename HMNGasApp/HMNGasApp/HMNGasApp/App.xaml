@@ -63,8 +63,6 @@
             <!--#endregion-->
             
             <!--#region Global Text-->
-
-            <x:String x:Key="Test">Test</x:String>
             
             <!--#region Login Page-->
 
@@ -109,7 +107,7 @@
 
             <!--#region Usage Page-->
              <x:String x:Key="UsagePage.TitleText">HMN Scanner</x:String>
-             <x:String x:Key="UsagePage.MainText">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet diam sed orci pharetra, sit amet convallis nisi tempor</x:String>
+             <x:String x:Key="UsagePage.MainText">Grafen ovenfor afspejler dit seneste forbrug ud fra dine seneste 5 aflæsninger</x:String>
             
             <!--#endregion-->
             
@@ -136,9 +134,32 @@
 
             <!--#region Scan Page-->
             <!--#endregion-->
+                        
+            <!--#region Errors-->
+
+            <x:String x:Key="Errors.Title.Fail">Fejl</x:String>
+            
+            <x:String x:Key="Errors.Message.SWWTryAgain">Noget gik galt - prøv igen</x:String>
+            <x:String x:Key="Errors.Message.SWWInfo">Noget gik galt, dine oplysninger blev ikke opdateret</x:String>
+            <x:String x:Key="Errors.Message.SWWGetInfo">Noget gik galt, da vi skulle hente dine oplysninger</x:String>
+            <x:String x:Key="Errors.Message.InputEmpty">Input feltet må ikke være tomt!</x:String>
+            <x:String x:Key="Errors.Message.InvalidEmail">Ugyldig e-mail</x:String>
+            
+            <x:String x:Key="Errors.Cancel.Okay">Okay</x:String>
 
             <!--#endregion-->
             
+            <!--#region Success-->
+            <x:String x:Key="Success.Title.Success">Success</x:String>
+            <x:String x:Key="Success.Title.MeterRead">Måler aflæst</x:String>
+            
+            <x:String x:Key="Success.Message.ReadingSent">Din aflæsning er indsendt!</x:String>
+            <x:String x:Key="Success.Message.UpdatedInfo">Dine oplysninger blev opdateret!</x:String>
+            
+            <x:String x:Key="Succe.Cancel.Okay">Okay</x:String>
+            <!--#endregion-->
+
+            <!--#endregion-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>
