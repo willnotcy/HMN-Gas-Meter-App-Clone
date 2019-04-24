@@ -10,24 +10,6 @@ namespace HMNGasApp.Tests.ViewModels
 {
     public class UsagePageViewModelTests
     {
-        [Fact]
-        public void Model_given_inpout_creates_some_output()
-        {
-            //Arrange
-            var config = new Config();
-            var meterReading = new MeterReading
-            {
-                ReasonToReading = "Ordinær",
-                Reading = "9999",
-            };
-            config.MeterReadings.Add(meterReading);
-            var usagePageViewModel = new UsagePageViewModel(config);
-
-            //Act
-            var result = usagePageViewModel.GraphData;
-
-            //Assert
-            Assert.NotNull(result);
-        }
+        
     }
 }
