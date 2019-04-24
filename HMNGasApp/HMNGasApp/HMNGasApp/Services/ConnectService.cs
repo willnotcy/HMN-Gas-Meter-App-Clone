@@ -21,7 +21,7 @@ namespace HMNGasApp.Services
             _client = Client;
         }
 
-        public bool canConnect()
+        public bool CanConnect()
         {
             var canConnect = false;
 
