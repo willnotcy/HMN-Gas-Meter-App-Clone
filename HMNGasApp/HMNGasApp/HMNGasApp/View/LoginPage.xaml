@@ -59,8 +59,6 @@
                                          FontSize="20" 
                                          HeightRequest="60"
                                          IsPassword="True"/>
-
-                <Label Text="{x:Static Text:TextFile.Test}"/>
             </StackLayout>
 
             <Button Text="Log ind" 
