@@ -347,6 +347,11 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\round_pencil_white.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\hmn_icon.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\hmn_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\hmn_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\hmn_icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\hmn_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\round_pencil_white.png" />
