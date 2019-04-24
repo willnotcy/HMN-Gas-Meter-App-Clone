@@ -20,13 +20,11 @@
             <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
                 <On Platform="iOS" Value="Scandia Bold" />
                 <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
-                <On Platform="UWP" Value="Assets/Fonts/Scandia-Bold.otf#Scandia" />
             </OnPlatform>
 
             <OnPlatform x:TypeArguments="x:String" x:Key="OpenSans">
                 <On Platform="iOS" Value="OpenSans-Regular" />
                 <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
-                <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
             </OnPlatform>
             <!--#endregion-->
             
