@@ -36,7 +36,7 @@ namespace HMNGasApp
 
             var json = DependencyService.Resolve<IJSONRepository>();
             var dic = json.Read().Result;
-
+            
             foreach (KeyValuePair<string, string> entry in dic)
             {
                 Application.Current.Resources[entry.Key] = entry.Value;

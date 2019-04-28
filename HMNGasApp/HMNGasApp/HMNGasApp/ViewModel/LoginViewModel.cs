@@ -12,8 +12,8 @@ namespace HMNGasApp.ViewModel
     public class LoginViewModel : BaseViewModel
     {
         private readonly ILoginSoapService _service;
-        private readonly IJSONRepository _repo;
         private readonly IConfig _config;
+
         //Get resources
         private readonly ResourceDictionary res = App.Current.Resources;
 
@@ -40,18 +40,15 @@ namespace HMNGasApp.ViewModel
             set => SetProperty(ref _password, value);
         }
 
-        public LoginViewModel(ILoginSoapService service, IConfig config, IJSONRepository repo)
+        public LoginViewModel(ILoginSoapService service, IConfig config)
         {
             Title = "Log in";
 
-            _repo = repo;
             _service = service;
             _config = config;
 
             Password = "";
             CustomerId = "";
-
-            //_repo.Read();
 
             SignInCommand = new Command(async () => await ExecuteSignInCommand());
         }

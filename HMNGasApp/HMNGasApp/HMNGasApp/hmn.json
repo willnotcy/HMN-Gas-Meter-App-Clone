@@ -1,4 +1,5 @@
 ﻿{
-  "MainPage.ScanButton": "value",
-  "Mainpage.ManualUsageButton":  "manual button"
+  "MainPage.Title": "title",
+  "MainPage.ScanButton": "SCAN",
+  "Mainpage.ManualUsageButton": "manual button"
 }
