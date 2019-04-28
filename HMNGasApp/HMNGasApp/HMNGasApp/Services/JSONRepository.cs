@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,11 +19,19 @@ namespace HMNGasApp.Services
             _client = client;
         }
 
-        public async Task<string> Read()
+        public async Task<Dictionary<string, string>> Read()
         {
-            var response = await _client.GetAsync($"api/file");
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            Stream stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.hmn.json");
 
-            return await response.Content.ReadAsStringAsync();
+            using (var reader = new System.IO.StreamReader(stream))
+            {
+                var json = reader.ReadToEnd();
+
+                Dictionary<string, string> ValueList = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+
+                return ValueList;
+            }
         } 
     }
 }

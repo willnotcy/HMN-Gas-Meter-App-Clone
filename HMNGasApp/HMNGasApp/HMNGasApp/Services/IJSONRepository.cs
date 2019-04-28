@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.Services
 {
     public interface IJSONRepository
     {
-        Task<string> Read();
+        Task<Dictionary<string, string>> Read();
     }
 }

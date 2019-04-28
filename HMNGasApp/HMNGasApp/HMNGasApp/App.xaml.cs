@@ -33,11 +33,19 @@ namespace HMNGasApp
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
             MainPage = new NavigationPage(new LoginPage());
+
+            var json = DependencyService.Resolve<IJSONRepository>();
+            var dic = json.Read().Result;
+
+            foreach (KeyValuePair<string, string> entry in dic)
+            {
+                Application.Current.Resources[entry.Key] = entry.Value;
+            }
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+           
         }
 
         protected override void OnSleep()
@@ -82,7 +90,6 @@ namespace HMNGasApp
             services.AddScoped<IConnectService, ConnectService>();
             services.AddScoped<IJSONRepository, JSONRepository>();
             services.AddSingleton(_ => new HttpClient() { BaseAddress = _backendUrl });
-
 
             return services.BuildServiceProvider();
         }
