@@ -32,7 +32,6 @@ namespace HMNGasApp
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
-            DemoStuff();
             MainPage = new NavigationPage(new LoginPage());
         }
 
@@ -82,16 +81,10 @@ namespace HMNGasApp
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
             services.AddScoped<IJSONRepository, JSONRepository>();
+            services.AddSingleton(_ => new HttpClient() { BaseAddress = _backendUrl });
 
 
             return services.BuildServiceProvider();
-        }
-
-        private async Task DemoStuff()
-        {
-            var repo = DependencyService.Resolve<IJSONRepository>();
-            var res = await repo.Read();
-            System.Diagnostics.Debug.WriteLine(res);
         }
     }
 }
