@@ -23,6 +23,8 @@ namespace HMNGasApp.ViewModel
         private readonly ITesseractApi _tesseract;
         private readonly IDevice _device;
         private readonly IOpenCVService _openCVService;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
         public ICommand ReturnNavCommand { get; }
         public ICommand OpenCameraCommand { get; }
         public ICommand ConfirmReadingCommand { get; }
@@ -64,11 +66,11 @@ namespace HMNGasApp.ViewModel
 
             if (Reading == null || Reading.Equals(""))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], (string)res["Errors.Message.InputEmpty"], (string)res["Errors.Cancel.Okay"]);
             }
             else if (Reading.Contains("?"))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "OCR kunne ikke genkende alle tal. Ret eventuelle ? til det korrekte tal.", "OK");
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], (string)res["Errors.Message.OCR"], (string)res["Errors.Cancel.Okay"]);
             }
             else
             {
@@ -128,7 +130,7 @@ namespace HMNGasApp.ViewModel
                     {
                         if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
                         {
-                            await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
+                            await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNeedCamera"], (string)res["Permission.Cancel.Okay"]);
                         }
 
                         var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
@@ -145,13 +147,13 @@ namespace HMNGasApp.ViewModel
                     }
                     else if (status != PermissionStatus.Unknown)
                     {
-                        await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                        await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNotPermitted"], (string)res["Permission.Cancel.Okay"]);
                     }
                 });
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNotPermitted"], (string)res["Permission.Cancel.Okay"]);
             }
             IsBusy = false;
         }
