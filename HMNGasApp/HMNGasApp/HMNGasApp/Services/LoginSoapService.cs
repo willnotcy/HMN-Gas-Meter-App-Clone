@@ -43,6 +43,7 @@ namespace HMNGasApp.Services
 
                 if (canConnect)
                 {
+                    //TODO: change to something more meaningful
                     (bool, string) result = (false, "Not ok");
 
                     var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
@@ -51,13 +52,14 @@ namespace HMNGasApp.Services
 
                     if (result.Item1)
                     {
-                        _config.Context.securityKey = result.Item2;
+                        _config.Context.SecurityKey = result.Item2;
                         _config.CustomerId = customerId;
                         _config.MeterReadings = await GetMeterReadings();
                     }
 
                     return result;
                 }
+                //TODO: Inconsistent with danish/english
                 return (false, "Kunne ikke få forbindelse");
             });
 
@@ -97,7 +99,7 @@ namespace HMNGasApp.Services
 
                 if (result.ErrorCode.Equals("0"))
                 {
-                    _config.Context.securityKey = "";
+                    _config.Context.SecurityKey = "";
                     return true;
                 }
                 else

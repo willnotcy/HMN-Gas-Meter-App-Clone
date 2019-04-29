@@ -58,7 +58,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            ResourceDictionary res = App.Current.Resources;
+            var res = App.Current.Resources;
             var result = await _service.Logout();
             if (result)
             {
@@ -110,9 +110,5 @@ namespace HMNGasApp.ViewModel
 
 			IsBusy = false;
 		}
-        public void Init()
-        {
-            _emergencyText = "";
-        }
 	}
 }

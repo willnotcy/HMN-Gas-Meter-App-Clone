@@ -13,21 +13,34 @@ namespace HMNGasApp.Tests.Services
     public class CustomerSoapServiceTests
     {
         [Fact]
-        public async Task GetCustomer_given_valid_login_returns_customer()
+        public void GetCustomer_given_valid_login_returns_customer()
         {
+            //Arrange
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
 
-            var customers = new List<WebServices.Customer>();
-            customers.Add(new WebServices.Customer() { AccountNum = "73" , Address = "Bow St, Smithfield Village, Ireland", Email = "test@test.dk", Name = "James On", Phone = "12345678"  });
+            var customers = new List<Customer>();
+            var customer = new Customer()
+            {
+                AccountNum = "73",
+                Address = "Bow St, Smithfield Village, Ireland",
+                Email = "test@test.dk",
+                Name = "James On",
+                Phone = "12345678"
+            };
+
+            //Act
+            customers.Add(customer);
+
             var response = new CustomerResponse() { Customers = customers.ToArray() };
 
             client.Setup(s => s.getCustomers(It.IsAny<CustomerRequest>())).Returns(response);
 
             var api = new CustomerSoapService(client.Object, config.Object);
 
-            var result = await api.GetCustomerAsync();
+            var result = api.GetCustomer();
 
+            //Assert
             Assert.Equal("73", result.Item2.AccountNum);
             Assert.Equal("Bow St, Smithfield Village, Ireland", result.Item2.Address);
             Assert.Equal("test@test.dk", result.Item2.Email);
@@ -36,14 +49,14 @@ namespace HMNGasApp.Tests.Services
         }
 
         [Fact]
-        public async Task GetCustomer_returns_false_when_api_doesnt_respond()
+        public void GetCustomer_returns_false_when_api_doesnt_respond()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
 
             var service = new CustomerSoapService(client.Object, config.Object);
 
-            var result = await service.GetCustomerAsync();
+            var result = service.GetCustomer();
 
             Assert.False(result.Item1);
             Assert.Null(result.Item2);
@@ -57,7 +70,7 @@ namespace HMNGasApp.Tests.Services
             client.Setup(s => s.newCustContactInfo(It.IsAny<NewCustContactInfoRequest>())).Returns(new NewCustContactInfoResponse { ResponseCode = "Ok", ErrorCode = "0", ResponseMessage = "Succesfuld opdatering af kundedetaljer"});
             var service = new CustomerSoapService(client.Object, config.Object);
 
-            var customer = new WebServices.Customer();
+            var customer = new Customer();
 
             var result = await service.EditCustomerAsync(customer);
 
@@ -71,7 +84,7 @@ namespace HMNGasApp.Tests.Services
             var config = new Mock<IConfig>();
             var service = new CustomerSoapService(client.Object, config.Object);
 
-            var customer = new WebServices.Customer();
+            var customer = new Customer();
 
             var result = await service.EditCustomerAsync(customer);
 

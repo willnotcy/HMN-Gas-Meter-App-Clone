@@ -1,7 +1,6 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.Services;
 using HMNGasApp.View;
-using HMNGasApp.WebServices;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -58,18 +57,18 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            ResourceDictionary res = App.Current.Resources;
+            var res = App.Current.Resources;
             var result = await _service.NewLoginAsync(CustomerId, Password);
             if(result.Item1)
             {
                 SignedIn = true;
-                _config.Context.securityKey = result.Item2;
+                _config.Context.SecurityKey = result.Item2;
                 await Navigation.PushAsync(new MainPage());
-            } else
-            {
-                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
             }
-
+            else
+            {
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], result.Item2, (string)res["Errors.Cancel.Okay"]);
+            }
             IsBusy = false;
         }
     }

@@ -7,7 +7,6 @@ using HMNGasApp.Model;
 
 namespace HMNGasApp.ViewModel
 {
-
     public class ManualPageViewModel : BaseViewModel
     {
         public ICommand ManualCommand { get; set; }
@@ -62,8 +61,6 @@ namespace HMNGasApp.ViewModel
             get => _examplePicture;
             set => SetProperty(ref _examplePicture, value);
         }
-
-
         public ManualPageViewModel(IConfig config)
         {
             Init();
@@ -93,6 +90,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
             ResourceDictionary res = App.Current.Resources;
+
+            var res = App.Current.Resources;
 
             if (UsageInput == null || UsageInput.Equals(""))
             {

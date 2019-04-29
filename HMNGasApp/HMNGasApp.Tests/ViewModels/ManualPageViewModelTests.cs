@@ -1,9 +1,12 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.ViewModel;
 using Moq;
+<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Text;
+=======
+>>>>>>> origin/Finish_up
 using Xunit;
 
 namespace HMNGasApp.Tests.ViewModels
@@ -16,11 +19,12 @@ namespace HMNGasApp.Tests.ViewModels
             //Arrange
             var input = "1235678";
             var config = new Mock<IConfig>();
-            var manualPageViewModel = new ManualPageViewModel(config.Object);
+            var manualPageViewModel = new ManualPageViewModel(config.Object)
+            {
+                UsageInput = input
+            };
 
             //Act
-            manualPageViewModel.UsageInput = input;
-
             var result = manualPageViewModel.UsageInput;
 
             //Assert
@@ -33,10 +37,12 @@ namespace HMNGasApp.Tests.ViewModels
             //Arrange
             var input = "1235678";
             var config = new Mock<IConfig>();
-            var manualPageViewModel = new ManualPageViewModel(config.Object);
+            var manualPageViewModel = new ManualPageViewModel(config.Object)
+            {
+                UsageInput = input
+            };
 
             //Act
-            manualPageViewModel.UsageInput = input;
 
             manualPageViewModel.Reset();
 

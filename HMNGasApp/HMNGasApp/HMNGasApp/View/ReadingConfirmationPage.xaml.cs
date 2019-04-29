@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-using HMNGasApp.ViewModel;
+﻿using HMNGasApp.ViewModel;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace HMNGasApp.View
 {
@@ -15,15 +11,8 @@ namespace HMNGasApp.View
         {
             InitializeComponent();
             BindingContext = _vm = DependencyService.Resolve<ReadingConfirmationPageViewModel>();
-            _vm.Navigation = Navigation;
 
             _vm.Init(reading);
-
         }
-        public ReadingConfirmationPage() 
-        {
-            InitializeComponent();
-        }
-
     }
 }
