@@ -264,7 +264,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = await _service.GetCustomer();
+            var result = _service.GetCustomer();
             if (result.Item1)
             {
                 Init(result.Item2);

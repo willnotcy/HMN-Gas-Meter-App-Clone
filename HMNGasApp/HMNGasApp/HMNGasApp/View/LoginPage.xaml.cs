@@ -1,5 +1,4 @@
-﻿
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HMNGasApp.ViewModel;
 
@@ -10,7 +9,7 @@ namespace HMNGasApp.View
     {
         private readonly LoginViewModel _vm;
 
-		public LoginPage ()
+		public LoginPage()
 		{
 			InitializeComponent();
             BindingContext = _vm = DependencyService.Resolve<LoginViewModel>();
