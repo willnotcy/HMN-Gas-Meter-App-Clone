@@ -291,12 +291,12 @@ namespace HMNGasApp.ViewModel
             EditEnabledEmail = false;
             EditEnabledPhone = false;
 
-            await Navigation.PopModalAsync();
+            await Navigation.PopAsync();
 
             IsBusy = false;
         }
 
-        public void Init(WebServices.Customer c)
+        public void Init(Customer c)
         {
             Customer = c;
             AccountNum = c.AccountNum;

@@ -39,13 +39,8 @@ namespace HMNGasApp.ViewModel
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             _config = config;
-            Init();
-
-        }
-
-        private void Init()
-        {
             AccountNum = _config.CustomerId;
+
         }
         private async Task ExecuteReturnNavCommand()
         {

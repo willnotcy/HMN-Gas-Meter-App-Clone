@@ -6,11 +6,6 @@
              xmlns:components="clr-namespace:HMNGasApp.View.Components"
              xmlns:Text="clr-namespace:HMNGasApp.Resource"
              NavigationPage.HasNavigationBar="False">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:EntryHasDataConverter x:Key="dataHasBeenEntered"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -59,12 +54,18 @@
                                          FontSize="20" 
                                          HeightRequest="60"
                                          IsPassword="True"/>
+                <ActivityIndicator x:Name="activityIndicator"
+                        IsVisible="{Binding IsBusy}"
+                        IsRunning="{Binding IsBusy}"
+                        Color="{StaticResource PrimaryGreen}"
+                        VerticalOptions="CenterAndExpand"
+                        HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
 
             <Button Text="{StaticResource LoginPage.LoginButton}" 
                         Command="{Binding SignInCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
-                        HeightRequest="100" 
+                        HeightRequest="80" 
                         Style="{StaticResource SignInButton}"
                         Grid.Row="2"
                         Margin="0,-3"/>

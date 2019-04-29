@@ -11,13 +11,12 @@ using System.Globalization;
 
 namespace HMNGasApp.ViewModel
 {
-    class UsagePageViewModel : BaseViewModel
+    public class UsagePageViewModel : BaseViewModel
     {
         public ICommand ReturnNavCommand { get; set; }
         private readonly IConfig _config;
 
         private PlotModel _graphData;
-
         public PlotModel GraphData
         {
             get { return _graphData; }
@@ -69,7 +68,6 @@ namespace HMNGasApp.ViewModel
             plotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
-                StringFormat = "dd-MM-yy",
                 IsPanEnabled = false,
                 IsZoomEnabled = false,
                 Title = "Dato",

@@ -9,8 +9,6 @@ namespace HMNGasApp.Model
 
         public string CustomerId { get; set; }
 
-        public string Name { get; set; }
-
         public UserContext Context { get; set; }
 
         public List<MeterReading> MeterReadings { get; set; }
