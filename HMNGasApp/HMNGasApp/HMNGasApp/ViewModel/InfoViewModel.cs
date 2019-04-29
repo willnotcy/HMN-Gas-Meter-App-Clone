@@ -172,7 +172,7 @@ namespace HMNGasApp.ViewModel
                     var result = await _service.EditCustomerAsync(Customer);
                     if (result)
                     {
-                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.InfoUpdated"], (String)res["Success.Cancel.Okay"]);
+                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.UpdatedInfo"], (String)res["Success.Cancel.Okay"]);
                         Readonly = true;
                         EditEnabledName = false;
                         EditEnabledEmail = false;
