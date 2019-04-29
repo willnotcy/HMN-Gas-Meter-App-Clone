@@ -39,7 +39,10 @@ namespace HMNGasApp
             
             foreach (KeyValuePair<string, string> entry in dic)
             {
-                Application.Current.Resources[entry.Key] = entry.Value;
+                if (!entry.Value.Equals(""))
+                {
+                    Application.Current.Resources[entry.Key] = entry.Value;
+                }
             }
         }
 
