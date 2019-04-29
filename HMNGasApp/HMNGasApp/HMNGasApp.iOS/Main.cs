@@ -7,7 +7,6 @@ using Tesseract;
 using Tesseract.iOS;
 using UIKit;
 using HMNGasApp.Services;
-using UIKit;
 using Xamarin.Forms;
 
 namespace HMNGasApp.iOS
