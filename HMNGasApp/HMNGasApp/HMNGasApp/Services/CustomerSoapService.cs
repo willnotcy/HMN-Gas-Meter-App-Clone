@@ -28,19 +28,22 @@ namespace HMNGasApp.Services
         /// <returns>Customer object</returns>
         public async Task<(bool, WebServices.Customer)> GetCustomerAsync()
         {
-            var context = _config.Context;
-
-            var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
-
-            if(result != null && result.Customers.Length == 1)
+            return await Task.Run(() =>
             {
-                return (true, result.Customers[0]);
-            }
-            else
-            {
-                return (false, null);
-            }
+                var context = _config.Context;
 
+                var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
+
+                if (result != null && result.Customers.Length == 1)
+                {
+                    return (true, result.Customers[0]);
+                }
+                else
+                {
+                    return (false, null);
+                }
+            }
+            );
         }
 
         /// <summary>

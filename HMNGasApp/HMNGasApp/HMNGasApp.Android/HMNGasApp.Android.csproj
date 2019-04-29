@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Drive.v3">
-      <Version>1.38.2.1566</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client">
       <Version>5.2.7</Version>
     </PackageReference>
@@ -75,9 +72,6 @@
     </PackageReference>
     <PackageReference Include="Plugin.Permissions">
       <Version>3.0.0.12</Version>
-    </PackageReference>
-    <PackageReference Include="Microcharts">
-      <Version>0.7.1</Version>
     </PackageReference>
     <PackageReference Include="OxyPlot.Xamarin.Android">
       <Version>1.0.0</Version>

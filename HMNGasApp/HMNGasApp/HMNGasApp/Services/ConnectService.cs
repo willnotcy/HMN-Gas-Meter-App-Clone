@@ -14,7 +14,6 @@ namespace HMNGasApp.Services
     {
         private readonly string Firm = "HNG";
         private IXellentAPI _client;
-        private readonly IConfig _config;
 
         public ConnectService(IXellentAPI Client)
         {
