@@ -1,9 +1,11 @@
 ﻿using Xamarin.Forms;
 using HMNGasApp.ViewModel;
 using Xamarin.Forms.Xaml;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HMNGasApp.View
 {
+    [ExcludeFromCodeCoverage]
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScanPage : ContentPage
     {

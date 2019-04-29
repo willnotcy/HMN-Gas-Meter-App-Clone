@@ -1,11 +1,13 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using HMNGasApp.ViewModel;
+using System.Diagnostics.CodeAnalysis;
 
 namespace HMNGasApp.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class LoginPage : ContentPage
+    [ExcludeFromCodeCoverage]
+    public partial class LoginPage : ContentPage
     {
         private readonly LoginViewModel _vm;
 

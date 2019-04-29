@@ -6,21 +6,17 @@ using HMNGasApp.ViewModel;
 using HMNGasApp.WebServices;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using Tesseract;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-using System.Diagnostics;
-using System.Resources;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net;
+using System.Diagnostics.CodeAnalysis;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
 {
+    [ExcludeFromCodeCoverage]
     public partial class App : Application
     {
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());

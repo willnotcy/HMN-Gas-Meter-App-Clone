@@ -1,8 +1,10 @@
 ﻿using HMNGasApp.ViewModel;
+using System.Diagnostics.CodeAnalysis;
 using Xamarin.Forms;
 
 namespace HMNGasApp.View
 {
+    [ExcludeFromCodeCoverage]
     public partial class ManualPage : ContentPage
     {
         private readonly ManualPageViewModel viewModel;
