@@ -14,6 +14,7 @@ namespace HMNGasApp.ViewModel
     public class UsagePageViewModel : BaseViewModel
     {
         public ICommand ReturnNavCommand { get; set; }
+
         private readonly IConfig _config;
 
         private PlotModel _graphData;
@@ -65,6 +66,7 @@ namespace HMNGasApp.ViewModel
                 Title = "Forbrug (m\u00b3)",
                 AxislineStyle = LineStyle.Solid
             });
+
             plotModel.Axes.Add(new CategoryAxis
             {
                 Position = AxisPosition.Bottom,
@@ -74,6 +76,7 @@ namespace HMNGasApp.ViewModel
                 AxislineStyle = LineStyle.Solid,
                 ItemsSource = dates
             });
+
             plotModel.Series.Add(series);
 
             GraphData = plotModel;
@@ -82,7 +85,6 @@ namespace HMNGasApp.ViewModel
         private string FormatDate(string input)
         {
             var dateTime = Convert.ToDateTime(input);
-
             return dateTime.ToString("dd-MM-yy");
         }
     }

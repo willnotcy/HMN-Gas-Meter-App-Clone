@@ -130,9 +130,11 @@ namespace HMNGasApp.ViewModel
                         var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
                         //Best practice to always check that the key exists
                         if (results.ContainsKey(Permission.Camera))
+                        {
                             status = results[Permission.Camera];
+                        }
                     }
-
+                    //TODO: Double check?
                     if (status == PermissionStatus.Granted)
                     {
                         _openCVService.OpenCamera();
@@ -147,8 +149,6 @@ namespace HMNGasApp.ViewModel
             {
                 await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
             }
-            
-
             IsBusy = false;
         }
         
@@ -166,7 +166,9 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             if (result == null)
-                return;
+            {
+                return; 
+            }
 
             if (!_tesseract.Initialized)
             {
@@ -174,7 +176,9 @@ namespace HMNGasApp.ViewModel
                 _tesseract.SetWhitelist("0123456789");
                 _tesseract.SetPageSegmentationMode(PageSegmentationMode.SingleChar);
                 if (!initialised)
+                {
                     return;
+                }       
             }
 
             
@@ -194,7 +198,7 @@ namespace HMNGasApp.ViewModel
                 while (enumerator.MoveNext())
                 {
                     var item = enumerator.Current.Text;
-                    textResult += item ;
+                    textResult += item;
                 }
 
                 bool isDigit = textResult.All(char.IsDigit);
@@ -208,7 +212,6 @@ namespace HMNGasApp.ViewModel
             {
                 Reading = "didnt work";
             }
-
             IsBusy = false;
         }
     }

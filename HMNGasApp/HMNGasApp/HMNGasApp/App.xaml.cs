@@ -47,7 +47,7 @@ namespace HMNGasApp
         {
             var services = new ServiceCollection();
 
-            var context = new UserContext { Caller = "", Company = "", functionName = "", Logg = 0, MaxRows = 1, StartRow = 0, securityKey = "" };
+            var context = new UserContext { Caller = "", Company = "", FunctionName = "", Logg = 0, MaxRows = 1, StartRow = 0, SecurityKey = "" };
 
             var config = new Config
             {

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace HMNGasApp.WebServices
+﻿namespace HMNGasApp.WebServices
 {
     public interface IXellentAPI
     {

@@ -60,7 +60,7 @@ namespace HMNGasApp.ViewModel
             if(result.Item1)
             {
                 SignedIn = true;
-                _config.Context.securityKey = result.Item2;
+                _config.Context.SecurityKey = result.Item2;
                 await Navigation.PushAsync(new MainPage());
             }
             else
