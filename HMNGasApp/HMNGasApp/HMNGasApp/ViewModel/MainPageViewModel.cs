@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Services;
 using HMNGasApp.View;
@@ -9,6 +10,8 @@ namespace HMNGasApp.ViewModel
     public class MainPageViewModel : BaseViewModel
     {
         private readonly ILoginSoapService _service;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
 
         public ICommand ManualPageNavCommand { get; set; }
         public ICommand InfoPageNavCommand { get; set; }
@@ -64,7 +67,7 @@ namespace HMNGasApp.ViewModel
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt - prøv igen", "Okay");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWW"], (String)res["Errors.Cancel.Okay"]);
             }
 
             IsBusy = false;

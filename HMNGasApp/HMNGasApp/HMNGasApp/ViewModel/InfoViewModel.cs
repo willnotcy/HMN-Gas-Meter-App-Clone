@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HMNGasApp.WebServices;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace HMNGasApp.ViewModel
 {
@@ -13,6 +14,8 @@ namespace HMNGasApp.ViewModel
     {
         private readonly ICustomerSoapService _service;
         private readonly IConfig _config;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
 
         public ICommand LoadCommand { get; set; }
         public ICommand EditModeNameCommand { get; set; }
@@ -168,10 +171,9 @@ namespace HMNGasApp.ViewModel
                 {
 
                     var result = await _service.EditCustomerAsync(Customer);
-
                     if (result)
                     {
-                        await App.Current.MainPage.DisplayAlert("Success", "Dine oplysninger blev opdateret!", "Okay");
+                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.InfoUpdated"], (String)res["Success.Cancel.Okay"]);
                         Readonly = true;
                         EditEnabledName = false;
                         EditEnabledEmail = false;
@@ -180,13 +182,13 @@ namespace HMNGasApp.ViewModel
                     else
                     {
                         //TODO: Get text from languagefile
-                        await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
+                        await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWWInfo"], (String)res["Errors.Cancel.Okay"]);
                     }
-                }
-                else 
-                {
-                    await App.Current.MainPage.DisplayAlert("Fejl", "Ugyldig email.", "Okay");
-                }
+                } else 
+                    {
+                        
+                        await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InvalidEmail"], (String)res["Errors.Cancel.Okay"]);
+                    }
             }
             IsBusy = false;
         }
@@ -271,7 +273,7 @@ namespace HMNGasApp.ViewModel
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, da vi skulle hente dine oplysninger", "Ok");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWWGetInfo"], (String)res["Errors.Cancel.Okay"]);
             }
 
             IsBusy = false;

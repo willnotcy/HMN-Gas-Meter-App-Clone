@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
@@ -9,9 +10,12 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
+
+        public ICommand ManualCommand { get; set; }
         private readonly IConfig _config;
         public ICommand ReturnNavCommand { get; set; }
-        public ICommand ManualCommand { get; set; }
         
         private string _usageInput;
         public string UsageInput
@@ -33,6 +37,24 @@ namespace HMNGasApp.ViewModel
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             _service = service;
             _config = config;
+        }
+
+        public void Init(string reading)
+        {
+            var numberSize = _config.MeterReadings.Count > 0 ? Int32.Parse(_config.MeterReadings[0].NumberSize) : 5;
+
+            if (reading.Contains(".")) 
+            {
+                reading = reading.Split('.')[0]; 
+            }
+
+            if (reading.Length > numberSize)
+            {
+                reading = reading.Substring(0, numberSize);
+            }
+
+            UsageInput = reading;
+
             AccountNum = _config.CustomerId;
 
         }
@@ -61,12 +83,13 @@ namespace HMNGasApp.ViewModel
 
             if (!result.Item1)
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
                 await Navigation.PopAsync();
             }
             else
             {
-                await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Success.Title.MeterRead"], (String)res["Success.Message.ReadingSent"], (String)res["Success.Cancel.Okay"]);
+
                 this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
                 await Navigation.PopAsync();
             }

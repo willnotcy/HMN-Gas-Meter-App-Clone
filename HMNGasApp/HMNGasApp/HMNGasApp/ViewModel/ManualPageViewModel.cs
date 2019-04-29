@@ -3,13 +3,18 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using HMNGasApp.View;
 using System.Threading.Tasks;
+using HMNGasApp.Model;
 
 namespace HMNGasApp.ViewModel
 {
     public class ManualPageViewModel : BaseViewModel
     {
+        //Get resources
+        private readonly ResourceDictionary res = App.Current.Resources;
+
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
+        private readonly IConfig _config;
 
         private string _titleText;
         public string TitleText
@@ -59,12 +64,12 @@ namespace HMNGasApp.ViewModel
             get => _examplePicture;
             set => SetProperty(ref _examplePicture, value);
         }
-
-        public ManualPageViewModel()
+        public ManualPageViewModel(IConfig config)
         {
             Init();
             ManualCommand = new Command(async () => await ExecuteManualCommand());
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
+            _config = config;
         }
 
         private async Task ExecuteReturnNavCommand()
@@ -90,7 +95,7 @@ namespace HMNGasApp.ViewModel
 
             if (UsageInput == null || UsageInput.Equals(""))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
+                await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InputEmpty"], (String)res["Errors.Cancel.Okay"]);
             }
             else
             {
@@ -100,11 +105,6 @@ namespace HMNGasApp.ViewModel
         }
         public void Init()
         {
-            _titleText = "Manuel Indtastning";
-            _placeholder = "Måleraflæsning...";
-            _intructionsText = "Indtast din måleraflæsning:";
-            _phoneText = "Eller indmeld via tlf.: +45 62 25 90 00";
-            _exampleText = "Bemærk: det er kun tallene inden for det orange felt der skal indsendes.";
             _examplePicture = "meter_example.jpg";
         }
         public void Reset()

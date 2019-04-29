@@ -40,6 +40,7 @@ namespace HMNGasApp.iOS
                     await service.Logout();
                 });
             });
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
         }
     }
 }

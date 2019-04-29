@@ -4,6 +4,7 @@
              x:Class="HMNGasApp.View.LoginPage"
              xmlns:converters="clr-namespace:HMNGasApp.Converters"
              xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             xmlns:Text="clr-namespace:HMNGasApp.Resource"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid>
@@ -22,7 +23,7 @@
 
                 </Grid.RowDefinitions>
 
-                <Label Text="HMN Scanner" 
+                <Label Text="{StaticResource LoginPage.Title}" 
                        Style="{StaticResource Heading}" 
                        HorizontalOptions="CenterAndExpand" 
                        VerticalTextAlignment="Center"
@@ -31,25 +32,25 @@
             </Grid>
             <StackLayout Padding="30,70,30,0"
                          Grid.Row="1">
-                <Label Text="Kunde nr." 
+                <Label Text="{StaticResource LoginPage.CustomerNo}" 
                        Style="{StaticResource BodyText}"
                        FontSize="14"
                        Margin="30,0,0,0"/>
                 <components:RoundedEntry x:Name="customerId" 
                                          Text="{Binding CustomerId}" 
-                                         Placeholder="Indtast kunde nr." 
+                                         Placeholder="{StaticResource LoginPage.CustomerNoPlaceHolder}" 
                                          FontSize="20"
                                          HeightRequest="60"
                                          Keyboard="Numeric"/>
 
-                <Label Text="Kodeord" 
+                <Label Text="{StaticResource LoginPage.CustomerPw}" 
                        Style="{StaticResource BodyText}"
                        FontSize="14"
                        Margin="30,20,0,0"/>
 
                 <components:RoundedEntry x:Name="password" 
                                          Text="{Binding Password}" 
-                                         Placeholder="Indtast kodeord" 
+                                         Placeholder="{StaticResource LoginPage.CustomerPwPlaceHolder}" 
                                          FontSize="20" 
                                          HeightRequest="60"
                                          IsPassword="True"/>
@@ -60,7 +61,8 @@
                         VerticalOptions="CenterAndExpand"
                         HorizontalOptions="CenterAndExpand"/>
             </StackLayout>
-            <Button Text="Log ind" 
+
+            <Button Text="{StaticResource LoginPage.LoginButton}" 
                         Command="{Binding SignInCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
                         HeightRequest="80" 
