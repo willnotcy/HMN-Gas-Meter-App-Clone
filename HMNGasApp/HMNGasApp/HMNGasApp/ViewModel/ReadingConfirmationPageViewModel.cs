@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
-using HMNGasApp.View;
 using Xamarin.Forms;
 
 namespace HMNGasApp.ViewModel
@@ -11,20 +9,18 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
-
-        private string _usageInput;
-        private string _accountNum;
-        public ICommand ManualCommand { get; set; }
         private readonly IConfig _config;
-
         public ICommand ReturnNavCommand { get; set; }
-
+        public ICommand ManualCommand { get; set; }
+        
+        private string _usageInput;
         public string UsageInput
         {
             get => _usageInput;
             set => SetProperty(ref _usageInput, value);
         }
 
+        private string _accountNum;
         public string AccountNum
         {
             get => _accountNum;
@@ -33,9 +29,9 @@ namespace HMNGasApp.ViewModel
 
         public ReadingConfirmationPageViewModel(IMeterReadingSoapService service, IConfig config)
         {
-            _service = service;
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             ManualCommand = new Command(async () => await ExecuteManualCommand());
+            _service = service;
             _config = config;
             AccountNum = _config.CustomerId;
 
@@ -67,13 +63,13 @@ namespace HMNGasApp.ViewModel
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "OK");
                 await Navigation.PopAsync();
-            } else
+            }
+            else
             {
                 await App.Current.MainPage.DisplayAlert("Måler aflæst", "Din aflæsning er indsendt.", "OK");
                 this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
                 await Navigation.PopAsync();
             }
-
             IsBusy = false;
         }
     }

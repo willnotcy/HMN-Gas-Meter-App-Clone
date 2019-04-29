@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace HMNGasApp.ViewModel
 {
-
     public class ManualPageViewModel : BaseViewModel
     {
-
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
 
@@ -61,7 +59,6 @@ namespace HMNGasApp.ViewModel
             get => _examplePicture;
             set => SetProperty(ref _examplePicture, value);
         }
-
 
         public ManualPageViewModel()
         {

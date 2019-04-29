@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Services;
 using HMNGasApp.View;
@@ -109,9 +108,5 @@ namespace HMNGasApp.ViewModel
 
 			IsBusy = false;
 		}
-        public void Init()
-        {
-            _emergencyText = "";
-        }
 	}
 }

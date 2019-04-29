@@ -1,7 +1,6 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.Services;
 using HMNGasApp.View;
-using HMNGasApp.WebServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -63,14 +62,12 @@ namespace HMNGasApp.ViewModel
                 SignedIn = true;
                 _config.Context.securityKey = result.Item2;
                 await Navigation.PushAsync(new MainPage());
-            } else
+            }
+            else
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
             }
-
             IsBusy = false;
         }
-
-        
     }
 }

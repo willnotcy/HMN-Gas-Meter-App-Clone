@@ -182,14 +182,12 @@ namespace HMNGasApp.ViewModel
                         //TODO: Get text from languagefile
                         await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, dine oplysninger blev ikke opdateret", "Okay");
                     }
-
-                } else 
-                    {
-                        await App.Current.MainPage.DisplayAlert("Fejl", "Ugyldig email.", "Okay");
-                    }
+                }
+                else 
+                {
+                    await App.Current.MainPage.DisplayAlert("Fejl", "Ugyldig email.", "Okay");
+                }
             }
-
-
             IsBusy = false;
         }
 
@@ -230,10 +228,11 @@ namespace HMNGasApp.ViewModel
         private bool VerifyEmail(string email) 
         {
             var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
-            if(Regex.IsMatch(email, emailPattern)) 
-                {
-                    return true;
-                }
+
+            if (Regex.IsMatch(email, emailPattern)) 
+            {
+                return true;
+            }
             return false;
 
         }
@@ -265,10 +264,12 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             var result = _service.GetCustomer();
+
             if (result.Item1)
             {
                 Init(result.Item2);
-            } else
+            }
+            else
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", "Noget gik galt, da vi skulle hente dine oplysninger", "Ok");
             }
@@ -305,12 +306,14 @@ namespace HMNGasApp.ViewModel
             GSRN = "6969696";
 
             var latestReading = _config.MeterReadings.LastOrDefault();
+
             if(latestReading != null)
             {
                 MeterNum = latestReading.MeterNum;
                 LatestMeasure = latestReading.Reading.TrimEnd('0',',') + " m\u00B3";
                 MeasureDate = latestReading.ReadingDate;
-            } else
+            }
+            else
             {
                 MeterNum = "";
                 LatestMeasure = "";
