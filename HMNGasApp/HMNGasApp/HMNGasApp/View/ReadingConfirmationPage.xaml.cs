@@ -11,7 +11,7 @@ namespace HMNGasApp.View
         {
             InitializeComponent();
             BindingContext = _vm = DependencyService.Resolve<ReadingConfirmationPageViewModel>();
-
+            _vm.Navigation = Navigation;
             _vm.Init(reading);
         }
     }
