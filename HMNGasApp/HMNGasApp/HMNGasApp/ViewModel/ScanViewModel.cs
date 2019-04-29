@@ -67,6 +67,10 @@ namespace HMNGasApp.ViewModel
             {
                 await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
             }
+            else if (Reading.Contains("?"))
+            {
+                await App.Current.MainPage.DisplayAlert("Fejl", "OCR kunne ikke genkende alle tal. Ret eventuelle ? til det korrekte tal.", "OK");
+            }
             else
             {
                 await Navigation.PushAsync(new ReadingConfirmationPage(Reading));
