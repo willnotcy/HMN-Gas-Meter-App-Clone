@@ -26,6 +26,7 @@ namespace HMNGasApp.Droid
 		
 		public static void UpdateIdValues()
 		{
+			global::Microcharts.Droid.Resource.String.library_name = global::HMNGasApp.Droid.Resource.String.library_name;
 			global::Tesseract.Droid.Resource.String.ApplicationName = global::HMNGasApp.Droid.Resource.String.ApplicationName;
 			global::Tesseract.Droid.Resource.String.Hello = global::HMNGasApp.Droid.Resource.String.Hello;
 			global::Xamarin.Forms.Platform.Android.Resource.Animation.abc_fade_in = global::HMNGasApp.Droid.Resource.Animation.abc_fade_in;

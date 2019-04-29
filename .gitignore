@@ -346,3 +346,6 @@ MigrationBackup/
 
 # secrets.json for environmental variables (user secrets)
 secrets.json
+
+# credentials.json for drive access
+credentials.json

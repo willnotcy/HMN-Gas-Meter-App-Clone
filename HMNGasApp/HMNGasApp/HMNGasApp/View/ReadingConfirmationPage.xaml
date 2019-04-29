@@ -16,14 +16,14 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Style="{StaticResource Heading}" 
-                           Text="Bekræft aflæsning" 
+                           Text="{StaticResource ReadingConfirmationPage.Title}" 
                            FontSize="Large" 
                            TextColor="White" 
                            HorizontalOptions="CenterAndExpand" 
                            Margin="0,0,50,0"  />
                 </StackLayout>
             </StackLayout>
-            <Label Text="Din måleraflæsning:"
+            <Label Text="{StaticResource ReadingConfirmationPage.YourReading}"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 25"
@@ -36,7 +36,7 @@
                    HorizontalTextAlignment="Center"
                    />
             
-            <Label Text="Kundenummer:"
+            <Label Text="{StaticResource ReadingConfirmationPage.CustomerNo}"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    FontSize="10"
@@ -49,7 +49,7 @@
                    HorizontalTextAlignment="Center"
                    />
             
-            <Button Text="Indsend"
+            <Button Text="{StaticResource ReadingConfirmationPage.Send}"
                     TextColor="White"
                     Margin="90,50,90,10"
                     BorderRadius="7"

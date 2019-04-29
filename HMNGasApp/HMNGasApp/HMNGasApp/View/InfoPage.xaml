@@ -17,7 +17,7 @@
                     </Image.GestureRecognizers>
                 </Image>
                 <Label Font="Bold"
-                       Text="Mine Oplysninger" 
+                       Text="{x:StaticResource InfoPage.Title}"
                        FontSize="Large" 
                        TextColor="White" 
                        HorizontalOptions="CenterAndExpand" 
@@ -45,7 +45,7 @@
                                               HorizontalOptions="Fill"
                                               IsReadOnly="True"                                             
                                               VerticalOptions="Center"
-                                              Placeholder="Jens Jensen"
+                                              Placeholder="{x:StaticResource InfoPage.NamePlaceholder}"
                                               MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
@@ -61,7 +61,7 @@
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
-                        <Label Text="Navn" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.NameLabel}" FontSize="Micro"/>
                     </StackLayout>
                     <Image Source="round_pencil_black.png" HorizontalOptions="EndAndExpand" x:Name="EditNameImage" IsVisible="{Binding EditName}">
                         <Image.GestureRecognizers>
@@ -100,7 +100,7 @@
                     <Image Source="round_location_on_black.png" Margin="0,0,15,0"/>
                     <StackLayout>
                         <Label Text="{Binding Address}" Style="{StaticResource CustomerInfoLabel}"/>
-                        <Label Text="Addresse" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.AddressLabel}" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <!--#endregion-->
@@ -117,7 +117,7 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="Jens.jensen@gmail.com"
+                                                    Placeholder="{x:StaticResource InfoPage.EmailPlaceholder}"
                                                     MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
@@ -134,7 +134,7 @@
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
 
-                        <Label Text="E-mail" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.EmailLabel}" FontSize="Micro"/>
                     </StackLayout>
                     <Image Source="round_pencil_black.png" 
                            HorizontalOptions="EndAndExpand" 
@@ -186,7 +186,7 @@
                                                     MaxLength="30"
                                                     VerticalOptions="Center"
                                                     IsTextPredictionEnabled="False"
-                                                    Placeholder="+45 12 34 56 78"
+                                                    Placeholder="{x:StaticResource InfoPage.PhonePlaceholder}"
                                                     MinimumWidthRequest="10">
                             <components:NoBorderEntry.Triggers>
                                 <DataTrigger 
@@ -202,7 +202,7 @@
                                 </DataTrigger>
                             </components:NoBorderEntry.Triggers>
                         </components:NoBorderEntry>
-                        <Label Text="Mobil" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.PhoneLabel}" FontSize="Micro"/>
                     </StackLayout>
                     <Image Source="round_pencil_black.png" 
                            HorizontalOptions="EndAndExpand" 
@@ -246,7 +246,7 @@
                     <Image Source="round_info_black.png" Margin="0,0,15,0" />
                     <StackLayout>
                         <Label Text="{Binding GSRN}" Style="{StaticResource CustomerInfoLabel}" />
-                        <Label Text="Aftagenummer (GSRN)" FontSize="Micro" />
+                        <Label Text="{x:StaticResource InfoPage.GSRNLabel}" FontSize="Micro" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
@@ -264,7 +264,7 @@
                         <Label Text="{Binding LatestMeasure}"
                                Style= "{StaticResource CustomerInfoLabel}" 
                                />
-                        <Label Text="Seneste måling" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.ReadingLabel}" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <!--#endregion-->
@@ -273,7 +273,7 @@
                     <Image Source="round_date_range_black.png" Margin="0,0,15,0" />
                     <StackLayout>
                         <Label Text="{Binding MeasureDate}" Style="{StaticResource CustomerInfoLabel}"/>
-                        <Label Text="Dato for seneste måling" FontSize="Micro"/>
+                        <Label Text="{x:StaticResource InfoPage.ReadingDateLabel}" FontSize="Micro"/>
                     </StackLayout>
                 </StackLayout>
                 <!--#endregion-->

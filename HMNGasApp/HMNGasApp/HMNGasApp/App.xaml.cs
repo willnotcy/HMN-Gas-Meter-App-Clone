@@ -11,7 +11,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-
+using System.Diagnostics;
+using System.Resources;
+using System.Collections;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
@@ -20,6 +25,8 @@ namespace HMNGasApp
     {
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
+        private static readonly Uri _backendUrl = new Uri("https://localhost:44336/");
+
         public IServiceProvider Container => _lazyProvider.Value;
 
         public App()
@@ -27,15 +34,27 @@ namespace HMNGasApp
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
             MainPage = new NavigationPage(new LoginPage());
+
+            var json = DependencyService.Resolve<IJSONRepository>();
+            var dic = json.Read().Result;
+            
+            foreach (KeyValuePair<string, string> entry in dic)
+            {
+                if (!entry.Value.Equals(""))
+                {
+                    Application.Current.Resources[entry.Key] = entry.Value;
+                }
+            }
         }
 
         protected override void OnStart()
         {
-            // Handle when your app starts
+           
         }
 
         protected override void OnSleep()
         {
+
         }
 
         protected override void OnResume()
@@ -69,7 +88,8 @@ namespace HMNGasApp
             services.AddScoped<IMeterReadingSoapService, MeterReadingSoapService>();
             services.AddSingleton<IXellentAPI, XellentAPI>();
             services.AddScoped<IConnectService, ConnectService>();
-			
+            services.AddScoped<IJSONRepository, JSONRepository>();
+            services.AddSingleton(_ => new HttpClient() { BaseAddress = _backendUrl });
 
             return services.BuildServiceProvider();
         }
