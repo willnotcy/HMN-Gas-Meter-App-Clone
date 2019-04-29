@@ -14,9 +14,6 @@ namespace HMNGasApp.ViewModel
     {
         private readonly ICustomerSoapService _service;
         private readonly IConfig _config;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand LoadCommand { get; set; }
         public ICommand EditModeNameCommand { get; set; }
         public ICommand EditModeEmailCommand { get; set; }
@@ -160,6 +157,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
+
             //Check if any changes has been made, and if not - don't save
             if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
             {
@@ -265,6 +264,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             var result = _service.GetCustomer();
 
             if (result.Item1)

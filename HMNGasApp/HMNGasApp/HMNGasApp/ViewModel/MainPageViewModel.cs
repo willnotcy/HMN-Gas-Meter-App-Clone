@@ -10,8 +10,6 @@ namespace HMNGasApp.ViewModel
     public class MainPageViewModel : BaseViewModel
     {
         private readonly ILoginSoapService _service;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
 
         public ICommand ManualPageNavCommand { get; set; }
         public ICommand InfoPageNavCommand { get; set; }
@@ -60,6 +58,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             var result = await _service.Logout();
             if (result)
             {

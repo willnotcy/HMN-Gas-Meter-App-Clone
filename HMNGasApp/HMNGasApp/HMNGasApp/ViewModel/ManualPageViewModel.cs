@@ -9,9 +9,6 @@ namespace HMNGasApp.ViewModel
 {
     public class ManualPageViewModel : BaseViewModel
     {
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         private readonly IConfig _config;
@@ -92,6 +89,8 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
+
+            var res = App.Current.Resources;
 
             if (UsageInput == null || UsageInput.Equals(""))
             {

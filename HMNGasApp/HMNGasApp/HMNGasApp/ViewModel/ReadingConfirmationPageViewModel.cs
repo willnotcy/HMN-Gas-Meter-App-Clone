@@ -10,9 +10,6 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand ManualCommand { get; set; }
         private readonly IConfig _config;
         public ICommand ReturnNavCommand { get; set; }
@@ -79,6 +76,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             var result = await _service.NewMeterReadingAsync(UsageInput);
 
             if (!result.Item1)

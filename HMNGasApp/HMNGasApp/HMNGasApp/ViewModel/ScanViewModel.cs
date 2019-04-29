@@ -23,8 +23,6 @@ namespace HMNGasApp.ViewModel
         private readonly ITesseractApi _tesseract;
         private readonly IDevice _device;
         private readonly IOpenCVService _openCVService;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
         public ICommand ReturnNavCommand { get; }
         public ICommand OpenCameraCommand { get; }
         public ICommand ConfirmReadingCommand { get; }
@@ -63,6 +61,7 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
+            var res = App.Current.Resources;
 
             if (Reading == null || Reading.Equals(""))
             {
@@ -125,6 +124,7 @@ namespace HMNGasApp.ViewModel
                 await Task.Run(async () =>
                 {
                     var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                    var res = App.Current.Resources;
 
                     if (status != PermissionStatus.Granted)
                     {
@@ -153,6 +153,7 @@ namespace HMNGasApp.ViewModel
             }
             catch (Exception)
             {
+                var res = App.Current.Resources;
                 await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNotPermitted"], (string)res["Permission.Cancel.Okay"]);
             }
             IsBusy = false;
