@@ -5332,7 +5332,7 @@ namespace HMNGasApp.WebServices
         }
 
         /// <remarks/>
-        public string SecurityKey
+        public string securityKey
         {
             get
             {
@@ -5345,7 +5345,7 @@ namespace HMNGasApp.WebServices
         }
 
         /// <remarks/>
-        public string FunctionName
+        public string functionName
         {
             get
             {

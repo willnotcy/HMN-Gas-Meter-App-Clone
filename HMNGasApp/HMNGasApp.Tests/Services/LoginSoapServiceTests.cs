@@ -75,7 +75,7 @@ namespace HMNGasApp.Tests.Services
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
             var meterService = new Mock<IMeterReadingSoapService>();
-            var config = new Config { Context = new UserContext { SecurityKey = "anfkasjnfajk" } };
+            var config = new Config { Context = new UserContext { securityKey = "anfkasjnfajk" } };
             client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "0", ResponseCode = "Ok", ResponseMessage = "" });
 
             var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
@@ -83,7 +83,7 @@ namespace HMNGasApp.Tests.Services
             var result = await service.Logout();
 
             Assert.True(result);
-            Assert.Equal("", config.Context.SecurityKey);
+            Assert.Equal("", config.Context.securityKey);
         }
 
         [Fact]
@@ -92,14 +92,14 @@ namespace HMNGasApp.Tests.Services
             var client = new Mock<IXellentAPI>();
             var connectService = new Mock<IConnectService>();
             var meterService = new Mock<IMeterReadingSoapService>();
-            var config = new Config { Context = new UserContext { SecurityKey = "anfkasjnfajk" } };
+            var config = new Config { Context = new UserContext { securityKey = "anfkasjnfajk" } };
             client.Setup(c => c.logout(It.IsAny<LogoutRequest>())).Returns(new LogoutResponse { ErrorCode = "1000", ResponseCode = "Not ok", ResponseMessage = "" });
             var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
             var result = await service.Logout();
 
             Assert.False(result);
-            Assert.Equal("anfkasjnfajk", config.Context.SecurityKey);
+            Assert.Equal("anfkasjnfajk", config.Context.securityKey);
         }
         [Fact]
         public void ConfigGetApiKey_set_test()

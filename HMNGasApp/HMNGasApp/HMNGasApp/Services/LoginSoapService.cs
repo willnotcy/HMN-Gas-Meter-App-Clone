@@ -52,7 +52,7 @@ namespace HMNGasApp.Services
 
                     if (result.Item1)
                     {
-                        _config.Context.SecurityKey = result.Item2;
+                        _config.Context.securityKey = result.Item2;
                         _config.CustomerId = customerId;
                         _config.MeterReadings = await GetMeterReadings();
                     }
@@ -99,7 +99,7 @@ namespace HMNGasApp.Services
 
                 if (result.ErrorCode.Equals("0"))
                 {
-                    _config.Context.SecurityKey = "";
+                    _config.Context.securityKey = "";
                     return true;
                 }
                 else
