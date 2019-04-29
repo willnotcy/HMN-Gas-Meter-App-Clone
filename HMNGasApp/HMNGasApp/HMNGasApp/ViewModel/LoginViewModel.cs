@@ -14,9 +14,6 @@ namespace HMNGasApp.ViewModel
         private readonly ILoginSoapService _service;
         private readonly IConfig _config;
 
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand SignInCommand { get; set; }
 
         private bool _signedIn;
@@ -61,6 +58,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            ResourceDictionary res = App.Current.Resources;
             var result = await _service.NewLoginAsync(CustomerId, Password);
             if(result.Item1)
             {

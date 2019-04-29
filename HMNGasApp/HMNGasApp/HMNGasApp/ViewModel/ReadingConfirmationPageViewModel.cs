@@ -11,8 +11,6 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
 
         private string _usageInput;
         private string _accountNum;
@@ -82,7 +80,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             var result = await _service.NewMeterReadingAsync(UsageInput);
-
+            ResourceDictionary res = App.Current.Resources;
             if (!result.Item1)
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
