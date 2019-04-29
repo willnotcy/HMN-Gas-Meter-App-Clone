@@ -1,12 +1,9 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.ViewModel;
 using Moq;
-<<<<<<< HEAD
 using System;
 using System.Collections.Generic;
 using System.Text;
-=======
->>>>>>> origin/Finish_up
 using Xunit;
 
 namespace HMNGasApp.Tests.ViewModels

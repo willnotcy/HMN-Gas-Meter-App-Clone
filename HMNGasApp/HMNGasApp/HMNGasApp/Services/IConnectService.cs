@@ -1,7 +1,9 @@
-﻿namespace HMNGasApp.Services
+﻿using System.Threading.Tasks;
+
+namespace HMNGasApp.Services
 {
     public interface IConnectService
     {
-        bool CanConnect();
+        Task<bool> CanConnect();
     }
 }

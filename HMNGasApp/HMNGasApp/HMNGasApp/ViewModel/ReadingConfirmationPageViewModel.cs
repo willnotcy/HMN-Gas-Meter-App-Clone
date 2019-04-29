@@ -79,7 +79,6 @@ namespace HMNGasApp.ViewModel
 
             var res = App.Current.Resources;
             var result = await _service.NewMeterReadingAsync(UsageInput);
-            ResourceDictionary res = App.Current.Resources;
             if (!result.Item1)
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);

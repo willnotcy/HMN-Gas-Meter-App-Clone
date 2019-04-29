@@ -89,10 +89,8 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
-            ResourceDictionary res = App.Current.Resources;
 
             var res = App.Current.Resources;
-
             if (UsageInput == null || UsageInput.Equals(""))
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InputEmpty"], (String)res["Errors.Cancel.Okay"]);

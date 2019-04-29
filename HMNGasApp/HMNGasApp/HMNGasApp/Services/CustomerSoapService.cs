@@ -22,7 +22,7 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public (bool, Customer) GetCustomer()
+        public async Task<(bool, Customer)> GetCustomer()
         {
             return await Task.Run(() =>
             {

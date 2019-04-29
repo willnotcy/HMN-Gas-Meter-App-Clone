@@ -256,7 +256,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        private async void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
             if (IsBusy)
             {
@@ -265,7 +265,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             var res = App.Current.Resources;
-            var result = _service.GetCustomer();
+            var result = await _service.GetCustomer();
 
             if (result.Item1)
             {
