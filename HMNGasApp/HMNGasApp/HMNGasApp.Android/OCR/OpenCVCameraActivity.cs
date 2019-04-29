@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using HMNGasApp.Helpers;
 using OpenCV.Android;
 using OpenCV.Core;
@@ -26,7 +20,7 @@ namespace HMNGasApp.Droid.OCR
         private CameraBridgeViewBase _openCvCameraView;
         private OpenCVServiceDroid _openCV { get; set; }
 
-        private Mat mRgba;
+        private Mat rgba;
         private Rect roi;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -34,6 +28,7 @@ namespace HMNGasApp.Droid.OCR
             base.OnCreate(savedInstanceState);
             Window.AddFlags(WindowManagerFlags.KeepScreenOn);
             SetContentView(Resource.Layout.opencv_camera);
+
             _openCvCameraView = FindViewById<CameraBridgeViewBase>(Resource.Id.surfaceView);
             _openCvCameraView.Visibility = ViewStates.Visible;
             _openCvCameraView.SetCvCameraViewListener(this);
@@ -71,61 +66,62 @@ namespace HMNGasApp.Droid.OCR
                 _openCvCameraView.DisableView();
                 _openCvCameraView = null;
                 _openCV = null;
-                mRgba = null;
+                rgba = null;
                 roi = null;
             }
         }
         private Rect GetRoi(Mat mat)
         {
-            var scanBox = new Size(mat.Width() - ((mat.Width() / 6) * 2),
-                                   mat.Height() / 6);
+            var boxWidth = mat.Width() - (mat.Width() / 3);
+            var boxHeight = mat.Height() / 6;
+            var scanBox = new Size(boxWidth, boxHeight);
 
-            var scanBoxStartingPoint = new Point(mat.Width() / 6,
-                                                 (mat.Height() / 2) - (mat.Height() / 10));
+            var xStartingPoint = mat.Width() / 6;
+            var yStartingPoint = (mat.Height() / 2) - (mat.Height() / 10);
+            var scanBoxStartingPoint = new Point(xStartingPoint,yStartingPoint);
 
             return new Rect(scanBoxStartingPoint, scanBox);
         }
 
-        public Mat OnCameraFrame(Mat p0)
+        public Mat OnCameraFrame(Mat frame)
         {
+            //Only done on first frame.
+            //If ROI it not initailized, then we draw it on the frame.
+            //However, if we have already drawn it on previous frame
+            //then we don't need to draw it again.
             if(roi == null)
             {
-                roi = GetRoi(p0);
+                roi = GetRoi(frame);
             }
+
             // TODO: provide these in a global config file
-            var contourMinHeight = p0.Height() / 34;
-            var contourMaxHeight = p0.Height() / 4;
+            var contourMinHeight = frame.Height() / 34;
+            var contourMaxHeight = frame.Height() / 4;
 
             // Initial rotation because camera starts in landscape mode.
-            var input = _openCV.Rotate(p0, -90);
-            mRgba = input.Clone();
+            var input = _openCV.Rotate(frame, -90);
+
+
+            rgba = input.Clone();
             var submat = input.Submat(roi);
             var submatClone = submat.Clone();
 
-            mRgba = _openCV.DrawRectangle(mRgba, roi, new Scalar(0, 255, 0));
+            rgba = _openCV.DrawRectangle(rgba, roi, new Scalar(0, 255, 0));
 
             // Turn image black and white.
             var gray = _openCV.ToGray(submat);
 
-            //Brightness and contrast correction
+            // Brightness and contrast correction trough Histogram Equalization
             var equalized = _openCV.EqualizeHistogram(gray);
 
             // Blur image to reduce noise.
             var blur = _openCV.GaussianBlur(equalized);
-            //var blur = _openCV.MedianBlur(equalized);
 
-            // Detect edges using canny.
-            var edges = _openCV.OtsuThresh(blur);
-
-            // Detect straight lines using Hough Lines Transform.
-            //var lines = _openCV.HoughLines(edges, houghThresh);
-
-            // Rotate image based on detected lines average gradient.
-            //var thetaDegrees = _openCV.GetAverageLineTheta(lines);
-            //var rotated = _openCV.Rotate(edges, thetaDegrees);
-
+            // Detect blobs using Otsu Tresholding
+            var blobs = _openCV.OtsuThresh(blur);
+            
             // Find contours in image. (clone because it this version of OpenCV applies some changes to the input image)
-            var clone = edges.Clone();
+            var clone = blobs.Clone();
             var contours = _openCV.FindContours(clone);
 
             // Filter contours based on size -> then by Y position and height of their bounding boxes.
@@ -134,14 +130,15 @@ namespace HMNGasApp.Droid.OCR
 
             // Draw bounding boxes on input image for user visualization.
             var withBoundingBoxes = _openCV.DrawBoundingBoxes(submatClone.Clone(), alignedContours.Item2);
-            withBoundingBoxes.CopyTo(mRgba.Submat(roi));
+            withBoundingBoxes.CopyTo(rgba.Submat(roi));
 
             // Discard the frame if less than 8 matching contours are found. We want all the digits on the gas meter before processing.
+            // TODO: if gasmeters have less than 8 digits, then what?
             if (alignedContours.Item2.Count != 8)
             {
-                return mRgba;
+                return rgba;
             }
-
+       
             // Prepare output for OCR and stop the camera feed.
             try
             {
@@ -160,8 +157,8 @@ namespace HMNGasApp.Droid.OCR
                 // Cut each digit individually based on bounding box.
                 foreach (Rect rect in sorted)
                 {
-                    digits.Add(_openCV.MatToStream(new Mat(edges, rect)));
-                    digitsClone.Add(_openCV.MatToStream(new Mat(edges, rect)));
+                    digits.Add(_openCV.MatToStream(new Mat(blobs, rect)));
+                    digitsClone.Add(_openCV.MatToStream(new Mat(blobs, rect)));
                 }
 
                 // TODO: Crop output image to region of interest when that is implemented.
@@ -174,7 +171,7 @@ namespace HMNGasApp.Droid.OCR
                 gray.Release();
                 equalized.Release();
                 blur.Release();
-                edges.Release();
+                blobs.Release();
                 clone.Release();
                 contours.Item2.Release();
                 submatClone.Release();
@@ -185,20 +182,20 @@ namespace HMNGasApp.Droid.OCR
             catch (Exception)
             {
                 // Processing the rectangles sometimes fail throwing an exception. These frames can discarded and the feed continues.
-                return mRgba;
+                return rgba;
             }
 
-            return mRgba;
+            return rgba;
         }
 
         public void OnCameraViewStarted(int width, int height)
         {
-            mRgba = new Mat(height, width, CvType.Cv8uc4);
+            rgba = new Mat(height, width, CvType.Cv8uc4);
         }
 
         public void OnCameraViewStopped()
         {
-            mRgba.Release();
+            rgba.Release();
         }
 
         public void OnManagerConnected(int p0)
@@ -212,7 +209,6 @@ namespace HMNGasApp.Droid.OCR
                     break;
             }
         }
-
         public void OnPackageInstall(int p0, IInstallCallbackInterface p1)
         {
             throw new NotImplementedException();
