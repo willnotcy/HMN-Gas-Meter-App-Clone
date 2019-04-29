@@ -1,10 +1,6 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 
 namespace HMNGasApp.Services
 {
@@ -26,13 +22,20 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public async Task<(bool, WebServices.Customer)> GetCustomerAsync()
+        public (bool, Customer) GetCustomer()
         {
             var context = _config.Context;
 
-            var result = _client.getCustomers(new CustomerRequest { AccountNum = _config.CustomerId, UserContext = context, OrgNo = "" });
+            var request = new CustomerRequest
+            {
+                AccountNum = _config.CustomerId,
+                UserContext = context,
+                OrgNo = ""
+            };
 
-            if(result != null && result.Customers.Length == 1)
+            var result = _client.getCustomers(request);
+
+            if (result != null && result.Customers.Length == 1)
             {
                 return (true, result.Customers[0]);
             }
@@ -48,7 +51,7 @@ namespace HMNGasApp.Services
         /// </summary>
         /// <param name="Customer"></param>
         /// <returns></returns>
-        public async Task<bool> EditCustomerAsync(WebServices.Customer Customer)
+        public async Task<bool> EditCustomerAsync(Customer Customer)
         {
             return await Task.Run(() =>
             {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Tesseract;
+﻿using Tesseract;
 
 namespace HMNGasApp.Services
 {

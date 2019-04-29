@@ -1,8 +1,5 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace HMNGasApp.Services
 {
@@ -14,7 +11,6 @@ namespace HMNGasApp.Services
     {
         private readonly string Firm = "HNG";
         private IXellentAPI _client;
-        private readonly IConfig _config;
 
         public ConnectService(IXellentAPI Client)
         {
@@ -24,7 +20,7 @@ namespace HMNGasApp.Services
         public bool CanConnect()
         {
             var canConnect = false;
-
+            //HACK: Should maybe be changed or at least reasoned why 3 tries is great?
             for(int i = 0; i < 3; i++)
             {
                 var result = _client.canConnect(Firm);

@@ -26,7 +26,7 @@ namespace HMNGasApp.Tests.Services
 
             var api = new CustomerSoapService(client.Object, config.Object);
 
-            var result = await api.GetCustomerAsync();
+            var result = api.GetCustomer();
 
             Assert.Equal("73", result.Item2.AccountNum);
             Assert.Equal("Bow St, Smithfield Village, Ireland", result.Item2.Address);
@@ -43,7 +43,7 @@ namespace HMNGasApp.Tests.Services
 
             var service = new CustomerSoapService(client.Object, config.Object);
 
-            var result = await service.GetCustomerAsync();
+            var result = service.GetCustomer();
 
             Assert.False(result.Item1);
             Assert.Null(result.Item2);

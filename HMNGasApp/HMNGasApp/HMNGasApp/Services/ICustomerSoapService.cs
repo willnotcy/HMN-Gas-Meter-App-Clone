@@ -6,7 +6,7 @@ namespace HMNGasApp.Services
 {
     public interface ICustomerSoapService
     {
-        Task<(bool, Customer)> GetCustomerAsync();
+        (bool, Customer) GetCustomer();
 
         Task<bool> EditCustomerAsync(Customer Customer);
     }
