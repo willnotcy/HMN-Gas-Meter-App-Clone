@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace HMNGasApp
