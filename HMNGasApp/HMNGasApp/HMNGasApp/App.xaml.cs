@@ -25,7 +25,7 @@ namespace HMNGasApp
     {
         private readonly Lazy<IServiceProvider> _lazyProvider = new Lazy<IServiceProvider>(() => ConfigureServices());
 
-        private static readonly Uri _backendUrl = new Uri("https://localhost:44336/");
+        private static readonly Uri _backendUrl = new Uri("https://gasnet.dk/GasApp/File/");
 
         public IServiceProvider Container => _lazyProvider.Value;
 
@@ -36,15 +36,20 @@ namespace HMNGasApp
             MainPage = new NavigationPage(new LoginPage());
 
             var json = DependencyService.Resolve<IJSONRepository>();
-            var dic = json.Read().Result;
-            
-            foreach (KeyValuePair<string, string> entry in dic)
+
+            // Retrieve resource dictionary values from HMN server and update where needed. Runs in a new thread and updates when ready.
+            Task.Run(async () =>
             {
-                if (!entry.Value.Equals(""))
+                var dic = await json.Read();
+
+                foreach (KeyValuePair<string, string> entry in dic)
                 {
-                    Application.Current.Resources[entry.Key] = entry.Value;
+                    if (!entry.Value.Equals(""))
+                    {
+                        Application.Current.Resources[entry.Key] = entry.Value;
+                    }
                 }
-            }
+            }).Wait();
         }
 
         protected override void OnStart()
