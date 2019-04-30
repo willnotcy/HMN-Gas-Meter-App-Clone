@@ -14,9 +14,6 @@ namespace HMNGasApp.ViewModel
     {
         private readonly ICustomerSoapService _service;
         private readonly IConfig _config;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand LoadCommand { get; set; }
         public ICommand EditModeNameCommand { get; set; }
         public ICommand EditModeEmailCommand { get; set; }
@@ -160,6 +157,8 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
+
             //Check if any changes has been made, and if not - don't save
             if (Customer.Name != Name.Trim() || Customer.Phone != Phone.Trim() || Customer.Email != Email.Trim())
             {
@@ -173,7 +172,7 @@ namespace HMNGasApp.ViewModel
                     var result = await _service.EditCustomerAsync(Customer);
                     if (result)
                     {
-                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.InfoUpdated"], (String)res["Success.Cancel.Okay"]);
+                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.UpdatedInfo"], (String)res["Success.Cancel.Okay"]);
                         Readonly = true;
                         EditEnabledName = false;
                         EditEnabledEmail = false;
@@ -184,15 +183,12 @@ namespace HMNGasApp.ViewModel
                         //TODO: Get text from languagefile
                         await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWWInfo"], (String)res["Errors.Cancel.Okay"]);
                     }
-
                 } else 
                     {
                         
                         await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InvalidEmail"], (String)res["Errors.Cancel.Okay"]);
                     }
             }
-
-
             IsBusy = false;
         }
 
@@ -233,10 +229,11 @@ namespace HMNGasApp.ViewModel
         private bool VerifyEmail(string email) 
         {
             var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
-            if(Regex.IsMatch(email, emailPattern)) 
-                {
-                    return true;
-                }
+
+            if (Regex.IsMatch(email, emailPattern)) 
+            {
+                return true;
+            }
             return false;
 
         }
@@ -259,7 +256,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        private async void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
             if (IsBusy)
             {
@@ -267,11 +264,14 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-            var result = await _service.GetCustomerAsync();
+            var res = App.Current.Resources;
+            var result = await _service.GetCustomer();
+
             if (result.Item1)
             {
                 Init(result.Item2);
-            } else
+            }
+            else
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWWGetInfo"], (String)res["Errors.Cancel.Okay"]);
             }
@@ -308,12 +308,14 @@ namespace HMNGasApp.ViewModel
             GSRN = "6969696";
 
             var latestReading = _config.MeterReadings.LastOrDefault();
+
             if(latestReading != null)
             {
                 MeterNum = latestReading.MeterNum;
                 LatestMeasure = latestReading.Reading.TrimEnd('0',',') + " m\u00B3";
                 MeasureDate = latestReading.ReadingDate;
-            } else
+            }
+            else
             {
                 MeterNum = "";
                 LatestMeasure = "";

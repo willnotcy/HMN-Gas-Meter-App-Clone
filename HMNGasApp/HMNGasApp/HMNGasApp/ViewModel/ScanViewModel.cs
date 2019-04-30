@@ -4,17 +4,12 @@ using HMNGasApp.View;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Tesseract;
 using Xamarin.Forms;
-using XLabs.Ioc;
-using XLabs.Platform.Device;
-using XLabs.Platform.Services.Media;
 
 namespace HMNGasApp.ViewModel
 {
@@ -24,7 +19,6 @@ namespace HMNGasApp.ViewModel
     public class ScanViewModel : BaseViewModel
     {
         private readonly ITesseractApi _tesseract;
-        private readonly IDevice _device;
         private readonly IOpenCVService _openCVService;
         public ICommand ReturnNavCommand { get; }
         public ICommand OpenCameraCommand { get; }
@@ -48,10 +42,10 @@ namespace HMNGasApp.ViewModel
         {
             _tesseract = DependencyService.Get<ITesseract>().TesseractApi;
             _openCVService = DependencyService.Get<IOpenCVService>();
-            _device = Resolver.Resolve<IDevice>();
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             OpenCameraCommand = new Command(async () => await ExecuteOpenCameraCommand());
             ConfirmReadingCommand = new Command(async () => await ExecuteConfirmReadingCommand());
+
             MessagingCenter.Subscribe<CameraResultMessage>(this, CameraResultMessage.Key, async (sender) => await HandleResult(sender));
         }
 
@@ -62,14 +56,15 @@ namespace HMNGasApp.ViewModel
                 return;
             }
             IsBusy = true;
+            var res = App.Current.Resources;
 
             if (Reading == null || Reading.Equals(""))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "Input feltet må ikke være tomt!", "OK");
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], (string)res["Errors.Message.InputEmpty"], (string)res["Errors.Cancel.Okay"]);
             }
             else if (Reading.Contains("?"))
             {
-                await App.Current.MainPage.DisplayAlert("Fejl", "OCR kunne ikke genkende alle tal. Ret eventuelle ? til det korrekte tal.", "OK");
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], (string)res["Errors.Message.OCR"], (string)res["Errors.Cancel.Okay"]);
             }
             else
             {
@@ -119,41 +114,43 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
-
             try
             {
                 await Task.Run(async () =>
                 {
                     var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+                    var res = App.Current.Resources;
+
                     if (status != PermissionStatus.Granted)
                     {
                         if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Camera))
                         {
-                            await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen skal bruge dit kamera til at udføre scanningen", "OK");
+                            await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNeedCamera"], (string)res["Permission.Cancel.Okay"]);
                         }
 
                         var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
                         //Best practice to always check that the key exists
                         if (results.ContainsKey(Permission.Camera))
+                        {
                             status = results[Permission.Camera];
+                        }
                     }
-
+                    //TODO: Double check?
                     if (status == PermissionStatus.Granted)
                     {
                         _openCVService.OpenCamera();
                     }
                     else if (status != PermissionStatus.Unknown)
                     {
-                        await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                        await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNotPermitted"], (string)res["Permission.Cancel.Okay"]);
                     }
                 });
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("Kamera tilladelse", "Appen har ikke tilladelse til at bruge dit kamera", "OK");
+                var res = App.Current.Resources;
+                await App.Current.MainPage.DisplayAlert((string)res["Permission.Title.Camera"], (string)res["Permission.Message.AppNotPermitted"], (string)res["Permission.Cancel.Okay"]);
             }
-            
-
             IsBusy = false;
         }
         
@@ -171,7 +168,9 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             if (result == null)
-                return;
+            {
+                return; 
+            }
 
             if (!_tesseract.Initialized)
             {
@@ -179,7 +178,9 @@ namespace HMNGasApp.ViewModel
                 _tesseract.SetWhitelist("0123456789");
                 _tesseract.SetPageSegmentationMode(PageSegmentationMode.SingleChar);
                 if (!initialised)
+                {
                     return;
+                }       
             }
 
             
@@ -199,7 +200,7 @@ namespace HMNGasApp.ViewModel
                 while (enumerator.MoveNext())
                 {
                     var item = enumerator.Current.Text;
-                    textResult += item ;
+                    textResult += item;
                 }
 
                 bool isDigit = textResult.All(char.IsDigit);
@@ -213,7 +214,6 @@ namespace HMNGasApp.ViewModel
             {
                 Reading = "didnt work";
             }
-
             IsBusy = false;
         }
     }

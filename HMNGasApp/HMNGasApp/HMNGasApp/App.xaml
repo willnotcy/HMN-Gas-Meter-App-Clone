@@ -144,6 +144,7 @@
             <x:String x:Key="Errors.Message.SWWGetInfo">Noget gik galt, da vi skulle hente dine oplysninger</x:String>
             <x:String x:Key="Errors.Message.InputEmpty">Input feltet må ikke være tomt!</x:String>
             <x:String x:Key="Errors.Message.InvalidEmail">Ugyldig e-mail</x:String>
+            <x:String x:Key="Errors.Message.OCR">OCR kunne ikke genkende alle tal. Ret eventuelle ? til det korrekte tal</x:String>
             
             <x:String x:Key="Errors.Cancel.Okay">Okay</x:String>
 
@@ -156,7 +157,16 @@
             <x:String x:Key="Success.Message.ReadingSent">Din aflæsning er indsendt!</x:String>
             <x:String x:Key="Success.Message.UpdatedInfo">Dine oplysninger blev opdateret!</x:String>
             
-            <x:String x:Key="Succe.Cancel.Okay">Okay</x:String>
+            <x:String x:Key="Success.Cancel.Okay">Okay</x:String>
+            <!--#endregion-->
+            
+            <!--#region Permission-->
+            <x:String x:Key="Permission.Title.Camera">Kamera tilladelse</x:String>
+
+            <x:String x:Key="Permission.Message.AppNeedCamera">Appen skal bruge dit kamera til at udføre scanningen</x:String>
+            <x:String x:Key="Permission.Message.AppNotPermitted">Appen har ikke tilladelse til at bruge dit kamera</x:String>
+
+            <x:String x:Key="Permission.Cancel.Okay">Okay</x:String>
             <!--#endregion-->
 
             <!--#endregion-->

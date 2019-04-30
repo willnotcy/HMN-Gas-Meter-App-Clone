@@ -11,7 +11,7 @@ namespace HMNGasApp.View
         {
             InitializeComponent();
             BindingContext = viewModel = DependencyService.Resolve<MainPageViewModel>();
-            viewModel.Navigation = this.Navigation;
+            viewModel.Navigation = Navigation;
         }
     }
 }

@@ -2,6 +2,7 @@
 using HMNGasApp.Services;
 using HMNGasApp.WebServices;
 using Moq;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace HMNGasApp.Tests.Services
@@ -9,7 +10,7 @@ namespace HMNGasApp.Tests.Services
     public class ConnectServiceTests
     {
         [Fact]
-        public void ConnectService_canConnect_returns_true_given_HNG()
+        public async Task ConnectService_canConnect_returns_true_given_HNG()
         {
             //Arrange
             var client = new Mock<IXellentAPI>();
@@ -20,13 +21,13 @@ namespace HMNGasApp.Tests.Services
 
             var connectService = new ConnectService(client.Object);
 
-            var result = connectService.CanConnect();
+            var result = await connectService.CanConnect();
             
             //Assert
             Assert.True(result);
         }
         [Fact]
-        public void ConnectService_canConnect_returns_false_given_no_connection()
+        public async Task ConnectService_canConnect_returns_false_given_no_connection()
         {
             //Arrange
             var client = new Mock<IXellentAPI>();
@@ -37,7 +38,7 @@ namespace HMNGasApp.Tests.Services
 
             var connectService = new ConnectService(client.Object);
 
-            var result = connectService.CanConnect();
+            var result = await connectService.CanConnect();
 
             //Assert
             Assert.False(result);

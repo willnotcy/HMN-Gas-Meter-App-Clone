@@ -33,23 +33,25 @@ namespace HMNGasApp
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
-            MainPage = new NavigationPage(new LoginPage());
-
-            var json = DependencyService.Resolve<IJSONRepository>();
 
             // Retrieve resource dictionary values from HMN server and update where needed. Runs in a new thread and updates when ready.
-            Task.Run(async () =>
-            {
-                var dic = await json.Read();
+            Task.Run(() => LoadJSON()).Wait();
 
-                foreach (KeyValuePair<string, string> entry in dic)
-                {
-                    if (!entry.Value.Equals(""))
-                    {
-                        Application.Current.Resources[entry.Key] = entry.Value;
-                    }
-                }
-            }).Wait();
+            MainPage = new NavigationPage(new LoginPage());
+        }
+
+        private async Task LoadJSON()
+        {
+            var json = DependencyService.Resolve<IJSONRepository>();
+
+			var dic = await json.Read();;
+			foreach (KeyValuePair<string, string> entry in dic)
+			{
+				if (!entry.Value.Equals(""))
+				{
+					Application.Current.Resources[entry.Key] = entry.Value;
+				}
+			}
         }
 
         protected override void OnStart()

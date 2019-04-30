@@ -4,6 +4,7 @@
                 x:Class="HMNGasApp.View.InfoPage"
                 xmlns:events="clr-namespace:HMNGasApp.View.Events"
                 Title="{Binding Title}"
+                NavigationPage.HasNavigationBar="False"
                 xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <StackLayout>
         <!--#region Header-->
