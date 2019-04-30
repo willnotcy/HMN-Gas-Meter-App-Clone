@@ -172,7 +172,7 @@ namespace HMNGasApp.ViewModel
                     var result = await _service.EditCustomerAsync(Customer);
                     if (result)
                     {
-                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.InfoUpdated"], (String)res["Success.Cancel.Okay"]);
+                        await App.Current.MainPage.DisplayAlert((String)res["Success.Title.Success"], (String)res["Success.Message.UpdatedInfo"], (String)res["Success.Cancel.Okay"]);
                         Readonly = true;
                         EditEnabledName = false;
                         EditEnabledEmail = false;
@@ -255,7 +255,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = false;
         }
 
-        private async void ExecuteLoadCommand()
+        private async Task ExecuteLoadCommand()
         {
             if (IsBusy)
             {
@@ -264,7 +264,7 @@ namespace HMNGasApp.ViewModel
             IsBusy = true;
 
             var res = App.Current.Resources;
-            var result = _service.GetCustomer();
+            var result = await _service.GetCustomer();
 
             if (result.Item1)
             {

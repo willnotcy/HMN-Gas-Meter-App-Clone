@@ -39,7 +39,7 @@ namespace HMNGasApp.Services
             {
                 var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-                var canConnect = _connectService.CanConnect();
+                var canConnect = await _connectService.CanConnect();
 
                 if (canConnect)
                 {

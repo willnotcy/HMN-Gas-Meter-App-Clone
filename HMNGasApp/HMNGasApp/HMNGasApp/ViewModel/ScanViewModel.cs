@@ -10,8 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Tesseract;
 using Xamarin.Forms;
-using XLabs.Ioc;
-using XLabs.Platform.Device;
 
 namespace HMNGasApp.ViewModel
 {
@@ -21,7 +19,6 @@ namespace HMNGasApp.ViewModel
     public class ScanViewModel : BaseViewModel
     {
         private readonly ITesseractApi _tesseract;
-        private readonly IDevice _device;
         private readonly IOpenCVService _openCVService;
         public ICommand ReturnNavCommand { get; }
         public ICommand OpenCameraCommand { get; }
@@ -45,8 +42,6 @@ namespace HMNGasApp.ViewModel
         {
             _tesseract = DependencyService.Get<ITesseract>().TesseractApi;
             _openCVService = DependencyService.Get<IOpenCVService>();
-            _device = Resolver.Resolve<IDevice>();
-
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             OpenCameraCommand = new Command(async () => await ExecuteOpenCameraCommand());
             ConfirmReadingCommand = new Command(async () => await ExecuteConfirmReadingCommand());

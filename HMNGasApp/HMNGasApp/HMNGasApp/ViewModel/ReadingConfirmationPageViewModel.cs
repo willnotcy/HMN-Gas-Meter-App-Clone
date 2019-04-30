@@ -10,6 +10,7 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
+
         public ICommand ManualCommand { get; set; }
         private readonly IConfig _config;
         public ICommand ReturnNavCommand { get; set; }
@@ -78,7 +79,6 @@ namespace HMNGasApp.ViewModel
 
             var res = App.Current.Resources;
             var result = await _service.NewMeterReadingAsync(UsageInput);
-
             if (!result.Item1)
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);

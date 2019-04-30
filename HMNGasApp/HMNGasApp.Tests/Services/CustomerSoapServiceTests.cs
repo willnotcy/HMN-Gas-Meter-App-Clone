@@ -13,7 +13,7 @@ namespace HMNGasApp.Tests.Services
     public class CustomerSoapServiceTests
     {
         [Fact]
-        public void GetCustomer_given_valid_login_returns_customer()
+        public async Task GetCustomer_given_valid_login_returns_customer()
         {
             //Arrange
             var client = new Mock<IXellentAPI>();
@@ -38,7 +38,7 @@ namespace HMNGasApp.Tests.Services
 
             var api = new CustomerSoapService(client.Object, config.Object);
 
-            var result = api.GetCustomer();
+            var result = await api.GetCustomer();
 
             //Assert
             Assert.Equal("73", result.Item2.AccountNum);
@@ -49,14 +49,14 @@ namespace HMNGasApp.Tests.Services
         }
 
         [Fact]
-        public void GetCustomer_returns_false_when_api_doesnt_respond()
+        public async Task GetCustomer_returns_false_when_api_doesnt_respond()
         {
             var client = new Mock<IXellentAPI>();
             var config = new Mock<IConfig>();
 
             var service = new CustomerSoapService(client.Object, config.Object);
 
-            var result = service.GetCustomer();
+            var result = await service.GetCustomer();
 
             Assert.False(result.Item1);
             Assert.Null(result.Item2);

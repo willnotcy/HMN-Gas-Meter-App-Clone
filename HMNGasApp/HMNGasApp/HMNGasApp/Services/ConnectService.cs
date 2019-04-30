@@ -1,5 +1,6 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.WebServices;
+using System.Threading.Tasks;
 
 namespace HMNGasApp.Services
 {
@@ -17,21 +18,24 @@ namespace HMNGasApp.Services
             _client = Client;
         }
 
-        public bool CanConnect()
+        public async Task<bool> CanConnect()
         {
-            var canConnect = false;
-            //HACK: Should maybe be changed or at least reasoned why 3 tries is great?
-            for(int i = 0; i < 3; i++)
+            return await Task.Run(() =>
             {
-                var result = _client.canConnect(Firm);
-                if(result)
+                var canConnect = false;
+                //HACK: Should maybe be changed or at least reasoned why 3 tries is great?
+                for (int i = 0; i < 3; i++)
                 {
-                    canConnect = true;
-                    break;
+                    var result = _client.canConnect(Firm);
+                    if (result)
+                    {
+                        canConnect = true;
+                        break;
+                    }
                 }
-            }
 
-            return canConnect;
+                return canConnect;
+            });
         }
     }
 }

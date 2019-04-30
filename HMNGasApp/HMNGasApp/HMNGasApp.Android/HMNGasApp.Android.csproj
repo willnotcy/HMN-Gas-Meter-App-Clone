@@ -64,9 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Drive.v3">
-      <Version>1.38.2.1566</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client">
       <Version>5.2.7</Version>
     </PackageReference>
@@ -75,9 +72,6 @@
     </PackageReference>
     <PackageReference Include="Plugin.Permissions">
       <Version>3.0.0.12</Version>
-    </PackageReference>
-    <PackageReference Include="Microcharts">
-      <Version>0.7.1</Version>
     </PackageReference>
     <PackageReference Include="OxyPlot.Xamarin.Android">
       <Version>1.0.0</Version>
@@ -91,24 +85,12 @@
     <PackageReference Include="Xamarin.Tesseract">
       <Version>0.3.4</Version>
     </PackageReference>
-    <PackageReference Include="XLabs.Forms">
-      <Version>2.0.5782</Version>
-    </PackageReference>
-    <PackageReference Include="XLabs.IoC.TinyIoC">
-      <Version>2.0.5782</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
-    <PackageReference Include="XLabs.IoC">
-      <Version>2.0.5782</Version>
-    </PackageReference>
-    <PackageReference Include="XLabs.Platform">
-      <Version>2.0.5782</Version>
-    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="OCR\Callback.cs" />

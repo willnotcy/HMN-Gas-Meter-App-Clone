@@ -21,16 +21,17 @@ namespace HMNGasApp.Services
 
         public async Task<Dictionary<string, string>> Read()
         {
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            Stream stream = assembly.GetManifestResourceStream($"{assembly.GetName().Name}.hmn.json");
-
-            using (var reader = new StreamReader(stream))
+            try
             {
-                var json = reader.ReadToEnd();
+                var response = await _client.GetAsync("text.json");
+                var json = await response.Content.ReadAsStringAsync();
 
-                Dictionary<string, string> ValueList = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-
-                return ValueList;
+                return JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            }
+            catch (Exception e)
+            {
+                return new Dictionary<string, string>();
+                throw;
             }
         } 
     }

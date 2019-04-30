@@ -22,28 +22,30 @@ namespace HMNGasApp.Services
         /// Obtains customer information for the current customer
         /// </summary>
         /// <returns>Customer object</returns>
-        public (bool, Customer) GetCustomer()
+        public async Task<(bool, Customer)> GetCustomer()
         {
-            var context = _config.Context;
-
-            var request = new CustomerRequest
+            return await Task.Run(() =>
             {
-                AccountNum = _config.CustomerId,
-                UserContext = context,
-                OrgNo = ""
-            };
+                var context = _config.Context;
 
-            var result = _client.getCustomers(request);
+                var request = new CustomerRequest
+                {
+                    AccountNum = _config.CustomerId,
+                    UserContext = context,
+                    OrgNo = ""
+                };
 
-            if (result != null && result.Customers.Length == 1)
-            {
-                return (true, result.Customers[0]);
-            }
-            else
-            {
-                return (false, null);
-            }
+                var result = _client.getCustomers(request);
 
+                if (result != null && result.Customers.Length == 1)
+                {
+                    return (true, result.Customers[0]);
+                }
+                else
+                {
+                    return (false, null);
+                }
+            });
         }
 
         /// <summary>
