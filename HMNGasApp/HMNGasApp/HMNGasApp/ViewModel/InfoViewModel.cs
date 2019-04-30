@@ -304,7 +304,7 @@ namespace HMNGasApp.ViewModel
             Email = c.Email;
             Phone = c.Phone;
             //TODO: Add GSRN
-            GSRN = "6969696";
+            //GSRN = "6969696";
 
             var latestReading = _config.MeterReadings.LastOrDefault();
 

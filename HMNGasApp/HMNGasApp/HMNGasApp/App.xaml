@@ -133,6 +133,13 @@
             <!--#endregion-->
 
             <!--#region Scan Page-->
+            <x:String x:Key="ScanPage.TitleText">Scan måler</x:String>
+            <x:String x:Key="ScanPage.InstructionsText">Dit aflæste forbrug:</x:String>
+            <x:String x:Key="ScanPage.PlaceholderText">Måleraflæsning...</x:String>
+            <x:String x:Key="ScanPage.ControlImageText">Kontrolbillede:</x:String>
+            <x:String x:Key="ScanPage.ExampleText">Bemærk: det er kun tallene før kommaet der indsendes</x:String>
+            <x:String x:Key="ScanPage.ConfirmationText">Bekræft</x:String>
+            
             <!--#endregion-->
                         
             <!--#region Errors-->
