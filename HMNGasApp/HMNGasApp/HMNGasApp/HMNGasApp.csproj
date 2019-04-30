@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Drive.v3" Version="1.38.2.1566" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Mobile.BuildTools" Version="1.4.0.638">
@@ -29,10 +28,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
     <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
     <PackageReference Include="Xamarin.Tesseract" Version="0.3.4" />
-    <PackageReference Include="XLabs.Forms" Version="2.0.5782" />
-    <PackageReference Include="XLabs.IoC" Version="2.0.5782" />
-    <PackageReference Include="XLabs.IoC.TinyIoC" Version="2.0.5782" />
-    <PackageReference Include="XLabs.Platform" Version="2.0.5782" />
     <PackageReference Include="OxyPlot.Xamarin.Forms" Version="1.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
   </ItemGroup>

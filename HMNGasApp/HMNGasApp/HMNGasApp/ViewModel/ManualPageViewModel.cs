@@ -7,12 +7,8 @@ using HMNGasApp.Model;
 
 namespace HMNGasApp.ViewModel
 {
-
     public class ManualPageViewModel : BaseViewModel
     {
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
-
         public ICommand ManualCommand { get; set; }
         public ICommand ReturnNavCommand { get; set; }
         private readonly IConfig _config;
@@ -65,8 +61,6 @@ namespace HMNGasApp.ViewModel
             get => _examplePicture;
             set => SetProperty(ref _examplePicture, value);
         }
-
-
         public ManualPageViewModel(IConfig config)
         {
             Init();
@@ -96,6 +90,7 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             if (UsageInput == null || UsageInput.Equals(""))
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.InputEmpty"], (String)res["Errors.Cancel.Okay"]);

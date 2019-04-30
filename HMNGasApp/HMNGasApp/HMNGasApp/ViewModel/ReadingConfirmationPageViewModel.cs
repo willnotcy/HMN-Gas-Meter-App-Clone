@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HMNGasApp.Model;
 using HMNGasApp.Services;
-using HMNGasApp.View;
 using Xamarin.Forms;
 
 namespace HMNGasApp.ViewModel
@@ -11,22 +10,19 @@ namespace HMNGasApp.ViewModel
     public class ReadingConfirmationPageViewModel : BaseViewModel
     {
         private readonly IMeterReadingSoapService _service;
-        //Get resources
-        private readonly ResourceDictionary res = App.Current.Resources;
 
-        private string _usageInput;
-        private string _accountNum;
         public ICommand ManualCommand { get; set; }
         private readonly IConfig _config;
-
         public ICommand ReturnNavCommand { get; set; }
-
+        
+        private string _usageInput;
         public string UsageInput
         {
             get => _usageInput;
             set => SetProperty(ref _usageInput, value);
         }
 
+        private string _accountNum;
         public string AccountNum
         {
             get => _accountNum;
@@ -35,9 +31,9 @@ namespace HMNGasApp.ViewModel
 
         public ReadingConfirmationPageViewModel(IMeterReadingSoapService service, IConfig config)
         {
-            _service = service;
             ReturnNavCommand = new Command(async () => await ExecuteReturnNavCommand());
             ManualCommand = new Command(async () => await ExecuteManualCommand());
+            _service = service;
             _config = config;
         }
 
@@ -81,20 +77,20 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             var result = await _service.NewMeterReadingAsync(UsageInput);
-
             if (!result.Item1)
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], result.Item2, (String)res["Errors.Cancel.Okay"]);
                 await Navigation.PopAsync();
-            } else
+            }
+            else
             {
                 await App.Current.MainPage.DisplayAlert((String)res["Success.Title.MeterRead"], (String)res["Success.Message.ReadingSent"], (String)res["Success.Cancel.Okay"]);
 
                 this.Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
                 await Navigation.PopAsync();
             }
-
             IsBusy = false;
         }
     }

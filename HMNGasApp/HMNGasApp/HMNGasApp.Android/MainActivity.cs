@@ -9,10 +9,6 @@ using Xamarin.Forms;
 using Tesseract;
 using Tesseract.Droid;
 using Android.Content;
-using TinyIoC;
-using XLabs.Platform.Device;
-using XLabs.Ioc;
-using XLabs.Ioc.TinyIOC;
 using Plugin.Permissions;
 using Plugin.CurrentActivity;
 using HMNGasApp.Services;
@@ -35,15 +31,7 @@ namespace HMNGasApp.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            var container = TinyIoCContainer.Current;
-            container.Register<IDevice>(AndroidDevice.CurrentDevice);
-
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-
-            Resolver.SetResolver(new TinyResolver(container));
-
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);
-
 
             OxyPlot.Xamarin.Forms.Platform.Android.PlotViewRenderer.Init();
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(ExceptionHandler);

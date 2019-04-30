@@ -33,11 +33,15 @@ namespace HMNGasApp
         {
             InitializeComponent();
             DependencyResolver.ResolveUsing(type => Container.GetService(type));
+            LoadJSON();
             MainPage = new NavigationPage(new LoginPage());
+        }
 
+        private async Task LoadJSON()
+        {
             var json = DependencyService.Resolve<IJSONRepository>();
-            var dic = json.Read().Result;
-            
+            var dic = await json.Read();
+
             foreach (KeyValuePair<string, string> entry in dic)
             {
                 if (!entry.Value.Equals(""))

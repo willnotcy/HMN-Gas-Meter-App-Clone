@@ -1,5 +1,4 @@
 ﻿using HMNGasApp.ViewModel;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
