@@ -31,7 +31,7 @@ namespace HMNGasApp.Services
             catch (Exception e)
             {
                 return new Dictionary<string, string>();
-                throw;
+                throw e;
             }
         } 
     }

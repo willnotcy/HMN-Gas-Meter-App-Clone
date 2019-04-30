@@ -180,7 +180,6 @@ namespace HMNGasApp.ViewModel
                     }
                     else
                     {
-                        //TODO: Get text from languagefile
                         await App.Current.MainPage.DisplayAlert((String)res["Errors.Title.Fail"], (String)res["Errors.Message.SWWInfo"], (String)res["Errors.Cancel.Okay"]);
                     }
                 } else 
@@ -226,7 +225,8 @@ namespace HMNGasApp.ViewModel
 
         }
 
-        private bool VerifyEmail(string email) 
+        //TODO public for testing purposes
+        public bool VerifyEmail(string email) 
         {
             var emailPattern = "^(?(\")(\".+?(?<!\\\\)\"@)|(([0-9a-z]((\\.(?!\\.))|[-!#\\$%&'\\*\\+/=\\?\\^`\\{\\}\\|~\\w])*)(?<=[0-9a-z])@))(?(\\[)(\\[(\\d{1,3}\\.){3}\\d{1,3}\\])|(([0-9a-z][-\\w]*[0-9a-z]*\\.)+[a-z0-9][\\-a-z0-9]{0,22}[a-z0-9]))$";
 
@@ -235,7 +235,6 @@ namespace HMNGasApp.ViewModel
                 return true;
             }
             return false;
-
         }
 
 
@@ -305,7 +304,7 @@ namespace HMNGasApp.ViewModel
             Email = c.Email;
             Phone = c.Phone;
             //TODO: Add GSRN
-            GSRN = "6969696";
+            //GSRN = "6969696";
 
             var latestReading = _config.MeterReadings.LastOrDefault();
 

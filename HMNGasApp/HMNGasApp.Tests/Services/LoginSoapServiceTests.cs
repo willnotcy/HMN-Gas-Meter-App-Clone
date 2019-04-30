@@ -20,7 +20,7 @@ namespace HMNGasApp.Tests.Services
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "", ResponseMessage = "securitykey", ResponseCode = ""});
             client.Setup(s => s.getMeterReadings(It.IsAny<MeterReadingsRequest>())).Returns(new MeterReadingsResponse { MeterReadings = new[] { new MeterReading()} });
-            connectService.Setup(s => s.CanConnect()).Returns(true);
+            connectService.Setup(s => s.CanConnect()).ReturnsAsync(true);
 
             var service = new LoginSoapService(client.Object, connectService.Object, config, meterService);
 
@@ -40,7 +40,7 @@ namespace HMNGasApp.Tests.Services
             var config = new Config();
             client.Setup(s => s.newLogin(It.IsAny<NewLoginRequest>())).
                     Returns(new newLoginResponse { ErrorCode = "4", ResponseMessage = "", ResponseCode = "Not Ok" });
-            connectService.Setup(s => s.CanConnect()).Returns(true);
+            connectService.Setup(s => s.CanConnect()).ReturnsAsync(true);
 
             var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 
@@ -58,7 +58,7 @@ namespace HMNGasApp.Tests.Services
             var connectService = new Mock<IConnectService>();
             var meterService = new Mock<IMeterReadingSoapService>();
             var config = new Config();
-            connectService.Setup(s => s.CanConnect()).Returns(false);
+            connectService.Setup(s => s.CanConnect()).ReturnsAsync(false);
 
             var service = new LoginSoapService(client.Object, connectService.Object, config, meterService.Object);
 

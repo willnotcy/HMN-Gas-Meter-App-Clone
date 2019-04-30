@@ -17,7 +17,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Font="Bold"
-                       Text="Scan måler" 
+                       Text="{x:StaticResource ScanPage.TitleText}" 
                        FontSize="Large" 
                        TextColor="White" 
                        HorizontalOptions="CenterAndExpand" 
@@ -30,7 +30,7 @@
                          Padding="10">
                 <ActivityIndicator x:Name="activityIndicator" 
                                    IsRunning="{Binding IsBusy}"/>
-                <Label Text="Dit aflæste forbrug:"
+                <Label Text="{StaticResource ScanPage.InstructionsText}"
                        TextColor="{StaticResource PrimaryDarkGrey}"
                        Style="{StaticResource BodyText}"
                        Font="Bold, 30"
@@ -38,7 +38,7 @@
                        Margin="10, 10"/>
                 <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding Reading}" 
-                                         Placeholder="Forbrug..." 
+                                         Placeholder="{StaticResource ScanPage.PlaceholderText}" 
                                          Style="{StaticResource BodyText}"
                                          Margin="50,10"
                                          HeightRequest="60"
@@ -46,30 +46,19 @@
                                          Keyboard="Numeric"/>
                 <StackLayout VerticalOptions="Center">
                     <Label HorizontalOptions="Center" 
-                           Text="Kontrolbillede:"/>
+                           Text="{StaticResource ScanPage.ControlImageText}"/>
                     <Image x:Name="PhotoImage" 
                            Source="{Binding ImageSource}"/>
-                    <StackLayout Orientation="Horizontal">
-                        <Image  
-                           Source="{Binding DigitSource}"/>
-                        <Image  
-                           Source="{Binding DigitSource2}"/>
-                        <Image  
-                           Source="{Binding DigitSource3}"/>
-                        <Image  
-                           Source="{Binding DigitSource4}"/>
-                        <Image  
-                           Source="{Binding DigitSource5}"/>
-                        <Image  
-                           Source="{Binding DigitSource6}"/>
-                        <Image  
-                           Source="{Binding DigitSource7}"/>
-                        <Image  
-                           Source="{Binding DigitSource8}"/>
-                    </StackLayout>
-                    
+                    <Label Text="{x:StaticResource ScanPage.ExampleText}"
+                           TextColor="{StaticResource PrimaryDarkGrey}"
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource BodyText}"
+                           HorizontalTextAlignment="Center"
+                           Opacity="0.5"
+                           FontSize="12"/>
+
                 </StackLayout>
-                <Button Text="BEKRÆFT"
+                <Button Text="{x:StaticResource ScanPage.ConfirmationText}"
                         TextColor="White"
                         Margin="90, 10"
                         BorderRadius="7"
