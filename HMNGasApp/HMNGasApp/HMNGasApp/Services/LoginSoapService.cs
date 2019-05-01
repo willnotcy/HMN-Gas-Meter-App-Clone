@@ -39,10 +39,11 @@ namespace HMNGasApp.Services
             {
                 var key = SHA.SHA1Encrypt(string.Format("{0}{1}", customerId, _config.ApiKey));
 
-                var canConnect = _connectService.canConnect();
+                var canConnect = await _connectService.CanConnect();
 
                 if (canConnect)
                 {
+                    //TODO: change to something more meaningful
                     (bool, string) result = (false, "Not ok");
 
                     var response = _client.newLogin(new NewLoginRequest() { NewLogin = new NewLogin { WebLogin = customerId, PassWord = password, EncryptedKey = key } });
@@ -58,6 +59,7 @@ namespace HMNGasApp.Services
 
                     return result;
                 }
+                //TODO: Inconsistent with danish/english
                 return (false, "Kunne ikke få forbindelse");
             });
 

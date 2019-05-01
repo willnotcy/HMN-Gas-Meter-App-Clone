@@ -1,105 +1,91 @@
-﻿using HMNGasApp.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
-using Microcharts;
-using SkiaSharp;
 using HMNGasApp.Model;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 using Xamarin.Forms;
 using System.Linq;
+using System.Globalization;
 
 namespace HMNGasApp.ViewModel
 {
-    class UsagePageViewModel:BaseViewModel
+    public class UsagePageViewModel : BaseViewModel
     {
-		private Chart _GraphData;
+        public ICommand ReturnNavCommand { get; set; }
 
-		public Chart GraphData
-		{
-			get => _GraphData;
-			set => SetProperty(ref _GraphData, value);
-		}
+        private readonly IConfig _config;
 
-		public ICommand ReturnNavCommand { get; set; }
-		private readonly IConfig _config;
-		public UsagePageViewModel(IConfig config)
-		{
-			_config = config;
-			ReturnNavCommand = new Command(async () => await Navigation.PopModalAsync());
-			Setup();
-		}
-
-		public void Setup()
-		{
-			var readings= _config.MeterReadings;
-			var entries = new List<Microcharts.Entry>();
-
-            float previous = default(float);
-			foreach (var r in readings)
-			{
-                if (previous == default(float))
-                {
-                    previous = float.Parse(r.Reading);
-                    continue;
-                }
-
-                if(r.ReasonToReading == "Ordinær")
-                {
-                    var parsedReading = float.Parse(r.Reading);
-				    entries.Add(new Microcharts.Entry(parsedReading - previous) { Label = r.ReadingDate,
-																			               ValueLabel = FormatValueLabel(float.Parse(r.Reading) - previous),
-																			               Color = SKColor.Parse("#54C7A9")
-                    });
-                    previous = parsedReading;
-                }
-			}
-
-			GraphData = new LineChart() { Entries = entries,
-										  LineSize = 10,
-										  LabelTextSize = 30,
-										  PointSize = 40,
-                                          LineAreaAlpha = 100, 
-                                          LineMode = LineMode.Straight
-			};
-		}
-
-        private string FormatValueLabel(float vl)
+        private PlotModel _graphData;
+        public PlotModel GraphData
         {
-            return "" + ((Int64) vl);
-            
+            get { return _graphData; }
+            set { SetProperty(ref _graphData, value); }
         }
 
-		public void Testsetup()
-		{
-			var entries = new[]{
-				 new Microcharts.Entry(212)
-				 {
-					 Label = "UWP",
-					 ValueLabel = "212",
-					 Color = SKColor.Parse("#2c3e50")
-				 },
-				 new Microcharts.Entry(248)
-				 {
-					 Label = "Android",
-					 ValueLabel = "248",
-					 Color = SKColor.Parse("#77d065")
-				 },
-				 new Microcharts.Entry(128)
-				 {
-					 Label = "iOS",
-					 ValueLabel = "128",
-					 Color = SKColor.Parse("#b455b6")
-				 },
-				 new Microcharts.Entry(514)
-				 {
-					 Label = "Shared",
-					 ValueLabel = "514",
-					 Color = SKColor.Parse("#3498db")
-				 }
-			};
-			GraphData = new LineChart() { Entries = entries };
+        public UsagePageViewModel(IConfig config)
+        {
+            _config = config;
+            ReturnNavCommand = new Command(async () => await Navigation.PopAsync());
+            Setup();
+        }
 
-		}
-	}
+        private void Setup()
+        {
+            var readings = _config.MeterReadings;
+            var plotModel = new PlotModel
+            {
+                Title = "Seneste forbrug",
+                TitleHorizontalAlignment = TitleHorizontalAlignment.CenteredWithinView,
+                PlotAreaBorderColor = OxyColors.Transparent
+            };
+
+            //TODO Hardcoded color, since impossible to get the correct color from Resource Dictionary ¯\_(ツ)_/¯
+            var green = OxyColor.FromRgb(51, 134, 113);
+
+            var series = new ColumnSeries
+            {
+                StrokeThickness = 1.0
+            };
+
+            var dates = new List<string>();
+            for (int i = readings.Count - 5; i < readings.Count; i++)
+            {
+                var r = readings.ElementAt(i);
+                var parsedReading = double.Parse(r.Consumption, new CultureInfo("da"));
+                series.Items.Add(new ColumnItem { Value = parsedReading, Color = green  });
+                dates.Add(FormatDate(r.ReadingDate));
+            }
+
+            plotModel.Axes.Add(new LinearAxis
+            {
+                Position = AxisPosition.Left,
+                IsPanEnabled = false,
+                IsZoomEnabled = false,
+                Title = "Forbrug (m\u00b3)",
+                AxislineStyle = LineStyle.Solid
+            });
+
+            plotModel.Axes.Add(new CategoryAxis
+            {
+                Position = AxisPosition.Bottom,
+                IsPanEnabled = false,
+                IsZoomEnabled = false,
+                Title = "Dato",
+                AxislineStyle = LineStyle.Solid,
+                ItemsSource = dates
+            });
+
+            plotModel.Series.Add(series);
+
+            GraphData = plotModel;
+        }
+
+        private string FormatDate(string input)
+        {
+            var dateTime = Convert.ToDateTime(input);
+            return dateTime.ToString("dd-MM-yy");
+        }
+    }
 }

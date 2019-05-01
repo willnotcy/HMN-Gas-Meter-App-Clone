@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:HMNGasApp.View.Components"
+             x:Class="HMNGasApp.View.ScanPage"
+             NavigationPage.HasNavigationBar="False" >
+    <ScrollView>
+        <StackLayout>
+            <!--#region Header-->
+            <StackLayout BackgroundColor="{StaticResource PrimaryGreen}" 
+                                VerticalOptions="Center" 
+                                HeightRequest="80">
+                <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
+                    <Image Source="round_arrow_back_white.png"  HorizontalOptions="Start" Margin="10,0,0,0" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ReturnNavCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Font="Bold"
+                       Text="{x:StaticResource ScanPage.TitleText}" 
+                       FontSize="Large" 
+                       TextColor="White" 
+                       HorizontalOptions="CenterAndExpand" 
+                       Margin="0,0,50,0"/>
+                </StackLayout>
+            </StackLayout>
+            <!--#endregion-->
+            <StackLayout VerticalOptions="Center" 
+                         HorizontalOptions="Center" 
+                         Padding="10">
+                <ActivityIndicator x:Name="activityIndicator" 
+                                   IsRunning="{Binding IsBusy}"/>
+                <Label Text="{StaticResource ScanPage.InstructionsText}"
+                       TextColor="{StaticResource PrimaryDarkGrey}"
+                       Style="{StaticResource BodyText}"
+                       Font="Bold, 30"
+                       HorizontalTextAlignment="Center"
+                       Margin="10, 10"/>
+                <components:RoundedEntry x:Name="usage" 
+                                         Text="{Binding Reading}" 
+                                         Placeholder="{StaticResource ScanPage.PlaceholderText}" 
+                                         Style="{StaticResource BodyText}"
+                                         Margin="50,10"
+                                         HeightRequest="60"
+                                         FontSize="15"
+                                         Keyboard="Numeric"/>
+                <StackLayout VerticalOptions="Center">
+                    <Label HorizontalOptions="Center" 
+                           Text="{StaticResource ScanPage.ControlImageText}"/>
+                    <Image x:Name="PhotoImage" 
+                           Source="{Binding ImageSource}"/>
+                    <Label Text="{x:StaticResource ScanPage.ExampleText}"
+                           TextColor="{StaticResource PrimaryDarkGrey}"
+                           HorizontalOptions="FillAndExpand"
+                           Style="{StaticResource BodyText}"
+                           HorizontalTextAlignment="Center"
+                           Opacity="0.5"
+                           FontSize="12"/>
+
+                </StackLayout>
+                <Button Text="{x:StaticResource ScanPage.ConfirmationText}"
+                        TextColor="White"
+                        Margin="90, 10"
+                        BorderRadius="7"
+                        BackgroundColor="{StaticResource SecondaryMint}"
+                        Command="{Binding ConfirmReadingCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

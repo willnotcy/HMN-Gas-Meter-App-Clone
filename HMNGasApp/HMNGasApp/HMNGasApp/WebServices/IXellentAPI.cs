@@ -1,12 +1,10 @@
-﻿using System.Threading.Tasks;
-
-namespace HMNGasApp.WebServices
+﻿namespace HMNGasApp.WebServices
 {
     public interface IXellentAPI
     {
         string Url { get; set; }
         bool UseDefaultCredentials { get; set; }
-
+#pragma warning disable IDE1006 // Naming Styles
         event canConnectCompletedEventHandler canConnectCompleted;
         event contactCustomerCompletedEventHandler contactCustomerCompleted;
         event createPaymentPlanRequestCompletedEventHandler createPaymentPlanRequestCompleted;
@@ -131,7 +129,6 @@ namespace HMNGasApp.WebServices
         event setProdDetailsForNewCustCompletedEventHandler setProdDetailsForNewCustCompleted;
         event setProductDetailsCompletedEventHandler setProductDetailsCompleted;
         event submitComplaintsCompletedEventHandler submitComplaintsCompleted;
-
         void CancelAsync(object userState);
         bool canConnect(string Company);
         void canConnectAsync(string Company);
@@ -505,5 +502,6 @@ namespace HMNGasApp.WebServices
         submitComplaintsResponse submitComplaints(submitComplaintsRequest Request);
         void submitComplaintsAsync(submitComplaintsRequest Request);
         void submitComplaintsAsync(submitComplaintsRequest Request, object userState);
+#pragma warning restore IDE1006 // Naming Styles
     }
 }

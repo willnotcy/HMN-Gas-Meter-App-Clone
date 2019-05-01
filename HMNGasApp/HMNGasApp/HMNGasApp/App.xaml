@@ -1,24 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HMNGasApp.App"
              xmlns:components="clr-namespace:HMNGasApp.View.Components">
     <Application.Resources>
         <ResourceDictionary>
-             <!-- Fonts -->
-            <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
-                <On Platform="iOS" Value="Scandia Bold" />
-                <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
-                <On Platform="UWP" Value="Assets/Fonts/Scandia-Bold.otf#Scandia" />
-            </OnPlatform>
-
-            <OnPlatform x:TypeArguments="x:String" x:Key="OpenSans">
-                <On Platform="iOS" Value="OpenSans-Regular" />
-                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
-                <On Platform="UWP" Value="Assets/Fonts/OpenSans-Regular.ttf#Open Sans" />
-            </OnPlatform>
-
-            <!-- Colors -->
+            <!--#region Colors-->
             <Color x:Key="PrimaryOrange">#E37222</Color>
             <Color x:Key="PrimaryGreen">#338671</Color>
             <Color x:Key="PrimaryBlue">#26578A</Color>
@@ -27,8 +14,21 @@
             <Color x:Key="SecondaryCurry">#FEAC2C</Color>
             <Color x:Key="SecondaryMint">#54C7A9</Color>
             <Color x:Key="SecondaryAzur">#26A2D6</Color>
+            <!--#endregion-->
+
+            <!--#region Fonts-->
+            <OnPlatform x:TypeArguments="x:String" x:Key="ScandiaBold">
+                <On Platform="iOS" Value="Scandia Bold" />
+                <On Platform="Android" Value="Scandia-Bold.otf#Scandia" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" x:Key="OpenSans">
+                <On Platform="iOS" Value="OpenSans-Regular" />
+                <On Platform="Android" Value="OpenSans-Regular.ttf#Open Sans" />
+            </OnPlatform>
+            <!--#endregion-->
             
-            <!-- Font styles -->
+            <!--#region Font styles-->
             <Style x:Key="Heading" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="FontSize" Value="40"/>
@@ -60,6 +60,123 @@
                 <Setter Property="FontFamily" Value="{StaticResource OpenSans}" />
                 <Setter Property="TextColor" Value="Black" />
             </Style>
+            <!--#endregion-->
+            
+            <!--#region Global Text-->
+            
+            <!--#region Login Page-->
+
+            <x:String x:Key="LoginPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="LoginPage.CustomerNo">Kunde nr.</x:String>
+            <x:String x:Key="LoginPage.CustomerNoPlaceHolder">Indtast kunde nr.</x:String>
+
+            <x:String x:Key="LoginPage.CustomerPw">Kodeord</x:String>
+            <x:String x:Key="LoginPage.CustomerPwPlaceHolder">Indtast kodeord</x:String>
+
+            <x:String x:Key="LoginPage.LoginButton">Log ind</x:String>
+
+            <!--#endregion-->
+
+            <!--#region Main Page-->
+            
+            <x:String x:Key="MainPage.Title">HMN Scanner</x:String>
+            
+            <x:String x:Key="MainPage.ScanButton">SCAN</x:String>
+            <x:String x:Key="Mainpage.ManualUsageButton">TAST SELV</x:String>
+            <x:String x:Key="Mainpage.MyReadingsButton">MINE MÅLERAFLÆSNINGER</x:String>
+            
+            <x:String x:Key="Mainpage.LogOutButton">Log ud</x:String>
+       
+            
+            <!--#endregion-->
+
+            <!--#region Info Page-->
+            <x:String x:Key="InfoPage.Title">Mine Oplysninger</x:String>
+            <x:String x:Key="InfoPage.NamePlaceholder">Jens Jensen</x:String>
+            <x:String x:Key="InfoPage.NameLabel">Navn</x:String>
+            <x:String x:Key="InfoPage.AddressLabel">Addresse</x:String>
+            <x:String x:Key="InfoPage.EmailPlaceholder">Jens.jensen@gmail.com</x:String>
+            <x:String x:Key="InfoPage.EmailLabel">E-mail</x:String>
+            <x:String x:Key="InfoPage.PhonePlaceholder">+45 12 34 56 78</x:String>
+            <x:String x:Key="InfoPage.PhoneLabel">Mobil</x:String>
+            <x:String x:Key="InfoPage.GSRNLabel">Aftagenummer (GSRN)</x:String>
+            <x:String x:Key="InfoPage.ReadingLabel">Seneste måling</x:String>
+            <x:String x:Key="InfoPage.ReadingDateLabel">Dato for seneste måling</x:String>
+            <!--#endregion-->
+
+            <!--#region Usage Page-->
+             <x:String x:Key="UsagePage.TitleText">HMN Scanner</x:String>
+             <x:String x:Key="UsagePage.MainText">Grafen ovenfor afspejler dit seneste forbrug ud fra dine seneste 5 aflæsninger</x:String>
+            
+            <!--#endregion-->
+            
+            <!--#region Manual Page-->
+            
+            <x:String x:Key="ManualPage.TitleText">Manuel Indtastning</x:String>
+            <x:String x:Key="ManualPage.InstructionsText">Indtast din måleraflæsning:</x:String>
+            <x:String x:Key="ManualPage.PlaceholderText">Måleraflæsning...</x:String>
+            <x:String x:Key="ManualPage.PhoneText">Eller indmeld via tlf.: +45 62 25 90 00</x:String>
+            <x:String x:Key="ManualPage.ExampleText">Bemærk: det er kun tallene inden for det orange felt der skal indsendes.</x:String>
+            <x:String x:Key="ManualPage.ConfirmationText">Bekræft</x:String>
+            
+            <!--#endregion-->
+            
+            <!--#region Reading Confirmation Page-->
+
+            <x:String x:Key="ReadingConfirmationPage.Title">Bekræft aflæsning</x:String>
+
+            <x:String x:Key="ReadingConfirmationPage.YourReading">Din måleraflæsning:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.CustomerNo">Kundenummer:</x:String>
+            <x:String x:Key="ReadingConfirmationPage.Send">Indsend</x:String>
+
+            <!--#endregion-->
+
+            <!--#region Scan Page-->
+            <x:String x:Key="ScanPage.TitleText">Scan måler</x:String>
+            <x:String x:Key="ScanPage.InstructionsText">Dit aflæste forbrug:</x:String>
+            <x:String x:Key="ScanPage.PlaceholderText">Måleraflæsning...</x:String>
+            <x:String x:Key="ScanPage.ControlImageText">Kontrolbillede:</x:String>
+            <x:String x:Key="ScanPage.ExampleText">Bemærk: det er kun tallene før kommaet der indsendes</x:String>
+            <x:String x:Key="ScanPage.ConfirmationText">Bekræft</x:String>
+            
+            <!--#endregion-->
+                        
+            <!--#region Errors-->
+
+            <x:String x:Key="Errors.Title.Fail">Fejl</x:String>
+            
+            <x:String x:Key="Errors.Message.SWWTryAgain">Noget gik galt - prøv igen</x:String>
+            <x:String x:Key="Errors.Message.SWWInfo">Noget gik galt, dine oplysninger blev ikke opdateret</x:String>
+            <x:String x:Key="Errors.Message.SWWGetInfo">Noget gik galt, da vi skulle hente dine oplysninger</x:String>
+            <x:String x:Key="Errors.Message.InputEmpty">Input feltet må ikke være tomt!</x:String>
+            <x:String x:Key="Errors.Message.InvalidEmail">Ugyldig e-mail</x:String>
+            <x:String x:Key="Errors.Message.OCR">OCR kunne ikke genkende alle tal. Ret eventuelle ? til det korrekte tal</x:String>
+            
+            <x:String x:Key="Errors.Cancel.Okay">Okay</x:String>
+
+            <!--#endregion-->
+            
+            <!--#region Success-->
+            <x:String x:Key="Success.Title.Success">Success</x:String>
+            <x:String x:Key="Success.Title.MeterRead">Måler aflæst</x:String>
+            
+            <x:String x:Key="Success.Message.ReadingSent">Din aflæsning er indsendt!</x:String>
+            <x:String x:Key="Success.Message.UpdatedInfo">Dine oplysninger blev opdateret!</x:String>
+            
+            <x:String x:Key="Success.Cancel.Okay">Okay</x:String>
+            <!--#endregion-->
+            
+            <!--#region Permission-->
+            <x:String x:Key="Permission.Title.Camera">Kamera tilladelse</x:String>
+
+            <x:String x:Key="Permission.Message.AppNeedCamera">Appen skal bruge dit kamera til at udføre scanningen</x:String>
+            <x:String x:Key="Permission.Message.AppNotPermitted">Appen har ikke tilladelse til at bruge dit kamera</x:String>
+
+            <x:String x:Key="Permission.Cancel.Okay">Okay</x:String>
+            <!--#endregion-->
+
+            <!--#endregion-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

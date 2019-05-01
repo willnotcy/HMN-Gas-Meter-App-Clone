@@ -18,7 +18,7 @@
                         Grid.Row="0">
                 <StackLayout Padding="0, 35, 0, 25"  Orientation="Horizontal">
                     <Label Font="Bold" 
-                    Text="HMN Scanner" 
+                    Text="{x:StaticResource MainPage.Title}"
                     FontSize="Large" 
                     TextColor="White" 
                     HorizontalOptions="CenterAndExpand" 
@@ -32,15 +32,16 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout Grid.Row="1">
-                <Button Text="SCAN"
+                <Button Text="{x:StaticResource MainPage.ScanButton}"
                         TextColor="White"
+                        Command="{Binding ScanPageNavCommand}"
                         Padding="15"
                         BorderRadius="7"
                         Margin="10,70,10,10"
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
-                <Button Text="TAST SELV"
+                <Button Text="{x:StaticResource Mainpage.ManualUsageButton}"
                         TextColor="White"
                         Command="{Binding ManualPageNavCommand}"
                         Margin="10,10,10,10"
@@ -49,7 +50,7 @@
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
 
-                <Button Text="MINE MÅLERAFLÆSNINGER"
+                <Button Text="{x:StaticResource Mainpage.MyReadingsButton}"
                         Command="{Binding UsagePageNavCommand}"
                         TextColor="White"
                         Margin="10,10,10,50"
@@ -57,17 +58,18 @@
                         BorderRadius="7"
                         Font="Bold, 15"
                         BackgroundColor="{StaticResource PrimaryGreen}"/>
+                        
+                <Label  Text="{Binding EmergencyText}"
+                        Margin="20,20"/>
+            </StackLayout>
 
-            </StackLayout>
-            <StackLayout Grid.Row="2"
-                         VerticalOptions="EndAndExpand"
-                         BackgroundColor="{StaticResource SecondaryMint}">
-                <Button Text="Log out"
-                        VerticalOptions="EndAndExpand"
+            <Button Text="{x:StaticResource Mainpage.LogOutButton}" 
+                        Command="{Binding SignOutCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
+                        HeightRequest="80" 
                         Style="{StaticResource SignInButton}"
-                        Command="{Binding SignOutCommand}"/>
-            </StackLayout>
+                        Grid.Row="2"
+                        Margin="0,-3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Foundation;
-using HMNGasApp.Services;
+using Tesseract;
+using Tesseract.iOS;
 using UIKit;
+using HMNGasApp.Services;
 using Xamarin.Forms;
 
 namespace HMNGasApp.iOS
@@ -25,6 +27,7 @@ namespace HMNGasApp.iOS
                     await service.Logout();
                 });
             });
+            System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
         }
     }
 }

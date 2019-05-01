@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Input;
-using HMNGasApp.ViewModel;
+﻿using HMNGasApp.ViewModel;
+using System.Diagnostics.CodeAnalysis;
 using Xamarin.Forms;
-using System.Threading.Tasks;
 
 namespace HMNGasApp.View
 {
+    [ExcludeFromCodeCoverage]
     public partial class ReadingConfirmationPage : ContentPage
     {
         private readonly ReadingConfirmationPageViewModel _vm;
@@ -16,14 +14,7 @@ namespace HMNGasApp.View
             InitializeComponent();
             BindingContext = _vm = DependencyService.Resolve<ReadingConfirmationPageViewModel>();
             _vm.Navigation = Navigation;
-
-            _vm.UsageInput = reading;
-
+            _vm.Init(reading);
         }
-        public ReadingConfirmationPage() 
-        {
-            InitializeComponent();
-        }
-
     }
 }

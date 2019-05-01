@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Threading.Tasks;
 
 namespace HMNGasApp.Services
 {
     public interface IConnectService
     {
-        bool canConnect();
+        Task<bool> CanConnect();
     }
 }

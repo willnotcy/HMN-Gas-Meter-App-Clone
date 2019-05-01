@@ -18,7 +18,7 @@
                         </Image.GestureRecognizers>
                     </Image>
                     <Label Font="Bold" 
-                           Text="Manuel indtastning" 
+                           Text="{x:StaticResource ManualPage.TitleText}" 
                            FontSize="Large" 
                            TextColor="White" 
                            HorizontalOptions="CenterAndExpand" 
@@ -26,31 +26,41 @@
                 </StackLayout>
             </StackLayout>    
             
-            <Label Text="Indtast din måleraflæsning:"
+            <Label Text="{x:StaticResource ManualPage.InstructionsText}"
                    TextColor="{StaticResource PrimaryDarkGrey}"
                    Style="{StaticResource BodyText}"
                    Font="Bold, 30"
                    HorizontalTextAlignment="Center"
-                   Margin="10, 100, 20, 10"/>
+                   Margin="10, 100, 10, 10"/>
             <components:RoundedEntry x:Name="usage" 
                                          Text="{Binding UsageInput}" 
-                                         Placeholder="Måleraflæsning..." 
+                                         Placeholder="{x:StaticResource ManualPage.PlaceholderText}" 
                                          Style="{StaticResource BodyText}"
-                                         Margin="50,10,50,10"
+                                         Margin="50,10"
                                          HeightRequest="60"
                                          FontSize="15"
                                          Keyboard="Numeric"/>
-            <Label TextColor="{StaticResource PrimaryDarkGrey}"
+            
+            <Label Text="{x:StaticResource ManualPage.PhoneText}"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
                    HorizontalOptions="FillAndExpand"
                    Style="{StaticResource BodyText}"
                    HorizontalTextAlignment="Center"
                    Opacity="0.5"
-                   FontSize="12">
-                <Label.Text>
-                Eller indmeld 24/7 via tlf.: +45 20 14 34 79
-                </Label.Text>
-            </Label>
-            <Button Text="Bekræft"
+                   FontSize="12"/>
+
+            <Image Source="{Binding ExamplePicture}"
+                   Margin="15,10,15,10"/>
+            
+            <Label Text="{x:StaticResource ManualPage.ExampleText}"
+                   TextColor="{StaticResource PrimaryDarkGrey}"
+                   HorizontalOptions="FillAndExpand"
+                   Style="{StaticResource BodyText}"
+                   HorizontalTextAlignment="Center"
+                   Opacity="0.5"
+                   FontSize="12"/>
+            
+            <Button Text="{x:StaticResource ManualPage.ConfirmationText}"
                     TextColor="White"
                     Margin="90,50,90,10"
                     BorderRadius="7"

@@ -1,7 +1,7 @@
 ﻿using HMNGasApp.Model;
 using HMNGasApp.Services;
 using HMNGasApp.View;
-using HMNGasApp.WebServices;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -57,20 +57,19 @@ namespace HMNGasApp.ViewModel
             }
             IsBusy = true;
 
+            var res = App.Current.Resources;
             var result = await _service.NewLoginAsync(CustomerId, Password);
             if(result.Item1)
             {
                 SignedIn = true;
                 _config.Context.securityKey = result.Item2;
                 await Navigation.PushAsync(new MainPage());
-            } else
-            {
-                await App.Current.MainPage.DisplayAlert("Fejl", result.Item2, "Okay");
             }
-
+            else
+            {
+                await App.Current.MainPage.DisplayAlert((string)res["Errors.Title.Fail"], result.Item2, (string)res["Errors.Cancel.Okay"]);
+            }
             IsBusy = false;
         }
-
-        
     }
 }

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMNGasApp.Tests", "HMNGasApp.Tests\HMNGasApp.Tests.csproj", "{1DBD3444-5844-4396-BF3D-4B517D511B52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMNGasApp.Tests", "HMNGasApp.Tests\HMNGasApp.Tests.csproj", "{1DBD3444-5844-4396-BF3D-4B517D511B52}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMNGasApp.Android", "HMNGasApp\HMNGasApp.Android\HMNGasApp.Android.csproj", "{7A96A781-6507-4E74-A54B-E1366A1224C3}"
 EndProject
@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMNGasApp.iOS", "HMNGasApp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMNGasApp.UWP", "HMNGasApp\HMNGasApp.UWP\HMNGasApp.UWP.csproj", "{99C0CA39-75D3-494F-9AB2-0B4CFBC893C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HMNGasApp", "HMNGasApp\HMNGasApp\HMNGasApp.csproj", "{1407FB7F-6AB8-41FE-ABF2-086AE2D849DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HMNGasApp", "HMNGasApp\HMNGasApp\HMNGasApp.csproj", "{1407FB7F-6AB8-41FE-ABF2-086AE2D849DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9E2ED56C-FC28-4356-B081-E31643B4691C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

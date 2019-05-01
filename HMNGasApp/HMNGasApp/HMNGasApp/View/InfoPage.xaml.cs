@@ -1,11 +1,12 @@
 ﻿using HMNGasApp.ViewModel;
-using System;
+using System.Diagnostics.CodeAnalysis;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HMNGasApp.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    [ExcludeFromCodeCoverage]
     public partial class InfoPage : ContentPage
     {
         private readonly InfoViewModel _viewModel;
