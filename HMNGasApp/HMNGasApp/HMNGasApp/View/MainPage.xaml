@@ -63,7 +63,7 @@
                         Margin="20,20"/>
             </StackLayout>
 
-            <Button Text="{x:StaticResource Mainpage.LogInButton}" 
+            <Button Text="{x:StaticResource Mainpage.LogOutButton}" 
                         Command="{Binding SignOutCommand}" 
                         BackgroundColor="{StaticResource SecondaryMint}"
                         HeightRequest="80" 
