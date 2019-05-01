@@ -86,7 +86,7 @@
             <x:String x:Key="Mainpage.ManualUsageButton">TAST SELV</x:String>
             <x:String x:Key="Mainpage.MyReadingsButton">MINE MÅLERAFLÆSNINGER</x:String>
             
-            <x:String x:Key="Mainpage.LogInButton">Log ind</x:String>
+            <x:String x:Key="Mainpage.LogOutButton">Log ud</x:String>
        
             
             <!--#endregion-->

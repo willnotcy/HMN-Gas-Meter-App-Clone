@@ -10,7 +10,7 @@
   "MainPage.ScanButton": "",
   "Mainpage.ManualUsageButton": "",
   "Mainpage.MyReadingsButton": "",
-  "Mainpage.LogInButton": "",
+  "Mainpage.LogOutButton": "",
 
   "InfoPage.Title": "",
   "InfoPage.NamePlaceholder": "",
@@ -38,6 +38,13 @@
   "ReadingConfirmationPage.YourReading": "",
   "ReadingConfirmationPage.CustomerNo": "",
   "ReadingConfirmationPage.Send": "",
+
+  "ScanPage.TitleText": "",
+  "ScanPage.InstructionsText": "",
+  "ScanPage.PlaceholderText": "",
+  "ScanPage.ControlImageText": "",
+  "ScanPage.ExampleText": "",
+  "ScanPage.ConfirmationText": "",
 
   "Errors.Title.Fail": "",
   "Errors.Message.SWWTryAgain": "",
