@@ -1,5 +1,62 @@
 ﻿{
+  "LoginPage.Title": "",
+  "LoginPage.CustomerNo": "",
+  "LoginPage.CustomerNoPlaceHolder": "",
+  "LoginPage.CustomerPw": "",
+  "LoginPage.CustomerPwPlaceHolder": "",
+  "LoginPage.LoginButton": "",
+
   "MainPage.Title": "",
   "MainPage.ScanButton": "",
-  "Mainpage.ManualUsageButton": ""
+  "Mainpage.ManualUsageButton": "",
+  "Mainpage.MyReadingsButton": "",
+  "Mainpage.LogOutButton": "",
+
+  "InfoPage.Title": "",
+  "InfoPage.NamePlaceholder": "",
+  "InfoPage.NameLabel": "",
+  "InfoPage.AddressLabel": "",
+  "InfoPage.EmailPlaceholder": "",
+  "InfoPage.EmailLabel": "",
+  "InfoPage.PhonePlaceholder": "",
+  "InfoPage.PhoneLabel": "",
+  "InfoPage.GSRNLabel": "",
+  "InfoPage.ReadingLabel": "",
+  "InfoPage.ReadingDateLabel": "",
+
+  "UsagePage.TitleText": "",
+  "UsagePage.MainText": "",
+
+  "ManualPage.TitleText": "",
+  "ManualPage.InstructionsText": "",
+  "ManualPage.PlaceholderText": "",
+  "ManualPage.PhoneText": "",
+  "ManualPage.ExampleText": "",
+  "ManualPage.ConfirmationText": "",
+
+  "ReadingConfirmationPage.Title": "",
+  "ReadingConfirmationPage.YourReading": "",
+  "ReadingConfirmationPage.CustomerNo": "",
+  "ReadingConfirmationPage.Send": "",
+
+  "ScanPage.TitleText": "",
+  "ScanPage.InstructionsText": "",
+  "ScanPage.PlaceholderText": "",
+  "ScanPage.ControlImageText": "",
+  "ScanPage.ExampleText": "",
+  "ScanPage.ConfirmationText": "",
+
+  "Errors.Title.Fail": "",
+  "Errors.Message.SWWTryAgain": "",
+  "Errors.Message.SWWInfo": "",
+  "Errors.Message.SWWGetInfo": "",
+  "Errors.Message.InputEmpty": "",
+  "Errors.Message.InvalidEmail": "",
+  "Errors.Cancel.Okay": "",
+
+  "Success.Title.Success": "",
+  "Success.Title.MeterRead": "",
+  "Success.Message.ReadingSent": "",
+  "Success.Message.UpdatedInfo": "",
+  "Success.Cancel.Okay": ""
 }
